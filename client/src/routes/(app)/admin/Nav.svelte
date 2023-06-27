@@ -4,41 +4,43 @@
 
 
     const nav = [ 
-        {
-            name: 'ADMIN',
-            icon: 'settings_applications',
-            active: false,
-            routes: [
-                { name: 'Users', icon: 'account_circle', location: `/admin/users`, routes: null },
-                { name: 'Groups', icon: 'groups', location: `/admin/groups`, routes: null
-                    // [
-                    //     { name: 'Licenses', icon: 'assignment', location: `/admin/groups~licenses` },
-                    //     { name: 'Territories', icon: 'map', location: `/admin/groups~territories` },
-                    // ]
-                },
-                { name: 'Licenses', icon: 'assignment_turned_in', location: `/admin/licenses`, routes: null },
-                { name: 'Packs', icon: 'storage', location: `/admin/packs`, routes: null },
-            ]
-        }, 
+            { 
+                name: 'Buildings', 
+                icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M21 20h2v2H1v-2h2V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v17Zm-2 0V4H5v16h14ZM8 11h3v2H8v-2Zm0-4h3v2H8V7Zm0 8h3v2H8v-2Zm5 0h3v2h-3v-2Zm0-4h3v2h-3v-2Zm0-4h3v2h-3V7Z"></path></svg>`, 
+                location: `/admin/buildings`, 
+                routes: [] 
+            },
+            { 
+                name: 'Measures', 
+                icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M7.76 16.24C6.67 15.16 6 13.66 6 12s.67-3.16 1.76-4.24l1.42 1.42C8.45 9.9 8 10.9 8 12c0 1.1.45 2.1 1.17 2.83l-1.41 1.41zm8.48 0C17.33 15.16 18 13.66 18 12s-.67-3.16-1.76-4.24l-1.42 1.42C15.55 9.9 16 10.9 16 12c0 1.1-.45 2.1-1.17 2.83l1.41 1.41zM12 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm8 2c0 2.21-.9 4.21-2.35 5.65l1.42 1.42C20.88 17.26 22 14.76 22 12s-1.12-5.26-2.93-7.07l-1.42 1.42A7.94 7.94 0 0 1 20 12zM6.35 6.35L4.93 4.93C3.12 6.74 2 9.24 2 12s1.12 5.26 2.93 7.07l1.42-1.42C4.9 16.21 4 14.21 4 12s.9-4.21 2.35-5.65z"></path></svg>`, 
+                routes: [
+                    {
+                        name: 'import',
+                        location: `/admin/measures/import`, 
+                        icon: 'file_upload'
+
+                    }
+                ]
+            },
     ]
 </script>
 
-<section class="z-depth-2" transition:fly={{ x:-300, duration: 200}}>
-    <a href="{getPath('/')}" rel="external"><i class="micon app">clear</i></a>
-
+<section class="z-depth-2" transition:fly|global={{ x:-300, duration: 200}}>
+    <a href="{getPath('/')}"><i class="micon app">clear</i></a>
     <header>
 
     </header>
     <ul class="nav">
     {#each nav as item}
-        <li class="item">
-            <i class="micon">{item.icon}</i>{item.name}
+        <li class="item flex">
+            <i class="icon">{@html item.icon}</i>
+            {item.name}
         </li>
         <ul class="routes" transition:slide={{ duration:200 }}>
             {#each item.routes as route}
                 <a href="{getPath(route.location)}">
                  <li
-                    class="route waves-effect" 
+                    class="route flex" 
                     class:active="{$url.includes(route.location) && !$url.includes('~')}"
                 >
                     <i class="micon">{route.icon}</i>
@@ -74,13 +76,14 @@
         left:0;
         bottom:0;
         width:240px;
-        background-color:#fafafa;
-        border-right:1px solid #eee;
+        background-color:#212121;
+        border-right:1px solid #616161;
     }
     header{
         background:transparent;
         padding:0 16px;
         margin:40px 0;
+        height: 80px;
     }
 
     ul{
@@ -92,25 +95,22 @@
     li{
         margin:0;
         width:100%;
-        display:flex;justify-content:flex-start;align-items:center;
     }
     li.item{
         height:32px;
-        line-height:32px;
         font-family:'Lato';
         font-size:18px;
         text-transform:uppercase;
-        color:#00796b;
+        color:var(--secondary-lighten);
         font-weight:400;
         margin-left:8px;
         user-select: none;
         cursor:default;
     }
-    li.item i{
-        line-height:32px;
-        width:32px;
-        font-size:28px;
-        margin:0 4px;
+    li.item i.icon{
+        width:24px;
+        height: 24px;
+        margin:0 8px;
         padding:0;
     }
     li.route{
@@ -122,25 +122,26 @@
         transition:all,0.4s;
         width:200px;
         border-radius:4px 2px 2px 4px;
-        color:#616161;margin-left:16px;
+        color:#eee;
+        margin-left:16px;
     }
     li.route i{
         font-size:22px;
         width:20px;
-        color:#616161;
+        color:#eee;
         line-height:32px;
         margin-right:8px;
     }
     li.route:not(.active):hover{
-        background-color:#eee;
+        background-color:#424242;
     }
     li.route.active{
-        background:#e0e0e0;
-        border-right:4px solid #0288d1;
-        width:200px;color:#424242;
+        background:#000;
+        border-right:4px solid var(--primary);
+        width:200px;color:var(--primary-lighten);
     }
     li.route.active i{
-        color:#0288d1;
+        color:var(--primary-lighten);
     }
     ul.routes{
         margin-bottom:16px;
@@ -182,12 +183,12 @@
     }
     li.subroute.active{
         background:#e0e0e0;
-        border-right:4px solid #0288d1;
+        border-right:4px solid var(--primary-lighten);
         width:176px;
         color:#424242;
     }
     li.subroute.active i{
-        color:#0288d1;
+        color:var(--primary-lighten);
     }
     i.app{
         position:absolute;
@@ -201,6 +202,6 @@
         line-height:32px;
     }
     i.app:hover{
-        background:#eee;
+        background:#000;
     }
 </style>

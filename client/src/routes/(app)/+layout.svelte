@@ -4,6 +4,7 @@
 	import { user, status } from '$module/session'
 	import { Loading } from 'gros/loading'
     import { getPath } from 'gros/page'
+	import Header from '$lib/components/Header.svelte'
 </script>
 
 <svelte:head>
@@ -14,6 +15,7 @@
 	<Loading bootstrap/>
 {:then}
 	{#if $status.isAuthenticated}
+		<Header/>
 		<slot/>
 		<Presence info={{ application: 'PREBAT' }}/>
 	{:else}

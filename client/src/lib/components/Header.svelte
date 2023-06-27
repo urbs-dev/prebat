@@ -6,7 +6,7 @@
 
 <header class="z-depth-2">
     {#if $user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN}
-    <a href="{getPath('/admin')}" rel="external"><i class="micon app">menu</i></a>
+    <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
     {/if}
     <a href="{ getPath('/')}">
         <div style:left={$url.includes('admin') ? '256px' : '80px'} class="logo flex">
@@ -51,7 +51,8 @@
         left:80px;
         height:56px;
         width:156px;
-        justify-content: center;;
+        justify-content: center;
+        transition: left, 0.2s;
     }
     header div.logo img{
         width: 40px;
