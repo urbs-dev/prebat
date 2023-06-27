@@ -14,7 +14,7 @@
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
             body: JSON.stringify({ 
                 email: email,
-                url: 'BASE_URL' + getPath('/connexion'),
+                url: 'BASE_URL' + getPath('/auth'),
                 sendMail: true,
                 mailType: 'forgot-password'
             })

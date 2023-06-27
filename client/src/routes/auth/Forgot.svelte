@@ -33,7 +33,7 @@
 
 
 <article class="anim_bottom">
-    <img alt="imope-logo" src="STATIC_PATH/img/imope-logo.svg"/>
+    <img alt="imope-logo" src="STATIC_PATH/img/logo.svg"/>
     <div class="form">
         <section>
             <p class="title">Réinitialisation du mot de passe</p>
@@ -48,6 +48,7 @@
             {:else}
             <div class="error">
                 {#if errors}
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
                     <div class="message" in:fade on:keypress on:click={() => errors = null}>
                         <Errors errors={errors}/>
                     </div>
