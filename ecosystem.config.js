@@ -3,6 +3,7 @@ function getPostDeploy(node_env) {
         cd ./api
         && npm install
         && node ace migration:run
+        && node ace swagger:generate
         && node ace build --ignore-ts-errors
         && cp /home/urbs/www/prebat/current/api/.env /home/urbs/www/prebat/current/api/build/.env
 

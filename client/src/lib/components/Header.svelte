@@ -16,7 +16,7 @@
     </a>
     <aside>
         <AccountButton height={"56px"}>
-            <Link isExternal href="/prebat.api/swagger/" name="API doc" icon="code"/>
+            <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>
         </AccountButton>
         <Tools/>
     </aside>

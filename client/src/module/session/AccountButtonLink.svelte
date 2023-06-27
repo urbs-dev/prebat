@@ -9,7 +9,7 @@
 
 </script>
 
-{#if isExternal && $user.roles[role] }
+{#if isExternal && $user.roles[role] || $user.roles.GLOBAL_ADMIN }
     <a href="{href}" rel="external">
         <i class="micon">{icon}</i>
         <span>{name}</span>
