@@ -1,0 +1,14 @@
+node_modules
+build
+.vscode
+.DS_Store
+package-lock.json
+*.xlsx
+swagger.json
+.svelte-kit
+package
+
+
+coverage
+!template.*
+tmp

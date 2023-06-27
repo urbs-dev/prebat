@@ -1,0 +1,10 @@
+{
+  "name": "prebat",
+  "version": "0.0.1",
+  "scripts": {
+		"swagger": "cd ./api && node ace swagger:generate && cd ../",
+		"migration": "cd ./api && node ace migration:run && cd ../api",
+		"migration:undo": "cd ./api && node ace migration:rollback --batch=0 && cd ../api",
+		"seed": "node ace db:seed"
+	}
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<title>PREBAT API</title>
+	<link rel="icon" href="../images/favicon.png" />
+	<script src="//unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js"></script>
+	<script src="//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+	<link rel="stylesheet" href="//unpkg.com/swagger-ui-dist@3/swagger-ui.css"/>
+	<style>
+		html{box-sizing: border-box;overflow: -moz-scrollbars-vertical;overflow-y: scroll;}
+		*,*:before,*:after{box-sizing: inherit;}
+		body{margin:0;background: #fafafa;}
+		div.topbar{display:none;}
+		footer{float:bottom;width:100%;height:500px;margin-top:50px;}
+		#swagger-ui{margin-left:230px;margin-right:0}
+		nav{position:fixed;top:0;bottom:0;left:0;width:230px;background:#fff;font-family:'Helvetica';}
+		nav header{height:auto;background:#fff;padding:40px 0;}
+		nav header img{display:block;width:176px;margin:0 auto;}
+		nav ul{list-style-type:none;margin:20px auto;padding:0;font-weight:bold;padding-left:30px;}
+		nav li{height:35px;width:100%;margin:0;cursor:pointer;transition:all,0.4s;line-height:35px;padding:0 20px;border-left:4px solid transparent;}
+		nav li:hover{background-color:#f5f5f5}
+		nav li.active{color:#212121;background-color:#eee;border-left:4px solid #EF7757;}
+		nav a{color:#424242;text-decoration:none;}
+
+
+		.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {-webkit-box-shadow: 0 2px 2px 0 rgba(189,189,189, 0.14), 0 3px 1px -2px rgba(189,189,189, 0.12), 0 1px 5px 0 rgba(189,189,189, 0.2);box-shadow: 0 2px 2px 0 rgba(189,189,189, 0.14), 0 3px 1px -2px rgba(189,189,189, 0.12), 0 1px 5px 0 rgba(189,189,189, 0.2);}
+		.z-depth-1-half, .btn:hover, .btn-large:hover, .btn-small:hover, .btn-floating:hover {-webkit-box-shadow: 0 3px 3px 0 rgba(189,189,189, 0.14), 0 1px 7px 0 rgba(189,189,189, 0.12), 0 3px 1px -1px rgba(189,189,189, 0.2);box-shadow: 0 3px 3px 0 rgba(189,189,189, 0.14), 0 1px 7px 0 rgba(189,189,189, 0.12), 0 3px 1px -1px rgba(189,189,189, 0.2);}
+		.z-depth-2 {-webkit-box-shadow: 0 4px 5px 0 rgba(189,189,189, 0.14), 0 1px 10px 0 rgba(189,189,189, 0.12), 0 2px 4px -1px rgba(189,189,189, 0.3);box-shadow: 0 4px 5px 0 rgba(189,189,189, 0.14), 0 1px 10px 0 rgba(189,189,189, 0.12), 0 2px 4px -1px rgba(189,189,189, 0.3);}
+		.z-depth-3 {-webkit-box-shadow: 0 8px 17px 2px rgba(189,189,189, 0.14), 0 3px 14px 2px rgba(189,189,189, 0.12), 0 5px 5px -3px rgba(189,189,189, 0.2);box-shadow: 0 8px 17px 2px rgba(189,189,189, 0.14), 0 3px 14px 2px rgba(189,189,189, 0.12), 0 5px 5px -3px rgba(189,189,189, 0.2);}
+		.z-depth-4 {-webkit-box-shadow: 0 16px 24px 2px rgba(189,189,189, 0.14), 0 6px 30px 5px rgba(189,189,189, 0.12), 0 8px 10px -7px rgba(189,189,189, 0.2);box-shadow: 0 16px 24px 2px rgba(189,189,189, 0.14), 0 6px 30px 5px rgba(189,189,189, 0.12), 0 8px 10px -7px rgba(189,189,189, 0.2);}
+		.z-depth-5, .modal {-webkit-box-shadow: 0 24px 38px 3px rgba(189,189,189, 0.14), 0 9px 46px 8px rgba(189,189,189, 0.12), 0 11px 15px -7px rgba(189,189,189, 0.2);box-shadow: 0 24px 38px 3px rgba(189,189,189, 0.14), 0 9px 46px 8px rgba(189,189,189, 0.12), 0 11px 15px -7px rgba(189,189,189, 0.2);}
+	</style>
+	<script>
+		window.onload = () => {
+			let ui = SwaggerUIBundle({
+				url: "{{ specUrl }}",
+				dom_id: "#swagger-ui",
+				presets: [
+					SwaggerUIBundle.presets.apis,
+					SwaggerUIBundle.SwaggerUIStandalonePreset
+				],
+				plugins: [
+					SwaggerUIBundle.plugins.DownloadUrl
+				],
+			})
+
+			window.ui = ui
+
+			const nav = document.querySelectorAll("nav li")
+			for (const li of nav) {
+				li.addEventListener('click', function(e) {
+					const isActive = document.querySelector("nav li.active")
+					if (isActive) {
+						isActive.classList.remove('active')
+					}
+					e.target.classList.add('active')
+				})
+			}
+		}
+	</script>
+</head>
+<body>
+	<nav class="z-depth-2">
+		<a href="./">
+			<header>
+				<img src="../images/logo.svg">
+			</header>
+		</a>
+		<ul>
+			<a href="#operations-tag-Buildings">		<li>Buildings</li></a>
+			<a href="#operations-tag-Measures">			<li>Measures</li></a>
+		 </ul>
+	</nav>
+	<div id="swagger-ui"></div>
+	<footer></footer>
+</body>
+</html>

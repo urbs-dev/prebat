@@ -1,0 +1,21 @@
+/prebat.api/buildings:
+  get:
+    tags:
+      - Buildings
+    summary: Renvoie la liste de toutes les opérations
+    responses:
+      200:
+        example: Building list
+  post:
+    tags:
+      - Buildings
+    summary: Crée une nouvelle opération
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:      
+            type: object
+    responses:
+      200:
+        example: Building

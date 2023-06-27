@@ -1,0 +1,13 @@
+@font-face{font-family: "Lato";src: url('./fonts/Lato/Lato-Regular.ttf')};
+
+.anim-zoom {-webkit-animation:animatezoom 0.6s;animation:animatezoom 0.6s}
+@-webkit-keyframes animatezoom{from{-webkit-transform:scale(0)} to{-webkit-transform:scale(1)}}
+@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}
+
+.alt-font{
+    font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    letter-spacing: .01em;
+}
+.delete {
+    color: #e57373;
+}

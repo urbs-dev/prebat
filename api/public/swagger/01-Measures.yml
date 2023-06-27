@@ -1,0 +1,21 @@
+/prebat.api/measures:
+  get:
+    tags:
+      - Measures
+    summary: Renvoie la liste de toutes les mesures
+    responses:
+      200:
+        example: Measures list
+  post:
+    tags:
+      - Measures
+    summary: Importe de nouvelles mesures
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:      
+            type: object
+    responses:
+      200:
+        example: Measures

@@ -1,0 +1,10 @@
+node_modules
+build
+coverage
+.vscode
+.DS_STORE
+public/exports/*
+!public/images/legend-graphics
+!template.*
+!.empty
+tmp

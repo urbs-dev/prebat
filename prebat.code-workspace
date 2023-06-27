@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"restoreTerminals.terminals": [
+			{
+				"splitTerminals": [{ "name": "RESOURCES-API", "commands": ["cd ../resources/api", "node ace serve --watch"] }]
+			},
+			{
+				"splitTerminals": [{ "name": "API", "commands": ["cd ./api", "node ace serve --watch"] }]
+			},
+			{
+				"splitTerminals": [{ "name": "CLIENT", "commands": ["cd ./client", "npm run dev"] }]
+			},
+			{
+				"splitTerminals": [{ "name": "Git bash", }],
+			},
+		],
+		"terminal.integrated.persistentSessionReviveProcess": "never"
+	}
+}
+
