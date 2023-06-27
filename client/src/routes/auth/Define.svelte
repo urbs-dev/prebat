@@ -41,7 +41,7 @@
                 <div class="confirmed">
                     <p>Votre mot de passe a été enregistré avec succès. Vous pouvez maintenant vous connecter à IMOPE en utilisant votre adresse mail.</p>
                 </div>
-                <button class="btn waves-effect" on:click={() => goto(getPath('/connexion'))}>
+                <button class="btn waves-effect" on:click={() => goto(getPath('/auth'))}>
                     Se connecter
                     <i class="tall material-icons right">chevron_right</i>
                 </button>
@@ -49,6 +49,7 @@
             <p class="explain">Afin de sécuriser votre accès, merci de définir un mot de passe personnel et sécurisé :</p>
             <div class="error">
                 {#if errors}
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
                     <div class="message" in:fade on:keypress on:click={() => errors = null}>
                         <Errors errors={errors}/>
                     </div>

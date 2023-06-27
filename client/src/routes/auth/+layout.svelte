@@ -1,7 +1,8 @@
 
 <section>
-
-    <slot/>
+    <article>
+        <slot/>
+    </article>
     <div/>
     <img alt="cerema-logo" src="STATIC_PATH/img/logo-cerema.svg"/>
 </section>
@@ -15,9 +16,14 @@
         background-repeat:no-repeat;
         background-size:cover;
     }
+    article {
+        position:absolute;
+        top:0;bottom:0;right:0;left:0;
+        z-index: 4;
+    }
     div {
         position:absolute;
-        top:0;bottom:0;right:0;left:392px;
+        top:0;bottom:0;right:0;left:0;
         z-index: 1;
         background: rgba(255,255,255,0.7);
     }

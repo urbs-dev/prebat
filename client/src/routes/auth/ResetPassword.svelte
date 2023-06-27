@@ -26,7 +26,7 @@
             <article>
                 <p class="warning">Ce lien de réinitialisation n'est plus valide...</p>
                 <p>Pour obtenir un nouveau lien, cliquez sur <i>"mot de passe oublié"</i> dans la page d'acceuil.</p>
-                <a href="{getPath('/connexion')}">&#8592; Retour à la page d'accueil</a>
+                <a href="{getPath('/auth')}">&#8592; Retour à la page d'accueil</a>
             </article>
         {:else}
             {#if type === 'define'}
