@@ -1,5 +1,6 @@
 <script>
     import { AccountButton, AccountButtonLink as Link, Account, user } from '$module/session'
+    import { Tooltip } from 'gros/tooltip'
     import Tools from './Header_Tools.svelte'
     import { getPath, url } from 'gros/page'
 </script>
@@ -15,6 +16,12 @@
         </div>
     </a>
     <aside>
+        <a href="BASE_URL/resources" rel="external">
+            <button class="btn tooltip" style:border-right="1px solid #eee">
+                <Tooltip bottom content="Applications" gap={8}/>
+                <i class="micon">apps</i>
+            </button>
+        </a>
         <AccountButton height={"56px"}>
             <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>
         </AccountButton>
@@ -33,6 +40,7 @@
         height:56px;
         z-index:800;
         background-color:#fff;
+        border-bottom: 1px solid #eee;
         transition:all,0.2s;
         -webkit-box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);
     }
@@ -80,6 +88,17 @@
         font-size:26px;
     }
     i.app:hover{
+        background:#eee;
+    }
+    button{
+        position:relative;
+        width:56px;
+        height:56px;
+    }
+    button i{
+        color:#424242;
+    }
+    button:hover{
         background:#eee;
     }
 </style>

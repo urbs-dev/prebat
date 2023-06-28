@@ -11,7 +11,7 @@ const databaseConfig: DatabaseConfig = {
 				port: Env.get('DB_PORT'),
 				user: Env.get('DB_USER'),
 				password: Env.get('DB_PASSWORD', ''),
-				database: 'DATA',
+				database: 'PREBAT',
 			},
 			migrations: {
 				naturalSort: true,

@@ -12,5 +12,4 @@ export default class BuildingsController {
         const data = request.body()
         return response.send(data)
     }
-
 }

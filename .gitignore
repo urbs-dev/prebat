@@ -4,6 +4,7 @@ build
 .DS_Store
 package-lock.json
 *.xlsx
+.~lock.*
 swagger.json
 .svelte-kit
 package

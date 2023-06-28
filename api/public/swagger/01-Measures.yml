@@ -2,19 +2,60 @@
   get:
     tags:
       - Measures
-    summary: Renvoie la liste de toutes les mesures
+    summary: Renvoie la liste de tous les types de mesure
     responses:
       200:
         example: Measures list
   post:
     tags:
       - Measures
-    summary: Importe de nouvelles mesures
+    summary: Créé une nouveau type de mesure
     requestBody:
       required: true
       content:
         application/json:
-          schema:      
+          schema:
+            type: object
+    responses:
+      200:
+        example: Measures
+  patch:
+    tags:
+      - Measures
+    summary: Importe un fichier de mesures au format XSLX
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+    responses:
+      200:
+        example: Measures
+
+/prebat.api/measures/{id}:
+  put:
+    tags:
+      - Measures
+    summary: Màj un type de mesure
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+    responses:
+      200:
+        example: Measures
+  delete:
+    tags:
+      - Measures
+    summary: Supprime un type de mesure
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
             type: object
     responses:
       200:
