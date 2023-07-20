@@ -6,9 +6,9 @@ Route.group( () => {
 
     Route.post('measures', 'MeasuresController.store')
 
-    Route.put('measures:id', 'MeasuresController.update')
+    Route.put('measures/:id', 'MeasuresController.update')
 
-    Route.delete('measures:id', 'MeasuresController.destroy')
+    Route.delete('measures/:id', 'MeasuresController.destroy')
 
     Route.get('measures/test', 'MeasuresController.test')
 

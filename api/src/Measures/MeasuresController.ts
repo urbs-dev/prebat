@@ -7,7 +7,7 @@ export default class MeasuresController
 {
     public async test({ response }: HttpContextContract)
     {
-        const file = '20170626_BDD_401.xlsx'
+        const file = '20170626_BDD_504.xlsx'
         const io = new MeasuresIO()
 
         try {
@@ -15,7 +15,7 @@ export default class MeasuresController
             const result = await sheet.getData()
             return response.send(result)
         } catch (error) {
-            return response.status(500).send({ message: String(error) })
+            return response.status(412).send({ message: String(error) })
         }
 
     }

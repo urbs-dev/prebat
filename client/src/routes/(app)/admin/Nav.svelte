@@ -5,10 +5,16 @@
 
     const nav = [ 
             { 
-                name: 'Buildings', 
-                icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M21 20h2v2H1v-2h2V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v17Zm-2 0V4H5v16h14ZM8 11h3v2H8v-2Zm0-4h3v2H8V7Zm0 8h3v2H8v-2Zm5 0h3v2h-3v-2Zm0-4h3v2h-3v-2Zm0-4h3v2h-3V7Z"></path></svg>`, 
-                location: `/admin/buildings`, 
-                routes: [] 
+                name: 'Opérations', 
+                icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M22 8H7.85q-1.55 0-2.7.975T4 11.45V18l1.975-6.575q.2-.65.738-1.038T7.9 10h12.9q1.025 0 1.613.813t.312 1.762l-1.8 6q-.2.65-.738 1.038T19 20H4q-.825 0-1.413-.588T2 18V6q0-.825.588-1.413T4 4h5.175q.4 0 .763.15t.637.425L12 6h8q.825 0 1.413.588T22 8Z"></path></svg>`, 
+                location: `/admin/operations`, 
+                routes: [
+                    {
+                        name: 'Bâtiments',
+                        location: `/admin/operations`, 
+                        icon: 'format_list_bulleted' 
+                    }
+                ] 
             },
             { 
                 name: 'Measures', 

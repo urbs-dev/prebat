@@ -1,5 +1,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 import './routes/buildings'
+import './routes/operations'
 import './routes/measures'
 
 Route.get('/', async () => {
