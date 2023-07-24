@@ -18,6 +18,15 @@ export default class OperationsController
         return response.send(result)
     }
 
+    public async show({ request, response }: HttpContextContract)
+    {
+        const id = request.param('id')
+        const result = await OperationsModel.query().where('id', id).first()
+        if (!result) return response.status(404).send({ message: 'Operation not found'})
+
+        
+    }
+
     public async update({ request, response }: HttpContextContract)
     {
         const data = request.body() as OperationsModel

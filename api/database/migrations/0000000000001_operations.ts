@@ -6,7 +6,11 @@ export default class Operations extends BaseSchema {
 	public async up () {
 		this.schema.createTable(this.tablename, (column) => {
 			column.uuid	    ( 'id'				).primary()
-			column.string	( 'title'		    ).notNullable().unique()
+			column.string	( 'name'		    ).notNullable().unique()
+			column.integer	( 'time_step'		)
+			column.json		( 'sites'			)
+			column.integer	( 'building_count'	)
+			column.integer	( 'row_count'		)
 			column.text		( 'abstract' 		)
             column.string   ( 'program'         )
             column.integer  ( 'delivered_on'    )
@@ -14,8 +18,9 @@ export default class Operations extends BaseSchema {
             column.string   ( 'engineering'     )
             column.string   ( 'label'           )
             column.string   ( 'climatic_zone'   )
-			column.string	( 'air_permeability')
             column.string   ( 'city_code'    	)
+            column.float   	( 'lat'    			)
+            column.float   	( 'lon'    			)
 			column.timestamps()
 		})
 	}

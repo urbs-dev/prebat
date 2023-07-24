@@ -41,7 +41,7 @@
     button{
         height:56px;
         width:56px;
-        color: var(--secondary);
+        color: var(--primary);
         border-left: 1px solid #eee;
     }
     button i {

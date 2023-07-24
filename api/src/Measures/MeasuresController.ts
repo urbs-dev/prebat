@@ -1,36 +1,43 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import MeasuresModel from './MeasuresModel'
 import MeasuresIO from './MeasuresIO'
+import Application from '@ioc:Adonis/Core/Application'
 
 
 export default class MeasuresController 
 {
-    public async test({ response }: HttpContextContract)
-    {
-        const file = '20170626_BDD_504.xlsx'
-        const io = new MeasuresIO()
-
-        try {
-            const sheet = await io.read(file)
-            const result = await sheet.getData()
-            return response.send(result)
-        } catch (error) {
-            return response.status(412).send({ message: String(error) })
-        }
-
-    }
-
     public async index({ response }: HttpContextContract)
     {
         const measures = await MeasuresModel.all()
         return response.send(measures)
     }
 
+    public async eval({ request, response }: HttpContextContract)
+    {
+        const file = await this.import({ request, response } as HttpContextContract) as string
+
+        try {
+            const io = new MeasuresIO()
+            await io.read(file)
+            const result = io.parse()
+            return response.send(result)
+        } catch (error) {
+            return response.send({ error: error })
+        }
+    }
+
     public async store({ request, response }: HttpContextContract)
     {
-        const measure = request.body() as MeasuresModel
-        const result = await MeasuresModel.create(measure)
-        return response.send(result)
+        const file = await this.import({ request, response } as HttpContextContract) as string
+
+        try {
+            const io = new MeasuresIO()
+            await io.read(file)
+            const result = await io.store()
+            return response.send(result)
+        } catch (error) {
+            return response.send({ error: error })
+        }
     }
 
     public async update({ request, response }: HttpContextContract)
@@ -55,21 +62,12 @@ export default class MeasuresController
         return response.send(result)
     }
 
-    public async import({ request, response }: HttpContextContract)
+    private async import({ request, response }: HttpContextContract)
     {
         const xlsx = request.file('xlsx')
-        if (!xlsx) return response.status(404).send(request)
+        if (!xlsx) return response.status(412).send({ message: 'No file in request body'})
         if (!xlsx.isValid) return response.status(412).send(xlsx.errors)
-
-        await xlsx.moveToDisk('./public/uploads')
-        // const file = xlsx.filePath
-        const schema = xlsx.clientName.replace('.xlsx', '').toLowerCase()
-
-        // const io = await DatasetsIO.import(file, schema) 
-
-        return response.send({
-            // process: io,
-            schema: schema
-        })
+        await xlsx.move(Application.appRoot + '/public/uploads/', { name: xlsx.clientName, overwrite: true })
+        return xlsx.clientName
     }
 }

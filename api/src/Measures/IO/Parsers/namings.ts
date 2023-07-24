@@ -1,6 +1,6 @@
 
 
-export const nature = {
+export const typology = {
     "apport": "Apports (solaires, géothermiques, …)",
     "co2": "CO2",
     "consoasc": "Consommation ascenceur",

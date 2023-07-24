@@ -1,30 +1,15 @@
 import Excel from 'exceljs'
-import type { CellValue } from 'exceljs'
 import Application from '@ioc:Adonis/Core/Application'
-import Parameters from './IO/Parameters'
-import Location from './IO/Location'
-import { nature, statement, unit } from './IO/namings'
-
-type Column = { columname: string|undefined, x: number, address: string, meta?: Meta }
-type Meta = {
-    typology: CellValue,
-    statement: CellValue,
-    unit: CellValue,
-    sensor: CellValue,
-    parameters: CellValue[],
-    location: LocationType
-}
-type LocationType = { building: CellValue, zone: CellValue, room: CellValue }
+import FileParser from './IO/FileParser'
+import FilePersister from './IO/FilePersister'
 
 
 export default class MeasuresIO
 {
     private PATH = (Application.appRoot + '/public/uploads/')
     public sheet: Excel.Worksheet
-    private rowCount: number
-    private id: string | undefined
-    private columns: number[]
-    public header: Column[]
+    public rowCount: number
+    public columns: number[]
 
     public async read(name: string)
     {
@@ -33,114 +18,20 @@ export default class MeasuresIO
         await workbook.xlsx.readFile(filename)
         this.sheet = workbook.getWorksheet('Donnée_1h')
         this.rowCount = this.sheet.rowCount
-        this.id = this.sheet.getCell('D1').value as string
-        this.columns = Array.from({ length: this.sheet.lastColumn.number - 3 }, (_, i) => 2 + 1 + i)
-        this.header = this.getHeader()
-        this.isValid()
         return this
     }
 
-    public async getData()
+    public parse(param = { isPreview: true })
     {
-        return this.getHeader()
-        // return this.sheet.getRow(24).getCell(4).value
-        // const rows = this.sheet.getRows(24, 10)?.map((row: Excel.Row) => {
-        //     return this.getKeyVal(row)
-        // })
-        return {
-            id: this.id,
-            rowCount: this.rowCount,
-            data: this.header
-        }
+        const parser = new FileParser(this.sheet, param.isPreview)
+        return parser.get()
     }
 
-    public getHeader(): Column[]
+    public async store()
     {
-        const row = this.sheet.getRow(18)
-        const map = this.columns.map(x => {
-            const cell = row.getCell(x)
-            return {
-                x: parseInt(cell.col),
-                address: cell.$col$row.replace(/[$]/g, ''),
-                columname: x === 3 ? 'created_at' : this.merge(x),
-                meta: x === 3 ? undefined : {
-                    parameters: Parameters.get(this.sheet, x),
-                    typology: cell.value,
-                    statement: this.sheet.getRow(20).getCell(x).value,
-                    unit: this.sheet.getRow(21).getCell(x).value,
-                    sensor: this.sheet.getRow(19).getCell(x).value,
-                    location: Location.get(this.sheet, x)
-                }
-            }
-        })
-        return map
-        return map.filter(column => column.columname).sort((a, b) => {
-            if (!a.columname) return 1
-            if (!b.columname) return -1
-            if (a.columname === b.columname) return 0
-            return a.columname.localeCompare(b.columname)
-        })
+        const document = this.parse({ isPreview: false })
+        const persister = new FilePersister(document)
+        return await persister.insert()
     }
 
-    private getKeyVal(row: Excel.Row)
-    {
-        const entries = this.header.map(({ x, columname }) => {
-            const value = row.getCell(x).value
-            // console.log(`${columname}: ${value}`)
-            return [
-                columname,
-                this.round(value),
-            ]
-        })
-        // return entries
-        return Object.fromEntries(entries)
-    }
-
-    private isValid()
-    {
-        const errors = this.header.filter(cell => !cell.columname)
-        if (errors && errors.length > 0) {
-            throw new Error(`parsing XLSX file. Unknown columname for value(s): '${errors.map(error => error.columname + `' in cell ${error.address}`).join(", '")}`)
-        }
-    }
-
-    private round(value: CellValue)
-    {
-        if (typeof value === 'number') {
-            return Math.round((value + Number.EPSILON) * 100) / 100
-        }
-        return value
-    }
-
-    private merge(x: number)
-    {
-        return this.getKey(this.sheet.getRow(18).getCell(x).value, nature)
-        const result = [
-            this.getKey(this.sheet.getRow(18).getCell(x).value, nature),
-            this.getKey(this.sheet.getRow(20).getCell(x).value, statement),
-            this.getKey(this.sheet.getRow(21).getCell(x).value, unit)
-        ]
-        return result.join('_')
-    }
-
-    private getKey(cellValue: CellValue, source: typeof nature | typeof statement | typeof unit)
-    {
-        if (!cellValue) return 'notFound'
-        if (!source) return 'notFound'
-        if (!Object.entries(source)) return 'notFound'
-        const result = Object.entries(source).find(([_, value]) => this.stringify(value) === this.stringify(cellValue)) as [key: string, value: string]
-        if (!result) return 'noResult'
-        const [ key, value ] = result
-        if (!key || !value) {
-            return ''
-        }
-        return key
-    }
-
-    private stringify(value: string | CellValue = null) {
-        return String(value)
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-    }
 }

@@ -22,7 +22,7 @@ const DATA_DB = new pg.Pool({
 })
 
 export default (dbname: string) => {
-    if (dbname === 'PREBAT_DB') {
+    if (dbname === 'PREBAT') {
         return PREBAT_DB
     }
     else {
@@ -30,3 +30,57 @@ export default (dbname: string) => {
     }
 }
 
+
+
+export const query = (sql: string, dbname: 'DATA' | 'PREBAT' = 'PREBAT') => {
+    return new Statement(sql, dbname)
+}
+
+class Statement
+{
+    private sql: string
+    private db: any
+    private try = true
+
+    constructor(sql: string, dbname: 'DATA' | 'PREBAT' = 'PREBAT')
+    {
+        this.sql = sql
+        this.db = dbname === 'DATA' ? DATA_DB : PREBAT_DB
+    }
+
+    public async all(statement: number|null = null)
+    {
+        const result = await this.exec()
+        if (statement !== null) {
+            return result[statement]
+        }
+        return result.rows
+    }
+
+    public async first(statement: number|null = null)
+    {
+        const result = await this.exec()
+        if (statement !== null) {
+            return result[statement]
+        }
+        return result.rows[0]
+    }
+
+    public noCatch()
+    {
+        this.try = false 
+        return this
+    }
+
+    public async exec()
+    {
+        if (this.try === false) {
+            return await this.db.query(this.sql)
+        }
+        try {
+            return await this.db.query(this.sql)
+        } catch (error) {
+            return ({ error: error.stack.split(' at ')[0].replace('error: ', '') })
+        }
+    }
+}

@@ -1,19 +1,23 @@
 <script>
-    import Building from './Nav_Operation_Building.svelte'
+    import Location from './Nav_Operation_Location.svelte'
     import { slide } from 'svelte/transition'
     import { page } from '$app/stores'
-    import { Dropdown } from 'gros/dropdown'
+    import { getPath } from 'gros/page'
+    // import { Dropdown } from 'gros/dropdown'
     export let operation
-    let active = $page.params?.slug && $page.params.slug.includes(operation.id + '-')
+    $: active = $page.params?.id  === operation.id
 </script>
 
 <section class="flex">
-    <button class="slider flex" on:click={() => active = !active} class:active={active}>
-        <i class="micon show">keyboard_arrow_right</i>
-        <i class="micon">{active ? 'folder_open' : 'folder'}</i>
-        {operation.title}
-    </button>
-    <Dropdown fixedWidth position="bottom-end">
+    <a href="{getPath(`/admin/operations/${operation.id}`)}">
+        <button class="slider flex" class:active={active}>
+            <i class="micon show">keyboard_arrow_right</i>
+            <i class="micon">{active ? 'folder_open' : 'folder'}</i>
+            {operation.name}
+        </button>
+    </a>
+
+    <!-- <Dropdown fixedWidth position="bottom-end">
         <button class="menu">
             <i class="micon menu">more_vert</i>
         </button>
@@ -31,14 +35,14 @@
                 Supprimer l'opération
             </button>
         </article>
-    </Dropdown>
+    </Dropdown> -->
 </section>
 
 
 {#if active}
     <aside transition:slide|local={{ duration:150 }}>
-        {#each operation.buildings as building}
-            <Building table={building}/>
+        {#each operation.locations as location}
+            <Location {location}/>
         {/each}
     </aside>
 {/if}
@@ -78,7 +82,7 @@
         margin-left: 18px;
     }
 
-    button.menu {
+    /* button.menu {
         border-radius: 50%;
         width: 32px;
         height: 32px;
@@ -89,6 +93,9 @@
     }
 
     article {
+        position: relative;
+        z-index: 2;
+        background: #fff;
         border: 1px solid #eee;
         padding:2px;
         border-radius: 4px;
@@ -104,5 +111,5 @@
     }
     article button:hover {
         background: #eee;
-    }
+    } */
 </style>

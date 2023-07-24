@@ -1,8 +1,6 @@
 <script>
     import { DataHandler } from 'gros/datatable'
     import Operation from './Nav_Operation.svelte'
-    import CreateOperation from './Modal_CreateOperation.svelte'
-    import { modal } from 'gros/modal'
     import { fly } from 'svelte/transition'
     export let data
 
@@ -18,11 +16,7 @@
 </script>
 
 <nav class="z-depth-1" in:fly={{ duration:200, x:-280 }}>
-    <div class="flex">
-        <button class="btn" on:click={() => modal.open(CreateOperation)}>
-            Créer une opérations
-        </button>
-    </div>
+
     <header>
         <i class="micon">search</i>
         <input 
@@ -49,10 +43,6 @@
         border-right:1px solid #eee;
         padding-bottom: 40px;
     }
-    div.flex {
-        justify-content: space-between;
-        margin-top: 8px;
-    }
     header{
         height:40px;
         border:2px solid var(--primary-lighten-3);
@@ -64,12 +54,6 @@
         color:var(--primary);
     }
     header input{border:none;padding-left:4px;}
-    button {
-        margin:0 16px;
-        color: var(--ternary);
-        padding: 0;
-        float: left;
-    }
     article{
         position:relative;
         margin-top: 4px;

@@ -69,7 +69,7 @@
     header div.logo span{
         font-weight: normal;
         font-family: 'Roboto';
-        color:var(--secondary);
+        color:var(--primary);
         font-size:24px;
         margin-left: 8px;
     }

@@ -7,19 +7,19 @@ export default class Catalog
     public static async getTree()
 	{
 		return await OperationsModel.query()
-            .preload('buildings', (query => {
-                this.getBuildingsQuery(query)
+            .preload('locations', (query => {
+                this.getLocationsQuery(query)
             }))
-            .orderBy('title', 'asc')
+            .orderBy('name', 'asc')
 	}
 
-    private static getBuildingsQuery(query)
+    private static getLocationsQuery(query)
     {
         return query
-            .select(['id', 'title', 'use', 'shon', 'constructive_system', 'heating', 'hot_water', 'airing'])
-            .orderBy('title')
-            .preload('children', query => {
-                this.getBuildingsQuery(query)
-            })
+            .select(['id', 'name', 'nature', 'use', 'shon', 'constructive_system', 'heating', 'hot_water', 'airing'])
+            .orderBy('name')
+            .preload('locations', (query => {
+                this.getLocationsQuery(query)
+            }))
     }
 }

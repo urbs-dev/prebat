@@ -1,15 +1,18 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 
-export default class BuildingsModel extends BaseModel
+export default class LocationsModel extends BaseModel
 {
-    public static table = 'buildings'
+    public static table = 'locations'
 
     @column({ isPrimary: true })
     public id: string
 
     @column()
-    public title: string
+    public name: string
+
+    @column()
+    public nature: 'building' | 'zone' | 'room'
 
     @column()
     public abstract: string | null
@@ -78,13 +81,25 @@ export default class BuildingsModel extends BaseModel
     public air_permeability: string | null
 
     @column()
-    public parent_id: string | null
+    public air_permeability_network: string | null
 
-    @column()
-    public operation_id: string | null
+	@column()
+	public operation_id: string | null
 
-    @hasMany( () => BuildingsModel, { foreignKey: 'parent_id', localKey: 'id' })
-    public children: HasMany<typeof BuildingsModel>
+	@column()
+	public building_id: string | null
+
+	@column()
+	public zone_id: string | null
+
+	@column()
+	public room_id: string | null
+
+	@column()
+	public parent_id: string | null
+
+    @hasMany( () => LocationsModel, { foreignKey: 'parent_id', localKey: 'id' })
+    public locations: HasMany<typeof LocationsModel>
 
 
     @column.dateTime({ columnName: 'created_at', autoCreate: true })

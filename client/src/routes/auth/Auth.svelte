@@ -57,7 +57,7 @@
         height: 64px;
     }
     aside.logo span {
-        color: var(--secondary);
+        color: var(--primary);
         font-size: 56px;
         margin-left: 16px;
     }

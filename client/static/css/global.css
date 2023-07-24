@@ -1,4 +1,6 @@
+@font-face{font-family:'JetBrains';src:url('./fonts/JetBrainsMono-VariableFont_wght.ttf')}
 @font-face{font-family: "Lato";src: url('./fonts/Lato/Lato-Regular.ttf')};
+
 
 .anim-zoom {-webkit-animation:animatezoom 0.6s;animation:animatezoom 0.6s}
 @-webkit-keyframes animatezoom{from{-webkit-transform:scale(0)} to{-webkit-transform:scale(1)}}

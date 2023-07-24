@@ -5,27 +5,9 @@
 
     const nav = [ 
             { 
-                name: 'Opérations', 
-                icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M22 8H7.85q-1.55 0-2.7.975T4 11.45V18l1.975-6.575q.2-.65.738-1.038T7.9 10h12.9q1.025 0 1.613.813t.312 1.762l-1.8 6q-.2.65-.738 1.038T19 20H4q-.825 0-1.413-.588T2 18V6q0-.825.588-1.413T4 4h5.175q.4 0 .763.15t.637.425L12 6h8q.825 0 1.413.588T22 8Z"></path></svg>`, 
-                location: `/admin/operations`, 
-                routes: [
-                    {
-                        name: 'Bâtiments',
-                        location: `/admin/operations`, 
-                        icon: 'format_list_bulleted' 
-                    }
-                ] 
-            },
-            { 
-                name: 'Measures', 
+                name: 'Mesures', 
                 icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M7.76 16.24C6.67 15.16 6 13.66 6 12s.67-3.16 1.76-4.24l1.42 1.42C8.45 9.9 8 10.9 8 12c0 1.1.45 2.1 1.17 2.83l-1.41 1.41zm8.48 0C17.33 15.16 18 13.66 18 12s-.67-3.16-1.76-4.24l-1.42 1.42C15.55 9.9 16 10.9 16 12c0 1.1-.45 2.1-1.17 2.83l1.41 1.41zM12 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm8 2c0 2.21-.9 4.21-2.35 5.65l1.42 1.42C20.88 17.26 22 14.76 22 12s-1.12-5.26-2.93-7.07l-1.42 1.42A7.94 7.94 0 0 1 20 12zM6.35 6.35L4.93 4.93C3.12 6.74 2 9.24 2 12s1.12 5.26 2.93 7.07l1.42-1.42C4.9 16.21 4 14.21 4 12s.9-4.21 2.35-5.65z"></path></svg>`, 
                 routes: [
-                    {
-                        name: 'Measure types',
-                        location: `/admin/measures`, 
-                        icon: 'format_list_bulleted'
-
-                    },
                     {
                         name: 'import',
                         location: `/admin/measures/import`, 
@@ -33,6 +15,18 @@
 
                     }
                 ]
+            },
+            { 
+                name: 'Opérations', 
+                icon: `<svg width="100%" height="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M22 8H7.85q-1.55 0-2.7.975T4 11.45V18l1.975-6.575q.2-.65.738-1.038T7.9 10h12.9q1.025 0 1.613.813t.312 1.762l-1.8 6q-.2.65-.738 1.038T19 20H4q-.825 0-1.413-.588T2 18V6q0-.825.588-1.413T4 4h5.175q.4 0 .763.15t.637.425L12 6h8q.825 0 1.413.588T22 8Z"></path></svg>`, 
+                location: `/admin/operations`, 
+                routes: [
+                    {
+                        name: 'Liste',
+                        location: `/admin/operations`, 
+                        icon: 'format_list_bulleted' 
+                    }
+                ] 
             },
     ]
 </script>
@@ -53,27 +47,12 @@
                 <a href="{getPath(route.location)}">
                  <li
                     class="route flex" 
-                    class:active="{$url === route.location}"
+                    class:active="{$url.includes(route.location)}"
                 >
                     <i class="micon">{route.icon}</i>
                     {route.name}
                  </li>
                 </a>
-                {#if route.routes}
-                <ul class="subroutes">
-                    {#each route.routes as subroute}
-                        <a href="{getPath(subroute.location)}">
-                            <li 
-                                class="subroute waves-effect" 
-                                class:active="{$url.includes(subroute.location)}"
-                            >
-                            <i class="micon">{subroute.icon}</i>
-                            {subroute.name}
-                            </li>
-                       </a>
-                    {/each}
-                </ul>
-                {/if}
             {/each}
         </ul>
     {/each}
@@ -167,41 +146,6 @@
         background-color:transparent
     }
 
-    ul.subroutes{
-        margin-bottom:16px;
-        padding-left: 24px;
-        background-color:transparent
-    }
-    li.subroute{
-        padding-left:8px;
-        height:24px;
-        line-height:24px;
-        background-color:transparent;
-        font-size:12px;
-        transition:all,0.4s;
-        width:176px;
-        border-radius:4px 2px 2px 4px;
-        color:#616161;margin-left:16px;
-    }
-    li.subroute i{
-        font-size:16px;
-        width:20px;
-        color:#616161;
-        line-height:32px;
-        margin-right:8px;
-    }
-    li.subroute:not(.active):hover{
-        background-color:#eee;
-    }
-    li.subroute.active{
-        background:#e0e0e0;
-        border-right:4px solid var(--primary-lighten);
-        width:176px;
-        color:#424242;
-    }
-    li.subroute.active i{
-        color:var(--primary-lighten);
-    }
     i.app{
         position:absolute;
         top:8px;right:8px;

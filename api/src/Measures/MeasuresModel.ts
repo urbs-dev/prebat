@@ -22,13 +22,40 @@ export default class MeasuresModel extends BaseModel
 	public title: string
 
 	@column()
-	public abstract: string | null
+	public parameters: string
 
 	@column()
-	public unit: string | null
+	public typology: string
 
 	@column()
-	public icon: string | null
+	public statement: string
+
+	@column()
+	public unit: string
+
+	@column()
+	public sensor: string
+
+	@column()
+	public address: string
+
+	@column()
+	public x: number
+
+	@column()
+	public operation_id: string | null
+
+	@column()
+	public building_id: string | null
+
+	@column()
+	public zone_id: string | null
+
+	@column()
+	public room_id: string | null
+
+	@column()
+	public parent_id: string | null
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime

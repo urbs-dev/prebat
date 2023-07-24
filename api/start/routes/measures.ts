@@ -4,12 +4,13 @@ Route.group( () => {
 
     Route.get('measures', 'MeasuresController.index')
 
-    Route.post('measures', 'MeasuresController.store')
+    Route.post('measures/store', 'MeasuresController.store')
+
+    Route.post('measures/eval', 'MeasuresController.eval')
 
     Route.put('measures/:id', 'MeasuresController.update')
 
     Route.delete('measures/:id', 'MeasuresController.destroy')
 
-    Route.get('measures/test', 'MeasuresController.test')
 
 }).namespace('App/Measures')
