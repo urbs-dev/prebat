@@ -1,4 +1,4 @@
-<h1 class="alt-font">Cliquez sur une table de la liste pour afficher le détail</h1>
+<h1 class="alt-font">Cliquez sur une opération pour afficher le détail</h1>
 
 
 <style>
