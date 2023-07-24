@@ -1,5 +1,7 @@
 
 export const load = (async (url) => {
-    console.log(url.params.id)
-    return {}
+    const response = await fetch(`BASE_URL/prebat.api/operations/${url.params.id}`)
+    return {
+        operation: response.json()
+    }
 })

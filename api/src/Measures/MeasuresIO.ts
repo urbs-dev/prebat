@@ -16,7 +16,7 @@ export default class MeasuresIO
         const filename = this.PATH + name
         const workbook = new Excel.Workbook()
         await workbook.xlsx.readFile(filename)
-        this.sheet = workbook.getWorksheet('Donnée_1h')
+        this.sheet = workbook.getWorksheet('Données')
         this.rowCount = this.sheet.rowCount
         return this
     }

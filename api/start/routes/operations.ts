@@ -4,9 +4,12 @@ Route.group( () => {
 
     Route.get('operations', 'OperationsController.index')
 
-    Route.get('operations/form', 'OperationsController.form')
-
     Route.post('operations', 'OperationsController.store')
+
+    Route.get('operations/:id', 'OperationsController.show')
+    
+    Route.put('operations', 'OperationsController.update')
+
 
     Route.delete('operations/:id', 'OperationsController.destroy')
 

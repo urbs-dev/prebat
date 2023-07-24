@@ -1,8 +1,8 @@
 
-export const form = [
-    { key: 'title', name: `Nom de l'opération`, required: true, type: 'text', },
-    { key: 'abstract', name: 'Commentaires', type: 'textarea', },
-    { key: 'program', name: 'Nom du programme', type: 'select', value: [ 'PREBAT', 'Autre' ] },
+export const operation = [
+    // { key: 'title', name: `Nom de l'opération`, required: true, type: 'text', },
+    { key: 'abstract', name: 'Description', type: 'textarea', },
+    { key: 'program', name: 'Nom du programme', type: 'select', value: [ 'PREBAT', 'Autre' ], default: 'PREBAT' },
     { key: 'delivered_on', name: 'Année de livraison', type: 'number' },
     { key: 'contract_type', name: `Type de maîtrise d'ouvrage`, type: 'select', value: [
         'Etat',
@@ -13,7 +13,7 @@ export const form = [
         'Autre',
     ] },
     { key: 'engineering', name: `Nature des travaux`, type: 'select', value: [ 'Neuf', 'Rénovation', 'Extension' ]},
-    { key: 'label', name: 'Label / Certification', type: 'select', values: [
+    { key: 'label', name: 'Label / Certification', type: 'checkbox-group', values: [
         'BBC Effinergie',
         'BBC Effinergie R',
         'Effinergie R',
@@ -39,6 +39,5 @@ export const form = [
         'Démarche BDM',
         'Autre',
     ]},
-    { key: 'air_permeability', name: `Pérméabilité à l'air des réseaux`, type: 'number'},
     { key: 'city_code', name: 'Commune', type: 'geocoder' }
 ]
