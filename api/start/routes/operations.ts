@@ -8,7 +8,7 @@ Route.group( () => {
 
     Route.get('operations/:id', 'OperationsController.show')
     
-    Route.put('operations', 'OperationsController.update')
+    Route.put('operations/:id', 'OperationsController.update')
 
 
     Route.delete('operations/:id', 'OperationsController.destroy')

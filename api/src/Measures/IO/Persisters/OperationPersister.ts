@@ -31,10 +31,7 @@ export default class OperationPersister
             .first()
 
         if (result) {
-            await OperationsModel.query().where('id', result.id).delete()
-            await LocationsModel.query().where('operation_id', result.id).delete()
-            await MeasuresModel.query().where('operation_id', result.id).delete()
-            await DataModel.query().where('operation_id', result.id).delete()
+            await OperationPersister.drop(result.id)
         }
     }
 
@@ -75,5 +72,13 @@ export default class OperationPersister
             const persister = new BuildingPersister(document, this.id)
             await persister.store()
         }
+    }
+
+    public static async drop(id: string)
+    {
+        await OperationsModel.query().where('id', id).delete()
+        await LocationsModel.query().where('operation_id', id).delete()
+        await MeasuresModel.query().where('operation_id', id).delete()
+        await DataModel.query().where('operation_id', id).delete()
     }
 }

@@ -1,6 +1,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import OperationsTree from './OperationsTree'
 import OperationsModel from './OperationsModel'
+import { getClimaticZone } from './climat'
+import OperationPersister from 'App/Measures/IO/Persisters/OperationPersister'
 
 export default class OperationsController
 {
@@ -30,6 +32,10 @@ export default class OperationsController
         const data = request.body() as OperationsModel
         const operation = await OperationsModel.find( request.param('id') )
         if (!operation) return response.status(404).send({ message: 'Operation not found'})
+
+        if (data?.place?.department_code) {
+            data.climatic_zone = getClimaticZone(data.place.department_code)
+        }
         operation.merge(data)
         const result =  await operation.save()
         return response.send(result)
@@ -37,9 +43,7 @@ export default class OperationsController
 
     public async destroy({ request, response }: HttpContextContract)
     {
-        const result = await OperationsModel.query()
-            .where('id', request.param('id'))
-            .delete()
+        const result = OperationPersister.drop(request.param('id'))
         return response.send(result)
     }
 }

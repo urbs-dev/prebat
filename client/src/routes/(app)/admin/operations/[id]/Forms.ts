@@ -11,7 +11,7 @@ export const operation = [
         'Privé',
         'Copropriété privée',
         'Autre',
-    ] },
+    ]},
     { key: 'engineering', name: `Nature des travaux`, type: 'select', value: [ 'Neuf', 'Rénovation', 'Extension' ]},
     { key: 'label', name: 'Label / Certification', type: 'checkbox-group', values: [
         'BBC Effinergie',

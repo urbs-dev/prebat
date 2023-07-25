@@ -50,7 +50,10 @@ export default class OperationsModel extends BaseModel
 	public air_permeability: string | null
 
 	@column()
-	public city_code: string | null
+	public place: { 
+		city_code: string, name: string, department_code: string, 
+		lat: number, lon: number, context: string, nature: string 
+	}
 
     @hasMany( () => LocationsModel, { 
 		foreignKey: 'parent_id', 
