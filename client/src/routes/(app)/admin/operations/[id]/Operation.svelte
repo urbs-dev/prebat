@@ -100,7 +100,7 @@
     aside :global(i.icon) {
         width:  24px;
         height: 24px;
-        color: var(--primary-lighten-3);
+        color: var(--secondary-lighten);
         margin-right: 16px;
     }
     aside :global(div) {
