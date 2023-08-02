@@ -85,20 +85,12 @@ export default class FileParser
         ].filter(Boolean)
          .filter(item => item.endsWith('Tout') === false) as string[] 
 
-        if (this.buildingCount === 1) {
-            return {
-                buildings: [
-                        ...new Set(this.columns.map(column => column.building))
-                    ].filter(Boolean) as string[],
-                zones,
-                rooms
-            }
-        }
+        const buildings = [
+            ...new Set(this.columns.map(column => column.building))
+        ].filter(Boolean)
+
         return {
-            buildings: [
-                ...new Set(this.columns.map(column => column.building))
-            ].filter(Boolean)
-            .filter(item => item !== 'Tout') as string[], 
+            buildings: buildings.length > 1 ? buildings.filter(item => item !== 'Tout') : buildings,
             zones,
             rooms
         }

@@ -56,11 +56,11 @@ export default class MeasuresController
 
     public async test({ response }: HttpContextContract)
     {
-        const file = '20170626_BDD_0101.xlsx'
+        const file = '20170626_BDD_504.xlsx'
 
         const io = new MeasuresIO()
         await io.read(file)
-        const result = io.sequence()
+        const result = io.parse()
         return response.send(result)
     }
 
