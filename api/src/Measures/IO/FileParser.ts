@@ -74,18 +74,33 @@ export default class FileParser
 
     public getSites()
     {
+        const zones = [
+            ...new Set(this.columns.map(column => column.building + ` / ` + column.zone))
+        ].filter(Boolean)
+         .filter(item => item.endsWith('Tout') === false) as string[]
+
+
+        const rooms =  [
+            ...new Set(this.columns.map(column => column.building + ` / ` + column.zone + ` / ` + column.room))
+        ].filter(Boolean)
+         .filter(item => item.endsWith('Tout') === false) as string[] 
+
+        if (this.buildingCount === 1) {
+            return {
+                buildings: [
+                        ...new Set(this.columns.map(column => column.building))
+                    ].filter(Boolean) as string[],
+                zones,
+                rooms
+            }
+        }
         return {
             buildings: [
-                    ...new Set(this.columns.map(column => column.building))
-                ].filter(Boolean) as string[],
-            zones: [
-                    ...new Set(this.columns.map(column => column.zone))
-                ].filter(Boolean)
-                 .filter(item => item !== 'Tout') as string[], 
-            rooms: [
-                    ...new Set(this.columns.map(column => column.room))
-                ].filter(Boolean)
-                 .filter(item => item !== 'Tout') as string[], 
+                ...new Set(this.columns.map(column => column.building))
+            ].filter(Boolean)
+            .filter(item => item !== 'Tout') as string[], 
+            zones,
+            rooms
         }
     }
 

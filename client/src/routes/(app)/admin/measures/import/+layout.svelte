@@ -1,6 +1,7 @@
 <script>
     import { loading } from 'gros/loading'
     import { page, content } from './store'
+    import { Upload } from './upload'
     import Dropzone from './Dropzone.svelte'
 
     let file
@@ -23,24 +24,21 @@
 
     const store = async () => {
         if (!file) return
-        loading.start('Intégration en cours', `Cela peut durer plus d'une minute`)
+        loading.start('Séquençage en cours', `Cela peut durer plus d'une minute`)
         $page = null
-        const data = new FormData()
-        data.append('xlsx', file, file.name)
-        const response = await fetch(`BASE_URL/prebat.api/measures/store`, {
-            method: 'POST',
-            body: data
-        })
-        const json = await response.json()
-        $page = json.error ? 'error' : 'result'
-        $content = json
-        loading.stop()
+        const upload = new Upload()
+
+        await upload.getSequence(file)
+        await upload.operation()
+        await upload.sites()
+        await upload.measures()
     }
 </script>
 
 <section>
     <form>
         <Dropzone bind:file on:change={evaluate}/>
+        <!-- <Dropzone bind:file/> -->
 
         {#if file}
         <aside class="flex">

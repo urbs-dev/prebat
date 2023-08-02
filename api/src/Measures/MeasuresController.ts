@@ -26,14 +26,28 @@ export default class MeasuresController
         }
     }
 
-    public async store({ request, response }: HttpContextContract)
+    public async sequence({ request, response }: HttpContextContract)
     {
         const file = await this.import({ request, response } as HttpContextContract) as string
 
         try {
             const io = new MeasuresIO()
             await io.read(file)
-            const result = await io.store()
+            const result = io.sequence()
+            return response.send(result)
+        } catch (error) {
+            return response.send({ error: error })
+        }
+    }
+
+    public async store({ request, response }: HttpContextContract)
+    {
+        const { file, measures } = request.body()
+
+        try {
+            const io = new MeasuresIO()
+            await io.read(file)
+            const result = await io.store(measures)
             return response.send(result)
         } catch (error) {
             return response.send({ error: error })

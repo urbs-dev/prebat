@@ -6,7 +6,9 @@ Route.group( () => {
 
     Route.get('measures/test', 'MeasuresController.test')
 
-    Route.post('measures/store', 'MeasuresController.store')
+    Route.post('measures/sequence', 'MeasuresController.sequence')
+
+    Route.post('measures', 'MeasuresController.store')
 
     Route.post('measures/eval', 'MeasuresController.eval')
 

@@ -1,5 +1,5 @@
 import Route from '@ioc:Adonis/Core/Route'
-import './routes/buildings'
+import './routes/locations'
 import './routes/operations'
 import './routes/measures'
 

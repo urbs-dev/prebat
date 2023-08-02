@@ -2,7 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import OperationsTree from './OperationsTree'
 import OperationsModel from './OperationsModel'
 import { getClimaticZone } from './climat'
-import OperationPersister from 'App/Measures/IO/Persisters/OperationPersister'
+import OperationsManager from './OperationsManager'
 
 export default class OperationsController
 {
@@ -12,9 +12,10 @@ export default class OperationsController
         return response.send(tree)
     }
 
-    public async store({request, response }: HttpContextContract)
+    public async store({ request, response }: HttpContextContract)
     {
         const data = request.body() as OperationsModel
+        await OperationsManager.dropIfExists(data.name)
         const result = await OperationsModel.create(data)
         return response.send(result)
     }
@@ -43,7 +44,7 @@ export default class OperationsController
 
     public async destroy({ request, response }: HttpContextContract)
     {
-        const result = OperationPersister.drop(request.param('id'))
-        return response.send(result)
+        await OperationsManager.drop(request.param('id'))
+        return response.send({ message: 'dropped'})
     }
 }

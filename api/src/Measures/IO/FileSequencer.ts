@@ -132,7 +132,7 @@ export default class Operation
     } = {})
     {
         if (!document.measures) return
-        const entries = this.document.measures.map(item => {
+        const entries = document.measures.map(item => {
             return {
                 ...item,
                 operation_id: this.id,
@@ -144,7 +144,7 @@ export default class Operation
             }
         })
         this.measures = [...this.measures, {
-            source,
+            path: source,
             entries: entries
         }]
     }

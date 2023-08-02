@@ -3,6 +3,7 @@ import Application from '@ioc:Adonis/Core/Application'
 import FileParser from './IO/FileParser'
 import FilePersister from './IO/FilePersister'
 import FileSequencer from './IO/FileSequencer'
+import MeasuresModel from './MeasuresModel'
 
 export default class MeasuresIO
 {
@@ -10,9 +11,11 @@ export default class MeasuresIO
     public sheet: Excel.Worksheet
     public rowCount: number
     public columns: number[]
+    public name: string
 
     public async read(name: string)
     {
+        this.name = name
         const filename = this.PATH + name
         const workbook = new Excel.Workbook()
         await workbook.xlsx.readFile(filename)
@@ -31,14 +34,16 @@ export default class MeasuresIO
     {
         const document = this.parse({ isPreview: true })
         const sequencer = new FileSequencer(document)
-        return sequencer.get()
+        return {
+            file: this.name, 
+            ...sequencer.get()
+        }
     }
 
-    public async store()
+    public async store(measures: MeasuresModel[])
     {
-        const document = this.parse({ isPreview: false })
-        const persister = new FilePersister(document)
-        return await persister.insert()
+        const persister = new FilePersister(this.sheet, measures)
+        return persister.insert()
     }
 
 }

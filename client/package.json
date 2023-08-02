@@ -13,6 +13,7 @@
 		"@rollup/plugin-replace": "^5.0.2",
 		"@sveltejs/adapter-node": "^1.2.4",
 		"@sveltejs/kit": "^1.20.4",
+		"@zerodevx/svelte-toast": "^0.9.5",
 		"dotenv": "^16.3.1",
 		"gros": "^0.19.7",
 		"socket.io-client": "^4.7.0",

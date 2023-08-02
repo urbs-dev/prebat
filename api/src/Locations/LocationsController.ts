@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import LocationsModel from './LocationsModel'
 
-export default class BuildingsController 
+export default class LocationsController 
 {
     public async index({ response }: HttpContextContract)
     {
@@ -10,8 +10,8 @@ export default class BuildingsController
 
     public async store({request, response }: HttpContextContract)
     {
-        const data = request.body() as LocationsModel
-        const result = await LocationsModel.create(data)
+        const data = request.body() as LocationsModel[]
+        const result = await LocationsModel.createMany(data)
         return response.send(result)
     }
 
