@@ -51,7 +51,7 @@ export default class OperationPersister
             return {
                 ...item,
                 operation_id: this.id,
-                parent_id: this.id
+                parent_id: null
             }
         })
         await MeasuresModel.createMany(measures)
@@ -60,7 +60,7 @@ export default class OperationPersister
             return {
                 ...item,
                 operation_id: this.id,
-                parent_id: this.id
+                parent_id: null
             }
         }))
         await data.store()

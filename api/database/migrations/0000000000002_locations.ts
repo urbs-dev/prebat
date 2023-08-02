@@ -7,6 +7,7 @@ export default class Locations extends BaseSchema {
 		this.schema.createTable(this.tablename, (column) => {
 			column.uuid		( 'id'						).primary()
 			column.string	( 'name'		    		)
+			column.string	( 'path'		    		)
 			column.string	( 'nature'		    		)
 			column.text		( 'abstract' 				)
 			column.string	( 'use'						)

@@ -40,6 +40,16 @@ export default class MeasuresController
         }
     }
 
+    public async test({ response }: HttpContextContract)
+    {
+        const file = '20170626_BDD_0101.xlsx'
+
+        const io = new MeasuresIO()
+        await io.read(file)
+        const result = io.sequence()
+        return response.send(result)
+    }
+
     public async update({ request, response }: HttpContextContract)
     {
         const data = request.body() as MeasuresModel

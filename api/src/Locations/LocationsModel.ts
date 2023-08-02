@@ -12,6 +12,9 @@ export default class LocationsModel extends BaseModel
     public name: string
 
     @column()
+    public path: string
+
+    @column()
     public nature: 'building' | 'zone' | 'room'
 
     @column()

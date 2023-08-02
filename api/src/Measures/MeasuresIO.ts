@@ -2,7 +2,7 @@ import Excel from 'exceljs'
 import Application from '@ioc:Adonis/Core/Application'
 import FileParser from './IO/FileParser'
 import FilePersister from './IO/FilePersister'
-
+import FileSequencer from './IO/FileSequencer'
 
 export default class MeasuresIO
 {
@@ -25,6 +25,13 @@ export default class MeasuresIO
     {
         const parser = new FileParser(this.sheet, param.isPreview)
         return parser.get()
+    }
+
+    public sequence()
+    {
+        const document = this.parse({ isPreview: true })
+        const sequencer = new FileSequencer(document)
+        return sequencer.get()
     }
 
     public async store()

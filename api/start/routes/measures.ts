@@ -4,6 +4,8 @@ Route.group( () => {
 
     Route.get('measures', 'MeasuresController.index')
 
+    Route.get('measures/test', 'MeasuresController.test')
+
     Route.post('measures/store', 'MeasuresController.store')
 
     Route.post('measures/eval', 'MeasuresController.eval')
