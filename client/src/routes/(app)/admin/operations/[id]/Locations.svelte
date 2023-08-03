@@ -23,6 +23,7 @@
                         <li>unité: <b>{measure.unit}</b></li>
                         <li>capteur: <b>{measure.sensor}</b></li>
                         <li>grandeur: <b>{measure.typology} / {measure.statement}</b></li>
+                        <li>colonne: <b>{measure.address}</b></li>
                     </ul>
                 </article>
 

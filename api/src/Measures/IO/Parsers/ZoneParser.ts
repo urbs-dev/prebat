@@ -9,6 +9,7 @@ export default class ZoneParser
     public kindof = 'zone'
     public sheet: Excel.Worksheet
     public name: string
+    public buildingName: string
     public rooms: { name: string, measures: number[] }[]
     public columns: Column[]
     public measureParser: MeasuresParser
@@ -20,6 +21,7 @@ export default class ZoneParser
         this.columns = parser.columns
         this.measureParser = parser.measureParser
         this.name = name
+        this.buildingName = parser.name
     }
 
     public get()
@@ -36,8 +38,8 @@ export default class ZoneParser
         const scope = [] as number[]
 
         for (const column of this.columns) {
-            const { x, zone, room } = column
-            if (room === 'Tout' && zone === this.name) {
+            const { x, building, zone, room } = column
+            if (room === 'Tout' && zone === this.name && building === this.buildingName) {
                 scope.push(x)
             }
         }
@@ -56,7 +58,7 @@ export default class ZoneParser
             }
         }
         const result = [...new Set(rooms)].map(name => {
-            const room = new RoomParser(name, this)
+            const room = new RoomParser(name, this, 'zone')
             return room.get()
         })
         return result.length > 0 ? result : undefined

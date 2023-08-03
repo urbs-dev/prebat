@@ -11,14 +11,18 @@ export default class RoomParser
     public timeStep: string
     public columns: Column[]
     public measureParser: MeasuresParser
+    public zoneName: string
+    public buildingName: string
 
 
-    constructor(name: string, parser: ZoneParser | BuildingParser)
+    constructor(name: string, parser: ZoneParser | BuildingParser, parentType = 'zone')
     {
         this.sheet = parser.sheet
         this.columns = parser.columns
         this.measureParser = parser.measureParser
         this.name = name
+        this.zoneName = parentType === 'zone' ? parser.name : 'Tout'  
+        this.buildingName = parentType === 'zone' ? parser.buildingName : parser.name
     }
 
     public get()
@@ -34,8 +38,8 @@ export default class RoomParser
         const scope = [] as number[]
 
         for (const column of this.columns) {
-            const { x, room } = column
-            if (room === this.name) {
+            const { x, room, zone, building } = column
+            if (room === this.name && zone === this.zoneName && building === this.buildingName) {
                 scope.push(x)
             }
         }

@@ -12,6 +12,7 @@ export default class BuildingParser
     public zones: { name: string, measures: number[] }[]
     public columns: Column[]
     public measureParser: MeasuresParser
+    public buildingName: string
 
 
     constructor(name: string, parser: FileParser)
@@ -73,7 +74,7 @@ export default class BuildingParser
             }
         }
         const result = [...new Set(rooms)].map(name => {
-            const room = new RoomParser(name, this)
+            const room = new RoomParser(name, this, 'building')
             return room.get()
         })
         return result.length > 0 ? result : undefined
