@@ -5,6 +5,7 @@
     import { modal } from 'gros/modal'
     import UpdateModal from './Modal_Operation_Update.svelte'
     import DeleteModal from './Modal_Operation_Delete.svelte'
+    import Locations from './Locations.svelte'
     export let data
     let operation
     $: data, operation = data.operation
@@ -43,6 +44,8 @@
         </div>
     </h2>
     <Sites {operation}/>
+
+    <Locations locations={operation.locations}/>
 </section>
 
 

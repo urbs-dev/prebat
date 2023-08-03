@@ -27,11 +27,13 @@
     </li>
 </ul>
 
+<!-- 
 Destination d'usage *
 Destination d'usage simplifiée
 SHON *
 SU
 SHAB
+ -->
 
 <style>
     span.num {
@@ -59,12 +61,5 @@ SHAB
     li.flex span {
         margin: 0 4px 0 8px;
         color: #424242;
-    }
-    h3 {
-        color: var(--secondary-darken);
-        font-size: 20px;
-        border-bottom: 1px dotted var(--secondary-lighten);
-        padding: 0 8px 8px 8px;
-        justify-content: space-between;
     }
 </style>

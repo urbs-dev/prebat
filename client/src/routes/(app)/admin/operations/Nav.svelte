@@ -60,6 +60,6 @@
         border-top: 1px dotted var(--primary-lighten-3);
         padding:16px 8px;
         overflow-y:auto;
-        height:calc(100% - 72px)
+        height:calc(100% - 16px)
     }
 </style>

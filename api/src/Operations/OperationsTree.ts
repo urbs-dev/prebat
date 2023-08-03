@@ -1,6 +1,6 @@
 import OperationsModel from 'App/Operations/OperationsModel'
 
-export default class Catalog   
+export default class Catalog
 {
     public catalog: string = 'catalog'
 
@@ -37,6 +37,7 @@ export default class Catalog
     {
         return query
             .orderBy('name')
+            .preload('measures')
             .preload('locations', (query => {
                 this.getLocations(query)
         }))

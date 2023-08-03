@@ -1,13 +1,19 @@
 <script>
     import Nav from './Nav.svelte'
     import { fade } from 'svelte/transition'
+    import { afterNavigate } from '$app/navigation'
     export let data
+    let element
+
+    afterNavigate( () => {
+        element.scrollTop = 0
+    })
 </script>
 
 
 <Nav data={data.operations}/>
 
-<section class="thin-scrollbar" in:fade={{ duration:200 }}>
+<section class="thin-scrollbar" in:fade={{ duration:200 }} bind:this={element}>
     <slot/>
 </section>
 

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-export default class Operation
+export default class FileSequencer
 {
     public document: any
     public id = uuid()
@@ -30,22 +30,25 @@ export default class Operation
     public getSites()
     {
         const path = this.document.name
-        if (this.document.measures) {
+        const id = uuid()
+        const hasMeasures = this.document.measures ? true : false
+        if (hasMeasures) {
             this.sites = [...this.sites, {
-                id: this.id,
+                id: id,
                 nature: 'collection',
                 operation_id: this.id,
+                parent_id: this.id,
                 name: this.document.name,
             }]
             this.getMeasures(this.document, path, {
-                parent_id: this.id
+                parent_id: id
             })
         }
-        this.buildings(path)
+        this.buildings(path, hasMeasures ? id : null )
     }
     
 
-    public buildings(source: string)
+    public buildings(source: string, parent_id: string|null = null)
     {
         if (!this.document.buildings) return
 
@@ -57,7 +60,7 @@ export default class Operation
                id: id,
                nature: 'building',
                operation_id: this.id,
-               parent_id: this.id,
+               parent_id: parent_id ?? this.id,
                path,
                name,
             }]
