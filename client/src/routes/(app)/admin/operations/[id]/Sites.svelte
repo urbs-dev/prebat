@@ -1,9 +1,12 @@
 <script>
     import { locations as icon  } from "$lib/svg"
+    import Report from './Report.svelte'
     export let operation
     let { sites, time_step } = operation
     $: operation, { sites, time_step } = operation
     const s = (number) => number > 1 ? 's' : ''
+    operation.report.name = operation.name
+    console.log(sites)
 </script>
 
 
@@ -27,13 +30,7 @@
     </li>
 </ul>
 
-<!-- 
-Destination d'usage *
-Destination d'usage simplifiée
-SHON *
-SU
-SHAB
- -->
+<Report report={operation.report}/>
 
 <style>
     span.num {
@@ -42,7 +39,7 @@ SHAB
         line-height: 28px;
     }
     ul {
-        margin: 24px 0;
+        margin: 16px 0;
         flex-wrap: wrap;
     }
     li {

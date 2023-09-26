@@ -1,7 +1,9 @@
 <script>
     import Anchor from './Anchor.svelte'
     import { locations as icon } from '$lib/svg'
+    import { slide } from 'svelte/transition'
     export let locations
+    let active = false
 </script>
 
 {#each locations as location}
@@ -13,21 +15,36 @@
                 {name}
             </h3>
             <span>{path ?? ''}</span>
-            {#if measures}
-                {#each measures as measure}
-                <article>
-                    <h4>
-                        {measure.title}
-                    </h4>
-                    <ul>
-                        <li>unité: <b>{measure.unit}</b></li>
-                        <li>capteur: <b>{measure.sensor}</b></li>
-                        <li>grandeur: <b>{measure.typology} / {measure.statement}</b></li>
-                        <li>colonne: <b>{measure.address}</b></li>
-                    </ul>
-                </article>
 
-                {/each}
+            {#if measures.length > 0}
+            <button class="btn measure" on:click={() => active = !active}>
+                Points de mesure ({measures.length})
+                <i class="micon">
+                    {active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}
+                </i>
+            </button>
+                {#if active}
+                    <table transition:slide={{ duration: 200 }}>
+                        <thead>
+                            <tr>
+                                <th>Type de données</th>
+                                <th>Capteur</th>
+                                <th>Point de mesure</th>
+                                <th>Unité</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#each measures as measure}
+                                <tr>
+                                    <td style:color="var(--primary-darken)">{measure.typology}</td>
+                                    <td>{measure.sensor}</td>
+                                    <td>{measure.statement}</td>
+                                    <td>{measure.unit}</td>
+                                </tr>
+                            {/each}
+                        </tbody>
+                    </table>
+                {/if}
             {/if}
             {#if location.locations}
                 <svelte:self locations={location.locations}/>
@@ -59,20 +76,31 @@
         color: var(--ternary);
         font-size: 12px;
     }
+    button.measure {
+        background: #fafafa;
+        width: 100%;
+        justify-content: space-between;
+        margin: 8px 0;
+        border: 1px solid #e0e0e0;
+    }
+    table {
+        padding: 0 8px;
+    }
+    td, th {
+        padding: 4px 8px;
+    }
+    thead th {
+        border-bottom: 1px solid #e0e0e0;
+        background: #fafafa;
+    }
+    tbody tr {
+        transition: background, 0.2s;
+    }
+    tbody tr:hover {
+        background: #fafafa;
+    }
+    tbody td {
+        border-bottom: 1px solid #eee;
+    }
 
-    h4 {
-        font-family: Lato;
-        font-size: 16px;
-        margin: 16px 0 8px 0;
-        color: var(--primary-lighten);
-    }
-    li {
-        color: #9e9e9e;
-        font-size: 12px;
-    }
-    li b {
-        font-weight: normal;
-        font-family: JetBrains;
-        color: #424242;
-    }
 </style>

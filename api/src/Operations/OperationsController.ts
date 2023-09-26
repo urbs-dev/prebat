@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import OperationsTree from './OperationsTree'
 import OperationsModel from './OperationsModel'
+import OperationsReportModel from './OperationsReportModel'
 import { getClimaticZone } from './climat'
 import OperationsManager from './OperationsManager'
 
@@ -30,12 +31,18 @@ export default class OperationsController
 
     public async update({ request, response }: HttpContextContract)
     {
-        const data = request.body() as OperationsModel
-        const operation = await OperationsModel.find( request.param('id') )
-        if (!operation) return response.status(404).send({ message: 'Operation not found'})
-
+        const data = request.body() as OperationsReportModel
+        const operation = await OperationsReportModel.query()
+            .where('name', data.name )
+            .first()
+        console.log(operation)
         if (data?.place?.department_code) {
             data.climatic_zone = getClimaticZone(data.place.department_code)
+        }
+
+        if (!operation) {
+            const result = await OperationsReportModel.create(data)
+            return response.send(result)
         }
         operation.merge(data)
         const result =  await operation.save()

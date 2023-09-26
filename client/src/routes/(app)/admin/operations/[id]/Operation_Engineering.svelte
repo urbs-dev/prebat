@@ -1,9 +1,9 @@
 
 
 <script>
-    export let operation
-    let { engineering } = operation
-    $: operation, { engineering } = operation
+    export let report = {}
+    let { engineering } = report
+    $: report, { engineering } = report
 </script>
 
 {#if engineering}

@@ -1,7 +1,7 @@
 <script>
-    export let operation
-    let certs = operation?.label?.split(', ')
-    $: operation, certs = operation?.label?.split(', ')
+    export let report = {}
+    let certs = report?.label?.split(', ')
+    $: report, certs = report?.label?.split(', ')
 </script>
 
 {#if certs}

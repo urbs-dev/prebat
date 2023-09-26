@@ -9,7 +9,7 @@
     export let props
     export let close
     const form = props ?? {}
-    let { id, delivered_on, abstract, program, contract_type, label, place, engineering } = form
+    let { id, name, delivered_on, abstract, program, contract_type, label, place, engineering } = form
 
     const update = async () => {
         close()
@@ -17,7 +17,7 @@
         const response = await fetch(`BASE_URL/prebat.api/operations/${id}`, {
             method: 'PUT',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({ delivered_on, abstract, program, contract_type, label, place, engineering })
+            body: JSON.stringify({ name, delivered_on, abstract, program, contract_type, label, place, engineering })
         })
         await response.json()
         invalidateAll()

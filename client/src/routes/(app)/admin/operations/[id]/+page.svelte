@@ -16,12 +16,12 @@
         <div class="flex baseline">
             {operation.name}
             <span>
-                {operation.delivered_on ? operation.delivered_on + ',' : ''}
-                {operation.program ?? ''}
+                {operation?.report?.delivered_on ? operation?.report?.delivered_on + ',' : ''}
+                {operation?.report?.program ?? ''}
             </span>
         </div>
         <div class="flex">
-            <button class="tooltip" on:click={() => modal.open(UpdateModal, operation)}>
+            <button class="tooltip" on:click={() => modal.open(UpdateModal, operation.report)}>
                 <Tooltip bottom content="Éditer"/>
                 <i class="micon">edit</i>
             </button>
@@ -33,16 +33,6 @@
     </h1>
     <Operation {operation}/>
 
-
-    <h2 class="alt-font flex">
-        Sites
-        <div class="flex">
-            <button class="tooltip" on:click={() => modal.open(UpdateModal, operation)}>
-                <Tooltip bottom content="Éditer"/>
-                <i class="micon">edit</i>
-            </button>
-        </div>
-    </h2>
     <Sites {operation}/>
 
     <Locations locations={operation.locations}/>
@@ -54,7 +44,7 @@
         padding: 40px 0;
         max-width: 880px;
     }
-    h1, h2 {
+    h1 {
         color: var(--secondary-darken);
         font-size: 32px;
         border-bottom: 1px dotted var(--secondary-lighten);
@@ -69,10 +59,6 @@
         font-size: 14px;
         font-family: JetBrains;
         color: #424242;
-    }
-    h2 {
-        font-size: 24px;
-        margin-top: 24px;
     }
     button {
         width: 32px;

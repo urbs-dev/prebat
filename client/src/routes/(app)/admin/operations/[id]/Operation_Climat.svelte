@@ -1,9 +1,9 @@
 
 
 <script>
-    export let operation
-    let { climatic_zone } = operation
-    $: operation, { climatic_zone } = operation
+    export let report = {}
+    let { climatic_zone } = report
+    $: report, { climatic_zone } = report
 </script>
 
 {#if climatic_zone}

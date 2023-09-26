@@ -5,17 +5,17 @@
     import Climat from './Operation_Climat.svelte'
     import Engineering from './Operation_Engineering.svelte'
     export let operation 
-    let { abstract } = operation
-    $: operation, { abstract } = operation
+    let { abstract, report } = operation
+    $: operation, { abstract, report } = operation
 </script>
 
 
 <aside>
-    <Contract {operation}/>
-    <Engineering {operation}/>
-    <Label {operation}/>
-    <Place {operation}/>
-    <Climat {operation}/>
+    <Contract {report}/>
+    <Engineering {report}/>
+    <Label {report}/>
+    <Place {report}/>
+    <Climat {report}/>
 </aside>
 
 {#if abstract}

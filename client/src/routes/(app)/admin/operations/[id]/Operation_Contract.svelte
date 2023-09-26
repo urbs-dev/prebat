@@ -1,9 +1,9 @@
 
 
 <script>
-    export let operation
-    let { contract_type } = operation
-    $: operation, { contract_type } = operation
+    export let report = {}
+    let { contract_type } = report
+    $: report, { contract_type } = report
 </script>
 
 {#if contract_type}
