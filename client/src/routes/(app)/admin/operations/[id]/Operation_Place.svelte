@@ -1,7 +1,7 @@
 <script>
-    export let operation
-    let place = operation?.report?.place
-    $: operation, place = operation?.report?.place
+    export let report
+    let place = report.place
+    $: report, place = report.place
 </script>
 
 {#if place}

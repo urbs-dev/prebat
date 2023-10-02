@@ -35,7 +35,6 @@ export default class OperationsController
         const operation = await OperationsReportModel.query()
             .where('name', data.name )
             .first()
-        console.log(operation)
         if (data?.place?.department_code) {
             data.climatic_zone = getClimaticZone(data.place.department_code)
         }

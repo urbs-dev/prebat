@@ -11,11 +11,11 @@
 
 
 <aside>
-    <Contract {report}/>
-    <Engineering {report}/>
-    <Label {report}/>
-    <Place {report}/>
-    <Climat {report}/>
+    <Contract       {report}/>
+    <Engineering    {report}/>
+    <Label          {report}/>
+    <Place          {report}/>
+    <Climat         {report}/>
 </aside>
 
 {#if abstract}

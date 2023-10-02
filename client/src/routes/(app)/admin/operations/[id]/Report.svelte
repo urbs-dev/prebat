@@ -1,6 +1,7 @@
 <script>
     import { modal } from 'gros/modal'
     import Generalities from './Modal_Report_Generalities.svelte'
+    import Envelope from './Modal_Report_Envelope.svelte'
     export let report
 </script>
 
@@ -39,16 +40,12 @@
 
     <h3 class="alt-font flex">
         Enveloppe
-        <button class="btn">éditer</button>
+        <button class="btn" on:click={() => modal.open(Envelope, report)}>éditer</button>
     </h3>
     <ul>
         <li class="required" class:warning={!report.constructive_system}>
             <i>Système constructif <em>*</em> </i>
             <b>{ report.constructive_system ?? ''}</b>
-        </li>
-        <li>
-            <i>Type d'isolation du bâtiment</i>
-            <b>{report.insulation_type ?? ''}</b>
         </li>
         <li>
             <i>Isolation du bâtiment</i>
