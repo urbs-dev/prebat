@@ -1,7 +1,7 @@
 <script>
     import Nav from './Nav.svelte'
     import Header from '$lib/components/Header.svelte'
-    import { Presence } from '$module/socket'
+    // import { Presence } from '$module/socket'
     import { goto } from '$app/navigation'
 	import { status, user } from '$module/session'
     import { getPath } from 'gros/page'
@@ -14,7 +14,7 @@
 
 
 {#if $status.isAuthenticated && ($user.roles.USER_ADMIN || $user.roles.GLOBAL_ADMIN)}
-    <Presence info={{ application: 'PREBAT (admin)' }}/>
+    <!-- <Presence info={{ application: 'PREBAT (admin)' }}/> -->
     <Header/>
     <Nav/>
     <section>

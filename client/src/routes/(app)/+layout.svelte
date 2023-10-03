@@ -1,6 +1,6 @@
 <script>
     import { goto } from '$app/navigation'
-	import { Presence } from '$module/socket'
+	// import { Presence } from '$module/socket'
 	import { user, status } from '$module/session'
 	import { Loading } from 'gros/loading'
     import { getPath } from 'gros/page'
@@ -17,7 +17,7 @@
 	{#if $status.isAuthenticated}
 		<Header/>
 		<slot/>
-		<Presence info={{ application: 'PREBAT' }}/>
+		<!-- <Presence info={{ application: 'PREBAT' }}/> -->
 	{:else}
 		<button on:click={goto( getPath('/auth'))}/>
 	{/if}

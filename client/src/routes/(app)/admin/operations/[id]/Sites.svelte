@@ -6,7 +6,6 @@
     $: operation, { sites, time_step } = operation
     const s = (number) => number > 1 ? 's' : ''
     operation.report.name = operation.name
-    console.log(sites)
 </script>
 
 
