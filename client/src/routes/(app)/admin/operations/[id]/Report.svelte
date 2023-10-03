@@ -2,6 +2,7 @@
     import { modal } from 'gros/modal'
     import Generalities from './Modal_Report_Generalities.svelte'
     import Envelope from './Modal_Report_Envelope.svelte'
+    import System from './Modal_Report_System.svelte'
     export let report
 </script>
 
@@ -75,7 +76,7 @@
 
     <h3 class="alt-font flex">
         Systèmes communs à toutes les zones
-        <button class="btn">éditer</button>
+        <button class="btn" on:click={() => modal.open(System, report)}>éditer</button>
     </h3>
     <ul>
         <li class="required" class:warning={!report.heating}>

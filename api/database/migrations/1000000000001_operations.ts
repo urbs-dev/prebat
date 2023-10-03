@@ -11,6 +11,7 @@ export default class Operations extends BaseSchema {
 			column.json		( 'sites'			)
 			column.integer	( 'building_count'	)
 			column.integer	( 'row_count'		)
+			column.boolean	( 'is_public'		).defaultTo(false)
 			column.timestamps()
 		})
 	}

@@ -1,21 +1,23 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
-import LocationsModel from 'App/Locations/LocationsModel'
+import { BaseModel, column, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuidv4 } from 'uuid'
 
-export default class OperationsReportModel extends BaseModel
+export default class ReportsModel extends BaseModel
 {
-	public static table = 'operations_report'
+	public static table = 'reports'
 	public static selfAssignPrimaryKey = true
 
 	@beforeCreate()
-	public static async createUUID (model: OperationsReportModel) { model.id = uuidv4() }
+	public static async createUUID (model: ReportsModel ) { model.id = uuidv4() }
 
 	@column({ isPrimary: true })
 	public id: string
 
 	@column()
 	public name: string
+
+	@column()
+	public path: string
 
 	@column()
 	public abstract: string | null
@@ -109,13 +111,6 @@ export default class OperationsReportModel extends BaseModel
 		city_code: string, name: string, department_code: string, 
 		lat: number, lon: number, context: string, nature: string 
 	}
-
-    @hasMany( () => LocationsModel, { 
-		foreignKey: 'parent_id', 
-		localKey: 'id', 
-		onQuery(query) { query.orderBy('name', 'asc') } 
-	})
-	public locations: HasMany<typeof LocationsModel>
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime

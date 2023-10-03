@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
-import OperationsReportModel from './OperationsReportModel'
+import ReportsModel from 'App/Reports/ReportsModel'
 import LocationsModel from 'App/Locations/LocationsModel'
 
 export default class OperationsModel extends BaseModel
@@ -26,6 +26,9 @@ export default class OperationsModel extends BaseModel
 	@column()
 	public row_count: number
 
+	@column()
+	public is_public: boolean
+
     @hasMany( () => LocationsModel, { 
 		foreignKey: 'parent_id', 
 		localKey: 'id', 
@@ -33,8 +36,12 @@ export default class OperationsModel extends BaseModel
 	})
 	public locations: HasMany<typeof LocationsModel>
 
-	@hasOne( () => OperationsReportModel, { foreignKey: 'name', localKey: 'name' })
-	public report: HasOne<typeof OperationsReportModel>
+	@hasOne( () => ReportsModel, { 
+		onQuery(query) { query.whereNull('path') }, 
+		foreignKey: 'name', 
+		localKey: 'name'
+	})
+	public report: HasOne<typeof ReportsModel>
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime

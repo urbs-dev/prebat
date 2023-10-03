@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import MeasuresModel from 'App/Measures/MeasuresModel'
+import ReportsModel from 'App/Reports/ReportsModel'
 
 export default class LocationsModel extends BaseModel
 {
@@ -17,75 +18,6 @@ export default class LocationsModel extends BaseModel
 
     @column()
     public nature: 'building' | 'zone' | 'room'
-
-    @column()
-    public abstract: string | null
-
-    @column()
-    public use: string
-
-    @column()
-    public use_typology: string
-
-    @column()
-    public shon: number
-
-    @column()
-    public su: number | null
-
-    @column()
-    public shab: number | null
-
-    @column()
-    public height: number | null
-
-    @column()
-    public constructive_system: string
-
-    @column()
-    public insulation_type: string | null
-
-    @column()
-    public building_insulation: string | null
-
-    @column()
-    public wall_insulation: string | null
-
-    @column()
-    public roof_insulation: string | null
-
-    @column()
-    public floor_insulation: string | null
-
-    @column()
-    public window_carpentry: string | null
-
-    @column()
-    public frame_carpentry: string | null
-
-    @column()
-    public heating: string
-
-    @column()
-    public hot_water: string
-
-    @column()
-    public airing: string
-
-    @column()
-    public refresher: string | null
-
-    @column()
-    public hot_emitter: string | null
-
-    @column()
-    public cold_emitter: string | null
-
-    @column()
-    public air_permeability: string | null
-
-    @column()
-    public air_permeability_network: string | null
 
 	@column()
 	public operation_id: string | null
@@ -107,6 +39,12 @@ export default class LocationsModel extends BaseModel
 
     @hasMany( () => MeasuresModel, { foreignKey: 'parent_id', localKey: 'id'})
     public measures: HasMany<typeof MeasuresModel>
+
+	@hasOne( () => ReportsModel, { 
+		foreignKey: 'path',
+		localKey: 'path'
+	})
+    public report: HasOne<typeof ReportsModel>
 
     @column.dateTime({ columnName: 'created_at', autoCreate: true })
     public createdAt: DateTime

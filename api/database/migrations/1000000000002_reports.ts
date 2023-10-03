@@ -1,12 +1,13 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class OperationsReport extends BaseSchema {
-	protected tablename = 'operations_report'
+export default class Reports extends BaseSchema {
+	protected tablename = 'reports'
 
 	public async up () {
 		this.schema.createTable(this.tablename, (column) => {
 			column.uuid	    ( 'id'				).primary()
-			column.string	( 'name'		    ).notNullable().unique() // Nom de l'opération *
+			column.string	( 'name'		    ).notNullable() // Nom de l'opération *
+			column.string	( 'path'			).unique() // PATH location
 			column.text		( 'abstract' 		) // Commentaire
             column.string   ( 'program'         ).defaultTo('PREBAT') // Nom du programme
             column.integer  ( 'delivered_on'    ) // Année de livraison
