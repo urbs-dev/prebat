@@ -14,11 +14,11 @@
     <ul>
         <li class="required" class:warning={!report.use}>
             <i>Destination d'usage <em>*</em></i>
-            <b>{report.use ?? ''}</b>
+            <b>{report.use ? report.use.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li class="required">
             <i>Destination d'usage simplifée</i>
-            <b>{report.use_typology ?? ''}</b>
+            <b>{report.use_typology ? report.use_typology.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li class="required" class:warning={!report.shon}>
             <i>SHON <em>*</em></i>
@@ -46,31 +46,31 @@
     <ul>
         <li class="required" class:warning={!report.constructive_system}>
             <i>Système constructif <em>*</em> </i>
-            <b>{ report.constructive_system ?? ''}</b>
+            <b>{ report.constructive_system ? report.constructive_system.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Isolation du bâtiment</i>
-            <b>{report.building_insulation ?? ''}</b>
+            <b>{report.building_insulation ? report.building_insulation.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Isolant murs</i>
-            <b>{report.wall_insulation ?? ''}</b>
+            <b>{report.wall_insulation ? report.wall_insulation.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Isolation toiture</i>
-            <b>{report.roof_insulation ?? ''}</b>
+            <b>{report.roof_insulation ? report.roof_insulation.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Isolation plancher</i>
-            <b>{report.floor_insulation ?? ''}</b>
+            <b>{report.floor_insulation ? report.floor_insulation.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Menuiserie - vitrage</i>
-            <b>{report.window_carpentry ?? ''}</b>
+            <b>{report.window_carpentry ? report.window_carpentry.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Menuiserie - châssis</i>
-            <b>{report.frame_carpentry ?? ''}</b>
+            <b>{report.frame_carpentry ? report.frame_carpentry.replace(/ ~ /g, ', ') : ''}</b>
         </li>
     </ul>
 
@@ -81,19 +81,19 @@
     <ul>
         <li class="required" class:warning={!report.heating}>
             <i>Chauffage de base <em>*</em></i>
-            <b>{report.heating ?? ''}</b>
+            <b>{report.heating ? report.heating.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li class="required" class:warning={!report.hot_water}>
             <i>Eau chaude sanitaire <em>*</em></i>
-            <b>{report.hot_water ?? ''}</b>
+            <b>{report.hot_water ? report.hot_water.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li class="required" class:warning={!report.airing}>
             <i>Ventilation <em>*</em></i>
-            <b>{report.airing ?? ''}</b>
+            <b>{report.airing ? report.airing.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Climatisation / Rafraichissement</i>
-            <b>{report.refresher ?? ''}</b>
+            <b>{report.refresher ? report.refresher.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Emetteurs chaud</i>
@@ -105,11 +105,11 @@
         </li>
         <li>
             <i>Pérméabilité à l'air de l'enveloppe</i>
-            <b>{report.air_permeability ?? ''}</b>
+            <b>{report.air_permeability ? report.air_permeability + ' m³/(h.m²)' : ''}</b>
         </li>
         <li>
             <i>Pérméabilité à l'air des réseaux</i>
-            <b>{report.air_permeability_network ?? ''}</b>
+            <b>{report.air_permeability_network ? report.air_permeability_network + ' m³/(h.m²)' : ''}</b>
         </li>
     </ul>
 </article>

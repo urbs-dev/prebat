@@ -20,7 +20,7 @@
             selected = [value, ...selected].sort((a, b) => a.localeCompare(b))
         }
     }
-    $: selected, result = selected.length === 0 ? null : selected.join(', ')
+    $: selected, result = selected.length === 0 ? null : selected.join(' ~ ')
 </script>
 
 <section>

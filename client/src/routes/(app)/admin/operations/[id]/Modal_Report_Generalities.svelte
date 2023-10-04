@@ -32,7 +32,7 @@
             selected = [value, ...selected].sort((a, b) => a.localeCompare(b))
         }
     }
-    $: selected, use = selected.filter(Boolean).join(', ')
+    $: selected, use = selected.filter(Boolean).join(' ~ ')
     $: selected, use_typology = getUseTypology(selected)
 </script>
 
@@ -51,7 +51,7 @@
                         <i>{usage.typology}</i>
                         <ul>
                             {#each usage.values as value}
-                            <li>
+                            <li class:active={selected.includes(value)}>
                                 <Checkbox checked={selected.includes(value)} size={16} margin={[0,8,0,0]} on:click={() => select(value, usage.typology)}>
                                     {value}
                                 </Checkbox>
@@ -106,9 +106,7 @@
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
     article li {
-        transition: background, .2s;
         border-radius: 2px;
-        padding: 2px 8px;
     }
     article li:hover {
         background: #f5f5f5;
@@ -123,5 +121,16 @@
         color:var(--primary);
         margin:0;
         margin-bottom:4px;
+    }
+    ul li.active :global(button.checkbox) {
+        background: var(--primary-lighten-1);
+    }
+    ul li :global(button.checkbox) {
+        width: 100%;
+        justify-content: flex-start !important;
+        padding: 2px 8px;
+    }
+    ul li :global(button:not(.checkbox)) {
+        width: 100%;
     }
 </style>

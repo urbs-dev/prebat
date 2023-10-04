@@ -3,11 +3,12 @@
     import { loading } from 'gros/loading'
     import { invalidateAll } from '$app/navigation'
     import { Checkbox } from 'gros/form'
-    import { envelope } from './utils'
+    import Radio from './Radio.svelte'
+    import { system } from './utils'
 
     export let props
     export let close
-    let active = envelope[0]
+    let active = system[0]
     const form = props ?? {}
 
     const update = async () => {
@@ -18,13 +19,14 @@
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
             body: JSON.stringify({ 
                 name: form.name, 
-                constructive_system: form.constructive_system, 
-                building_insulation: form.building_insulation, 
-                wall_insulation: form.wall_insulation, 
-                roof_insulation: form.roof_insulation, 
-                floor_insulation: form.floor_insulation, 
-                window_carpentry: form.window_carpentry, 
-                frame_carpentry: form.frame_carpentry 
+                heating: form.heating, 
+                hot_water: form.hot_water, 
+                airing: form.airing, 
+                refresher: form.refresher, 
+                hot_emitter: form.hot_emitter, 
+                cold_emitter: form.cold_emitter, 
+                air_permeability: form.air_permeability,
+                air_permeability_network: form.air_permeability_network,
             })
         })
         await response.json()
@@ -33,8 +35,13 @@
     }
 
     let selected = []
-    $: active, selected = form[active.name] ? form[active.name].split(' ~ ') : []
-    const select = (value, name) => {
+    $: active, selected = form[active.name] && active.type !== 'number' ? form[active.name].split(' ~ ') : []
+    const select = (value, name, replace = false) => {
+        if (replace) {
+            form[name] = value
+            return
+        }
+
         if (selected.includes(value)) {
             selected = selected.filter((item) => item !== value)
         } else {
@@ -47,7 +54,7 @@
 <Modal title="Modifier les informations" icon="edit">
     <section class="flex">
         <nav>
-        {#each envelope as item}
+        {#each system as item}
             <button class="btn" on:click={() => active = item} class:active={active === item}>
                 {item.label}
             </button>
@@ -59,12 +66,32 @@
                 <label for="{id}">
                     <div class="flex">
                         <i class="micon">chevron_right</i>
-                        <span>{active.label}</span>
+                        <span>{active.label}&nbsp;</span>
+                        {#if active.unit}
+                            <code>[{active.unit}]</code>
+                        {/if}
                     </div>
                 </label>
+                {#if active.type === 'radio'}
                 <ul>
                     {#each active.values as value}
-                    <li>
+                    <li class:active={selected.includes(value)}>
+                        <Radio 
+                            checked={selected.includes(value)} 
+                            size={16} margin={[0,8,0,0]} 
+                            on:click={() => select(value, active.name, true)
+                        }>
+                            {value}
+                        </Radio>
+                    </li>
+                    {/each}
+                </ul>
+                {:else if active.type === 'number'}
+                    <input type="number" bind:value={form[active.name]}/>
+                {:else}
+                <ul>
+                    {#each active.values as value}
+                    <li class:active={selected.includes(value)}>
                         <Checkbox 
                             checked={selected.includes(value)} 
                             size={16} margin={[0,8,0,0]} 
@@ -75,6 +102,7 @@
                     </li>
                     {/each}
                 </ul>
+                {/if}
             </aside>
         {/if}
     </section>
@@ -87,9 +115,9 @@
 
 <style>
     section {
-        width: 520px;
+        width: 680px;
         margin: 24px;
-        min-height: 34vh;
+        min-height: 40vh;
         justify-content: space-between;
         align-items: flex-start;
     }
@@ -118,12 +146,18 @@
         background: var(--primary);
         color: #fff;
     }
-    ul li {
-        transition: background, .2s;
-        border-radius: 2px;
-        padding: 2px 8px;
-    }
     ul li:hover {
         background: #f5f5f5;
+    }
+    ul li.active :global(button.checkbox) {
+        background: var(--primary-lighten-1);
+    }
+    ul li :global(button.checkbox) {
+        width: 100%;
+        justify-content: flex-start !important;
+        padding: 2px 8px;
+    }
+    ul li :global(button:not(.checkbox)) {
+        width: 100%;
     }
 </style>

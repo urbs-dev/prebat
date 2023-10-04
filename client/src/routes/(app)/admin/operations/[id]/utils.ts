@@ -76,7 +76,7 @@ export const getUseTypology = (selected: string[]) => {
     if (typologies.filter(Boolean).length === 0) {
         return null
     }
-    return [ ...new Set(typologies.filter(Boolean))].join(', ')
+    return [ ...new Set(typologies.filter(Boolean))].join(' ~ ')
 }
 
 
@@ -146,7 +146,77 @@ export const envelope = [
 
 
 export const system = [
+    { label: 'Chauffage de base *', name: 'heating', values: [
+        `Radiateurs électriques`,
+        `PAC`,
+        `Batterie ou résistance électrique`,
+        `Chaudière gaz`,
+        `Chaudière fioul`,
+        `Chaudière bois`,
+        `Réseau de chaleur urbain`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
+        `Groupée avec le système de chauffage`,
+        `Production instantanée non groupée avec le chauffage`,
+        `Ballon électrique`,
+        `Ballon thermodynamique`,
+        `ECS solaire`,
+        `Résistance électrique pour appoint`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Ventilation *', name: 'airing', values: [
+        `Ventilation naturelle`,
+        `Ventilation hybride`,
+        `VMC simple flux autoréglable`,
+        `VMC simple flux hygro A`,
+        `VMC simple flux hygro B`,
+        `VMC double flux`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Climatisation / Rafraichissement', name: 'refresher', values: [
+        `Climatisation à détente directe`,
+        `Climatisation avec réseau d'eau glacée`,
+        `PAC réversible`,
+        `Rafraîchissement`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Emetteurs chaud', name: 'hot_emitter', type: 'radio', values: [
+        `Plancher chauffant`,
+        `Plafond chauffant`,
+        `Mur rayonnant`,
+        `Radiateurs électriques`,
+        `Radiateurs à eau basse température`,
+        `Radiateurs à eau standards`,
+        `Ventilo convecteur`,
+        `Batterie à eau chaude dans la gaine de soufflage de la ventilation`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Emetteurs froid', name: 'cold_emitter', type: 'radio', values: [
+        `Plancher`,
+        `Plancher rafraîchissant`,
+        `Mur rayonnant`,
+        `Poutre froide`,
+        `Ventilo convecteur`,
+        `Batterie froide`,
+        `Autres`,
+        `Ne sait pas`,
+    ] },
     {
-        
+        label: `Pérméabilité à l'air de l'enveloppe`,
+        unit: 'm³/(h.m²)',
+        name: 'air_permeability', 
+        type: 'number',
+    },
+    {
+        label: `Perméabilité à l'air des réseaux`,
+        unit: 'm³/(h.m²)',
+        name: 'air_permeability_network', 
+        type: 'number',
     }
 ]
