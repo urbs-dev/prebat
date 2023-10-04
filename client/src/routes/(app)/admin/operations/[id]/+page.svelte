@@ -1,6 +1,5 @@
 <script>
     import Operation from './Operation.svelte'
-    import Sites from './Sites.svelte'
     import { Tooltip } from 'gros/tooltip'
     import { modal } from 'gros/modal'
     import UpdateModal from './Modal_Operation_Update.svelte'
@@ -32,8 +31,6 @@
         </div>
     </h1>
     <Operation {operation}/>
-
-    <Sites {operation}/>
 
     <Locations locations={operation.locations}/>
 </section>
