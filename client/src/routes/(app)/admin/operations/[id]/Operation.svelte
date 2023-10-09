@@ -29,7 +29,7 @@
     </fieldset>
 {/if}
 
-
+{#if sites}
 <ul class="flex">
     <li class="flex">
         <i class="icon">{@html icon.building}</i>
@@ -49,6 +49,7 @@
         pièce{s(sites.rooms.length)}
     </li>
 </ul>
+{/if}
 
 <Report report={operation.report}/>
 

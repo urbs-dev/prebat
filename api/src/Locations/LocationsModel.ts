@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import MeasuresModel from 'App/Measures/MeasuresModel'
 import ReportsModel from 'App/Reports/ReportsModel'
 
@@ -40,11 +40,12 @@ export default class LocationsModel extends BaseModel
     @hasMany( () => MeasuresModel, { foreignKey: 'parent_id', localKey: 'id'})
     public measures: HasMany<typeof MeasuresModel>
 
-	@hasOne( () => ReportsModel, { 
+	@belongsTo( () => ReportsModel, { 
+		onQuery(query) { query.whereNotNull('path') }, 
 		foreignKey: 'path',
 		localKey: 'path'
 	})
-    public report: HasOne<typeof ReportsModel>
+    public report: BelongsTo<typeof ReportsModel>
 
     @column.dateTime({ columnName: 'created_at', autoCreate: true })
     public createdAt: DateTime
