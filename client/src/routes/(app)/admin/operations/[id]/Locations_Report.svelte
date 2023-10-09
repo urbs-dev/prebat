@@ -1,16 +1,18 @@
 <script>
     import { modal } from 'gros/modal'
-    import Generalities from './Modal_Report_Generalities.svelte'
-    import Envelope from './Modal_Report_Envelope.svelte'
-    import System from './Modal_Report_System.svelte'
-    export let report
+    import Generalities from './Modal_Location_Report_Generalities.svelte'
+    import System from './Modal_Location_Report_System.svelte'
+    export let location
+    export let operation
+    let report = location.report ?? { name: operation.name, path: location.path }
+    $: location, report = location.report ?? { name: operation.name, path: location.path }
 </script>
 
 <article>
-    <h3 class="flex">
+    <h4 class="flex">
         Généralités
         <button class="btn" on:click={() => modal.open(Generalities, report)}>éditer</button>
-    </h3>
+    </h4>
     <ul>
         <li class="required" class:warning={!report.use}>
             <i>Destination d'usage <em>*</em></i>
@@ -32,52 +34,24 @@
             <i>SHAB</i>
             <b>{report.shab ? report.shab + ' m²' : ''}</b>
         </li>
+        {#if location.nature === 'building'}
         <li>
             <i>Hauteur du bâtiment</i>
             <b>{report.height ? report.height + ' m' : ''}</b>
         </li>
+        {/if}
     </ul>
 
 
-    <h3 class="flex">
-        Enveloppe
-        <button class="btn" on:click={() => modal.open(Envelope, report)}>éditer</button>
-    </h3>
+    <h4 class="flex">
+        Système
+        <button class="btn" on:click={() => modal.open(System, report)}>éditer</button>
+    </h4>
     <ul>
         <li class="required" class:warning={!report.constructive_system}>
             <i>Système constructif <em>*</em> </i>
             <b>{ report.constructive_system ? report.constructive_system.replace(/ ~ /g, ', ') : ''}</b>
         </li>
-        <li>
-            <i>Isolation du bâtiment</i>
-            <b>{report.building_insulation ? report.building_insulation.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-        <li>
-            <i>Isolant murs</i>
-            <b>{report.wall_insulation ? report.wall_insulation.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-        <li>
-            <i>Isolation toiture</i>
-            <b>{report.roof_insulation ? report.roof_insulation.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-        <li>
-            <i>Isolation plancher</i>
-            <b>{report.floor_insulation ? report.floor_insulation.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-        <li>
-            <i>Menuiserie - vitrage</i>
-            <b>{report.window_carpentry ? report.window_carpentry.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-        <li>
-            <i>Menuiserie - châssis</i>
-            <b>{report.frame_carpentry ? report.frame_carpentry.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-    </ul>
-
-    <h3 class="flex">
-        Systèmes communs à toutes les zones
-        <button class="btn" on:click={() => modal.open(System, report)}>éditer</button>
-    </h3>
     <ul>
         <li class="required" class:warning={!report.heating}>
             <i>Chauffage de base <em>*</em></i>
@@ -92,24 +66,8 @@
             <b>{report.airing ? report.airing.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
-            <i>Climatisation / Rafraichissement</i>
-            <b>{report.refresher ? report.refresher.replace(/ ~ /g, ', ') : ''}</b>
-        </li>
-        <li>
-            <i>Emetteurs chaud</i>
-            <b>{report.hot_emitter ?? ''}</b>
-        </li>
-        <li>
-            <i>Emetteurs froid</i>
-            <b>{report.cold_emitter ?? ''}</b>
-        </li>
-        <li>
             <i>Pérméabilité à l'air de l'enveloppe</i>
             <b>{report.air_permeability ? report.air_permeability + ' m³/(h.m²)' : ''}</b>
-        </li>
-        <li>
-            <i>Pérméabilité à l'air des réseaux</i>
-            <b>{report.air_permeability_network ? report.air_permeability_network + ' m³/(h.m²)' : ''}</b>
         </li>
     </ul>
 </article>
@@ -118,10 +76,10 @@
     article {
         padding: 0;
     }
-    h3 {
-        font-size: 24px;
+    h4 {
+        font-size: 20px;
         margin: 24px 0 16px 0;
-        font-weight: 800;
+        color: var(--secondary);
     }
     em {
         font-weight: bold;

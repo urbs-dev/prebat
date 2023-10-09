@@ -32,7 +32,7 @@
     </h1>
     <Operation {operation}/>
 
-    <Locations locations={operation.locations}/>
+    <Locations locations={operation.locations} {operation}/>
 </section>
 
 

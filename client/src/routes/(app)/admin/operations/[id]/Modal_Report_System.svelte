@@ -5,6 +5,7 @@
     import { Checkbox } from 'gros/form'
     import Radio from './Radio.svelte'
     import { system } from './utils'
+    import { removeEmptyString } from '$lib/utils'
 
     export let props
     export let close
@@ -17,7 +18,7 @@
         const response = await fetch(`BASE_URL/prebat.api/operations/${form.name}`, {
             method: 'PUT',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({ 
+            body: JSON.stringify(removeEmptyString({ 
                 name: form.name, 
                 heating: form.heating, 
                 hot_water: form.hot_water, 
@@ -27,7 +28,7 @@
                 cold_emitter: form.cold_emitter, 
                 air_permeability: form.air_permeability,
                 air_permeability_network: form.air_permeability_network,
-            })
+            }))
         })
         await response.json()
         invalidateAll()

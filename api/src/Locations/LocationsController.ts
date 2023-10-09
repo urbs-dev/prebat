@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import LocationsModel from './LocationsModel'
+import ReportsModel from 'App/Reports/ReportsModel'
 
 export default class LocationsController 
 {
@@ -17,11 +18,18 @@ export default class LocationsController
 
     public async update({ request, response }: HttpContextContract)
     {
-        const data = request.body() as LocationsModel
-        const building = await LocationsModel.find( request.param('id') )
-        if (!building) return response.status(404).send({ message: 'No building found'})
-        building.merge(data)
-        const result =  await building.save()
+        const data = request.body() as ReportsModel
+        const location = await ReportsModel.query()
+            .where('name', data.name )
+            .andWhereNotNull('path')
+            .first()
+
+        if (!location) {
+            const result = await ReportsModel.create(data)
+            return response.send(result)
+        }
+        location.merge(data)
+        const result =  await location.save()
         return response.send(result)
     }
 }

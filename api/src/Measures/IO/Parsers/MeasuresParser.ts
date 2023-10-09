@@ -108,7 +108,6 @@ export default class MeasuresParser
     // {
     //     const entries = this.header.map(({ x, columname }) => {
     //         const value = row.getCell(x).value
-    //         // console.log(`${columname}: ${value}`)
     //         return [
     //             columname,
     //             this.round(value),

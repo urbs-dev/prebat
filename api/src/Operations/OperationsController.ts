@@ -34,7 +34,7 @@ export default class OperationsController
         const data = request.body() as ReportsModel
         const operation = await ReportsModel.query()
             .where('name', data.name )
-            .andWhere('nature', 'operation')
+            .andWhereNull('path')
             .first()
         if (data?.place?.department_code) {
             data.climatic_zone = getClimaticZone(data.place.department_code)

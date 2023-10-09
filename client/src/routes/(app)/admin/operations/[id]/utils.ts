@@ -220,3 +220,57 @@ export const system = [
         type: 'number',
     }
 ]
+
+
+
+export const locationSystem = [
+    { label: 'Système constructif *', name: 'constructive_system', values: [
+        `Maçonnerie monomur`,
+        `Maçonnerie ancienne`,
+        `Maçonnerie - autre`,
+        `Ossature bois`,
+        `Ossature métallique`,
+        `Mixte (bois, béton)`,
+        `Mixte (bois, maçonnerie)`,
+        `Mixte (acier, béton)`,
+        `Mixte (acier, maçonnerie)`,
+        `Autre`,
+    ]},
+    { label: 'Chauffage de base *', name: 'heating', values: [
+        `Radiateurs électriques`,
+        `PAC`,
+        `Batterie ou résistance électrique`,
+        `Chaudière gaz`,
+        `Chaudière fioul`,
+        `Chaudière bois`,
+        `Réseau de chaleur urbain`,
+        `Autre`,
+        `Ne sait pas`,
+    ]},
+    { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
+        `Groupée avec le système de chauffage`,
+        `Production instantanée non groupée avec le chauffage`,
+        `Ballon électrique`,
+        `Ballon thermodynamique`,
+        `ECS solaire`,
+        `Résistance électrique pour appoint`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Ventilation *', name: 'airing', values: [
+        `Ventilation naturelle`,
+        `Ventilation hybride`,
+        `VMC simple flux autoréglable`,
+        `VMC simple flux hygro A`,
+        `VMC simple flux hygro B`,
+        `VMC double flux`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    {
+        label: `Pérméabilité à l'air de l'enveloppe`,
+        unit: 'm³/(h.m²)',
+        name: 'air_permeability', 
+        type: 'number',
+    },
+]

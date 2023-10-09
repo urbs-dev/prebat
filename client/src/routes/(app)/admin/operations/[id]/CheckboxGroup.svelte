@@ -11,7 +11,7 @@
 
     export let result = ''
     if (result) {
-        selected = result.split(', ')
+        selected = result.split(' ~ ')
     }
     const select = (value) => {
         if (selected.includes(value)) {

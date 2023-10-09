@@ -39,6 +39,7 @@ export default class Catalog
         return query
             .orderBy('name')
             .preload('measures')
+            .preload('report')
             .preload('locations', (query => {
                 this.getLocations(query)
         }))

@@ -2,6 +2,8 @@
     import Anchor from './Anchor.svelte'
     import { locations as icon } from '$lib/svg'
     import { slide } from 'svelte/transition'
+    import Report from './Locations_Report.svelte'
+    export let operation
     export let locations
     let active = false
 </script>
@@ -16,7 +18,14 @@
             </h3>
             <span>{path ?? ''}</span>
 
+            <Report {location} {operation}/>
+
             {#if measures.length > 0}
+
+            <h4 class="flex">
+                Points de mesure
+            </h4>
+
             <button class="btn measure" on:click={() => active = !active}>
                 Points de mesure ({measures.length})
                 <i class="micon">
@@ -47,7 +56,7 @@
                 {/if}
             {/if}
             {#if location.locations}
-                <svelte:self locations={location.locations}/>
+                <svelte:self locations={location.locations} {operation}/>
             {/if}
         </section>
     </Anchor>
@@ -70,6 +79,11 @@
         width: 24px;
         height: 24px;
         margin-right: 8px;
+    }
+    h4 {
+        font-size: 20px;
+        margin: 24px 0 16px 0;
+        color: var(--secondary);
     }
     span {
         font-family: JetBrains;

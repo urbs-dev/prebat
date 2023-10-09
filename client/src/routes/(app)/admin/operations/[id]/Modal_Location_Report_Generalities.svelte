@@ -5,19 +5,18 @@
     import { Input, Checkbox } from 'gros/form'
     import { usages, getUseTypology } from './utils'
     import { removeEmptyString } from '$lib/utils'
-
     export let props
     export let close
     const form = props ?? {}
-    let { name, use, use_typology, shon, su, shab, height } = form
+    let { name, path, use, use_typology, shon, su, shab, height } = form
 
     const update = async () => {
         close()
         loading.start()
-        const response = await fetch(`BASE_URL/prebat.api/operations/${name}`, {
+        const response = await fetch(`BASE_URL/prebat.api/locations/${name}`, {
             method: 'PUT',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify(removeEmptyString({ name, use, use_typology, shon, su, shab, height }))
+            body: JSON.stringify(removeEmptyString({ name, path, use, use_typology, shon, su, shab, height }))
         })
         await response.json()
         invalidateAll()

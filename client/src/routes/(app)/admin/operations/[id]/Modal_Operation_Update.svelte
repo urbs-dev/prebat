@@ -5,6 +5,7 @@
     import { Textarea, Select, Input } from 'gros/form'
     import CheckboxGroup from './CheckboxGroup.svelte'
     import Geocoder from './Geocoder.svelte'
+    import { removeEmptyString } from '$lib/utils'
 
     export let props
     export let close
@@ -17,7 +18,7 @@
         const response = await fetch(`BASE_URL/prebat.api/operations/${id}`, {
             method: 'PUT',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({ name, delivered_on, abstract, program, contract_type, label, place, engineering })
+            body: JSON.stringify(removeEmptyString({ name, delivered_on, abstract, program, contract_type, label, place, engineering }))
         })
         await response.json()
         invalidateAll()
