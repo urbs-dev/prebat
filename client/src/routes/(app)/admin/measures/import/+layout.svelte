@@ -37,14 +37,19 @@
 
 <section>
     <form>
-        <Dropzone bind:file on:change={evaluate}/>
+        <Dropzone bind:file/>
         <!-- <Dropzone bind:file/> -->
 
         {#if file}
-        <aside class="flex">
-            <button type="submit" class="btn" on:click={() => store()}>
+        <aside>
+            <button type="submit" class="btn" on:click={store}>
                 <i class="micon">file_upload</i>
                 importer
+            </button>
+
+            <button type="submit" class="btn" on:click={evaluate}>
+                <i class="micon">autorenew</i>
+                évaluer
             </button>
         </aside>
         {/if}
@@ -75,6 +80,7 @@
         color: #fff;
         font-size: 16px;
         width: 100%;
+        margin-bottom: 24px;
     }
     button i {
         margin-right: 8px;
