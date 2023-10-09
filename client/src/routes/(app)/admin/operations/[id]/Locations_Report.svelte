@@ -2,42 +2,49 @@
     import { modal } from 'gros/modal'
     import Generalities from './Modal_Location_Report_Generalities.svelte'
     import System from './Modal_Location_Report_System.svelte'
+    import { removeNullEntries } from '$lib/utils'
     export let location
     export let operation
-    let report = location.report ?? { name: operation.name, path: location.path }
-    $: location, report = location.report ?? { name: operation.name, path: location.path }
+    location.report = location.report ? 
+        { ...operation.report, ...removeNullEntries(location.report) } : 
+        { ...operation.report, name: operation.name, path: location.path }
+    $: location, location.report = location.report ? 
+        { ...operation.report, ...removeNullEntries(location.report) } : 
+        { ...operation.report, name: operation.name, path: location.path }
+
+
 </script>
 
 <article>
     <h4 class="flex">
         Généralités
-        <button class="btn" on:click={() => modal.open(Generalities, report)}>éditer</button>
+        <button class="btn" on:click={() => modal.open(Generalities, location.report)}>éditer</button>
     </h4>
     <ul>
-        <li class="required" class:warning={!report.use}>
+        <li class="required" class:warning={!location.report.use}>
             <i>Destination d'usage <em>*</em></i>
-            <b>{report.use ? report.use.replace(/ ~ /g, ', ') : ''}</b>
+            <b>{location.report.use ? location.report.use.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li class="required">
             <i>Destination d'usage simplifée</i>
-            <b>{report.use_typology ? report.use_typology.replace(/ ~ /g, ', ') : ''}</b>
+            <b>{location.report.use_typology ? location.report.use_typology.replace(/ ~ /g, ', ') : ''}</b>
         </li>
-        <li class="required" class:warning={!report.shon}>
+        <li class="required" class:warning={!location.report.shon}>
             <i>SHON <em>*</em></i>
-            <b>{report.shon ? report.shon + ' m²' : ''}</b>
+            <b>{location.report.shon ? location.report.shon + ' m²' : ''}</b>
         </li>
         <li>
             <i>SU</i>
-            <b>{report.su ? report.su + ' m²' : ''}</b>
+            <b>{location.report.su ? location.report.su + ' m²' : ''}</b>
         </li>
         <li>
             <i>SHAB</i>
-            <b>{report.shab ? report.shab + ' m²' : ''}</b>
+            <b>{location.report.shab ? location.report.shab + ' m²' : ''}</b>
         </li>
         {#if location.nature === 'building'}
         <li>
             <i>Hauteur du bâtiment</i>
-            <b>{report.height ? report.height + ' m' : ''}</b>
+            <b>{location.report.height ? location.report.height + ' m' : ''}</b>
         </li>
         {/if}
     </ul>
@@ -45,29 +52,29 @@
 
     <h4 class="flex">
         Système
-        <button class="btn" on:click={() => modal.open(System, report)}>éditer</button>
+        <button class="btn" on:click={() => modal.open(System, location.report)}>éditer</button>
     </h4>
     <ul>
-        <li class="required" class:warning={!report.constructive_system}>
+        <li class="required" class:warning={!location.report.constructive_system}>
             <i>Système constructif <em>*</em> </i>
-            <b>{ report.constructive_system ? report.constructive_system.replace(/ ~ /g, ', ') : ''}</b>
+            <b>{ location.report.constructive_system ? location.report.constructive_system.replace(/ ~ /g, ', ') : ''}</b>
         </li>
     <ul>
-        <li class="required" class:warning={!report.heating}>
+        <li class="required" class:warning={!location.report.heating}>
             <i>Chauffage de base <em>*</em></i>
-            <b>{report.heating ? report.heating.replace(/ ~ /g, ', ') : ''}</b>
+            <b>{location.report.heating ? location.report.heating.replace(/ ~ /g, ', ') : ''}</b>
         </li>
-        <li class="required" class:warning={!report.hot_water}>
+        <li class="required" class:warning={!location.report.hot_water}>
             <i>Eau chaude sanitaire <em>*</em></i>
-            <b>{report.hot_water ? report.hot_water.replace(/ ~ /g, ', ') : ''}</b>
+            <b>{location.report.hot_water ? location.report.hot_water.replace(/ ~ /g, ', ') : ''}</b>
         </li>
-        <li class="required" class:warning={!report.airing}>
+        <li class="required" class:warning={!location.report.airing}>
             <i>Ventilation <em>*</em></i>
-            <b>{report.airing ? report.airing.replace(/ ~ /g, ', ') : ''}</b>
+            <b>{location.report.airing ? location.report.airing.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Pérméabilité à l'air de l'enveloppe</i>
-            <b>{report.air_permeability ? report.air_permeability + ' m³/(h.m²)' : ''}</b>
+            <b>{location.report.air_permeability ? location.report.air_permeability + ' m³/(h.m²)' : ''}</b>
         </li>
     </ul>
 </article>

@@ -10,6 +10,7 @@
 
 {#each locations as location}
     {@const { id, name, path, measures, nature } = location }
+    {@const report = location.report}
     <Anchor {id}>
         <section>
             <h3 class="alt-font flex">
@@ -56,7 +57,7 @@
                 {/if}
             {/if}
             {#if location.locations}
-                <svelte:self locations={location.locations} {operation}/>
+                <svelte:self locations={location.locations} operation={location}/>
             {/if}
         </section>
     </Anchor>
