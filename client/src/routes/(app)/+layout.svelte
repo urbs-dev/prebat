@@ -19,6 +19,6 @@
 		<slot/>
 		<!-- <Presence info={{ application: 'PREBAT' }}/> -->
 	{:else}
-		<button on:click={goto( getPath('/auth'))}/>
+		<button on:click={goto( getPath('/public'))}/>
 	{/if}
 {/await}
