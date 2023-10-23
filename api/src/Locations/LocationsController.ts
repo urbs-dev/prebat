@@ -9,6 +9,12 @@ export default class LocationsController
         return response.send([])
     }
 
+    // public async show({ request, response }: HttpContextContract)
+    // {
+
+    //     return response.send([])
+    // }
+
     public async store({request, response }: HttpContextContract)
     {
         const data = request.body() as LocationsModel[]
