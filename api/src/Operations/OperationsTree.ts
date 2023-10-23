@@ -18,9 +18,9 @@ export default class Catalog
         return await OperationsModel.query()
             .where('id', id)
             .preload('report')
-            .preload('locations', (query => {
-                this.getLocations(query)
-            }))
+            // .preload('locations', (query => {
+            //     this.getLocations(query)
+            // }))
             .first()
     }
 

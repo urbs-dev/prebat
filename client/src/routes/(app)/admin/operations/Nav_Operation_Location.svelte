@@ -1,22 +1,25 @@
 <script>
-    import { anchor } from '$lib/utils/viewport'
+    import { getPath } from 'gros/page'
+    import { page } from '$app/stores'
     export let location
+    export let operation
     export let name
     import { locations as icon } from '$lib/svg'
+    $: active = $page.params?.location  === location.id
 </script>
 
 
-<a href={'#' + location.id} on:click={() => ($anchor = location.id)}>
-    <div class="flex" class:active={$anchor === location.id}>
+<a href={getPath('/admin/operations/' + operation.id + '/' + location.id)}>
+    <div class="flex" class:active={active}>
         <i class="icon">{@html icon[location.nature]}</i>
-        {location.name === name || location.name === 'batiment' ? 'Tout' : location.name}
+        {location.name === name || location.name === 'batiment' ? operation.name : location.name}
     </div>
 </a>
 
 <article>
     {#if location.locations}
         {#each location.locations as location}
-            <svelte:self {location}/>
+            <svelte:self {location} {operation}/>
         {/each}
     {/if}
 </article>

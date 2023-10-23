@@ -13,7 +13,7 @@
 
 <Nav data={data.operations}/>
 
-<section class="thin-scrollbar" in:fade={{ duration:200 }} bind:this={element}>
+<section in:fade={{ duration:200 }} bind:this={element}>
     <slot/>
 </section>
 

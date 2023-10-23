@@ -3,7 +3,7 @@
     import { Tooltip } from 'gros/tooltip'
     import { modal } from 'gros/modal'
     import DeleteModal from './Modal_Operation_Delete.svelte'
-    import Locations from './Locations.svelte'
+    // import Locations from './Locations.svelte'
     export let data
     let operation
     $: data, operation = data.operation
@@ -24,7 +24,7 @@
     </h1>
     <Operation {operation}/>
 
-    <Locations locations={operation.locations} {operation}/>
+    <!-- <Locations locations={operation.locations} {operation}/> -->
 </section>
 
 

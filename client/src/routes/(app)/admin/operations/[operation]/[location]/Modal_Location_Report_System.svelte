@@ -3,15 +3,15 @@
     import { loading } from 'gros/loading'
     import { invalidateAll } from '$app/navigation'
     import { Checkbox } from 'gros/form'
-    import Radio from './Radio.svelte'
-    import { locationSystem as system } from './utils'
+    import Radio from '../Radio.svelte'
+    import { locationSystem as system } from '../utils'
     import { removeEmptyString } from '$lib/utils'
 
     export let props
     export let close
     let active = system[0]
     const form = props ?? {}
-
+    console.log(form.path)
     const update = async () => {
         close()
         loading.start()

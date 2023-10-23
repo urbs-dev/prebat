@@ -9,11 +9,19 @@ export default class LocationsController
         return response.send([])
     }
 
-    // public async show({ request, response }: HttpContextContract)
-    // {
-
-    //     return response.send([])
-    // }
+    public async show({ request, response }: HttpContextContract)
+    {
+        const id = request.param('id')
+        const location = await LocationsModel.query()
+            .where('id', id)
+            .preload('report')
+            .preload('measures')
+            .first()
+        if (!location) {
+            return response.send({})
+        }
+        return response.send(location)
+    }
 
     public async store({request, response }: HttpContextContract)
     {
@@ -26,7 +34,7 @@ export default class LocationsController
     {
         const data = request.body() as ReportsModel
         const location = await ReportsModel.query()
-            .where('name', data.name )
+            .where('path', data.path )
             .andWhereNotNull('path')
             .first()
 
