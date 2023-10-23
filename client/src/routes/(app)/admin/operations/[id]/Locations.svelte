@@ -6,21 +6,21 @@
     export let operation
     export let locations
     let active = false
+    console.log(locations)
 </script>
 
 {#each locations as location}
     {@const { id, name, path, measures, nature } = location }
-    {@const report = location.report}
     <Anchor {id}>
         <section>
             <h3 class="alt-font flex">
                 <i class="icon">{@html icon[nature]}</i>
-                {name}
+                {name === operation.name ? 'Tout' : name}
             </h3>
             <span>{path ?? ''}</span>
-
-            <Report {location} {operation}/>
-
+            {#if path && location.name !== 'batiment'}
+                <Report {location} {operation}/>
+            {/if}
             {#if measures.length > 0}
 
             <h4 class="flex">
@@ -61,7 +61,6 @@
             {/if}
         </section>
     </Anchor>
-
 {/each}
 
 <style>

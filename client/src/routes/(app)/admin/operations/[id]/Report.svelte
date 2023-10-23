@@ -1,5 +1,6 @@
 <script>
     import { modal } from 'gros/modal'
+    import Metadata from './Modal_Report_Metadata.svelte'
     import Generalities from './Modal_Report_Generalities.svelte'
     import Envelope from './Modal_Report_Envelope.svelte'
     import System from './Modal_Report_System.svelte'
@@ -7,6 +8,47 @@
 </script>
 
 <article>
+    <h3 class="flex">
+        Métadonnées
+        <button class="btn" on:click={() => modal.open(Metadata, report)}>éditer</button>
+    </h3>
+    <ul>
+        <li class="required" class:warning={!report.delivered_on}>
+            <i>Année de livraison <em>*</em></i>
+            <b>{report.delivered_on ?? ''}</b>
+        </li>
+        <li class="required" class:warning={!report?.place?.name}>
+            <i>Localisation  <em>*</em></i>
+            <b>{report.place?.name ? report.place.name + ' (' + report.place.context + ')' : ''}</b>
+        </li>
+        <li>
+            <i>Zone climatique</i>
+            <b>{report.climatic_zone ?? ''}</b>
+        </li>
+        <li>
+            <i>Nom du programme</i>
+            <b>{report.program ?? ''}</b>
+        </li>
+        <li>
+            <i>Type de maîtrise d'ouvrage</i>
+            <b>{report.contract_type ?? ''}</b>
+        </li>
+        <li>
+            <i>Nature des travaux</i>
+            <b>{report.engineering ?? ''}</b>
+        </li>
+        <li>
+            <i>Label / Certification</i>
+            <b>{report.label ? report.label.replace(/ ~ /g, ', ') : ''}</b>
+        </li>
+        <li>
+            <i>Commentaire</i>
+            <b>{report.abstract ?? ''}</b>
+        </li>
+    </ul>
+
+
+
     <h3 class="flex">
         Généralités
         <button class="btn" on:click={() => modal.open(Generalities, report)}>éditer</button>

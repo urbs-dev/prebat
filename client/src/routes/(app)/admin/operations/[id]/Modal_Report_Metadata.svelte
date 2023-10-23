@@ -29,7 +29,7 @@
 <Modal title="Modifier l'opération" icon="edit">
     <section class="flex">
         <aside>
-            <Input big icon="chevron_right" label="Année de livraison" bind:value={delivered_on}/>
+            <Input big icon="chevron_right" label="Année de livraison *" bind:value={delivered_on}/>
             <Select  big icon="chevron_right" label="Nom du programme" bind:value={program} options={[
                'PREBAT', 'Autre'
             ]}/>
@@ -41,10 +41,10 @@
                 'Copropriété privée',
                 'Autre',
             ]}/>
-            <Textarea big icon="chevron_right" label="Description" bind:value={abstract} height="160px"/>
+            <Textarea big icon="chevron_right" label="Commentaire" bind:value={abstract} height="160px"/>
         </aside>
         <aside>
-            <Geocoder icon="chevron_right" label="Localisation" bind:value={place}/>
+            <Geocoder icon="chevron_right" label="Localisation *" bind:value={place}/>
             <Select  big icon="chevron_right" label="Nature des travaux" bind:value={engineering} options={[
                 'Neuf', 'Rénovation', 'Extension'
              ]}/>

@@ -2,7 +2,6 @@
     import Operation from './Operation.svelte'
     import { Tooltip } from 'gros/tooltip'
     import { modal } from 'gros/modal'
-    import UpdateModal from './Modal_Operation_Update.svelte'
     import DeleteModal from './Modal_Operation_Delete.svelte'
     import Locations from './Locations.svelte'
     export let data
@@ -14,16 +13,9 @@
     <h1 class="alt-font flex">
         <div class="flex baseline">
             {operation.name}
-            <span>
-                {operation?.report?.delivered_on ? operation?.report?.delivered_on + ',' : ''}
-                {operation?.report?.program ?? ''}
-            </span>
         </div>
         <div class="flex">
-            <button class="tooltip" on:click={() => modal.open(UpdateModal, operation.report)}>
-                <Tooltip bottom content="Éditer"/>
-                <i class="micon">edit</i>
-            </button>
+
             <button class="tooltip" on:click={() => modal.open(DeleteModal, operation)}>
                 <Tooltip bottom content="Supprimer"/>
                 <i class="micon delete">clear</i>
@@ -50,12 +42,6 @@
     }
     div.baseline {
         align-items: baseline;
-    }
-    h1 span {
-        margin-left: 24px;
-        font-size: 14px;
-        font-family: JetBrains;
-        color: #424242;
     }
     button {
         width: 32px;

@@ -42,7 +42,7 @@
 {#if active}
     <aside transition:slide|local={{ duration:150 }}>
         {#each operation.locations as location}
-            <Location {location}/>
+            <Location {location} name={operation.name}/>
         {/each}
     </aside>
 {/if}

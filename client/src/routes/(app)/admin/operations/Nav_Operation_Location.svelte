@@ -1,6 +1,7 @@
 <script>
     import { anchor } from '$lib/utils/viewport'
     export let location
+    export let name
     import { locations as icon } from '$lib/svg'
 </script>
 
@@ -8,7 +9,7 @@
 <a href={'#' + location.id} on:click={() => ($anchor = location.id)}>
     <div class="flex" class:active={$anchor === location.id}>
         <i class="icon">{@html icon[location.nature]}</i>
-        {location.name}
+        {location.name === name || location.name === 'batiment' ? 'Tout' : location.name}
     </div>
 </a>
 
@@ -19,9 +20,6 @@
         {/each}
     {/if}
 </article>
-
-
-
 
 
 <style>
