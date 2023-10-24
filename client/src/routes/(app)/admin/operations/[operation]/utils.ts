@@ -93,6 +93,8 @@ export const envelope = [
         `Mixte (acier, béton)`,
         `Mixte (acier, maçonnerie)`,
         `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Isolation du bâtiment', name: 'building_insulation', values: [
         `Isolation par l'intérieur (ITI)`,
@@ -100,6 +102,7 @@ export const envelope = [
         `Isolation répartie (ITR)`,
         `Isolation intégrée (ITitg)`,
         `Non isolé`,
+        `Ne sait pas`,
         
     ] },
     { label: 'Isolation murs', name: 'wall_insulation', values: [
@@ -110,6 +113,7 @@ export const envelope = [
         `Autres biosourcés`,
         `Autres`,
         `Non isolés`,
+        `Ne sait pas`,
     ] },
     { label: 'Isolation toiture', name: 'roof_insulation', values: [
         `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
@@ -119,6 +123,7 @@ export const envelope = [
         `Autres biosourcés`,
         `Autres`,
         `Non isolés`,
+        `Ne sait pas`,
     ] },
     { label: 'Isolation plancher', name: 'floor_insulation', values: [
         `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
@@ -128,18 +133,23 @@ export const envelope = [
         `Autres biosourcés`,
         `Autres`,
         `Non isolés`,
+        `Ne sait pas`,
     ] },
     { label: 'Menuiserie - vitrage', name: 'window_carpentry', values: [
         `Simple vitrage`,
         `Double vitrage`,
         `Triple vitrage`,
         `Double menuiseries`,
+        `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Menuiserie - châssis', name: 'frame_carpentry', values: [
         `PVC`,
         `Bois`,
         `Alu`,
         `Mixte`,
+        `Ne sait pas`,
+        `Aucun`,
     ] },
 
 ]
@@ -156,6 +166,7 @@ export const system = [
         `Réseau de chaleur urbain`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
         `Groupée avec le système de chauffage`,
@@ -166,6 +177,7 @@ export const system = [
         `Résistance électrique pour appoint`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Ventilation *', name: 'airing', values: [
         `Ventilation naturelle`,
@@ -176,6 +188,7 @@ export const system = [
         `VMC double flux`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Climatisation / Rafraichissement', name: 'refresher', values: [
         `Climatisation à détente directe`,
@@ -184,6 +197,7 @@ export const system = [
         `Rafraîchissement`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Emetteurs chaud', name: 'hot_emitter', type: 'radio', values: [
         `Plancher chauffant`,
@@ -196,6 +210,7 @@ export const system = [
         `Batterie à eau chaude dans la gaine de soufflage de la ventilation`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     { label: 'Emetteurs froid', name: 'cold_emitter', type: 'radio', values: [
         `Plancher`,
@@ -206,6 +221,7 @@ export const system = [
         `Batterie froide`,
         `Autres`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     {
         label: `Pérméabilité à l'air de l'enveloppe`,
@@ -235,6 +251,8 @@ export const locationSystem = [
         `Mixte (acier, béton)`,
         `Mixte (acier, maçonnerie)`,
         `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
     ]},
     { label: 'Chauffage de base *', name: 'heating', values: [
         `Radiateurs électriques`,
@@ -246,6 +264,7 @@ export const locationSystem = [
         `Réseau de chaleur urbain`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ]},
     { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
         `Groupée avec le système de chauffage`,
@@ -266,6 +285,7 @@ export const locationSystem = [
         `VMC double flux`,
         `Autre`,
         `Ne sait pas`,
+        `Aucun`,
     ] },
     {
         label: `Pérméabilité à l'air de l'enveloppe`,
