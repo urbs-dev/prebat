@@ -1,31 +1,35 @@
 <script>
-    import { AccountButton, AccountButtonLink as Link, Account, user } from '$module/session'
-    import { Tooltip } from 'gros/tooltip'
+    import { AccountButton, AccountButtonLink as Link, Account, user, status } from '$module/session'
     import Tools from './Header_Tools.svelte'
     import { getPath, url } from 'gros/page'
+    import Menu from './Header_Menu.svelte'
 </script>
 
-<header class="z-depth-2">
-    {#if $user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN}
-    <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
-    {/if}
-    <a href="{ getPath('/')}">
-        <div style:left={$url.includes('admin') ? '256px' : '80px'} class="logo flex">
-            <img alt="logo" src="STATIC_PATH/img/logo.svg"/>
-            <span class="alt-font">PREBAT</span>
-        </div>
-    </a>
-    <aside>
-        <a href="BASE_URL/resources" rel="external">
-            <button class="btn tooltip" style:border-right="1px solid #eee">
-                <Tooltip bottom content="Applications" gap={8}/>
-                <i class="micon">apps</i>
-            </button>
+<header class="z-depth-2 flex">
+    <article class="flex">
+        {#if $status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}
+        <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
+        {/if}
+        <a href="{ getPath('/')}">
+            <div style:margin-left={$url.includes('admin') ? '256px' : '80px'} class="logo flex">
+                <img alt="logo" src="STATIC_PATH/img/logo.svg"/>
+                <span class="alt-font">PREBAT</span>
+            </div>
         </a>
+        <Menu/>
+    </article>
+
+    <aside>
+        {#if $status.isAuthenticated}
         <AccountButton height={"56px"}>
             <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>
         </AccountButton>
         <Tools/>
+        {:else}
+            <a href="{getPath('/auth')}" class="btn">
+                Connexion
+            </a>
+        {/if}
     </aside>
 </header>
 
@@ -34,6 +38,7 @@
 <style>
     header{
         position:absolute;
+        justify-content: space-between;
         top:0;
         left:0;
         right:0;
@@ -45,18 +50,11 @@
         -webkit-box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);
     }
     header aside{
-        position:absolute;
-        right:0;
-        top:0;
-        bottom:0;
         display:flex;
         justify-content:flex-end;
         flex-direction:row;
     }
     header div.logo{
-        position:absolute;
-        top:0;
-        left:80px;
         height:56px;
         width:156px;
         justify-content: center;
@@ -90,15 +88,7 @@
     i.app:hover{
         background:#eee;
     }
-    button{
-        position:relative;
-        width:56px;
-        height:56px;
-    }
-    button i{
-        color:#424242;
-    }
-    button:hover{
-        background:#eee;
+    a.btn{
+        color: var(--primary);
     }
 </style>

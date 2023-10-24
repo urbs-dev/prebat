@@ -1,44 +1,81 @@
+<header></header>
 
+<h1 class="alt-font">Lorem ipsum dolor sit amet</h1>
+<article>
+    <aside>
+        <h2>Eget mauris pharetra et ultrices neque</h2>
+        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </aside>
+    <aside>
+        <h2>Gravida arcu ac tortor</h2>
+        <p>Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida hendrerit. Viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor. Auctor elit sed vulputate mi sit. Eu non diam phasellus vestibulum. Fames ac turpis egestas sed tempus urna et pharetra. Eget egestas purus viverra accumsan.</p>
 
+    </aside>
+</article>
 
-<div class="bg"/>
-<section class="thin-scrollbar">
-    <article>
-        <p class="alt-font">
-            Interface admin accessible en cliquant sur le hamburger en haut à gauche
-        </p>
-    </article>
-</section>
+<div class="divider">
+</div>
+
+<article>
+    <aside>
+        <h2>Odio ut sem nulla pharetra</h2>
+        <p>Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Diam in arcu cursus euismod. In pellentesque massa placerat duis ultricies lacus. Iaculis eu non diam phasellus vestibulum lorem sed risus. Amet consectetur adipiscing elit ut. Vehicula ipsum a arcu cursus vitae.</p>
+    </aside>
+    <aside>
+        <h2>Non quam lacus</h2>
+        <p>Aliquam id diam maecenas ultricies mi eget mauris pharetra. Posuere morbi leo urna molestie at elementum eu. Dolor morbi non arcu risus quis varius quam quisque id. Pellentesque nec nam aliquam sem. Consectetur purus ut faucibus pulvinar elementum integer.</p>
+
+    </aside>
+    <aside>
+        <h2>Elit at imperdiet</h2>
+        <p>Id aliquet risus feugiat in ante. Est ullamcorper eget nulla facilisi etiam dignissim diam quis. Quis varius quam quisque id. Vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Elementum facilisis leo vel fringilla.</p>
+
+    </aside>
+</article>
+
+<footer>
+
+</footer>
 
 <style>
-    section{
-        position:absolute;
-        z-index:2;
-        top:56px;left:0;right:0;bottom:0;
-        overflow-y:auto;
-        background-color:rgba(255,255,255,0.7)
+    header {
+        height: 56px;
     }
-    .bg{
-        position:absolute;
-        top:56px;left:0;bottom:0;right:0;
-        background-repeat:no-repeat;
-        overflow-y:hidden;
-        background-size:cover;
-        background: #fafafa;
-
-        /* background-image:url('STATIC_PATH/img/login-background.jpg') */
+    article {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 120px 80px;
+        background: #fff;
+        max-width: 1200px;
+        margin: 0 auto;
     }
-    article{
-        width:80%;
-        margin:40px auto;
-        padding: 80px;
-        color: #616161;
-        border-radius: 8px;
-    } 
-    p {
-        display: block;
+    .divider {
+        height: 400px;
+        background-image: url('STATIC_PATH/img/login-background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.5;
+    }
+    footer {
+        height: 400px;
+        background: #37474f;
+    }
+    aside {
+        max-width: 400px;
+        margin: 0 40px;
+    }
+    h1 {
         text-align: center;
-        font-size: 24px;
-        color: var(--primary);
+        color: var(--primary-darken);
+        margin: 64px 0 40px 0;
+    }
+    aside h2 {
+        color: var(--primary-darken);
+        font-size: 20px;
+    }
+    p {
+        line-height: 24px;
+        font-family: Lato;
     }
 </style>

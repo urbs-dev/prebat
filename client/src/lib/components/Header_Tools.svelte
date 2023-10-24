@@ -16,7 +16,7 @@
                 Github
             </li>
         </a>
-
+        <li class="divider"></li>
 
         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <li on:keypress on:click={() => modal.open(Modal, { application: 'prebat'})}>
@@ -24,13 +24,13 @@
             Signaler un bug...
         </li>
 
-        <li class="divider"></li>
+        <!-- <li class="divider"></li>
         <a href="/resources" rel="external">
             <li>
                 <i class="micon">apps</i>
                 Retour à l'accueil
             </li>
-        </a>
+        </a> -->
     </ul>
 
 </Dropdown>
@@ -51,7 +51,7 @@
         background-color:#f5f5f5;
     }
     ul{
-        min-width:288px;
+        min-width:200px;
         background: #fff;
         border: 1px solid #eee;
     }

@@ -3,6 +3,7 @@
     import { modal } from 'gros/modal'
     import { ForgotPasswordModal, user } from '$module/session'
     import { Input } from 'gros/form'
+    import { getPath } from 'gros/page'
 
 	let form = {login: '', password:'', termsOfUse: true}
 	let error = ''
@@ -34,6 +35,10 @@
             <i class="tall material-icons right">chevron_right</i>
         </button>
     </form>
+    <a href="{getPath('/auth/signup')}" class="btn z-depth-1">
+        <i class="tall material-icons right" style:margin-right="8px">assignment_ind</i>
+        Inscription
+    </a>
     <button class="password-forgotten" on:click={() => modal.open(ForgotPasswordModal)}>Mot de passe oublié</button>
 </article>
 
@@ -66,16 +71,26 @@
         width:100%;
         margin:0 auto;
         overflow: hidden;
-        padding:2% 2%;
+        padding:8px 8px;
     }
 	form button.btn{
-        background: #f5f5f5;
-        color:var(--primary);
+        background: var(--primary);
+        color: #eee;
         margin:40px auto 8px auto;
         width:100%;
         border:0;
         font-size:18px;
         height:60px;
+        border:1px solid #eee;
+    }
+    a.btn {
+        background: #f5f5f5;
+        color:var(--primary);
+        margin:0 auto 24px auto;
+        width:calc(100% - 16px);
+        border:0;
+        font-size:18px;
+        height:40px;
         border:1px solid #eee;
     }
 	div.error{
@@ -97,7 +112,7 @@
         display:block;
         margin:0 auto;
         background:#fff;
-        color:#9e9e9e;
+        color:#757575;
         cursor:pointer;
         font-size:13px;
         font-weight:400;
