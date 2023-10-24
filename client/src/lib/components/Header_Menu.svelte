@@ -5,8 +5,8 @@
 
 <ul class="flex">
 
-    <a href="{getPath('/')}">
-        <li class:active={$url === '/'}>
+    <a href="{getPath('/home')}">
+        <li class:active={$url.indexOf('home') > -1}>
             Accueil
         </li>
     </a>
