@@ -3,10 +3,22 @@
     import { Tooltip } from 'gros/tooltip'
     import { modal } from 'gros/modal'
     import DeleteModal from './Modal_Operation_Delete.svelte'
-    // import Locations from './Locations.svelte'
+    import { invalidateAll } from '$app/navigation'
     export let data
     let operation
     $: data, operation = data.operation
+
+    const isPublic = async () => {
+        const value = operation.is_public === true ? true : false 
+        const response = await fetch(`BASE_URL/prebat.api/operations/${operation.id}/is-public?value=${!value}`, {
+            method: 'PUT',
+            headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
+        })
+        const json = await response.json()
+        invalidateAll()
+        return json
+    }
+
 </script>
 
 <section>
@@ -15,7 +27,10 @@
             {operation.name}
         </div>
         <div class="flex">
-
+            <button class="tooltip" on:click={isPublic}>
+                <Tooltip bottom content="{operation.is_public ? 'Rendre privé' : 'Rendre public'}"/>
+                <i class="micon">{operation.is_public ? 'visibility' : 'visibility_off'}</i>
+            </button>
             <button class="tooltip" on:click={() => modal.open(DeleteModal, operation)}>
                 <Tooltip bottom content="Supprimer"/>
                 <i class="micon delete">clear</i>
@@ -23,10 +38,7 @@
         </div>
     </h1>
     <Operation {operation}/>
-
-    <!-- <Locations locations={operation.locations} {operation}/> -->
 </section>
-
 
 <style>
     section {

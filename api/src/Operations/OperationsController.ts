@@ -29,6 +29,20 @@ export default class OperationsController
         return response.send(tree)
     }
 
+    public async isPublic({ request, response }: HttpContextContract)
+    {
+        const isPublic = request.qs().value === 'true' ? true : false
+        const operation = await OperationsModel.query()
+            .where('id', request.param('id'))
+            .first()
+        if (!operation) {
+            return response.status(404).send({ message: 'No operation found'})
+        }
+        operation.is_public = isPublic
+        await operation.save()
+        return response.send({ message: true })
+    }
+
     public async update({ request, response }: HttpContextContract)
     {
         const data = request.body() as ReportsModel
