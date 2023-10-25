@@ -4,14 +4,16 @@ Route.group( () => {
 
     Route.get('operations', 'OperationsController.index')
 
-    Route.post('operations', 'OperationsController.store')
+    Route.get('operations/tree', 'OperationsController.tree').middleware('isUserAdmin')
 
-    Route.get('operations/:id', 'OperationsController.show')
+    Route.post('operations', 'OperationsController.store').middleware('isUserAdmin')
 
-    Route.put('operations/:id', 'OperationsController.update')
+    Route.get('operations/:id', 'OperationsController.show').middleware('isUserAdmin')
 
-    Route.put('operations/:id/is-public', 'OperationsController.isPublic')
+    Route.put('operations/:id', 'OperationsController.update').middleware('isUserAdmin')
 
-    Route.delete('operations/:id', 'OperationsController.destroy')
+    Route.put('operations/:id/is-public', 'OperationsController.isPublic').middleware('isUserAdmin')
+
+    Route.delete('operations/:id', 'OperationsController.destroy').middleware('isUserAdmin')
 
 }).namespace('App/Operations')

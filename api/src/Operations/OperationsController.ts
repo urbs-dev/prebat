@@ -7,7 +7,16 @@ import OperationsManager from './OperationsManager'
 
 export default class OperationsController
 {
-    public async index({ response }: HttpContextContract)
+    public async index({ user, response }: HttpContextContract)
+    {
+        const operations = await OperationsModel.query()
+            .preload('report')
+            .preload('measures')
+            .whereIn('is_public', user ? [ true , false ] : [ true ])
+        return response.send(operations)
+    }
+
+    public async tree({ response }: HttpContextContract)
     {
         const tree = await OperationsTree.all()
         return response.send(tree)

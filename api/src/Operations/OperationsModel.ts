@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import ReportsModel from 'App/Reports/ReportsModel'
 import LocationsModel from 'App/Locations/LocationsModel'
+import MeasuresModel from 'App/Measures/MeasuresModel'
 
 export default class OperationsModel extends BaseModel
 {
@@ -29,12 +30,22 @@ export default class OperationsModel extends BaseModel
 	@column()
 	public is_public: boolean
 
+	@column()
+	public filename: string
+
     @hasMany( () => LocationsModel, { 
 		foreignKey: 'parent_id', 
 		localKey: 'id', 
 		onQuery(query) { query.orderBy('name', 'asc') } 
 	})
 	public locations: HasMany<typeof LocationsModel>
+
+    @hasMany( () => MeasuresModel, { 
+		foreignKey: 'operation_id', 
+		localKey: 'id', 
+		onQuery(query) { query.orderBy('typology', 'asc') } 
+	})
+	public measures: HasMany<typeof MeasuresModel>
 
 	@hasOne( () => ReportsModel, { 
 		onQuery(query) { query.whereNull('path') }, 

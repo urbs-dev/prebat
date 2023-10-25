@@ -33,7 +33,7 @@ export default class MeasuresIO
     public sequence()
     {
         const document = this.parse({ isPreview: true })
-        const sequencer = new FileSequencer(document)
+        const sequencer = new FileSequencer(document, this.name)
         return {
             file: this.name, 
             ...sequencer.get()

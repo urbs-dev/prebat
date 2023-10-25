@@ -12,6 +12,7 @@ export default class Operations extends BaseSchema {
 			column.integer	( 'building_count'	)
 			column.integer	( 'row_count'		)
 			column.boolean	( 'is_public'		).defaultTo(false)
+			column.string	( 'filename'		)
 			column.timestamps()
 		})
 	}

@@ -3,13 +3,15 @@ import { v4 as uuid } from 'uuid'
 export default class FileSequencer
 {
     public document: any
+    public filename: string
     public id = uuid()
     public measures = [] as any[]
     public sites = [] as any[]
 
-    constructor(document: any) 
+    constructor(document: any, filename: string) 
     {
         this.document = document
+        this.filename = filename
     }
 
     public get()
@@ -19,7 +21,8 @@ export default class FileSequencer
         return {
             operation: {
                 id: this.id,
-                name, time_step, sites, row_count, building_count
+                filename: this.filename,
+                name, time_step, sites, row_count, building_count,
             },
             sites: this.sites,
             measures: this.measures
