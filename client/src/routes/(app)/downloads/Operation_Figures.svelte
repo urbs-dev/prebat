@@ -44,7 +44,7 @@
         line-height: 28px;
     }
     ul {
-        margin: 16px 0;
+        margin: 8px 0;
         flex-wrap: wrap;
     }
     li {

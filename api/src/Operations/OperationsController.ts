@@ -4,6 +4,7 @@ import OperationsModel from './OperationsModel'
 import ReportsModel from 'App/Reports/ReportsModel'
 import { getClimaticZone } from './climat'
 import OperationsManager from './OperationsManager'
+import OperationsIO from './OperationsIO'
 
 export default class OperationsController
 {
@@ -50,6 +51,20 @@ export default class OperationsController
         operation.is_public = isPublic
         await operation.save()
         return response.send({ message: true })
+    }
+
+    public async extract({ request, response }: HttpContextContract)
+    {
+        const operation = await OperationsModel.query()
+            .where('id', request.param('id'))
+            .preload('report')
+            .first()
+        if (!operation) {
+            return response.status(404).send({ message: 'No operation found'})
+        }
+        const io = new OperationsIO(operation)
+        const url = await io.extract()
+        return response.send({ url })
     }
 
     public async update({ request, response }: HttpContextContract)
