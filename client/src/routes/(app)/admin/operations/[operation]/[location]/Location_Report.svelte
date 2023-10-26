@@ -6,10 +6,10 @@
     export let location
     export let operation
     location.report = location.report ?
-        { ...operation.report, ...removeNullEntries(location.report), name: operation.name, path: location.path } : 
+        { ...removeNullEntries(location.report), name: operation.name, path: location.path } : 
         { ...operation.report, name: operation.name, path: location.path }
     $: location, location.report = location.report ? 
-        { ...operation.report, ...removeNullEntries(location.report), name: operation.name, path: location.path } : 
+        { ...removeNullEntries(location.report), name: operation.name, path: location.path } : 
         { ...operation.report, name: operation.name, path: location.path }
 </script>
 

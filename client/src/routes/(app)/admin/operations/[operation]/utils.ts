@@ -83,6 +83,7 @@ export const getUseTypology = (selected: string[]) => {
 
 export const envelope = [
     { label: 'Système constructif *', name: 'constructive_system', values: [
+        `Béton`,
         `Maçonnerie monomur`,
         `Maçonnerie ancienne`,
         `Maçonnerie - autre`,
@@ -241,6 +242,7 @@ export const system = [
 
 export const locationSystem = [
     { label: 'Système constructif *', name: 'constructive_system', values: [
+        `Béton`,
         `Maçonnerie monomur`,
         `Maçonnerie ancienne`,
         `Maçonnerie - autre`,
