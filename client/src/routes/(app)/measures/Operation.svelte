@@ -16,6 +16,7 @@
                 headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
             })
             const result = await response.json()
+            console.log(result)
             initDownload(result.url)
             loading.stop()
         }, 960)
@@ -25,7 +26,7 @@
 
 <aside class="z-depth-1">
     <h1 class="flex">
-        {row.name} 
+        {row.name.substring(0, 4)} 
         <button class="btn" on:click={extract}>
             <i class="micon" style:margin-right="4px">file_download</i>
             Télécharger
@@ -50,6 +51,7 @@
     }
     h1 {
         font-size: 24px;
+        margin-bottom: 0;
         color: var(--primary);
         border-bottom: 3px solid var(--primary-lighten-3);
         justify-content: space-between;
@@ -64,6 +66,7 @@
     li {
         font-size: 16px;
         align-items: flex-end;
+        line-height: 20px;
     }
     li span {
         width: 152px;

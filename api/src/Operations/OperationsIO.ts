@@ -36,8 +36,8 @@ export default class OperationsIO
         // return this.dir.zipTempdir(zipname)
 
         const origin = this.PATH + this.filename
-        console.log(origin)
-        const destination = this.dir.PATH_TO_FILES + 'PREBAT_' + this.name + '.xlsx'
+        const destination = this.dir.PATH_TO_FILES + 'PREBAT_MESURES_' + this.name.substring(0, 4) + '.xlsx'
+        console.log(destination)
         this.dir.copy(origin, destination)
         return this.dir.toUrl(destination)
     }

@@ -16,7 +16,7 @@
 
 <div class="main">
 
-<section class="z-depth-1">
+<section>
     <article>
         <!-- <h1 class="alt-font">Bienvenue sur la plateforme d'accès aux données de performance réelles des bâtiments résidentiels et tertiaires !</h1> -->
 
@@ -98,16 +98,16 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: #fdfdfd;
+        background: #fff;
         overflow-y: auto;
     }
     section {
         max-width: 960px;
         margin: 40px auto;
         padding-bottom: 96px;
-        border: 1px solid #e0e0e0;
+        /* border: 1px solid #eee; */
         border-radius: 8px;
-        padding: 0 40px;
+        padding: 24px 40px;
     }
 
     section 
