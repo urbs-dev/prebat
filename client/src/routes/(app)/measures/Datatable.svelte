@@ -96,7 +96,7 @@
     article {
         position: relative;
         height: 100%;
-        overflow: auto;
+        overflow: scroll;
         scrollbar-width: thin;
     }
     article::-webkit-scrollbar {
