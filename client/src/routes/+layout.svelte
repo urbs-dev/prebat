@@ -2,7 +2,6 @@
 	import { ModalContainer } from 'gros/modal'
 	import { Loading } from 'gros/loading'
 	import { user } from '$module/session'
-    import Header from '$lib/components/Header.svelte'
 </script>
 
 <svelte:head>

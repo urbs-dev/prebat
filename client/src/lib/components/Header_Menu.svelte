@@ -13,7 +13,7 @@
 
     <a href="{getPath('/downloads')}">
         <li class:active={$url.indexOf('downloads') > -1}>
-            Téléchargements
+            Mesures
         </li>
     </a>
 </ul>
@@ -21,14 +21,19 @@
 <style>
     ul {
         margin-left: 24px;
+        margin-right: 24px;
         font-family: 'Lato';
         text-transform: uppercase;
         color: var(--primary-lighten);
     }
     li {
         transition: all, 0.2s;
+        margin: 0 12px;
         border-bottom: 3px solid transparent;
-        margin: 0 8px;
+        transition: all,0.2s;
+    }
+    li:hover {
+        border-bottom: 3px solid var(--primary-lighten-1);
     }
     li.active {
         color: var(--primary-darken);

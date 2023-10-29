@@ -1,5 +1,5 @@
 :root {
-  --primary: #189471;
+  /* --primary: #189471;
   --primary-lighten: #5fb2a2;
   --primary-lighten-1: rgba(24, 148, 113,0.1);
   --primary-lighten-2: rgba(24, 148, 113,0.2);
@@ -8,8 +8,19 @@
 
   --secondary:#EF7757;
   --secondary-lighten: #F4A089;
-  --secondary-darken: #E4472C;
+  --secondary-darken: #E4472C; */
 
+  --primary:#292574;
+  --primary-lighten: #69669E;
+  --primary-lighten-1: rgba(41, 37, 116,0.1);
+  --primary-lighten-2: rgba(41, 37, 116,0.2);
+  --primary-lighten-3: rgba(41, 37, 116,0.3);
+  --primary-darken: #0F0D44;
+
+
+  --secondary:#EF7757;
+  --secondary-lighten: #F4A089;
+  --secondary-darken: #E4472C; 
 
   /* --primary:#EF7757;
   --primary-lighten: #F4A089;
@@ -26,6 +37,6 @@
   }
 
 ::selection {
-    background: #C6180C;
+    background: #292574;
     color: #fff;
 }

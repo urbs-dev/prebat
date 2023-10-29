@@ -39,8 +39,8 @@
 
 <style>
     button{
-        height:56px;
-        width:56px;
+        height:64px;
+        width:64px;
         color: var(--primary);
         border-left: 1px solid #eee;
     }
