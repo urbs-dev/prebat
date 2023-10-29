@@ -1,6 +1,17 @@
 <script>
     import Footer from '$lib/components/Footer.svelte'
     import { getPath } from 'gros/page'
+    import { initDownload } from '$lib/utils'
+
+    const download = async () => {
+        const response = await fetch(`BASE_URL/prebat.api/operations/results/extract`, {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
+        })
+        const result = await response.json()
+        initDownload(result.url)
+    }
+
 </script>
 
 <header></header>
@@ -35,14 +46,14 @@
 
         <div class="h3">
             <h3><span>1.</span> Évaluations par opération</h3>
-            <a href="{getPath('/downloads')}">
+            <a href="{getPath('/measures')}">
                 <button class="btn" type="button">
                     <i class="micon">file_download</i>
                     <span>Télécharger les données de mesure par opération</span>
                 </button>
             </a>
             <h3><span>2.</span> Résultats d'évaluation des opérations</h3>
-            <button class="btn">
+            <button class="btn" type="button" on:click={download}>
                 <i class="micon">file_download</i>
                 <span>Télécharger les résultats pour toutes les opérations</span>
             </button>
@@ -67,7 +78,7 @@
                 </button>
             </a>
 
-            <img style:width="80%" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
+            <img style="width:80%;padding-left: 40px;" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
 
         </div>
 
@@ -121,7 +132,7 @@
         color: #616161;
     }
     ul {
-        list-style-type: disc;
+        list-style-type: decimal;
         margin-left: 32px;
     }
     /* .divider {
@@ -135,9 +146,10 @@
         margin-left: 24px;
     }
     div.h3 button.btn {
-        margin: 4px 0;
+        margin: 12px 0 12px 40px;
         padding: 2px 8px 2px 4px;
-        background: var(--primary-lighten-1);
+        background: #f5f5f5;
+        border: 1px solid #eee;
         transition: background, 0.2s;
         border-radius: 2px;
         text-transform: none;
@@ -145,7 +157,8 @@
         font-size: 16px;
     }
     div.h3 button.btn:hover {
-        background: var(--primary-lighten-2);
+        background: var(--primary-lighten-1);
+        border: 1px solid var(--primary-lighten-2);
     }
     div.h3 button.btn:hover span {
         text-decoration: underline;

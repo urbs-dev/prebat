@@ -61,7 +61,7 @@
     h1 {
         display: inline;
         color: var(--primary-darken);
-        background: linear-gradient(180deg,rgba(255,255,255,0) 75%, var(--primary-lighten-1) 15%);
+        /* background: linear-gradient(180deg,rgba(255,255,255,0) 75%, var(--primary-lighten-1) 15%); */
         font-size: 36px;
     }
     h2 {

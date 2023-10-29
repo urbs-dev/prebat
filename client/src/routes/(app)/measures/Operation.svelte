@@ -1,19 +1,11 @@
 <script>
     import Figures from './Operation_Figures.svelte'
     import { loading } from 'gros/loading'
+    import { initDownload } from '$lib/utils'
     export let row
     const stringify = (value) => {
         if (!value) return 'N/R'
         return String(value).replace(/ ~ /g, ', ')
-    }
-
-    const initDownload = (url, name = '') => {
-        const a = document.createElement('a')
-        document.body.appendChild(a)
-        a.setAttribute('href', url)
-        a.setAttribute('download', name)
-        a.click()
-        document.body.removeChild(a)
     }
 
     const extract = async () => {

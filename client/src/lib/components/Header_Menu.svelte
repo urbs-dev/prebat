@@ -11,8 +11,8 @@
         </li>
     </a>
 
-    <a href="{getPath('/downloads')}">
-        <li class:active={$url.indexOf('downloads') > -1}>
+    <a href="{getPath('/measures')}">
+        <li class:active={$url.indexOf('measures') > -1}>
             Mesures
         </li>
     </a>

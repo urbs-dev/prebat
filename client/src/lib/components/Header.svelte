@@ -90,6 +90,7 @@
         color: #616161;
         font-weight: normal;
         font-size:13px;
+        line-height: 14px;
     }
 
     i.app{

@@ -55,6 +55,14 @@ export default class OperationsController
 
     public async extract({ request, response }: HttpContextContract)
     {
+        const id = request.param('id')
+
+        if (id === 'results') {
+            const io = new OperationsIO()
+            const url = await io.getResults()
+            return response.send({ url })
+        }
+
         const operation = await OperationsModel.query()
             .where('id', request.param('id'))
             .preload('report')
@@ -62,8 +70,8 @@ export default class OperationsController
         if (!operation) {
             return response.status(404).send({ message: 'No operation found'})
         }
-        const io = new OperationsIO(operation)
-        const url = await io.extract()
+        const io = new OperationsIO()
+        const url = await io.extract(operation)
         return response.send({ url })
     }
 
