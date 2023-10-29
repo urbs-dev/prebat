@@ -1,8 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import MeasuresModel from './MeasuresModel'
 import MeasuresIO from './MeasuresIO'
-import Application from '@ioc:Adonis/Core/Application'
-
+import { PATH_TO_FILES } from 'Core/utils'
 
 export default class MeasuresController 
 {
@@ -91,7 +90,7 @@ export default class MeasuresController
         const xlsx = request.file('xlsx')
         if (!xlsx) return response.status(412).send({ message: 'No file in request body'})
         if (!xlsx.isValid) return response.status(412).send(xlsx.errors)
-        await xlsx.move(Application.appRoot + '/public/uploads/', { name: xlsx.clientName, overwrite: true })
+        await xlsx.move(PATH_TO_FILES, { name: xlsx.clientName, overwrite: true })
         return xlsx.clientName
     }
 }

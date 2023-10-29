@@ -1,13 +1,13 @@
 import Excel from 'exceljs'
-import Application from '@ioc:Adonis/Core/Application'
 import FileParser from './IO/FileParser'
 import FilePersister from './IO/FilePersister'
 import FileSequencer from './IO/FileSequencer'
 import MeasuresModel from './MeasuresModel'
+import { PATH_TO_FILES } from 'Core/utils'
 
 export default class MeasuresIO
 {
-    private PATH = (Application.appRoot + '/public/uploads/')
+    private PATH = PATH_TO_FILES
     public sheet: Excel.Worksheet
     public rowCount: number
     public columns: number[]
