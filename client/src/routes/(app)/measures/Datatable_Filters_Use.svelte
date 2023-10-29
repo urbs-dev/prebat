@@ -1,5 +1,4 @@
 <script>
-    import { Dropdown } from "gros/dropdown"
     export let handler
 
     const usages = handler.createCalculation(row => row.report?.use).distinct((values) => {
@@ -13,22 +12,18 @@
     const selected = filter.getSelected()
 </script>
 
-<Dropdown position="bottom-start" preventClosing>
-    <button class="btn dd">
-        <i class="micon" style:margin-right="6px">filter_list</i>
-        Destination d'usage
-        <i class="micon" style:margin-left="4px">arrow_drop_down</i>
-    </button>
-    <article class="thin-scrollbar z-depth-2" slot="content">
-        <!-- <h3 class="flex">
-            <i class="micon">filter_list</i>
-            by Types
-            {#if $selected.length > 0}
-                <button class="clear btn" on:click={() => filter.clear()}>
-                    Clear
-                </button>
-            {/if}
-        </h3> -->
+    <h3 class="flex">
+        <div class="flex">
+            <i class="micon" style="margin-right:6px;font-size: 18px;">filter_list</i>
+            Destination d'usage
+        </div>
+        {#if $selected.length > 0}
+            <button class="btn" style:color="#e57373" on:click={() => filter.clear()}>
+                <i class="micon">clear</i>
+            </button>
+        {/if}
+    </h3>
+    <article>
         {#each usages as usage}
             {@const { value, count } = usage}
             {#if value}
@@ -41,56 +36,35 @@
             </button>
             {/if}
         {/each}
-    
     </article>
-</Dropdown>
 
 
 
 
 <style>
     article {
-        width: 224px;
-        position: relative;
-        overflow-y: auto;
+        width: 100%;
         border-radius: 4px;
-        margin: 4px;
-        background: #fff;
+        margin: 4px 0;
+        background: #fafafa;
         padding: 8px;
         border: 1px solid #e0e0e0;
     }
-    button.dd {
+    h3 {
         color: #616161;
-        background: #f5f5f5;
-        margin: 4px 4px 4px 0;
+        margin: 24px 4px 4px 0;
         font-family: Roboto;
-        font-size: 13px;
+        font-size: 15px;
         text-transform: none;
         letter-spacing: 0;
-    }
-    button.dd i {
-        font-size: 18px;
-    }
-    /* h3 {
-        font-size: 16px;
-        color: var(--secondary);
-        font-weight: 400;
-        margin: 0 0 16px 0;
-        padding-bottom: 4px;
-        border-bottom: 1px solid #eee;
+        justify-content: space-between;
     }
     h3 button {
-        color: #e57373;
-        border: 1px solid #e57373;
-        padding: 2px;
-        font-size: 10px;
-        border-radius: 4px;
-        margin-left: 8px;
+        padding: 0;
     }
-    h3 i {
-        margin-right: 4px;
-        font-size: 16px;
-    } */
+    h3 button i {
+        font-size: 18px;
+    }
     button.select {
         justify-content: flex-start;
         width: 100%;
@@ -99,7 +73,7 @@
         text-transform: none;
     }
     button.select span {
-        width: 140px;
+        width: 152px;
         white-space: wrap;
         text-align: left;
     }
@@ -116,7 +90,7 @@
     }
     code {
         font-family: JetBrains;
-        color: var(--primary);
+        color: var(--secondary);
         font-size: 14px;
         width: 16px;
         height: 16px;

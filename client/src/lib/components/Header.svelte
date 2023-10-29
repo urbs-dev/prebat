@@ -52,7 +52,7 @@
         height:64px;
         z-index:800;
         background-color:#fff;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #e0e0e0;
         transition:all,0.2s;
         -webkit-box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);
     }
@@ -113,7 +113,9 @@
         color: var(--primary);
         border: 1px solid var(--primary-lighten);
         border-radius: 4px;
-        margin-right: 8px;
+        margin-right: 16px;
+        padding: 4px 6px;
+        transition: background, 0.2s;
     }
     a.btn:hover{
         background: var(--primary-lighten-1);

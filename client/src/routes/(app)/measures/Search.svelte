@@ -1,12 +1,12 @@
 <script lang="ts">
-    import Use from './Search_Filter_Use.svelte'
-    import Contract from './Search_Filter_ContractType.svelte'
     import type { DataHandler, Row } from '@vincjo/datatables'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
     let value = ''
+
+    const rowCount = handler.getRowCount()
 
     handler.on('clearSearch', () => value ='')
 </script>
@@ -23,8 +23,7 @@
             on:input={() => handler.search(value)}
         />
     </aside>
-    <Use {handler}/>
-    <Contract {handler}/>
+    <span>{$rowCount.total} opération{$rowCount.total > 1 ? 's' : ''}</span>
 </section>
 
 
@@ -32,7 +31,7 @@
 <style>
     section {
         margin: 32px 0 16px 0;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
     }
@@ -58,7 +57,7 @@
         background:transparent;
         width: 100%;
         transition:border, 0.1s;
-        border:1px solid #d1d1d1;
+        border:1px solid var(--primary-lighten-3);
         /* border-radius:4px; */
         border-radius: 6px;
         font-size: 14px;
@@ -72,5 +71,14 @@
         line-height:24px;
         font-weight: 200;
         font-size: 14px;
+    }
+
+    
+    span {
+        color: #616161;
+        line-height: 32px;
+        font-size: 13px;
+        font-weight: normal;
+        font-family: JetBrains; 
     }
 </style>

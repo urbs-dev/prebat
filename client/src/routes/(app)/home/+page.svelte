@@ -14,9 +14,9 @@
 
 </script>
 
-<header></header>
+<div class="main">
 
-<section>
+<section class="z-depth-1">
     <article>
         <!-- <h1 class="alt-font">Bienvenue sur la plateforme d'accès aux données de performance réelles des bâtiments résidentiels et tertiaires !</h1> -->
 
@@ -89,14 +89,25 @@
 
 <Footer/>
 
+</div>
+
 <style>
-    header {
-        height: 64px;
+    div.main {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #fdfdfd;
+        overflow-y: auto;
     }
     section {
         max-width: 960px;
         margin: 40px auto;
         padding-bottom: 96px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 0 40px;
     }
 
     section 

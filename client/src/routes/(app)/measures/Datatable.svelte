@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { ComponentType } from 'svelte'
     import type {  DataHandler  } from 'gros/datatable'
+    import Filters from './Datatable_Filters.svelte'
 
     type T = $$Generic<Row>
 
@@ -30,10 +31,7 @@
 
     <article bind:this={element}>
         <aside class="flex">
-            <div class="thin-scrollbar">
-                <h1>Mesures par opération</h1>
-                <span>(!) Les mesures ne sont pas disponibles pour toutes les opérations.</span>
-            </div>
+            <Filters {handler}/>
             <slot />
         </aside>
     </article>
@@ -123,16 +121,5 @@
         max-width: 1200px;
         padding: 0 24px;
         align-items: flex-start;
-    }
-    aside div {
-        position:sticky;
-        top: 40px;
-        width: 320px;
-        background: var(--primary-lighten-1);
-        height: 400px;
-        border-radius: 8px;
-        padding: 16px;
-        overflow-y: auto;
-        scrollbar-width: thin;
     }
 </style>
