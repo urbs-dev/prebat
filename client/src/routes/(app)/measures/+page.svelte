@@ -9,26 +9,29 @@
 </script>
 
 <section>
-    <Datatable {handler}>
-        <table>
-            <thead>
-                <tr>
-                    <th><Search {handler}/></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        {#each $rows as row}
-                            <Operation {row}/>
-                        {/each}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </Datatable>
+    {#if data.operations.length > 0}
+        <Datatable {handler}>
+            <table>
+                <thead>
+                    <tr>
+                        <th><Search {handler}/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {#each $rows as row}
+                                <Operation {row}/>
+                            {/each}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </Datatable>
+    {:else}
+        <h1 class="alt-font">Acune opération n'est disponible pour le moment</h1>
+    {/if}
 </section>
-
 <style>
     section{
         position:absolute;
@@ -42,5 +45,11 @@
         background: #fff;
         /* background: rgba(255,255,255,0.5);
         backdrop-filter: blur(4px); */
+    }
+    h1 {
+        text-align: center;
+        color: var(--primary-lighten);
+        font-size: 32px;
+        margin-top: 24vh;
     }
 </style>
