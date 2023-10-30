@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import replace from '@rollup/plugin-replace'
 import { defineConfig } from 'vite'
-import path from 'path'
+import * from 'path'
 import { config } from 'dotenv'
 
 const result = config({ path: '../../.env'})
@@ -15,7 +15,7 @@ const params = {
         replace({
             preventAssignment: true,
             values: {
-                'BASE_URL': process.env.BASE_URL,
+                'BASE_URL': process.env.NODE_ENV === 'development' ? process.env.BASE_URL : 'https://cerema.urbs.fr',
                 'STATIC_PATH': process.env.NODE_ENV === 'development' ? '' : '/prebat',
             }
         }),
