@@ -12,7 +12,7 @@
         {/if}
         <div class="flex actors" style:margin-left={$url.includes('admin') ? '256px' : '72px'} >
             <img style:height="64px" src="STATIC_PATH/img/logo-rf.svg" alt="logo République Française">
-            <img style:height="40px" src="STATIC_PATH/img/logo-cerema.svg" alt="logo CEREMA">
+            <img style:height="52px" src="STATIC_PATH/img/logo-cerema-vert.png" alt="logo CEREMA">
         </div>
         <div class="divider"></div>
         <a href="{ getPath('/accueil')}">
@@ -89,8 +89,8 @@
         font-family: 'lato';
         color: #616161;
         font-weight: normal;
-        font-size:13px;
-        line-height: 14px;
+        font-size:14px;
+        line-height: 22px;
     }
 
     i.app{

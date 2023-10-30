@@ -115,6 +115,7 @@
         border: 1px solid #eee;
         border-radius: 8px;
         padding: 0 40px 40px 40px;
+        background: #fff;
     }
 
     section 
