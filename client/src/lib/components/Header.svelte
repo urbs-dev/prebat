@@ -11,7 +11,7 @@
         <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
         {/if}
         <div class="flex actors" style:margin-left={$url.includes('admin') ? '256px' : '72px'} >
-            <img style:height="64px" src="STATIC_PATH/img/logo-rf.svg" alt="logo République Française">
+            <img style:height="72px" src="STATIC_PATH/img/logo-rf.svg" alt="logo République Française">
             <img style:height="52px" src="STATIC_PATH/img/logo-cerema-vert.png" alt="logo CEREMA">
         </div>
         <div class="divider"></div>
