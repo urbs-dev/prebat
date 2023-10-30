@@ -79,7 +79,7 @@
                 <span>RESULTATS D'EVALUATION : télécharger les données pour toutes les opérations</span>
             </button>
 
-            <h3 style:margin-top="32px"><span>2.</span>Données par opération</h3>
+            <h3 style:margin-top="40px"><span>2.</span>Données par opération</h3>
             <a href="{getPath('/mesures')}">
                 <button class="btn" type="button">
                     <i class="micon">file_download</i>
@@ -169,7 +169,7 @@
         margin-left: 24px;
     }
     div.h3 button.btn {
-        margin: 12px 0 12px 40px;
+        margin: 12px 0 12px 24px;
         padding: 2px 8px 2px 4px;
         background: #f5f5f5;
         border: 1px solid #eee;
@@ -198,8 +198,8 @@
     div.h3 div.flex {
         flex-direction: column;
         align-items: flex-start;
-        padding-left: 40px;
-        margin-bottom: 40px;
+        padding-left: 0;
+        margin-bottom: 24px;
     }
     div.h3 div.flex span {
         border-top: 1px solid #e0e0e0;
