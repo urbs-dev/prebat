@@ -29,7 +29,7 @@
             </table>
         </Datatable>
     {:else}
-        <h1 class="alt-font">Acune opération n'est disponible pour le moment</h1>
+        <h1 class="alt-font">Aucune opération n'est disponible pour le moment</h1>
     {/if}
 </section>
 <style>
