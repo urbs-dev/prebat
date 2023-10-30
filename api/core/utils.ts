@@ -1,3 +1,3 @@
 
 
-export const PATH_TO_FILES = process.env.NODE_ENV === 'development' ? process.env.ROOT_PATH + 'prebat/data/' : process.env.ROOT_PATH + 'source/prebat/data/'
+export const PATH_TO_FILES = process.env.NODE_ENV === 'development' ? process.env.ROOT_PATH + 'prebat/data/' : process.env.ROOT_PATH + 'prebat/source/data/'
