@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import replace from '@rollup/plugin-replace'
 import { defineConfig } from 'vite'
-import * from 'path'
+import path from 'path'
 import { config } from 'dotenv'
 
 const result = config({ path: '../../.env'})
