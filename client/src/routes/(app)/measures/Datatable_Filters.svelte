@@ -1,4 +1,5 @@
 <script>
+    import DeliveredOn from './Datatable_Filters_DeliveredOn.svelte'
     import Use from './Datatable_Filters_Use.svelte'
     import ContractType from './Datatable_Filters_ContractType.svelte'
     import Engineering from './Datatable_Filters_Engineering.svelte'
@@ -13,6 +14,7 @@
 <section class="thin-scrollbar">
     <h1>Mesures par opération</h1>
     <span>⚠️ Les mesures ne sont pas disponibles pour toutes les opérations.</span>
+    <DeliveredOn {handler}/>
     <ContractType {handler}/>
     <Use {handler}/>
     <Engineering {handler}/>
@@ -31,6 +33,21 @@
         padding: 16px;
         overflow-y: auto;
         scrollbar-width: thin;
+    }
+    section::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    section::-webkit-scrollbar-track {
+        background: var(--primary-lighten-1);
+        border-radius: 0 8px 8px 0;
+    }
+    section::-webkit-scrollbar-thumb {
+        background: var(--primary-lighten-1);
+        border-radius: 0 8px 8px 0;
+    }
+    section::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-lighten-3);
     }
     h1 {
         font-size: 18px;

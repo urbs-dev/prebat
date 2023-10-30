@@ -107,7 +107,7 @@
         padding-bottom: 96px;
         /* border: 1px solid #eee; */
         border-radius: 8px;
-        padding: 24px 40px;
+        /* padding: 24px 40px; */
     }
 
     section 

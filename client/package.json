@@ -15,7 +15,7 @@
 		"@sveltejs/kit": "^1.20.4",
 		"@zerodevx/svelte-toast": "^0.9.5",
 		"dotenv": "^16.3.1",
-		"gros": "^0.19.7",
+		"gros": "^0.19.12",
 		"socket.io-client": "^4.7.0",
 		"svelte": "^4.0.0",
 		"svelte-check": "^3.4.3",
