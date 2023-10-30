@@ -24,7 +24,8 @@
 
         <!-- <p>Ces constats sont disponibles aux trois niveaux de traitement suivants&nbsp;:</p> -->
 
-        <p>En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiment résidentiel ou tertiaire, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p>
+        <h1 class="alt-font">PREBAT&nbsp;: Plateforme Data des performances réelles en bâtiment</h1>
+        <p style:margin-top="40px">En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiment résidentiel ou tertiaire, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p>
 
         <ul>
             <li>Données élémentaires par bâtiment&nbsp;: mesures, observations et enquêtes;</li>
@@ -98,16 +99,16 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: #fff;
+        background: #fdfdfd;
         overflow-y: auto;
     }
     section {
         max-width: 960px;
         margin: 40px auto;
         padding-bottom: 96px;
-        /* border: 1px solid #eee; */
+        border: 1px solid #eee;
         border-radius: 8px;
-        /* padding: 24px 40px; */
+        padding: 24px 40px;
     }
 
     section 
@@ -119,7 +120,7 @@
         display: inline;
         color: var(--primary-darken);
         /* background: linear-gradient(180deg,rgba(255,255,255,0) 75%, var(--primary-lighten-1) 15%); */
-        font-size: 36px;
+        font-size: 28px;
     }
     h2 {
         color: var(--primary-lighten);
@@ -138,13 +139,17 @@
         padding-right: 16px;
     }
     p, ul {
-        font-size: 16px;
+        font-size: 17px;
         font-weight: lighter;
         color: #616161;
+        line-height: 24px;
     }
     ul {
         list-style-type: decimal;
         margin-left: 32px;
+    }
+    ul li {
+        margin: 8px 0;
     }
     /* .divider {
         height: 400px;

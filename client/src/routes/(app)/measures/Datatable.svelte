@@ -98,6 +98,7 @@
         height: 100%;
         overflow: scroll;
         scrollbar-width: thin;
+        background: #fff;
     }
     article::-webkit-scrollbar {
         width: 6px;

@@ -21,11 +21,11 @@
         <i class="micon" style="margin-right:6px;font-size: 18px;">filter_list</i>
         Année de livraison
     </div>
-    <!-- {#if $selected.length > 0}
-        <button class="btn" style:color="#e57373" on:click={() => filter.clear()}>
+    {#if value[0] !== min || value[1] !== max}
+        <button class="btn" style:color="#e57373" on:click={() => value = [min, max]}>
             <i class="micon">clear</i>
         </button>
-    {/if} -->
+    {/if}
 </h3>
 
 <article>
@@ -56,9 +56,9 @@
         letter-spacing: 0;
         justify-content: space-between;
     }
-    /* h3 button {
+    h3 button {
         padding: 0;
-    } */
+    }
     h3 button i {
         font-size: 18px;
     }
