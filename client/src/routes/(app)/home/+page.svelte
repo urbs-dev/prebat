@@ -43,7 +43,7 @@
             Échantillon
         </h2>
         <p>166 opérations de bâtiments performants (niveau RT2012).</p>
-        <img style:width="80%" src="STATIC_PATH/img/energie_confort_thermique.png" alt="Graphique énergie et confort thermique">
+        <img style:width="700px" src="STATIC_PATH/img/energie_confort_thermique.png" alt="Graphique énergie et confort thermique">
 
         <h2 class="flex" style:margin-top="40px">
             <i class="micon" style:margin-right="8px">navigate_next</i>
@@ -53,7 +53,7 @@
         <div class="h3">
             <h3><span>1.</span>Données et enseignements inter-opérations</h3>
             <div class="flex">
-                <img style="width:80%;" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
+                <img style="width:650px;" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
                 <span>Consommations totales en énergie primaire par m² SHON et par an</span>
             </div>
             <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-3">
