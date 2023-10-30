@@ -1,4 +1,7 @@
-<script>
+<h1>404</h1>
+
+
+<!-- <script>
     import Form from './Form.svelte'
     import Confirmed from './Confirmed.svelte'
     let confirmed = false
@@ -53,4 +56,4 @@
         font-size: 56px;
         margin-left: 16px;
     }
-</style>
+</style> -->

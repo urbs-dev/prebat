@@ -35,10 +35,10 @@
             <i class="tall material-icons right">chevron_right</i>
         </button>
     </form>
-    <a href="{getPath('/auth/signup')}" class="btn z-depth-1">
+    <!-- <a href="{getPath('/auth/signup')}" class="btn z-depth-1">
         <i class="tall material-icons right" style:margin-right="8px">assignment_ind</i>
         Inscription
-    </a>
+    </a> -->
     <button class="password-forgotten" on:click={() => modal.open(ForgotPasswordModal)}>Mot de passe oublié</button>
 </article>
 
@@ -83,7 +83,7 @@
         height:60px;
         border:1px solid #eee;
     }
-    a.btn {
+    /* a.btn {
         background: #f5f5f5;
         color:var(--primary);
         margin:0 auto 24px auto;
@@ -92,7 +92,7 @@
         font-size:18px;
         height:40px;
         border:1px solid #eee;
-    }
+    } */
 	div.error{
         margin:0 auto 20px auto;
         height:48px;
