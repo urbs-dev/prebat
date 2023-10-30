@@ -36,7 +36,7 @@ export default class OperationsIO
         // return this.dir.zipTempdir(zipname)
 
         const origin = this.PATH + this.filename
-        const destination = this.dir.PATH_TO_FILES + 'PREBAT_MESURES_' + this.name.substring(0, 4) + '.xlsx'
+        const destination = this.dir.PATH_TO_FILES + 'Cerema-TAB-PREBAT_MESURES_' + this.name.substring(0, 4) + '.xlsx'
         console.log(destination)
         this.dir.copy(origin, destination)
         return this.dir.toUrl(destination)
@@ -45,7 +45,7 @@ export default class OperationsIO
     public async getResults()
     {
         const origin = this.PATH +  'resultats.xlsx'
-        const destination = this.dir.PATH_TO_FILES + 'PREBAT_Résultats.xlsx'
+        const destination = this.dir.PATH_TO_FILES + 'Cerema-TAB-Data_perfo_reelle_bat_Energie_Prebat.xlsx'
         this.dir.copy(origin, destination)
         return this.dir.toUrl(destination)
     }
