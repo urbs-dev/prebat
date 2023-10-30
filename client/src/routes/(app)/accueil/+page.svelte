@@ -24,8 +24,7 @@
 
         <!-- <p>Ces constats sont disponibles aux trois niveaux de traitement suivants&nbsp;:</p> -->
 
-        <h1 class="alt-font">PREBAT&nbsp;: Plateforme Data des performances réelles en bâtiment</h1>
-        <p style:margin-top="24px">En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiment résidentiel ou tertiaire, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p>
+        <p>En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiments résidentiels ou tertiaires, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p>
 
         <ul>
             <li>Données élémentaires par bâtiment&nbsp;: mesures, observations et enquêtes;</li>
@@ -43,7 +42,7 @@
             Échantillon
         </h2>
         <p>166 opérations de bâtiments performants (niveau RT2012).</p>
-        <img style:width="700px" src="STATIC_PATH/img/energie_confort_thermique.png" alt="Graphique énergie et confort thermique">
+        <img style:width="600px" src="STATIC_PATH/img/energie_confort_thermique.png" alt="Graphique énergie et confort thermique">
 
         <h2 class="flex" style:margin-top="40px">
             <i class="micon" style:margin-right="8px">navigate_next</i>
@@ -81,7 +80,7 @@
             </button>
 
             <h3 style:margin-top="32px"><span>2.</span>Données par opération</h3>
-            <a href="{getPath('/measures')}">
+            <a href="{getPath('/mesures')}">
                 <button class="btn" type="button">
                     <i class="micon">file_download</i>
                     <span>MESURES : sélectionner et télécharger les données par opération</span>
@@ -156,7 +155,7 @@
         margin-left: 32px;
     }
     ul li {
-        margin: 8px 0;
+        margin: 4px 0;
     }
     /* .divider {
         height: 400px;

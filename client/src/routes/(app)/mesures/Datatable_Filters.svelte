@@ -15,9 +15,9 @@
     <h1>Mesures par opération</h1>
     <span>⚠️ Les mesures ne sont pas disponibles pour toutes les opérations.</span>
     <DeliveredOn {handler}/>
-    <ContractType {handler}/>
     <Use {handler}/>
     <Engineering {handler}/>
+    <ContractType {handler}/>
 </section>
 
 

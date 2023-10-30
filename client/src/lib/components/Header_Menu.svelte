@@ -5,14 +5,14 @@
 
 <ul class="flex">
 
-    <a href="{getPath('/home')}">
-        <li class:active={$url.indexOf('home') > -1}>
+    <a href="{getPath('/accueil')}">
+        <li class:active={$url.indexOf('accueil') > -1}>
             Accueil
         </li>
     </a>
 
-    <a href="{getPath('/measures')}">
-        <li class:active={$url.indexOf('measures') > -1}>
+    <a href="{getPath('/mesures')}">
+        <li class:active={$url.indexOf('mesures') > -1}>
             Mesures
         </li>
     </a>

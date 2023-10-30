@@ -15,7 +15,7 @@
             <img style:height="40px" src="STATIC_PATH/img/logo-cerema.svg" alt="logo CEREMA">
         </div>
         <div class="divider"></div>
-        <a href="{ getPath('/home')}">
+        <a href="{ getPath('/accueil')}">
             <div class="logo flex">
                 <!-- <img alt="logo" src="STATIC_PATH/img/logo.svg"/> -->
                 <span class="alt-font">PREBAT</span>

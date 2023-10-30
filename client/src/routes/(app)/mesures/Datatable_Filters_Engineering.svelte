@@ -1,19 +1,19 @@
 <script>
     export let handler
 
-    const contracts = handler.createCalculation(row => row.report?.contract_type).distinct((values) => {
+    const works = handler.createCalculation(row => row.report?.engineering).distinct((values) => {
         return values
             .filter(Boolean)
             .sort((a, b) => { return a.localeCompare(b) })
     })
-    const filter = handler.createAdvancedFilter(row => row.report?.contract_type)
+    const filter = handler.createAdvancedFilter(row => row.report?.engineering)
     const selected = filter.getSelected()
 </script>
 
 <h3 class="flex">
     <div class="flex">
-        <i class="micon" style="margin-right:6px;font-size: 18px;">filter_list</i>
-        Maîtrise d'ouvrage
+        <i class="micon" style="margin-right:6px;font-size:18px;">filter_list</i>
+        Nature des travaux
     </div>
     {#if $selected.length > 0}
         <button class="btn" style:color="#e57373" on:click={() => filter.clear()}>
@@ -23,8 +23,8 @@
 </h3>
 
 <article>
-    {#each contracts as contract}
-        {@const { value, count } = contract}
+    {#each works as work}
+        {@const { value, count } = work}
         {#if value}
         <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
             <i class="micon">
@@ -36,6 +36,7 @@
         {/if}
     {/each}
 </article>
+
 
 
 
@@ -70,10 +71,12 @@
         font-size: 12px;
         padding: 4px 4px;
         text-transform: none;
+        letter-spacing: 0;
+        white-space: none;
+        text-wrap: wrap;
     }
     button.select span {
         width: 152px;
-        white-space: wrap;
         text-align: left;
     }
     button.select i {

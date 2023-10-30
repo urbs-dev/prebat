@@ -1,19 +1,25 @@
 <script>
     export let handler
 
-    const works = handler.createCalculation(row => row.report?.engineering).distinct((values) => {
-        return values
-            .filter(Boolean)
-            .sort((a, b) => { return a.localeCompare(b) })
-    })
-    const filter = handler.createAdvancedFilter(row => row.report?.engineering)
+    const usages = handler
+        .createCalculation((row) => row.report?.use)
+        .distinct((values) => {
+            return values
+                .map((value) => (value ? value.split(' ~ ') : null))
+                .flat()
+                .filter(Boolean)
+                .sort((a, b) => {
+                    return a.localeCompare(b)
+                })
+        })
+    const filter = handler.createAdvancedFilter((row) => row.report?.use)
     const selected = filter.getSelected()
 </script>
 
 <h3 class="flex">
     <div class="flex">
-        <i class="micon" style="margin-right:6px;font-size:18px;">filter_list</i>
-        Nature des travaux
+        <i class="micon" style="margin-right:6px;font-size: 18px;">filter_list</i>
+        Destination d'usage
     </div>
     {#if $selected.length > 0}
         <button class="btn" style:color="#e57373" on:click={() => filter.clear()}>
@@ -21,24 +27,20 @@
         </button>
     {/if}
 </h3>
-
 <article>
-    {#each works as work}
-        {@const { value, count } = work}
+    {#each usages as usage}
+        {@const { value, count } = usage}
         {#if value}
-        <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
-            <i class="micon">
-                {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
-            </i>
-            <span>{value}</span>
-            <code>{count}</code>
-        </button>
+            <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
+                <i class="micon">
+                    {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
+                </i>
+                <span>{value}</span>
+                <code>{count}</code>
+            </button>
         {/if}
     {/each}
 </article>
-
-
-
 
 <style>
     article {
@@ -70,10 +72,12 @@
         font-size: 12px;
         padding: 4px 4px;
         text-transform: none;
+        letter-spacing: 0;
+        white-space: none;
+        text-wrap: wrap;
     }
     button.select span {
         width: 152px;
-        white-space: wrap;
         text-align: left;
     }
     button.select i {

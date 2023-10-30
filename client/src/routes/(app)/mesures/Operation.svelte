@@ -35,9 +35,9 @@
     <Figures sites={row.sites} measuresCount={row.measures.length}/>
     <ul>
         <li class="alt-font flex"><span>Année de livraison :  </span><b>{stringify(row.report?.delivered_on)}</b></li>
-        <li class="alt-font flex"><span>Maîtrise d'ouvrage :  </span><b>{stringify(row.report?.contract_type)}</b></li>
         <li class="alt-font flex"><span>Destination d'usage : </span><b>{stringify(row.report?.use)}</b></li>
         <li class="alt-font flex"><span>Nature des travaux :  </span><b>{stringify(row.report?.engineering)}</b></li>
+        <li class="alt-font flex"><span>Maîtrise d'ouvrage :  </span><b>{stringify(row.report?.contract_type)}</b></li>
     </ul>
 </aside>
 
