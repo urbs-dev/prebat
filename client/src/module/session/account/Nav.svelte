@@ -1,5 +1,5 @@
 <script>
-    import { page } from '$module/session'
+    import { page } from '../'
 </script>
 
     <button on:click={() => $page = 'show'} class="btn">

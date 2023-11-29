@@ -1,17 +1,18 @@
+
 declare module '@ioc:Adonis/Core/HttpContext' {
-  
+
 	interface HttpContextContract {
-	  	user: {
+	  	session: {
 			id: string,
 			roles: {
+				MAINTAINER: boolean,
 				GLOBAL_ADMIN: boolean,
 				USER_ADMIN: boolean,
 				USER: boolean
 			},
-			group_id: string,
 			packs: string[],
-			territory_id: null | string
-		}
+			licenses: { [name: string]: { expired_at: string, is_valid: boolean } },
+		},
+		token: string,
 	}
-
 }

@@ -1,5 +1,5 @@
 <script>
-    import { page, account }    from '$module/session'
+    import { page, account }    from '../'
     import { Input }            from 'gros/form'
     import { loading }          from 'gros/loading'
     import { slide, fade }      from 'svelte/transition'
@@ -25,10 +25,10 @@
 
 <Nav/>
 
-<section in:fade|global={{ duration: 300 }}>
+<section in:fade={{ duration: 300 }}>
     <div>
         {#if errors && errors.length > 0}
-            <button class="message" in:slide|global={{ duration: 200 }} on:click={() => errors = false}>
+            <button class="message" in:slide={{ duration: 200 }} on:click={() => errors = false}>
                 {#each errors as error}
                     <aside>&#8226; {error.message}</aside>
                 {/each}

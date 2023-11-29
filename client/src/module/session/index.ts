@@ -12,23 +12,18 @@ const createUser = () => {
     const { subscribe, set, update } = writable(null)
     return {
         subscribe, set, update,
-        get: () => {
-            return get(user)
+        get: () => { return get(user) },
+        create: (session) => {
+            user.set(session)
+            document.cookie = `token=${session.token};path=/;`
         },
-        create: (data, updateJwt = true) => {
-            user.set(data)
-            if (updateJwt) {
-                document.cookie = `jwt=${data.jwt.token};expires=${new Date(data.jwt.expires).toUTCString()};path=/;`
-            }
-        },
-        connect: async (form) => {
-            const response = await fetch(`BASE_URL/resources.api/account/auth`, {
+        signIn: async (form: SignIn) => {
+            const response = await fetch(`BASE_URL/resources.api/account/sign-in`, {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
                 body: JSON.stringify(form)
             })
             const json = await response.json()
-
             if (response.status !== 200) {
                 if (json.message === 'terms') return `Vous devez accepter les CGU`
                 return 'Identifiant ou mot de passe incorrect'
@@ -36,13 +31,13 @@ const createUser = () => {
             if(json.redirect) {
                 window.location.replace( json.redirect )
                 return
-            } 
-            user.create( json )
+            }
+            user.create(json)
             window.location.replace( getPath('/') )
             return json
         },
-        register: async (form) => {
-            const response = await fetch(`BASE_URL/resources.api/account`, {
+        signUp: async (form) => {
+            const response = await fetch(`BASE_URL/resources.api/account/sign-up`, {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
                 body: JSON.stringify(form)
@@ -50,22 +45,27 @@ const createUser = () => {
             const json = await response.json()
             return json
         },
-        logout: () => {
-            document.cookie = `jwt=null;path=/`
+        signOut: async () => {
+            const response = await fetch(`BASE_URL/resources.api/account/sign-out`, {
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
+            })
+            await response.json()
+            document.cookie = `token=null;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT"`
             user.set(null)
             document.location.reload()
             return
         },
-        getAccount: async () => {
-            const response = await fetch(`BASE_URL/resources.api/account`)
-            const json = await response.json()
+        getSession: async () => {
+            const response = await fetch(`BASE_URL/resources.api/account/session`)
             if (response.status === 200) {
-                status.set({ isAuthenticated: true, isAdmin: json.roles.GLOBAL_ADMIN })
+                const json = await response.json()
                 user.create(json)
+                status.set({ isAuthenticated: true, isAdmin: json.roles.GLOBAL_ADMIN })
                 return status
             }
             status.set({ isAuthenticated: false, isAdmin: false })
-            user.set(status)
+            user.set({ isAuthenticated: false, isAdmin: false })
         },
     }
 }
@@ -80,7 +80,7 @@ export const account = {
         })
         const json = await response.json()
         if (response.ok) {
-            user.create( json, false )
+            user.create(json)
         }
         return json
     },
@@ -98,7 +98,7 @@ export const account = {
             method: 'DELETE',
         })
         if (response.status === 200) {
-            user.logout()
+            user.signOut()
             document.location.reload()
             return
         }
@@ -108,3 +108,12 @@ export const account = {
 
 export const manager = writable(false)
 export const page = writable('show')
+
+
+export type SignIn = {
+    login: string,
+    password: string,
+    termsOfUse: boolean,
+    sso?: string,
+    sig?: string,
+}

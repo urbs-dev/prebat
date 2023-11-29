@@ -8,7 +8,7 @@
 	<title>PREBAT</title>
 </svelte:head>
 
-{#await user.getAccount()}
+{#await user.getSession()}
 	<Loading bootstrap/>
 {:then}
 	<slot/>

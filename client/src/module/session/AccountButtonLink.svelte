@@ -1,5 +1,5 @@
 <script>
-    import { user } from '$module/session'
+    import { user } from './'
     import { getPath } from 'gros/page'
     export let role = 'USER'
     export let isExternal = false
@@ -9,7 +9,7 @@
 
 </script>
 
-{#if isExternal && $user.roles[role] || $user.roles.GLOBAL_ADMIN }
+{#if isExternal && $user.roles[role] }
     <a href="{href}" rel="external">
         <i class="micon">{icon}</i>
         <span>{name}</span>

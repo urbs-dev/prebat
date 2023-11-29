@@ -8,12 +8,12 @@ import OperationsIO from './OperationsIO'
 
 export default class OperationsController
 {
-    public async index({ user, response }: HttpContextContract)
+    public async index({ session, response }: HttpContextContract)
     {
         const operations = await OperationsModel.query()
             .preload('report')
             .preload('measures')
-            .whereIn('is_public', user ? [ true , false ] : [ true ])
+            .whereIn('is_public', session ? [ true , false ] : [ true ])
         return response.send(operations)
     }
 

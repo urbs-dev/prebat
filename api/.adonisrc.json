@@ -35,7 +35,8 @@
 		"@adonisjs/core",
 		"@adonisjs/lucid",
 		"adonis5-swagger",
-		"@adonisjs/view"
+		"@adonisjs/view",
+		"@adonisjs/redis"
 	],
 	"aceProviders": [
 		"@adonisjs/repl"

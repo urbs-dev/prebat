@@ -1,5 +1,5 @@
 <script>
-    import { user } from '$module/session'
+    import { user } from '../'
     import Nav from './Nav.svelte'
 </script>
 

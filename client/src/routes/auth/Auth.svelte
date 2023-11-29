@@ -8,7 +8,7 @@
 	let form = {login: '', password:'', termsOfUse: true}
 	let error = ''
 	const connect = async () => {
-		const response = await user.connect(form)
+		const response = await user.signIn(form)
 		error = response
 	}
 </script>

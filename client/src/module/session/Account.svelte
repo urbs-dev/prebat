@@ -9,7 +9,7 @@
 </script>
 
 {#if $manager}
-    <section transition:fly|global={ { x:384, duration: 200} } style:top={top} class="z-depth-2">
+    <section transition:fly={ { x:384, duration: 200} } style:top={top} class="z-depth-2">
         <header>
             Mon compte
             <button on:click={() => $manager = false}>

@@ -1,9 +1,3 @@
-/**
- * Config source: https://git.io/Jfefn
- *
- * Feel free to let us know via PR, if you find something broken in this config
- * file.
- */
 
 import { BodyParserConfig } from '@ioc:Adonis/Core/BodyParser'
 
@@ -25,7 +19,7 @@ const bodyParserConfig: BodyParserConfig = {
 
 	form: {
 		encoding: 'utf-8',
-		limit: '10mb',
+		limit: '60mb',
 		queryString: {},
 		convertEmptyStringsToNull: true,
 		types: [
@@ -35,7 +29,7 @@ const bodyParserConfig: BodyParserConfig = {
 	
 	raw: {
 		encoding: 'utf-8',
-		limit: '10mb',
+		limit: '60mb',
 		queryString: {},
 		types: [
 			'text/*',
@@ -48,7 +42,7 @@ const bodyParserConfig: BodyParserConfig = {
 		encoding: 'utf-8',
 		convertEmptyStringsToNull: true,
 		maxFields: 1000,
-		limit: '20mb',
+		limit: '60mb',
 		types: [
 			'multipart/form-data',
 		],

@@ -1,11 +1,11 @@
 <script>
-    import { page } from '$module/session'
+    import { page } from '../'
     import { fade } from 'svelte/transition'
     import { DateTime } from 'gros/date'
     export let user
 </script>
 
-<section in:fade|global={{ duration: 300 }}>
+<section in:fade={{ duration: 300 }}>
     <article>
         <i class="micon">person</i>
         <div>

@@ -29,6 +29,7 @@
             if (!response.ok) {
                 nok = true
                 const json = await response.json()
+                console.log(json)
             }
             else {
                 close()
@@ -45,7 +46,7 @@
 
     <section>
         {#if nok}
-            <div class="nok" on:click={() => nok = false} on:keypress transition:slide={{ duration: 200 }}>
+            <div class="nok" on:click={() => nok = false} on:keypress transition:slide|local={{ duration: 200 }}>
                 Un erreur de soumission est survenue.
             </div>
         {/if}

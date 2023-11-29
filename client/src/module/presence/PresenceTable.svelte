@@ -1,15 +1,26 @@
 <script>
-    import { presence } from '$module/socket'
+    import { presence, refresh, stopPropagation } from './'
+    import { onDestroy } from 'svelte'
     import { DataHandler, Datatable, Th, ThFilter } from 'gros/datatable'
+
+    refresh()
 
     const handler = new DataHandler($presence, { rowsPerPage: 50 })
     const rows = handler.getRows()
-    $: presence, handler.setRows($presence)
+    $: $presence, handler.setRows($presence ?? [])
+
+    const kill = async (token) => {
+        await fetch(`BASE_URL/resources.api/account/presence?token=${token}`, {
+            method: 'DELETE'
+        })
+        await refresh()
+    }
+    onDestroy(() => stopPropagation)
 </script>
 
 <section>
     <div class="flex alt-font">
-        <h2>Utilisateurs connectés ({$presence.length})</h2>
+        <h2>Sessions ouvertes ({$presence.length})</h2>
         <h1>INTERFACE ADMIN</h1>
     </div>
     <aside>
@@ -21,16 +32,14 @@
                     <Th {handler} orderBy="longin_count">Login count</Th>
                     <Th {handler} orderBy="group">Group</Th>
                     <Th {handler} orderBy="organization">Org.</Th>
-                    <Th {handler} orderBy="count">Nb. co</Th>
-                    <Th {handler} orderBy={row => JSON.stringify(row.info)}>Detail</Th>
+                    <th></th>
                 </tr>
                 <tr>
                     <ThFilter {handler} filterBy={row => row.firstname + row.name + row.email}/>
                     <ThFilter {handler} filterBy="longin_count"/>
                     <ThFilter {handler} filterBy="group"/>
                     <ThFilter {handler} filterBy="organization"/>
-                    <ThFilter {handler} filterBy="count"/>
-                    <ThFilter {handler} filterBy="info"/>   
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,18 +50,10 @@
                         <div>{user.email}</div>
                     </td>
                     <td>{user.login_count}</td>
-                    <td>{user.group ?? ''}</td>
+                    <td>{user.group?.name ?? ''}</td>
                     <td>{user.organization ?? ''}</td>
-                    <td>{user.count}</td>
                     <td>
-                        <ul>
-                            {#each user.info as detail}
-                                <li>
-                                    <strong>{detail.application}</strong>
-                                    <div>{detail.territory ?? ''}</div>
-                                </li>
-                            {/each}
-                        </ul>
+                        <button on:click={() => kill()}>X</button>
                     </td>
                 </tr>
                 {/each}
@@ -105,11 +106,6 @@
     }
     td div {
         color:#757575;
-    }
-    td li{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
     td strong{
         color:var(--ternary)
