@@ -5,6 +5,8 @@
 		"swagger": "cd ./api && node ace swagger:generate && cd ../",
 		"migration": "cd ./api && node ace migration:run && cd ../api",
 		"migration:undo": "cd ./api && node ace migration:rollback --batch=0 && cd ../api",
-		"seed": "cd ./api && node ace db:seed && cd ../api"
+		"seed": "cd ./api && node ace db:seed && cd ../api",
+		"deploy:test": "pm2 deploy testing",
+		"deploy:prod": "pm2 deploy production"
 	}
 }
