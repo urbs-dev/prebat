@@ -132,8 +132,9 @@
 
     }
     .presentation  span{
-        color: var(--primary-darken);   
+        color: #424242;   
         font-size: 24px;
+        font-weight: 600;
     }
     section 
     article {

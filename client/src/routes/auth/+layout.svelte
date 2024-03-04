@@ -4,7 +4,6 @@
         <slot/>
     </article>
     <div/>
-    <img alt="cerema-logo" src="STATIC_PATH/img/logo-cerema.svg"/>
 </section>
 
 

@@ -47,6 +47,7 @@
         font-family: 'Marianne';
         position:absolute;
         justify-content: space-between;
+        align-items: center;
         top:0;
         left:0;
         right:0;
@@ -57,7 +58,8 @@
         border-bottom: 1px solid #e0e0e0;
         justify-content: space-around;
         transition:all,0.2s;
-        -webkit-box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);box-shadow: 0 4px 5px 0 rgba(224,224,224, 0.14), 0 1px 10px 0 rgba(224,224,224, 0.12), 0 2px 4px -1px rgba(224,224,224, 0.3);
+        -webkit-box-shadow: 0 10px 9px rgba(0, 0, 0, 0.14);
+        box-shadow: 0 10px 9px rgba(0, 0, 0, 0.14);
     }
     header aside{
         justify-content:flex-end;

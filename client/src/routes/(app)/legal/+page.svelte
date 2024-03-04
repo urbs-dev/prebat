@@ -56,7 +56,7 @@
 <style>
     section {
         max-width: 800px;
-        margin: 120px auto;
+        margin: 180px auto;
     }
     h1 {
         display: inline;
