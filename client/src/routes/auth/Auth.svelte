@@ -16,8 +16,11 @@
 
 <article in:fade={{ duration:200 }}>
     <aside class="logo flex">
-        <img alt="imope-logo" src="STATIC_PATH/img/logo.svg"/>
-        <span class="alt-font">PREBAT</span>
+        <img alt="cerema-logo" src="STATIC_PATH/img/logo-cerema.svg"/>
+        <div>
+            <img alt="imope-logo" src="STATIC_PATH/img/logo.svg"/>
+            <span class="alt-font">PREBAT</span>
+        </div>
     </aside>
 
     <form>
@@ -56,11 +59,13 @@
     aside.logo {
         margin:40px auto 24px auto;
         justify-content: center;
+        flex-direction: column;
+        gap: 4em;
     }
     aside.logo img{
-        width: 64px;
         height: 64px;
     }
+    
     aside.logo span {
         color: var(--primary);
         font-size: 56px;
