@@ -358,7 +358,23 @@
         </div>   
 
     </section>
-    
+    <section>
+        <ul>
+            <li>
+                <a href="" > Plan du site </a>
+            </li>
+            <li>
+                <a href="/legal" > Mentions légales </a>
+            </li>
+            <li>
+                <a href="" > Contact </a>
+            </li>
+            <li>
+                <a href="" > Accessibilité: non conforme </a>
+            </li>
+        </ul>
+        <span>Copyright 2023 © - Cerema</span>
+    </section>
 </footer>
 
 
@@ -410,6 +426,17 @@
     }
     section:nth-child(3) svg, img {
         height: 10em;
+    }
+    section:nth-child(4){
+        display: flex;
+        flex-direction: column;
+        gap: 2em
+    }
+    section:nth-child(4) ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        gap: 5em;
     }
     aside {
         justify-content: start;
