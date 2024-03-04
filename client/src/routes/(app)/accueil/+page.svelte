@@ -17,23 +17,32 @@
 <div class="main">
 
 <section>
-    <article>
-        <!-- <h1 class="alt-font">Bienvenue sur la plateforme d'accès aux données de performance réelles des bâtiments résidentiels et tertiaires !</h1> -->
+    <article class="presentation">
+        <div>
+            <!-- <h1 class="alt-font">Bienvenue sur la plateforme d'accès aux données de performance réelles des bâtiments résidentiels et tertiaires !</h1> -->
 
-        <!-- <p class="alt-font" style:margin-top="40px">Tout acteur de la construction, rénovation, gestion ou exploitation de bâtiment, comme leurs occupants, utilisateurs ou usagers, trouveront ici les constats du Cerema de leur performance technique et d'usage, en conditions réelles de fonctionnement et d'occupation, et par contexte en type de bâtiment, nature de travaux, équipements, localisation...</p> -->
+            <!-- <p class="alt-font" style:margin-top="40px">Tout acteur de la construction, rénovation, gestion ou exploitation de bâtiment, comme leurs occupants, utilisateurs ou usagers, trouveront ici les constats du Cerema de leur performance technique et d'usage, en conditions réelles de fonctionnement et d'occupation, et par contexte en type de bâtiment, nature de travaux, équipements, localisation...</p> -->
 
-        <!-- <p>Ces constats sont disponibles aux trois niveaux de traitement suivants&nbsp;:</p> -->
+            <!-- <p>Ces constats sont disponibles aux trois niveaux de traitement suivants&nbsp;:</p> -->
 
-        <p>En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiments résidentiels ou tertiaires, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p>
+            <span>Données & performances énergétiques des bâtiments issues de PREBAT</span>
+            <p>
+                Retrouvez les constants techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation...
+            </p>
+            <!-- <p>En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiments résidentiels ou tertiaires, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p> -->
 
-        <ul>
-            <li>Données élémentaires par bâtiment&nbsp;: mesures, observations et enquêtes;</li>
-            <li>Résultats d'évaluation par bâtiment;</li>
-            <li>Enseignements transversaux tirés des résultats des évaluations, par typologies générales ou sélection plus fine.</li>
-        </ul>
+            <ul>
+                <li>Données élémentaires par bâtiment&nbsp;: mesures, observations et enquêtes;</li>
+                <li>Résultats d'évaluation par bâtiment;</li>
+                <li>Enseignements transversaux tirés des résultats des évaluations, par typologies générales ou sélection plus fine.</li>
+            </ul>
+        </div>
+
+        <div></div>
+
     </article>
 
-    <article>
+    <article class="content">
         <!-- <p style:margin-top="40px">Données&nbsp;: tous les postes de consommation, performances du bâti et des équipements techniques, pratiques des acteurs et usage, notamment confort thermique. Mesures pendant les deux premières années d'occupation.</p> -->
         <h1 class="alt-font">Énergie et confort thermique</h1>
 
@@ -101,7 +110,7 @@
 <style>
     div.main {
         position: absolute;
-        top: 64px;
+        top: 150px;
         left: 0;
         right: 0;
         bottom: 0;
@@ -109,21 +118,29 @@
         overflow-y: auto;
     }
     section {
-        max-width: 960px;
-        margin: 24px auto;
         padding-bottom: 96px;
-        border: 1px solid #eee;
-        border-radius: 8px;
-        padding: 0 40px 40px 40px;
         background: #fff;
     }
+    .presentation{
+        background-color: var(--primary-lighten-2);
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .presentation div {
+        padding: 40px;
 
+    }
+    .presentation  span{
+        color: var(--primary-darken);   
+        font-size: 24px;
+    }
     section 
     article {
         text-align: left;
-        margin: 40px auto;
+        padding: 0 40px 40px 40px;
     }
-    h1 {
+    .content h1 {
         display: inline;
         color: var(--primary-darken);
         background: linear-gradient(180deg,rgba(255,255,255,0) 75%, var(--primary-lighten-1) 15%);
