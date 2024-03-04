@@ -141,6 +141,9 @@
         text-align: left;
         padding: 0 40px 40px 40px;
     }
+    .content{
+        padding: 0 8em ;        
+    }
     .content h1 {
         display: inline;
         color: var(--primary-darken);
