@@ -19,17 +19,11 @@
 <section>
     <article class="presentation">
         <div>
-            <!-- <h1 class="alt-font">Bienvenue sur la plateforme d'accès aux données de performance réelles des bâtiments résidentiels et tertiaires !</h1> -->
-
-            <!-- <p class="alt-font" style:margin-top="40px">Tout acteur de la construction, rénovation, gestion ou exploitation de bâtiment, comme leurs occupants, utilisateurs ou usagers, trouveront ici les constats du Cerema de leur performance technique et d'usage, en conditions réelles de fonctionnement et d'occupation, et par contexte en type de bâtiment, nature de travaux, équipements, localisation...</p> -->
-
-            <!-- <p>Ces constats sont disponibles aux trois niveaux de traitement suivants&nbsp;:</p> -->
-
             <span>Données & performances énergétiques des bâtiments issues de PREBAT</span>
             <p>
-                Retrouvez les constants techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation...
+                Retrouvez les constants techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, 
+                en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitements suivants:
             </p>
-            <!-- <p>En tant qu'acteur de la construction, rénovation, gestion ou exploitation de bâtiments résidentiels ou tertiaires, comme en tant qu'occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne ici ses constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitement suivants&nbsp;:</p> -->
 
             <ul>
                 <li>Données élémentaires par bâtiment&nbsp;: mesures, observations et enquêtes;</li>
@@ -37,8 +31,7 @@
                 <li>Enseignements transversaux tirés des résultats des évaluations, par typologies générales ou sélection plus fine.</li>
             </ul>
         </div>
-
-        <div></div>
+        <img src="STATIC_PATH/img/presentation-logo.svg" alt="">
 
     </article>
 
@@ -125,16 +118,34 @@
         background-color: var(--primary-lighten-2);
         margin-bottom: 40px;
         display: flex;
+        font-size: 1.3em;
         justify-content: space-between;
+
     }
     .presentation div {
         padding: 40px;
+        font-weight: 800;
+        line-height: normal;
+        display: flex;
+        flex-direction: column;
+        gap: .8em;
 
     }
     .presentation  span{
         color: #424242;   
-        font-size: 24px;
-        font-weight: 600;
+        font-size: 2.8em;
+        font-weight: 800;
+    }
+    .presentation img{
+        width: 100%;
+        height: auto;
+    }
+    .presentation ul{
+        list-style-type: "+ ";
+        margin-left: 1em;
+    }
+    .presentation ul li{
+        margin: .8em 0;
     }
     section 
     article {
@@ -229,5 +240,17 @@
         font-size: 13px;
         width: 80%;
         padding-top: 4px;
+    }
+
+    @media ( min-width: 1921px ) {
+        .presentation img{
+            width: 50%;
+        }
+    }
+    @media ( max-width: 1080px ) {
+        .presentation {
+            display: flex;
+            flex-direction: column;
+        }
     }
 </style>
