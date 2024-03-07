@@ -3,6 +3,7 @@
     import Use from './Datatable_Filters_Use.svelte'
     import ContractType from './Datatable_Filters_ContractType.svelte'
     import Engineering from './Datatable_Filters_Engineering.svelte'
+    import Places from './Datatable_Filters_Places.svelte'
     export let handler
 </script>
 
@@ -14,10 +15,11 @@
 <section class="thin-scrollbar">
     <h1>Mesures par opération</h1>
     <span>⚠️ Les mesures ne sont pas disponibles pour toutes les opérations.</span>
-    <DeliveredOn {handler}/>
+    <Places {handler}/>
     <Use {handler}/>
     <Engineering {handler}/>
     <ContractType {handler}/>
+    <DeliveredOn {handler}/>
 </section>
 
 

@@ -24,7 +24,7 @@
 </script>
 
 
-<aside class="z-depth-1">
+<article class="z-depth-1">
     <h1 class="flex">
         {row.name.substring(0, 4)} 
         <button class="btn" on:click={extract}>
@@ -33,16 +33,22 @@
         </button>
     </h1>
     <Figures sites={row.sites} measuresCount={row.measures.length}/>
-    <ul>
-        <li class="alt-font flex"><span>Année de livraison :  </span><b>{stringify(row.report?.delivered_on)}</b></li>
-        <li class="alt-font flex"><span>Destination d'usage : </span><b>{stringify(row.report?.use)}</b></li>
-        <li class="alt-font flex"><span>Nature des travaux :  </span><b>{stringify(row.report?.engineering)}</b></li>
-        <li class="alt-font flex"><span>Maîtrise d'ouvrage :  </span><b>{stringify(row.report?.contract_type)}</b></li>
-    </ul>
-</aside>
+    <aside class="flex">
+        <ul>
+            <li class="alt-font flex"><span>Année de livraison :  </span><b>{stringify(row.report?.delivered_on)}</b></li>
+            <li class="alt-font flex"><span>Destination d'usage : </span><b>{stringify(row.report?.use)}</b></li>
+            <li class="alt-font flex"><span>Nature des travaux :  </span><b>{stringify(row.report?.engineering)}</b></li>
+            <li class="alt-font flex"><span>Maîtrise d'ouvrage :  </span><b>{stringify(row.report?.contract_type)}</b></li>
+        </ul>
+        <ul>
+            <li class="alt-font flex"><span>Département :         </span><b>{stringify(row.report?.place.context)}</b></li>
+            <li class="alt-font flex"><span>Zone climatique :     </span><b>{stringify(row.report?.climatic_zone)}</b></li>
+        </ul>
+    </aside>
+</article>
 
 <style>
-    aside {
+    article {
         margin: 16px 0;
         background: #fff;
         border: 1px solid #e0e0e0;
@@ -62,6 +68,12 @@
     button:hover {
         background: var(--primary-lighten-1);
         color: var(--primary-darken);
+    }
+    aside {
+        align-items: flex-start;
+    }
+    ul {
+        margin-right: 88px;
     }
     li {
         font-size: 16px;

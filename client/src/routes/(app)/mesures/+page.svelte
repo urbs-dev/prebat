@@ -5,6 +5,7 @@
     import Operation from './Operation.svelte'
     export let data
     const handler = new DataHandler(data.operations)
+    console.log(data.operations[0])
     const rows = handler.getRows()
 </script>
 
