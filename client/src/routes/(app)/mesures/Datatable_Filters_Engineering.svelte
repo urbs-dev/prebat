@@ -51,7 +51,7 @@
         border: 1px solid #e0e0e0;
     }
     h3 {
-        color: #616161;
+        color: #fff;
         margin: 24px 4px 4px 0;
         font-family: Roboto;
         font-size: 15px;
