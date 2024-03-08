@@ -364,7 +364,7 @@
                 <a href="" > Plan du site </a>
             </li>
             <li>
-                <a href="/legal" > Mentions légales </a>
+                <a href="legal" > Mentions légales </a>
             </li>
             <li>
                 <a href="" > Contact </a>
