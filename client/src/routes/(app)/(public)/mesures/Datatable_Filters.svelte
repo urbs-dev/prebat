@@ -31,7 +31,7 @@
         width: 320px;
         color: #fff;
         background: #002654;
-        height: calc(100vh - 80px - 64px);
+        height: calc(100vh - 80px - 134px);
         border-radius: 8px;
         padding: 16px;
         overflow-y: auto;
