@@ -1,6 +1,6 @@
 <script>
     import Nav from './Nav.svelte'
-    import Header from '$lib/components/Header.svelte'
+    import Header from './Header.svelte'
     import { goto } from '$app/navigation'
 	import { status, user } from '$module/session'
     import { getPath } from 'gros/page'
