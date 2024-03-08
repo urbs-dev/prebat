@@ -54,7 +54,7 @@
         height: 400px; */
     }
     h3 {
-        color: #616161;
+        color: #fff;
         margin: 24px 4px 4px 0;
         font-family: Roboto;
         font-size: 15px;
