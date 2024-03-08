@@ -29,7 +29,8 @@
         top: 40px;
         margin-top: 40px;
         width: 320px;
-        background: var(--primary-lighten-1);
+        color: #fff;
+        background: #002654;
         height: calc(100vh - 80px - 64px);
         border-radius: 8px;
         padding: 16px;

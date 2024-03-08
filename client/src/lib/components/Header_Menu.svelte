@@ -2,7 +2,6 @@
     import { getPath, url } from 'gros/page'
 </script>
 
-
 <ul class="flex">
 
     <a href="{getPath('/accueil')}">
@@ -22,7 +21,6 @@
     ul {
         margin-left: 24px;
         margin-right: 24px;
-        font-family: 'Lato';
         text-transform: uppercase;
         color: var(--primary-lighten);
     }
@@ -37,6 +35,5 @@
     }
     li.active {
         color: var(--primary-darken);
-        border-bottom: 3px solid var(--primary-lighten-3);
     }
 </style>
