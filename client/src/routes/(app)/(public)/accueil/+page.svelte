@@ -139,6 +139,7 @@
     .presentation img{
         width: 100%;
         height: auto;
+        max-height: 550px;
     }
     .presentation ul{
         list-style-type: "+ ";
@@ -242,15 +243,11 @@
         padding-top: 4px;
     }
 
-    @media ( min-width: 1921px ) {
-        .presentation img{
-            width: 50%;
-        }
-    }
-    @media ( max-width: 1080px ) {
+    @media ( max-width: 1280px ) {
         .presentation {
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
     }
 </style>
