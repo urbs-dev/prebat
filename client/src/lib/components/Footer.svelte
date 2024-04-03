@@ -72,7 +72,7 @@
         <aside class="flex">
             <span>
                 Le Cerema est un établissement public qui apporte son expertise pour la transition écologique,
-                l'adaptation au changement climatique et la cohésion des territoires. Grâce à ses 26 implantations partout
+                l'adaptation au changement climatique et la cohésion des territoires. Grâce à ses 26 sites partout
                 en France, il accompagne les collectivités dans la réalisation de leurs projets.
             </span>
             <ul class="flex">

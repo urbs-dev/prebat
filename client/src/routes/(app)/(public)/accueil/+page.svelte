@@ -21,7 +21,7 @@
         <div>
             <span>Données & performances énergétiques des bâtiments issues de PREBAT</span>
             <p>
-                Retrouvez les constants techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, 
+                Retrouvez les constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, 
                 en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitements suivants:
             </p>
 
