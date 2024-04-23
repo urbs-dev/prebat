@@ -7,6 +7,7 @@
     const handler = new DataHandler(data.operations)
     console.log(data.operations[0])
     const rows = handler.getRows()
+    
 </script>
 
 <section>
@@ -21,6 +22,7 @@
                 <tbody>
                     <tr>
                         <td>
+                            {JSON.stringify(handler.getRows())}
                             {#each $rows as row}
                                 <Operation {row}/>
                             {/each}
