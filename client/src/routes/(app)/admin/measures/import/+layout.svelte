@@ -39,7 +39,10 @@
     <form>
         <Dropzone bind:file/>
         <!-- <Dropzone bind:file/> -->
-
+        <span class="warning">
+            Veillez à anonymiser le nom de vos opérations
+            (Cellule D1 à XX du fichier .xls)
+        </span>
         {#if file}
         <aside>
             <button type="submit" class="btn" on:click={store}>
@@ -88,5 +91,13 @@
 
     button:hover {
         background: var(--primary-darken);
+    }
+
+    span.warning {
+        color: #424242;
+        font-size: 18px;
+        margin-top: 16px;
+        display: block;
+        
     }
 </style>
