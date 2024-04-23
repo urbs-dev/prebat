@@ -8,7 +8,7 @@
 <header class="z-depth-2 flex">
     <article class="flex">
         {#if $status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}
-        <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
+            <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
         {/if}
         <div class="flex actors" style:margin-left={$url.includes('admin') ? '256px' : '72px'} >
             <img style:height="140px" src="STATIC_PATH/img/logo-rf.svg" alt="logo République Française">
@@ -25,7 +25,7 @@
     </article>
 
     <aside class="flex">
-        <Menu/>
+        <Menu isAuthenticated={$status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}/>
         {#if $status.isAuthenticated}
             <AccountButton height={"64px"}>
                 <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>

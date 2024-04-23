@@ -25,7 +25,7 @@
     </article>
 
     <aside class="flex">
-        <Menu/>
+        <Menu isAuthenticated={$status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}/>
         {#if $status.isAuthenticated}
             <AccountButton height={"64px"}>
                 <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>

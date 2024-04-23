@@ -1,5 +1,6 @@
 <script>
     import { getPath, url } from 'gros/page'
+    export let isAuthenticated = false
 </script>
 
 <ul class="flex">
@@ -15,6 +16,13 @@
             Mesures
         </li>
     </a>
+    {#if isAuthenticated}
+        <a href="{getPath('/admin/measures/import')}">
+            <li class:active={$url.indexOf('admin/measures/import') > -1}>
+                Nouvelle opération
+            </li>
+        </a>
+    {/if}
 </ul>
 
 <style>
