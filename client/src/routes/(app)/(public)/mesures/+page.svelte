@@ -4,7 +4,7 @@
     import Search from './Search.svelte'
     import Operation from './Operation.svelte'
     export let data
-    const handler = new DataHandler(data.operations)
+    const handler = new DataHandler(data.operations, {rowsPerPage: 10})
     console.log(data.operations[0])
     const rows = handler.getRows()
     
@@ -22,10 +22,9 @@
                 <tbody>
                     <tr>
                         <td>
-                            {JSON.stringify(handler.getRows())}
                             {#each $rows as row}
                                 <Operation {row}/>
-                            {/each}
+                            {/each} 
                         </td>
                     </tr>
                 </tbody>
@@ -39,7 +38,7 @@
     section{
         position:absolute;
         z-index:2;
-        top:calc(146px);left:0;right:0;bottom:0;
+        top:calc(116px);left:0;right:0;bottom:0;
         overflow-y:auto;
         background-color:#fff;
     }

@@ -1,11 +1,17 @@
 <script lang="ts">
     import type { ComponentType } from 'svelte'
-    import type {  DataHandler  } from 'gros/datatable'
+    import type {  DataHandler } from 'gros/datatable'
+    import { Pagination } from 'gros/datatable'
     import Filters from './Datatable_Filters.svelte'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
+
+
+    export let rowCount       = true
+    export let selectedCount  = false
+    export let pagination     = true
 
     export let header: ComponentType[] = []
     export let footer: ComponentType[] = []
@@ -34,12 +40,13 @@
             <Filters {handler}/>
             <slot />
         </aside>
+        
     </article>
 
-    <footer class:container={hasFooter}>
-        {#each footer as component}
-            <svelte:component this={component} {handler} {small} {element}/>
-        {/each}
+    <footer class:container={rowCount || pagination}>
+        {#if pagination}
+            <Pagination {handler} small={clientWidth < 600} />
+        {/if}
     </footer>
 
 </section>
@@ -82,7 +89,7 @@
         min-height: 4px;
         padding: 0 16px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
     }
     footer {
