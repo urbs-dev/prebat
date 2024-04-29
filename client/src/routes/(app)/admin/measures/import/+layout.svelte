@@ -45,7 +45,7 @@
                 (Cellule D1 à XX du fichier .xls)
             </span>
 
-            <a class="file" href="/file.xls" download>
+            <a class="file" href="/Cerema-TAB-PREBAT_MESURES_VIERGE.xlsx" download>
                 <i class="micon">file_download</i>
                 <span>
                     Télécharger le fichier vierge de mesure
