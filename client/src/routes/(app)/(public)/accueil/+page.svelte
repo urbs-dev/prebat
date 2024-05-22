@@ -249,5 +249,17 @@
             flex-direction: column;
             width: 100%;
         }
+        .content {
+            padding: 0 1em;
+        }
+        div.h3 button.btn {
+            margin: 12px 0 12px 12px;
+            padding: 2px 8px 2px 0;
+        }
+        div.h3 button.btn span{
+            white-space: wrap;
+            text-align: start;
+            max-width: 30em;
+        }
     }
 </style>

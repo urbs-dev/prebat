@@ -3,11 +3,13 @@
     import type {  DataHandler } from 'gros/datatable'
     import { Pagination } from 'gros/datatable'
     import Filters from './Datatable_Filters.svelte'
+    import Mobilfilter from './Datatable_Filters_Mobil.svelte'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
-
+    export let isMobile = false
+    export let showMobileFilters = false
 
     export let rowCount       = true
     export let selectedCount  = false
@@ -25,6 +27,7 @@
     handler.on('change', () => {
         if (element) element.scrollTop = 0
     })
+
 </script>
 
 <section bind:clientWidth class={$$props.class ?? ''}>
@@ -37,7 +40,8 @@
 
     <article bind:this={element}>
         <aside class="flex">
-            <Filters {handler}/>
+            <Filters {handler} bind:isMobile/>
+            <Mobilfilter bind:handler bind:showMobileFilters bind:isMobile/>
             <slot />
         </aside>
         

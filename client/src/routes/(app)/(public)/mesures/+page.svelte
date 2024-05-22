@@ -7,16 +7,21 @@
     const handler = new DataHandler(data.operations, {rowsPerPage: 10})
     console.log(data.operations[0])
     const rows = handler.getRows()
-    
+
+    let showMobileFilters = false
+    let isMobile = false
+    let innerWidth
+    $: innerWidth < 950 ? isMobile = true : isMobile = false
 </script>
+<svelte:window bind:innerWidth/>
 
 <section>
     {#if data.operations.length > 0}
-        <Datatable {handler}>
+        <Datatable {handler} bind:isMobile bind:showMobileFilters>
             <table>
                 <thead>
                     <tr>
-                        <th><Search {handler}/></th>
+                        <th><Search {handler} {isMobile} bind:showMobileFilters/></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +50,7 @@
     thead {
         z-index: 2;
         background: #fff;
+        transition: all 0.2s;
         /* background: rgba(255,255,255,0.5);
         backdrop-filter: blur(4px); */
     }
