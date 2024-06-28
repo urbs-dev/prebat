@@ -18,7 +18,7 @@ const createUser = () => {
             document.cookie = `token=${session.token};path=/;`
         },
         signIn: async (form: SignIn) => {
-            const response = await fetch(`BASE_URL/resources.api/account/sign-in`, {
+            const response = await fetch(`BASE_URL/resources.api/account/signin`, {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
                 body: JSON.stringify(form)
