@@ -12,50 +12,24 @@ export default class MeasuresModel extends BaseModel
 	@column({ isPrimary: true })
 	public id: string
 
-	@column()
-	public columname: string
+	@column() public columname: string
+	@column() public type: string
+	@column() public title: string
+	@column() public parameters: string
+	@column() public typology: string
+	@column() public statement: string
+	@column() public unit: string
+	@column() public sensor: string
+	@column() public address: string
+	@column() public x: number
 
-	@column()
-	public type: string
+	// ajouter les entrées du formulaire
 
-	@column()
-	public title: string
-
-	@column()
-	public parameters: string
-
-	@column()
-	public typology: string
-
-	@column()
-	public statement: string
-
-	@column()
-	public unit: string
-
-	@column()
-	public sensor: string
-
-	@column()
-	public address: string
-
-	@column()
-	public x: number
-
-	@column()
-	public operation_id: string | null
-
-	@column()
-	public building_id: string | null
-
-	@column()
-	public zone_id: string | null
-
-	@column()
-	public room_id: string | null
-
-	@column()
-	public parent_id: string | null
+	@column() public operation_id: string | null
+	@column() public building_id: string | null
+	@column() public zone_id: string | null
+	@column() public room_id: string | null
+	@column() public parent_id: string | null
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime

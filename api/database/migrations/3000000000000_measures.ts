@@ -16,6 +16,9 @@ export default class Measures extends BaseSchema {
 			column.string   ( 'sensor'			)
 			column.string  	( 'address'        	)
 			column.integer 	( 'x'        		)
+
+			// ajouter les colonnes pour le formuaire
+
 			column.uuid		( 'operation_id'	)
 			column.uuid		( 'building_id'		)
 			column.uuid		( 'zone_id'			)
