@@ -21,7 +21,7 @@
         <div>
             <span>Données & performances énergétiques des bâtiments issues de PREBAT</span>
             <p>
-                Retrouvez les constants techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, 
+                Retrouvez les constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, 
                 en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitements suivants:
             </p>
 
@@ -57,37 +57,43 @@
                 <img style="width:650px;" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
                 <span>Consommations totales en énergie primaire par m² SHON et par an</span>
             </div>
-            <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-3">
-                <button class="btn" type="button">
-                    <i class="micon">exit_to_app</i>
-                    <span>Rapport de capitalisation</span>
-                </button>
-            </a>
-            <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-2">
-                <button class="btn" type="button">
-                    <i class="micon">exit_to_app</i>
-                    <span>Synthèse</span>
-                </button>
-            </a>
-            <a href="https://www.cerema.fr/fr/centre-ressources/boutique/enseignements-batiments-performants-energie">
-                <button class="btn" type="button">
-                    <i class="micon">exit_to_app</i>
-                    <span>Agir en conséquence</span>
-                </button>
-            </a>
-
-            <button class="btn" type="button" on:click={download}>
-                <i class="micon">file_download</i>
-                <span>RESULTATS D'EVALUATION : télécharger les données pour toutes les opérations</span>
-            </button>
+            <ul>
+                <li>
+                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-3">
+                        <i class="micon">exit_to_app</i>
+                        <span>Rapport de capitalisation</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-2">
+                        <i class="micon">exit_to_app</i>
+                        <span>Synthèse</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/enseignements-batiments-performants-energie">
+                        <i class="micon">exit_to_app</i>
+                        <span>Agir en conséquence</span>
+                    </a>
+                </li>
+                <li>
+                    <button class="btn" type="button" on:click={download}>
+                        <i class="micon">file_download</i>
+                        <span>RESULTATS D'EVALUATION : télécharger les données pour toutes les opérations</span>
+                    </button>
+                </li>
+        </ul>
 
             <h3 style:margin-top="40px"><span>2.</span>Données par opération</h3>
-            <a href="{getPath('/mesures')}">
-                <button class="btn" type="button">
-                    <i class="micon">file_download</i>
-                    <span>MESURES : sélectionner et télécharger les données par opération</span>
-                </button>
-            </a>
+            <ul>
+
+                <li>
+                    <a href="{getPath('/mesures')}">
+                        <i class="micon">file_download</i>
+                        <span>MESURES : sélectionner et télécharger les données par opération</span>
+                    </a>
+                </li>
+            </ul>
 
         </div>
 
@@ -139,6 +145,7 @@
     .presentation img{
         width: 100%;
         height: auto;
+        max-height: 550px;
     }
     .presentation ul{
         list-style-type: "+ ";
@@ -183,24 +190,10 @@
         color: #616161;
         line-height: 20px;
     }
-    ul {
-        list-style-type: decimal;
-        margin-left: 32px;
-    }
-    ul li {
-        margin: 4px 0;
-    }
-    /* .divider {
-        height: 400px;
-        background-image: url('STATIC_PATH/img/login-background.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        opacity: 0.5;
-    } */
     div.h3 {
         margin-left: 24px;
     }
-    div.h3 button.btn {
+    div.h3 li{
         margin: 12px 0 12px 24px;
         padding: 2px 8px 2px 4px;
         background: #f5f5f5;
@@ -210,18 +203,37 @@
         text-transform: none;
         letter-spacing: 0;
         font-size: 16px;
+        width: fit-content;
     }
-    div.h3 button.btn:hover {
+    div.h3 li span{
+        letter-spacing: 0;
+        text-transform: none;
+        color: black;
+        font-size: 16px;
+    }
+    div.h3 li button, div.h3 li a {
+        display: flex;
+        align-items: start;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    div.h3 li button:hover {
+        background: none;
+    }
+
+    div.h3 li:hover {
         background: var(--primary-lighten-1);
         border: 1px solid var(--primary-lighten-2);
     }
-    div.h3 button.btn:hover span {
+    div.h3 li:hover span {
         text-decoration: underline;
     }
-    div.h3 button.btn:hover span {
+    div.h3 li:hover span {
         text-decoration: underline;
     }
-    div.h3 button.btn i {
+    div.h3 li i {
         color: var(--secondary);
         font-size: 20px;
         margin-right: 8px;
@@ -242,15 +254,24 @@
         padding-top: 4px;
     }
 
-    @media ( min-width: 1921px ) {
-        .presentation img{
-            width: 50%;
-        }
-    }
-    @media ( max-width: 1080px ) {
+    @media ( max-width: 1280px ) {
         .presentation {
             display: flex;
             flex-direction: column;
+            width: 100%;
+        }
+        .content {
+            padding: 0 1em;
+        }
+        div.h3 li {
+            margin: 12px 0 12px 12px;
+            padding: 2px 8px 2px 0;
+        }
+        div.h3 li span{
+            text-overflow: ellipsis;
+            white-space: wrap;
+            text-align: st;
+            max-width: 30em;
         }
     }
 </style>

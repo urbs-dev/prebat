@@ -1,11 +1,19 @@
 <script lang="ts">
     import type { ComponentType } from 'svelte'
-    import type {  DataHandler  } from 'gros/datatable'
+    import type {  DataHandler } from 'gros/datatable'
+    import { Pagination } from 'gros/datatable'
     import Filters from './Datatable_Filters.svelte'
+    import Mobilfilter from './Datatable_Filters_Mobil.svelte'
 
     type T = $$Generic<Row>
 
     export let handler: DataHandler<T>
+    export let isMobile = false
+    export let showMobileFilters = false
+
+    export let rowCount       = true
+    export let selectedCount  = false
+    export let pagination     = true
 
     export let header: ComponentType[] = []
     export let footer: ComponentType[] = []
@@ -19,6 +27,7 @@
     handler.on('change', () => {
         if (element) element.scrollTop = 0
     })
+
 </script>
 
 <section bind:clientWidth class={$$props.class ?? ''}>
@@ -31,15 +40,17 @@
 
     <article bind:this={element}>
         <aside class="flex">
-            <Filters {handler}/>
+            <Filters {handler} bind:isMobile/>
+            <Mobilfilter bind:handler bind:showMobileFilters bind:isMobile/>
             <slot />
         </aside>
+        
     </article>
 
-    <footer class:container={hasFooter}>
-        {#each footer as component}
-            <svelte:component this={component} {handler} {small} {element}/>
-        {/each}
+    <footer class:container={rowCount || pagination}>
+        {#if pagination}
+            <Pagination {handler} small={clientWidth < 600} />
+        {/if}
     </footer>
 
 </section>
@@ -82,7 +93,7 @@
         min-height: 4px;
         padding: 0 16px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
     }
     footer {

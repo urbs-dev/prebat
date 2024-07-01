@@ -18,7 +18,7 @@ const createUser = () => {
             document.cookie = `token=${session.token};path=/;`
         },
         signIn: async (form: SignIn) => {
-            const response = await fetch(`BASE_URL/resources.api/account/sign-in`, {
+            const response = await fetch(`BASE_URL/resources.api/account/signin`, {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
                 body: JSON.stringify(form)
@@ -37,7 +37,7 @@ const createUser = () => {
             return json
         },
         signUp: async (form) => {
-            const response = await fetch(`BASE_URL/resources.api/account/sign-up`, {
+            const response = await fetch(`BASE_URL/resources.api/account/signup`, {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
                 body: JSON.stringify(form)
@@ -46,7 +46,7 @@ const createUser = () => {
             return json
         },
         signOut: async () => {
-            const response = await fetch(`BASE_URL/resources.api/account/sign-out`, {
+            const response = await fetch(`BASE_URL/resources.api/account/signout`, {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' },
             })

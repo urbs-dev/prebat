@@ -3,16 +3,21 @@
     import Tools from './Header_Tools.svelte'
     import { getPath, url } from 'gros/page'
     import Menu from './Header_Menu.svelte'
+    import MobilNav from './Mobil_Nav.svelte';
+
+    $: innerWidth = 0
+
 </script>
+<svelte:window bind:innerWidth/>
 
 <header class="z-depth-2 flex">
     <article class="flex">
-        {#if $status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}
-        <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
+        {#if $status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN) && innerWidth > 900}
+            <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
         {/if}
-        <div class="flex actors" style:margin-left={$url.includes('admin') ? '256px' : '72px'} >
-            <img style:height="140px" src="STATIC_PATH/img/logo-rf.svg" alt="logo République Française">
-            <img style:height="110px" src="STATIC_PATH/img/logo-cerema-vert.png" alt="logo CEREMA">
+        <div class="flex actors">
+            <img src="STATIC_PATH/img/logo-rf.svg" alt="logo République Française">
+            <img src="STATIC_PATH/img/logo-cerema-vert.png" alt="logo CEREMA">
         </div>
         <div class="divider"></div>
         <a href="{ getPath('/accueil')}">
@@ -24,20 +29,24 @@
         </a>
     </article>
 
-    <aside class="flex">
-        <Menu/>
-        {#if $status.isAuthenticated}
-            <AccountButton height={"64px"}>
-                <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>
-            </AccountButton>
-            <Tools/>
-        {:else}
-            <a href="{getPath('/auth')}" class="btn">
-                Connexion
-            </a>
-        {/if}
-        <!-- <img src="STATIC_PATH/img/logo-ademe.svg" alt="logo ADEME"/> -->
-    </aside>
+    {#if innerWidth > 900}
+        <aside class="flex">
+            <Menu isAuthenticated={$status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}/>
+            {#if $status.isAuthenticated}
+                <AccountButton height={"64px"}>
+                    <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>
+                </AccountButton>
+                <Tools/>
+            {:else}
+                <a href="{getPath('/auth')}" class="btn">
+                    Connexion
+                </a>
+            {/if}
+            <!-- <img src="STATIC_PATH/img/logo-ademe.svg" alt="logo ADEME"/> -->
+        </aside>
+    {:else}
+        <MobilNav isAuthenticated={$status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}/>
+    {/if}
 </header>
 
 <Account top={"64px"}/>
@@ -121,11 +130,26 @@
         transition: background, 0.2s;
     }
     a.btn:hover{
-        background: var(--secondary-lighten);
+        background: var(--secondary-darken);
     }
     div.actors {
         padding-right: 24px;
     }
+    .actors img{
+        width: 100%;
+        min-width: 80px;
+        max-height: 140px;
+        margin-right: 8px;
+    }
+    /* @media(max-width: 768px){
+        header div.logo{
+            padding-left: 0;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    } */
+
     div.divider {
         height: 40px;
         border-right: 1px solid #9e9e9e;

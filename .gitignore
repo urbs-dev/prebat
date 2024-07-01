@@ -3,7 +3,6 @@ build
 .vscode
 .DS_Store
 package-lock.json
-*.xlsx
 *.zip
 .~lock.*
 swagger.json
