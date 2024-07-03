@@ -50,7 +50,7 @@
                             <td>{measure.sensor}</td>
                             <td>{measure.statement}</td>
                             <td>{measure.unit}</td>
-                            <td><button class="edit" on:click={() => modal.open(Edit, measure)}> Editer </button></td>
+                            <td><button class="btn" on:click={() => modal.open(Edit, measure)}> éditer </button></td>
                         </tr>
                     {/each}
                 </tbody>
@@ -112,16 +112,13 @@
     tbody td {
         border-bottom: 1px solid #eee;
     }
-    .edit{
-        background: #eee;
-        color: #2F2F2F;
-        font-size: 14px;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
+    .btn{
+        color: var(--primary-darken);
+        background: var(--primary-lighten-1);
+        border: 1px solid #e0e0e0;
+        margin: 4px 0 4px 24px;
     }
-    .edit:hover{
+    .btn:hover{
         background: #ddd;
     }
 

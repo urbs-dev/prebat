@@ -27,23 +27,18 @@
         invalidateAll()
         loading.stop()
     }
-    let showUsage = true
-    let showSensor = true
-    let showSystem = true
-    let showPrecision = true
-    let showCalculation = true
 </script>
 
 <Modal title="Modifier les mesures" icon="edit">
     <article>
-        <!-- Usage -->
-        <section> 
-            <button class="category" on:click={() => {showUsage = !showUsage}} class:active={showUsage}>
-                <h2>Usage</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"/></svg>
-            </button>
-            {#if showUsage}
-                <div transition:slide>
+        <aside>
+            <!-- Usage -->
+            <section> 
+                <h2 class="flex">
+                    <i class="micon">chevron_right</i>
+                    <span>Usage</span>
+                </h2>
+                <div>
                     <Select 
                         label="Usage"
                         bind:value={form.parameters}
@@ -59,16 +54,14 @@
                         />
                     {/if}
                 </div>
-            {/if}
-        </section>
-        <!-- Sensor -->
-         <section>
-            <button class="category" on:click={() => {showSensor = !showSensor}} class:active={showSensor}>
-                <h2>Capteur</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"/></svg>
-            </button>
-            {#if showSensor}
-                <div transition:slide>
+            </section>
+            <!-- Sensor -->
+            <section>
+                <h2 class="flex">
+                    <i class="micon">chevron_right</i>
+                    <span>Capteur</span>
+                </h2>
+                <div>
                     <Select
                         label="Capteur"
                         bind:value={form.sensor}
@@ -84,16 +77,14 @@
                         />
                     {/if}
                 </div>
-            {/if}
-        </section> 
-        <!-- System -->
-        <section>
-            <button class="category" on:click={() => {showSystem = !showSystem}} class:active={showSystem}>
-                <h2>Equipement</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"/></svg>
-            </button>
-            {#if showSystem}
-                <div transition:slide>
+            </section> 
+            <!-- System -->
+            <section>
+                <h2 class="flex">
+                    <i class="micon">chevron_right</i>
+                    <span>Equipement</span>
+                </h2>
+                <div>
                 <Select 
                     label="Catégorie d'équipement"
                     bind:value={form.system_category}
@@ -109,16 +100,34 @@
                     />
                 {/if}
                 </div>
-            {/if}
-        </section>
-        <!-- Precision -->
-        <section> 
-            <button class="category" on:click={() => {showPrecision = !showPrecision}} class:active={showPrecision}>
-                <h2>Précision</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"/></svg>
-            </button>
-            {#if showPrecision}
-                <div transition:slide>
+            </section>
+            <!-- Calculation -->
+            <section>
+                <h2 class="flex">
+                    <i class="micon">chevron_right</i>
+                    <span>Calcul</span>
+                </h2>
+                <div >
+                    <Checkbox bind:checked={form.is_computed} size={20} margin={[0,8,0,0]}>
+                        PM issue du calcul
+                    </Checkbox>
+
+                    {#if form?.is_computed}
+                        <span transition:slide>
+                            <Input label="Formule de calcul" bind:value={form.calculation}/>
+                        </span>
+                    {/if}
+                </div>
+            </section>
+        </aside>
+        <aside>
+            <!-- Precision -->
+            <section> 
+                <h2 class="flex">
+                    <i class="micon">chevron_right</i>
+                    <span>Précision</span>
+                </h2>
+                <div>
                     <h3>Domaine de mesure :</h3>
                     <span>
 
@@ -170,28 +179,10 @@
                         bind:value={form.comment}
                     />
                 </div>
-            {/if}
-        </section>
-        <section>
-            <button class="category" on:click={() => {showCalculation = !showCalculation}} class:active={showCalculation}>
-                <h2>Calcul</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"/></svg>
-            </button>
-            {#if showCalculation}
-                <div transition:slide>
-                    <Checkbox bind:checked={form.is_computed} size={20} margin={[0,8,0,0]}>
-                        PM issue du calcul
-                    </Checkbox>
+            </section>
+        </aside>
 
-                    {#if form?.is_computed}
-                        <Input 
-                            label="Formule de calcul"
-                            bind:value={form.calculation}
-                        />
-                    {/if}
-                </div>
-            {/if}
-        </section>
+     
     </article>
 
     <svelte:fragment slot="footer">
@@ -203,52 +194,41 @@
 <style>
     article {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 16px;
         padding: 16px;
         overflow: auto;
         max-height: 70vh;
     }
+    aside{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 50%;
+    }
     section{
         display: flex;
         flex-direction: column;
-        gap: 4px;
         color: var(--primary-darken);
+        min-width: 380px;
     }
-    button.category {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        background: #efefef;
-        border: none;
-        cursor: pointer;
-        padding: 4px 8px;
-        border-radius: 4px;
-        min-width: 420px;
-        color: var(--primary);
-    }
-    button svg{
-        width: 18px;
-        height: 18px;
-        opacity: 0.8;
-        transition: all 0.3s;
-    }
-    button.active svg{
-        transform: rotate(90deg);
-    }
-
+    
     h2 {
-        font-weight: bold;
-        font-size: 18px;
-        margin: 0;
+        color: var(--primary);
+        font-size: 16px;
+        margin: 0 0 4px 0;
+        cursor: default;
     }
     h3 {
-        font-size: 16px;
+        color: var(--primary);
+        font-size: 14px;
         margin: 0;
+        cursor: default;
     }
     div {
-        padding: 0 16px ;
+        border: 1px solid #e0e0e0;
+        border-radius: 0.4rem;
+        padding: 8px 16px ;
     }
     span{
         display: flex;
