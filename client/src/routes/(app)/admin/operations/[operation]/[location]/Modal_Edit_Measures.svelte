@@ -29,7 +29,7 @@
     let a 
 </script>
 
-<Modal title="Modifier les généralités" icon="edit">
+<Modal title="Modifier les mesures" icon="edit">
     <article>
         <!-- Usage -->
         <section> 
