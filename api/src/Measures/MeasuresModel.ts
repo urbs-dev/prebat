@@ -51,6 +51,7 @@ export default class MeasuresModel extends BaseModel
 	@column() public parent_id:		string | null
 	
 	@column.dateTime({ columnName: 'created_at', autoCreate: true }) 
+
 	public createdAt: DateTime
 
 	@column.dateTime({ columnName: 'updated_at', autoCreate: true, autoUpdate: true }) 
