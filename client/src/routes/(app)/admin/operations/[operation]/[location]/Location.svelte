@@ -2,6 +2,8 @@
     import { locations as icon } from '$lib/svg'
     import { slide } from 'svelte/transition'
     import Report from './Location_Report.svelte'
+    import Edit from './Modal_Edit_Measures.svelte'
+    import { modal } from 'gros/modal';
     export let operation
     export let location
     let { name, path, measures, nature } = location
@@ -38,6 +40,7 @@
                         <th>Capteur</th>
                         <th>Point de mesure</th>
                         <th>Unité</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +50,7 @@
                             <td>{measure.sensor}</td>
                             <td>{measure.statement}</td>
                             <td>{measure.unit}</td>
+                            <td><button class="btn" on:click={() => modal.open(Edit, measure)}> éditer </button></td>
                         </tr>
                     {/each}
                 </tbody>
@@ -107,6 +111,15 @@
     }
     tbody td {
         border-bottom: 1px solid #eee;
+    }
+    .btn{
+        color: var(--primary-darken);
+        background: var(--primary-lighten-1);
+        border: 1px solid #e0e0e0;
+        margin: 4px 0 4px 24px;
+    }
+    .btn:hover{
+        background: #ddd;
     }
 
 </style>
