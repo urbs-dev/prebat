@@ -293,7 +293,12 @@ export const locationSystem = [
 ]
 
 export const getValues = (array: Object[], label: string) => {
-    return array[array.indexOf(array.find(a => a.label === label))].values
+    let object = array[array.indexOf(array.find(a => a.label === label))]
+
+    if ( object?.values ) {
+        return object.values
+    }
+    return []
 }
 
 export const sensor = [
@@ -311,7 +316,7 @@ export const sensor = [
         ]
     },
     {
-        label: 'calorique',
+        label: 'Compteur de calories',
         values: [
             'Index compteur calories',
             'Consommation compteur calories',
@@ -323,7 +328,7 @@ export const sensor = [
         ]
     },
     {
-        label: 'volumétrique gaz',
+        label: 'Compteur volumétrique gaz',
         values: [
             'Index gaz',
             'Volume gaz',
@@ -333,7 +338,7 @@ export const sensor = [
         ]
     },
     {
-        label: 'volumétrique fioul',
+        label: 'Compteur volumétrique fioul',
         values: [
             'Index fioul',
             'Volume fioul',
@@ -343,7 +348,7 @@ export const sensor = [
         ]
     },
     {
-        label: 'volumétrique eau',
+        label: 'Compteur volumétrique eau',
         values: [
             'Index eau',
             'Volume eau',
