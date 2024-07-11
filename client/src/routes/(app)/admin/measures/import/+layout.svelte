@@ -7,8 +7,8 @@
     import { Tooltip } from 'gros/tooltip'
 
     let file
-    let name = "Ec.dep34.0001"
-    let step = 3 // 1- button, 2- naming, 3- import 
+    let name 
+    let step = 1 // 1- button, 2- naming, 3- import 
 
     const evaluate = async () => {
         if (!file) return
