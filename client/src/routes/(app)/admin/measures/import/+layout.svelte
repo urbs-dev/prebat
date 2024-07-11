@@ -4,8 +4,11 @@
     import { Upload } from './upload'
     import Dropzone from './Dropzone.svelte'
     import Naming from './naming.svelte';
+    import { Tooltip } from 'gros/tooltip'
 
     let file
+    let name = "Ec.dep34.0001"
+    let step = 3 // 1- button, 2- naming, 3- import 
 
     const evaluate = async () => {
         if (!file) return
@@ -34,41 +37,72 @@
         await upload.sites()
         await upload.measures()
     }
+    const copy = () => {
+        navigator.clipboard.writeText(name)
+    }
 </script>
 
 <section>
     <form>
-        <Dropzone bind:file/>
-        <!-- <Dropzone bind:file/> -->
-        <div class="info">
-            <span class="warning">
-                Veillez à anonymiser le nom de vos opérations
-                (Cellule D1 à XX du fichier .xls)
-            </span>
-
-            <a class="file" href="/Cerema-TAB-PREBAT_MESURES_VIERGE.xlsx" download>
-                <i class="micon">file_download</i>
-                <span>
-                    Télécharger le fichier vierge de mesure
-                </span>
-            </a>
-        </div>
-        <Naming/>
-
-        {#if file}
-        <aside>
-            <button type="submit" class="btn" on:click={store}>
-                <i class="micon">file_upload</i>
-                importer
+        {#if step != 1}
+            <button class="back" on:click={()=> step--}>
+                <i class="micon">arrow_back</i>
             </button>
-
-            <button type="submit" class="btn" on:click={evaluate}>
-                <i class="micon">autorenew</i>
-                évaluer
+        {/if}
+        {#if step === 1}
+            <button class="btn" on:click={()=> step++}>
+                <i class="micon">add
+                </i>
+                créer une opération
             </button>
-        </aside>
+        {:else if step === 2}
+            <Naming bind:name bind:step/>
+        {:else if step === 3}
+            <div class="import">
+                    <Dropzone bind:file/>
+                    <!-- <Dropzone bind:file/> -->
+                    <div class="info">
+                        <span class="warning">
+                            {#if name}
+                                Veuillez anonymiser le fichier de donnée avec le nom suivant
+                                avant de l'importer en base:
+                                <button on:click={() => copy()} class='tooltip'>
+                                    {name}
+                                    <Tooltip top content="Cliquez pour copier"/>
+                                </button>
+                            {:else}
+                                Veuillez anonymiser le fichier de donnée avant de l'importer en base.
+                            {/if}
+                            <p>
+                                La procédure est décrite dans la notice du fichier.
+                            </p>
+                        </span>
+
+                        <a class="file" href="/Cerema-TAB-PREBAT_MESURES_VIERGE.xlsx" download>
+                            <i class="micon">file_download</i>
+                            <span>
+                                Télécharger le fichier vierge de mesure
+                            </span>
+                        </a>
+                    </div>
+
+                    {#if file}
+                    <aside>
+                        <button type="submit" class="btn" on:click={store}>
+                            <i class="micon">file_upload</i>
+                            importer
+                        </button>
+
+                        <button type="submit" class="btn" on:click={evaluate}>
+                            <i class="micon">autorenew</i>
+                            évaluer
+                        </button>
+                    </aside>
+                    {/if}
+            </div>
         {/if}
     </form>
+
 </section>
 
 <slot/>
@@ -88,7 +122,7 @@
         margin-top: 40px;
         justify-content: center;
     }
-    button {
+    .btn {
         width: 136px;
         padding: 12px;
         background: var(--primary);
@@ -97,11 +131,11 @@
         width: 100%;
         margin-bottom: 24px;
     }
-    button i {
+    .btn i {
         margin-right: 8px;
     }
 
-    button:hover {
+    .btn:hover {
         background: var(--primary-darken);
     }
     div.info{
@@ -110,13 +144,18 @@
         justify-content: center;
         align-items: center;
     }
-    span.warning {
+    .warning {
         font-size: 18px;
         margin-top: 16px;
-        display: flex;
-        align-items: center;
     }
-
+    button.tooltip{
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-size: 18px;
+        padding: 4px 4px;
+        background-color: #ddd;
+    }
     a.file{
         margin-top: 16px;
         font-size: 12px;
@@ -125,5 +164,22 @@
     }
     a.file i {
         margin-right: 8px;
+    }
+    .back{
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: #fff;
+        border-radius: 50%;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .tooltip{
+        position: relative;
+    }
+    .import{ 
+        margin: 24px 0;
     }
 </style>

@@ -2,6 +2,9 @@
     import { Select, Input } from 'gros/form'
     import { Tooltip } from 'gros/tooltip'
 
+    export let name 
+    export let step
+
     const types = [
         { value: 'MI', label: 'Habitation individuelle' },
         { value: 'LC', label: 'Habitation collective' },
@@ -17,7 +20,6 @@
     ]
     let type 
     let department
-    let name 
 
     const getName = () => {
         if (!type || !department) return
@@ -27,6 +29,7 @@
             .then(response => response.json())
             .then(json => {
                 name = `${prefix}${json.index.toString().padStart(4, "0")}`
+                step++
             })
     }
 
@@ -36,33 +39,19 @@
 </script>
 
 <div class="naming">
-    <span>Aide au nommage</span>
-    {#if name}
-        <p>
-            <b>Nom:</b> 
-            <button on:click={() => copy()} class='tooltip'>
-                {name}
-                <Tooltip top content="Cliquez pour copier"/>
-            </button>
-        </p>
-        <button class="btn" on:click={() => name = null}>
-            Modifier
+    <Select label="Fonction du bâtiment" bind:value={type} options={types} required/>
+    <Input label="Département" placeholder="75" bind:value={department} required/>
+    <div class="btn">
+        <button type="submit" class="btn" on:click={() => getName()}>
+            générer le code
         </button>
-    {:else}
-        <form on:submit|preventDefault={() => getName()}>
-            <Select label="Fonction du bâtiment" bind:value={type} options={types} required/>
-            <Input label="Département" placeholder="75" bind:value={department} required/>
-            <button type="submit" class="btn">
-                Rechercher
-            </button>
-        </form>
-  
-    {/if}
+        <button on:click={()=> {name = null; step++ }}>j'ai déja un code</button>
+    </div>
 </div>
 
 <style>
 
-    div{
+    div.naming{
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -90,5 +79,11 @@
         color: #fff;
         font-size: 16px;
         width: 100%;
+    }
+
+    div.btn{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
 </style>
