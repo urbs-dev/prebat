@@ -6,6 +6,8 @@ Route.group( () => {
 
     Route.get('operations/tree', 'OperationsController.tree').middleware('isUserAdmin')
 
+    Route.get('operations/name/:prefix', 'OperationsController.getIndex').middleware('isUserAdmin')
+
     Route.post('operations', 'OperationsController.store').middleware('isUserAdmin')
 
     Route.get('operations/:id', 'OperationsController.show').middleware('isUserAdmin')

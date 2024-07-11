@@ -3,6 +3,7 @@
     import { page, content } from './store'
     import { Upload } from './upload'
     import Dropzone from './Dropzone.svelte'
+    import Naming from './naming.svelte';
 
     let file
 
@@ -51,7 +52,8 @@
                     Télécharger le fichier vierge de mesure
                 </span>
             </a>
-         </div>
+        </div>
+        <Naming/>
 
         {#if file}
         <aside>

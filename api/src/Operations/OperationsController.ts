@@ -100,4 +100,14 @@ export default class OperationsController
         await OperationsManager.drop(request.param('id'))
         return response.send({ message: 'dropped'})
     }
+
+    public async getIndex({ request, response }: HttpContextContract)
+    {
+        const prefix = request.param('prefix')
+        
+        const operations = await OperationsModel.query()
+        .where('name','LIKE', `${prefix}%` )
+        
+        return response.send({ index:  operations.length + 1 })
+    }
 }
