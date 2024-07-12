@@ -5,6 +5,8 @@
     import Dropzone from './Dropzone.svelte'
     import Naming from './naming.svelte';
     import { Tooltip } from 'gros/tooltip'
+    import OverWrite from './Modal_Overwrite_Operation.svelte' 
+    import { modal } from 'gros/modal'
 
     let file
     let name 
@@ -31,12 +33,27 @@
         loading.start('Séquençage en cours', `Cela peut durer plus d'une minute`)
         $page = null
         const upload = new Upload()
+        let acces = await upload.checkAccess(file.name)
 
-        await upload.getSequence(file)
-        await upload.operation()
-        await upload.sites()
-        await upload.measures()
+        if (acces?.alreadyExists) {
+            loading.stop()
+            modal.open(OverWrite, {file})
+            return 
+        }
+        else if (acces?.error) {
+            $page = 'error'
+            $content = acces
+            loading.stop()
+            return 
+        }
+        else{
+            await upload.getSequence(file)
+            await upload.operation()
+            await upload.sites()
+            await upload.measures()
+        }
     }
+
     const copy = () => {
         navigator.clipboard.writeText(name)
     }

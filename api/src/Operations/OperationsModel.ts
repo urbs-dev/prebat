@@ -32,6 +32,9 @@ export default class OperationsModel extends BaseModel
 
 	@column()
 	public filename: string
+	
+	@column()
+	public owner: string | null
 
     @hasMany( () => LocationsModel, { 
 		foreignKey: 'parent_id', 
