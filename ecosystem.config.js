@@ -38,7 +38,7 @@ module.exports = {
         testing : {
             user          : "urbs",
             host          : [ "test.urbs.fr -p 8322" ],
-            ref           : "origin/master",
+            ref           : "origin/main",
             repo          : "git@github.com:urbs-dev/prebat.git",
             path          : "/home/urbs/www/prebat",
             "post-deploy" : getPostDeploy('testing')
@@ -46,7 +46,7 @@ module.exports = {
         production : {
             user          : "urbs",
             host          : [ "prod.urbs.fr -p 8422" ],
-            ref           : "origin/master",
+            ref           : "origin/main",
             repo          : "git@github.com:urbs-dev/prebat.git",
             path          : "/home/urbs/www/prebat/api",
             "post-deploy" : getPostDeploy('production')
