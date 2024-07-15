@@ -38,6 +38,8 @@ export default class OperationsController
             }
             await OperationsManager.drop(operation.id)
         }
+        else data.owner = session.id
+        
         const result = await OperationsModel.create(data)
         return response.send(result)
     }
