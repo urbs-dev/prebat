@@ -27,6 +27,21 @@ export class Upload {
         toast.push('Fichier séquencé avec succès')
     }
 
+    public async checkAccess(filename){
+        if (!filename) return
+        const response = await fetch(`BASE_URL/prebat.api/operations/access/${filename}`)
+        const json = await response.json()
+        if (json.access && !json.error) {
+            return json
+        }
+        else if (json.error && json.access)
+        {
+            return { alreadyExists: true }
+        }
+        else {
+            return { error: "Une erreur est survenue lors de la vérification" }
+        }
+    }
 
     public async operation()
     {

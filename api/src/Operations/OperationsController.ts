@@ -23,10 +23,21 @@ export default class OperationsController
         return response.send(tree)
     }
 
-    public async store({ request, response }: HttpContextContract)
+    public async store({ request, response, session }: HttpContextContract)
     {
         const data = request.body() as OperationsModel
-        await OperationsManager.dropIfExists(data.name)
+        const operation = await OperationsModel.query()
+            .where('name', data.name)
+            .first()
+            
+        if (operation)
+        {
+            if (!session?.roles?.USER_ADMIN || !session?.roles?.GLOBAL_ADMIN)
+            {
+                if (operation?.owner != session.id) return response.send({ error: "Acces denied" })
+            }
+            await OperationsManager.drop(operation.id)
+        }
         const result = await OperationsModel.create(data)
         return response.send(result)
     }
@@ -109,5 +120,16 @@ export default class OperationsController
         .where('name','LIKE', `${prefix}%` )
         
         return response.send({ index:  operations.length + 1 })
+    }
+
+    public async checkAccess({session, request, response }: HttpContextContract)
+    {
+        const name = request.param('name')
+        const operation = await OperationsModel.query()
+            .where('name', name)
+            .first()
+        if(!operation) return response.send({ access: true })
+        if (operation.owner === session.id) return response.send({ access: true })
+        return response.send({ error: 'Operation already exists', access: true}) // TODO: check access when we store uploder
     }
 }

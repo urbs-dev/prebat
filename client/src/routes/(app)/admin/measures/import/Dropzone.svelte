@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { page, content } from './store'
 
     export let file = undefined
     let filename = undefined
@@ -8,14 +9,38 @@
 
     const drop = (e) => {
         dragging = false
+
+        filename = e.target.files[0].name
+        file = null
+        if (!checkName(e.target.files[0].name))
+            return throwError()
+
+        $page = null
         file = e.dataTransfer.files[0]
-        filename = file.name		
+        filename = file.name
         dispatch('change')
     }
     const handleInput = (e) => {
+        filename = e.target.files[0].name
+        file = null
+        if (!checkName(e.target.files[0].name))
+            return throwError()
+
+        $page = null
         file = e.target.files[0]
-        filename = file.name	
+        filename = file.name
         dispatch('change')
+    }
+
+    const checkName = (name) => {
+        name = name.split('.')[0] + '.' + name.split('.')[1] + '.' + name.split('.')[2]
+        const regex = /^[A-Za-z]{2}\.dep\d{2}\.\d{4}$/;
+        return regex.test(name);
+    }
+    
+    const throwError = () => {
+        $page = 'error'
+        $content = {error: 'Nom de fichier invalide, merci de respecter le format: XX.depXX.XXXX'}
     }
 
     let dragging = false
