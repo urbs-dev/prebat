@@ -36,7 +36,7 @@ export default class OperationsIO
         // return this.dir.zipTempdir(zipname)
 
         const origin = this.PATH + this.filename
-        const destination = this.dir.PATH_TO_FILES + 'Cerema-TAB-PREBAT_MESURES_' + this.name.substring(0, 4) + '.xlsx'
+        const destination = this.dir.PATH_TO_FILES + 'Cerema-TAB-PREBAT_MESURES_' + this.name + '.xlsx'
         this.dir.copy(origin, destination)
         return this.dir.toUrl(destination)
     }
