@@ -26,7 +26,7 @@
 
 <article class="z-depth-1">
     <h1 class="flex">
-        {row.name.substring(0, 4)} 
+        {row.name} 
         <button class="btn" on:click={extract}>
             <i class="micon" style:margin-right="4px">file_download</i>
             Télécharger
