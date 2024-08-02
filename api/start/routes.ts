@@ -2,6 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 import './routes/locations'
 import './routes/operations'
 import './routes/measures'
+import './routes/results'
 
 Route.get('/', async () => {
 	return { hello: 'Welcome to PREBAT API' }
