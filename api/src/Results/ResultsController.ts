@@ -7,10 +7,9 @@ export default class ResultsController
     public async graph({ response }: HttpContextContract)
     {
         let counts = {}
-        const fieldsWithCount = ['fonction','maitre_ouvrage','nature_travaux',
-                                 'bepos','label_energetique','isoloation_pvo',
-                                 'systeme_chauffage','ecs_principal','confort_ete',
-                                 'confort_hiver','classe_inertie'
+        const fieldsWithCount = ['fonction','zone_climatique','maitre_ouvrage','nature_travaux',
+                                 'bepos','label_energetique','isolation_pvo','ecs_principal',
+                                 'confort_ete','confort_hiver','classe_inertie'
                                 ]
         
         fieldsWithCount.map(async (field) => {
@@ -30,11 +29,23 @@ export default class ResultsController
     {
         return await Database.rawQuery(`
             SELECT
-                JSON_BUILD_OBJECT( ${field}, COUNT(*) ) as count
+                JSONB_BUILD_OBJECT( 
+                    CASE WHEN ${field}='' THEN 'Non renseigné' ELSE ${field} END, COUNT(*)
+                ) as count
             FROM results
             GROUP BY ${field}
             ;`
         )
+        
+        // return await Database.rawQuery(`
+        //     SELECT
+        //         JSONB_BUILD_OBJECT( 
+        //         ${field}, COUNT(*) 
+        //         ) as count
+        //     FROM results
+        //     GROUP BY ${field}
+        //     ;`
+        // )
 
     }
 
