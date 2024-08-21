@@ -14,7 +14,6 @@ export default class ResultsController
                                  'bepos','label_energetique','isolation_pvo','ecs_principal',
                                  'confort_ete','confort_hiver','classe_inertie'
                                 ]
-        
 
         fieldsWithCount.map(async (field) => {
             const result = await this.getCount(field, where)
@@ -23,9 +22,10 @@ export default class ResultsController
                 return { ...acc, ...cur }
             })
         })
+
         const rows = await this.getRows(where)
         const result = { ...counts, rows } 
-        
+
         return response.send(result)
     }
 
@@ -56,7 +56,16 @@ export default class ResultsController
             if (Object.keys(filter).length > 0) {
                 where = "WHERE "
                 for (const key in filter) {
-                    where += `${key}='${filter[key]}' AND `
+                    const filters = filter[key].split(',')
+                    if ( filters.length > 1) {
+                        where += "("
+                        filters.map((f) => {
+                            where += `${key}='${f}' OR `
+                        })
+                        where = where.slice(0, -4)
+                        where += ") AND "
+                    } 
+                    else where += `${key}='${filter[key]}' AND `
                 }
                 where = where.slice(0, -5)
             }
