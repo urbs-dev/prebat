@@ -7,7 +7,7 @@
     let canvas;
     let chart;
 
-    const option = {
+    let option = {
             tooltip: {
                 trigger: 'item',
                 triggerOn: 'mousemove|click',
@@ -16,26 +16,22 @@
                     return `${params.name} <br/> ${colorSpan} <b> ${params.percent}%  </b> 
                     <i>(${params.value})</i>`
                 }
-            // formatter: '{a} <br/>{b} : {c} ({d}%)'
             },
             legend: {
                 show: true,
                 orient: "horizontal",
-                top: "85%",
+                bottom: 20,
                 type: "scroll",
             },
+            animation: true,
             series: [
                 {
-                    name: 'Access From',
                     type: 'pie',
                     radius: ['40%', '70%'],
+                    center: ['50%', '39%'],
                     avoidLabelOverlap: false,
                     label: {
                         show: false,
-                        position: 'center'
-                    },
-                    labelLine: {
-                        show: false
                     },
                     data: Object.keys(value).map(key => ({value: value[key], name: key}))
                 }
@@ -49,21 +45,21 @@
 
     const update = () => {
         if (!chart) return;
+        option.series[0].data = Object.keys(value).map(key => ({value: value[key], name: key}));
         chart.setOption(option);
     }
 
 
     $: update(value);
-
 </script>
 
 <div bind:this={canvas}></div>
 
 <style>
     div {
-        min-width: 600px;
-        max-width: 600px;
-        min-height: 300px;
-        max-height: 300px;
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 250px;
+        max-height: 250px;
     }
 </style>

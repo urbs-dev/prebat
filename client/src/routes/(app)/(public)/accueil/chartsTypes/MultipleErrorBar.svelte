@@ -2,16 +2,14 @@
     import * as echarts from "echarts";
     import { onMount } from "svelte";
     import { getCategoreis, deviation, round } from "./utils";
-    import { get } from "svelte/store";
     export let value;
-    export let row = false;
     export let options = {};
 
     let range = {}
     let rawData = {};
     let deviations = {};
 
-    const categoryData = getCategoreis(value, options.groupedBy);
+    let categoryData = getCategoreis(value, options.groupedBy);
 
     const getBarData = (value) => {
         let data = {};
@@ -53,10 +51,12 @@
         categoryData.map((key, i) => {
             rangeResult.min[i] = [i];
             Object.keys(range).map((attribute, y) => {
+                if(!range[attribute] || !range[attribute][key]) return;
                 rangeResult.min[i][y + 1] = range[attribute][key].min;
             });
             rangeResult.max[i] = [i];
             Object.keys(range).map((attribute, y) => {
+                if(!range[attribute] || !range[attribute][key]) return;
                 rangeResult.max[i][y + 1] = range[attribute][key].max;
             })
         });
@@ -73,6 +73,7 @@
     const getErrorBar = () => {
         let arr = []
         Object.keys(deviations).map((attribute,i) => {
+            if (!barData[attribute]) return;
             Object.keys(deviations[attribute]).map((key, y) => {
                 if (!arr[y]) arr[y] = [y];
                 arr[y].push(round(barData[attribute][y] - deviations[attribute][key]))
@@ -95,7 +96,6 @@
 
                     var highPoint2 = api.coord([xValue, api.value(3)]);
                     var lowPoint2 = api.coord([xValue, api.value(4)]);
-                    console.log(highPoint1, lowPoint1, highPoint2, lowPoint2);
                     
                     var halfWidth = api.size([1, 0])[0] * 0.1;
                     var style = api.style({
@@ -304,7 +304,7 @@
         Object.keys(barData).map((key, i) => {
             series.push({
                 type: 'bar',
-                name: key,
+                name: `moyenne ${key}`,
                 data: barData[key]
             })
         })
@@ -322,28 +322,61 @@
     let ctx;
     let chart;
 
-    const option = {
+    let option = {
         tooltip: {
             trigger: 'item',
             axisPointer: {
             type: 'shadow'
             }
         },
+        grid:{
+            top: 10,
+            bottom: 100,
+        },
         legend: {
-            data: ['bar']
+            bottom: 20,
+            data: [
+                ...Object.keys(barData).map((key, i) => {
+                    return {name:`moyenne ${key}`}
+                }),
+                {
+                    name: 'min',
+                    itemStyle: {
+                        color: "#FFFF00",
+                        borderWidth: 0.5,
+                        borderColor: "#000"
+
+                    }
+                },
+                {
+                    name: 'max',
+                    itemStyle: {
+                        color: "#BB0000"
+                    }
+                },
+                {
+                    name: 'écart type',
+                    icon: 'path://M8.5 4h7v2H13v12h2.5v2h-7v-2H11V6H8.5z',
+                    itemStyle: {
+                        color: "#000"
+                    }
+                }
+            ]
         },
         xAxis: {
             data: categoryData,
             axisLabel: {
                 interval: 0,
-                rotate: 0,
+                hideOverlap: true,
                 margin: 10,
+                rotate: 45,
+                overflow: "truncate",
                 textStyle: {
                     fontSize: 10,
                 },
                 formatter: function (value) {
-                    if (value.length > 15) {
-                        return value.substring(0, 15) + '...';
+                    if (value.length > 10) {
+                        return value.substring(0, 10) + '...';
                     }
                     return value;
                 }
@@ -358,19 +391,23 @@
         chart.setOption(option);
     });
 
-    const updated = (value) => {
+    const updated = async (value) => {
+        if (!chart) return;
+        categoryData = getCategoreis(value, options.groupedBy);
+        barData = await getBarData(value.rows);
+        option.xAxis.data = categoryData;
+        option.series = await getSeries();
+        chart.setOption(option);
     };
 
-    $: updated(barData);
+    $: updated(value);
 </script>
 
 <div bind:this={ctx}></div>
-
 <style>
     div {
-        min-width: 800px;
-        max-width: 800px;
-        min-height: 300px;
-        max-height: 300px;
+        min-width: 700px;
+        min-height: 250px;
+        max-height: 250px;
     }
 </style>

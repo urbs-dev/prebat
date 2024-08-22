@@ -19,13 +19,11 @@
         },
         legend: {
             selectedMode: false,
-            bottom: 0, 
+            bottom: 20, 
         },
         grid:{
-            left: 100,
-            right: 100,
-            top: 50,
-            bottom: '15%',    
+            top: 10,
+            bottom: 100,    
         },
         yAxis: {
             type: "value",
@@ -51,9 +49,8 @@
 
 <style>
     div {
-        min-width: 600px;
-        max-width: 600px;
-        min-height: 300px;
-        max-height: 300px;
+        min-width: 400px;
+        min-height: 250px;
+        max-height: 250px;
     }
 </style>

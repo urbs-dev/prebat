@@ -1,11 +1,13 @@
 <script>
+    import Show from "$module/session/account/Show.svelte";
+    import { Legend } from "chart.js";
     import * as echarts from "echarts";
     import { onMount } from "svelte";
     export let value;
 
     let ctx;
     let chart;
-    const option = {
+    let option = {
         tooltip: {
             trigger: 'axis',
         },
@@ -29,17 +31,10 @@
     });
 
     const updated = (value) => {
-        // if (!chart) return;
-        // const data = {
-        //     labels: Object.keys(value),
-        //     datasets: [
-        //         {
-        //             data: Object.keys(value).map((key) => value[key]),
-        //         },
-        //     ],
-        // };
-        // chart.data = data;
-        // chart.update();
+        if (!chart) return;
+        option.series[0].data = Object.keys(value).map((key) => value[key]);
+        chart.setOption(option);
+
     };
 
     $: updated(value);
@@ -48,10 +43,9 @@
 <div bind:this={ctx}></div>
 <style>
     div {
-        min-width: 600px;
-        max-width: 600px;
-        min-height: 300px;
-        max-height: 300px;
+        min-width: 300px;
+        min-height: 250px;
+        max-height: 250px;
     }
 </style>
 

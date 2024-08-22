@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import { getCategoreis, deviation, round } from "./utils";
     import { get } from "svelte/store";
+    import Show from "$module/session/account/Show.svelte";
     export let value;
     export let row = false;
     export let options = {};
@@ -239,7 +240,7 @@
         Object.keys(barData).map((key, i) => {
             series.push({
                 type: 'bar',
-                name: key,
+                name: "moyenne",
                 data: barData[key]
             })
         })
@@ -253,8 +254,6 @@
     }
 
     let barData = getBarData(value.rows);
-    let errorData = []
-
     let ctx;
     let chart;
 
@@ -265,21 +264,54 @@
             type: 'shadow'
             }
         },
+        grid:{
+            top: 10,
+            bottom: 100,
+        },
         legend: {
-            data: ['bar']
+            bottom: 20,
+            data: [
+                {
+                    name: 'moyenne',
+                },
+                {
+                    name: 'min',
+                    itemStyle: {
+                        color: "#FFFF00",
+                        borderWidth: 0.5,
+                        borderColor: "#000"
+
+                    }
+                },
+                {
+                    name: 'max',
+                    itemStyle: {
+                        color: "#BB0000"
+                    }
+                },
+                {
+                    name: 'écart type',
+                    icon: 'path://M8.5 4h7v2H13v12h2.5v2h-7v-2H11V6H8.5z',
+                    itemStyle: {
+                        color: "#000"
+                    }
+                }
+            ]
         },
         xAxis: {
             data: categoryData,
             axisLabel: {
                 interval: 0,
-                rotate: 0,
+                hideOverlap: true,
                 margin: 10,
+                rotate: 45,
+                overflow: "truncate",
                 textStyle: {
                     fontSize: 10,
                 },
                 formatter: function (value) {
-                    if (value.length > 15) {
-                        return value.substring(0, 15) + '...';
+                    if (value.length > 10) {
+                        return value.substring(0, 10) + '...';
                     }
                     return value;
                 }
@@ -301,11 +333,11 @@
 </script>
 
 <div bind:this={ctx}></div>
+
 <style>
     div {
-        min-width: 600px;
-        max-width: 600px;
-        min-height: 300px;
-        max-height: 300px;
+        min-width: 500px;
+        min-height: 250px;
+        max-height: 250px;
     }
 </style>

@@ -8,7 +8,6 @@
 
     let ctx;
     let chart;
-    let aled = [];
 
     const getSeries = () => {
         if (!row)
@@ -90,20 +89,19 @@
             };
         }
     };
-  
 
-    const option = {
+    let option = {
         tooltip: getTooltips(row),
         legend: {
             show: true,
             orient: "horizontal",
-            top: "85%",
             type: "scroll",
+            bottom: 20,
         },
         grid: {
             left: "3%",
-            right: "4%",
-            top: "3%",
+            right: '4%',
+            top: 10,
             bottom: "20%",
             containLabel: true,
         },
@@ -119,19 +117,21 @@
         chart.setOption(option);
     });
 
-    const update = () => {
+    const update = (value) => {
         if (!chart) return;
+        option.series = getSeries();
         chart.setOption(option);
     };
+
+    $: update(value)
 </script>
 
 <div bind:this={ctx}></div>
 
 <style>
     div {
-        min-width: 600px;
-        max-width: 600px;
-        min-height: 300px;
-        max-height: 300px;
+        min-width: 450px;
+        min-height: 250px;
+        max-height: 250px;
     }
 </style>

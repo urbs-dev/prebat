@@ -9,6 +9,7 @@
     import ErrorBar from './chartsTypes/ErrorBar.svelte';
     import MultipleErrorBar from './chartsTypes/MultipleErrorBar.svelte';
     import GroupedBar from './chartsTypes/GroupedBar.svelte';
+    import Error from '../../admin/measures/import/Error.svelte';
 
     const TYPE = {
         'stacked_hzbar': StackedHzBar,
@@ -42,13 +43,18 @@
 <section class="chart">
     <h4>{chart.title}</h4> 
     <div>
-        {#if isArray(chart.attribute) && getArrayValues(chart.attribute)}
-            <svelte:component this={TYPE[chart.type]} value={getArrayValues(chart.attribute)}/>
-        {:else if valueIsSingle(values ,chart.attribute)}
-            <svelte:component this={TYPE[chart.type]} value={values[chart.attribute]}/>
-        {:else}
-            <svelte:component this={TYPE[chart.type]} value={values} options={chart} row={true}/>
+        {#if values}
+            {#if isArray(chart.attribute) && getArrayValues(chart.attribute)}
+                {#key values}
+                    <svelte:component this={TYPE[chart.type]} value={getArrayValues(chart.attribute)}/>
+                {/key}
+            {:else if valueIsSingle(values ,chart.attribute)}
+                <svelte:component this={TYPE[chart.type]} bind:value={values[chart.attribute]}/>
+            {:else}
+                <svelte:component this={TYPE[chart.type]} bind:value={values} options={chart} row={true}/>
+            {/if}
         {/if}
+
 
     </div>
 </section>
@@ -58,5 +64,7 @@
         background: #f5f5f5;
         padding: 16px;
         border-radius: 8px;
-    }
+        width: fit-content;
+        height: fit-content;
+}
 </style>

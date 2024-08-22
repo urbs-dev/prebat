@@ -17,6 +17,7 @@ export default class ResultsController
 
         fieldsWithCount.map(async (field) => {
             const result = await this.getCount(field, where)
+            if (result.rows.length === 0) return
             counts[field] = result.rows.map((row) => row.count)
             counts[field] = counts[field].reduce((acc, cur) => {
                 return { ...acc, ...cur }
@@ -49,28 +50,43 @@ export default class ResultsController
         return results.rows
     }
 
-    private async getFilter(filter:JSON)
+    private async getFilter(filters:JSON)
     {
         let where = ""
-        if (filter) {
-            if (Object.keys(filter).length > 0) {
+        if (filters) {
+            
+            const keys = Object.keys(filters)
+            if (keys.length > 0) {
                 where = "WHERE "
-                for (const key in filter) {
-                    const filters = filter[key].split(',')
-                    if ( filters.length > 1) {
+                keys.map((key) => {
+                    const filter = filters[key].split('|')
+                    if ( filter.length >1) {
                         where += "("
-                        filters.map((f) => {
-                            where += `${key}='${f}' OR `
+                        filter.map((f) => {
+                             where += `${key}${this.formatFilter(f)} OR `
                         })
                         where = where.slice(0, -4)
                         where += ") AND "
                     } 
-                    else where += `${key}='${filter[key]}' AND `
-                }
+                    else where += `${key}${this.formatFilter(filters[key])} AND `
+                })
                 where = where.slice(0, -5)
+                console.log(where);
             }
         }
+        
         return where
     }
+
+    private formatFilter(string:string)
+    {
+        if (string.includes(`'`) || string.includes(`"`) || string.includes(`(`) || string.includes(`)`) ) {
+                string = string.replace(/'/g, "%")
+                string = string.replace(/"/g, '%')
+                string = string.replace(/\(/g, '%')
+                string = string.replace(/\)/g, '%')
+                return ` LIKE '${string}'`
+        }
+        else return `='${string}'`    }
 
 }
