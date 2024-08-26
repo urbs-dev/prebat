@@ -10,10 +10,15 @@
         type: "bar",
         stack: "total",
         data: Object.keys(value[key]).map((k) => value[key][k]),
-        
     }));
+    const getXAxis = () => {
+        
+        return  {
+            type: "category",
+            data: Object.keys(value[Object.keys(value)[0]]),
+        }}
 
-    const option = {
+    let option = {
         tooltip: {
             trigger: 'axis',
         },
@@ -28,10 +33,7 @@
         yAxis: {
             type: "value",
         },
-        xAxis: {
-            type: "category",
-            data: Object.keys(value[Object.keys(value)[0]]),
-        },
+        xAxis: getXAxis(),
         series,
     };
     onMount(async () => {
@@ -41,12 +43,12 @@
 
     const update = () => {
         if (!chart) return;
+        option.xAxis= getXAxis();
         chart.setOption(option);
     };
 </script>
 
 <div bind:this={ctx}></div>
-
 <style>
     div {
         min-width: 400px;

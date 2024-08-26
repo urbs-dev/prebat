@@ -60,6 +60,7 @@ export const getFilterValues = (keys, AllData, filters) => {
     }
     else {
         Object.keys(AllData[keys]).map((key)=>{
+            if(key === "") return
             if(!result[key]) result[key] = 0
         })
     }
@@ -75,12 +76,14 @@ export const getFilterValues = (keys, AllData, filters) => {
                     }
                 }
             })
+            if (row[keys] === "") return result["Non renseigné"] ++
             if (check) result[row[keys]] ++
         })
     }
     else {
         if (!AllData[keys]){
             AllData.rows.map((row)=>{
+                if(row[keys] === "") return result["Non renseigné"] ++
                 result[row[keys]] ++
             })
         }
@@ -95,5 +98,6 @@ export const getFilterValues = (keys, AllData, filters) => {
         else total += result[key]
     })
 
+  
     return result
 }

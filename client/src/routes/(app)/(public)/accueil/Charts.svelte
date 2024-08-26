@@ -22,7 +22,8 @@
     const getAttributes = async (filters) => {
         const params = await formatFilter(filters)
         if (params === "") attributes = data.attributes
-        const response = await fetch(`BASE_URL/prebat.api/results?${params}`).then(res => res.json())
+        
+        const response = await fetch(`BASE_URL/prebat.api/results?${params.replace(/\+/g, '%')}`).then(res => res.json())
         attributes = response 
     }   
 

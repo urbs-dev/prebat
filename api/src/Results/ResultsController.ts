@@ -70,22 +70,22 @@ export default class ResultsController
                     else where += `${key}${this.formatFilter(filters[key])} AND `
                 })
                 where = where.slice(0, -5)
-                console.log(where);
             }
         }
-        
         return where
     }
 
     private formatFilter(string:string)
     {
-        if (string.includes(`'`) || string.includes(`"`) || string.includes(`(`) || string.includes(`)`) ) {
+        if (string.includes(`'`) || string.includes(`"`) || string.includes(`(`) || string.includes(`)`) ||  string.includes(`%`)) {
                 string = string.replace(/'/g, "%")
                 string = string.replace(/"/g, '%')
                 string = string.replace(/\(/g, '%')
                 string = string.replace(/\)/g, '%')
+                string = string.replace(/\+/g, '%')
                 return ` LIKE '${string}'`
         }
+        if (string === "Non renseigné") return `=''`
         else return `='${string}'`    }
 
 }

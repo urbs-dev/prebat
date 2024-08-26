@@ -61,7 +61,9 @@ const charts = [
             {
                 title: 'Typologie de système d’ECS',
                 type: 'stacked_hzbar',
-                attribute: 'ecs_principal'
+                attribute: 'ecs_principal',
+                groupedBy: "fonction"
+
             },
             {
                 title: 'Perméabilité à l’air',

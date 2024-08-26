@@ -45,10 +45,10 @@
         {#if values}
             {#if isArray(chart.attribute) && getArrayValues(chart.attribute)}
                 {#key values}
-                    <svelte:component this={TYPE[chart.type]} value={getArrayValues(chart.attribute)}/>
+                    <svelte:component this={TYPE[chart.type]} value={getArrayValues(chart.attribute)} options={chart}/>
                 {/key}
             {:else if valueIsSingle(values ,chart.attribute)}
-                <svelte:component this={TYPE[chart.type]} bind:value={values[chart.attribute]}/>
+                <svelte:component this={TYPE[chart.type]} bind:value={values[chart.attribute]} options={chart}/>
             {:else}
                 <svelte:component this={TYPE[chart.type]} bind:value={values} options={chart} row={true}/>
             {/if}
