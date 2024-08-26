@@ -9,7 +9,6 @@
     import ErrorBar from './chartsTypes/ErrorBar.svelte';
     import MultipleErrorBar from './chartsTypes/MultipleErrorBar.svelte';
     import GroupedBar from './chartsTypes/GroupedBar.svelte';
-    import Error from '../../admin/measures/import/Error.svelte';
 
     const TYPE = {
         'stacked_hzbar': StackedHzBar,
@@ -61,10 +60,20 @@
 
 <style>
     section{
-        background: #f5f5f5;
-        padding: 16px;
+        padding: 0 16px;
         border-radius: 8px;
         width: fit-content;
         height: fit-content;
-}
+        background-color: #fafafa;
+
+    }
+    h4{
+        color: var(--primary-lighten);
+        font-size: 18px;
+        margin: 16px 0 8px 0;
+    }
+    div{
+        display: flex;
+        justify-content: center;
+    }
 </style>

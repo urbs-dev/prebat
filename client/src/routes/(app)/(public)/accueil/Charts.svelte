@@ -33,11 +33,11 @@
     <Filter bind:filters={filters} defaultAttributes={data.attributes} bind:attributes/>
     <article>
        {#each data.charts as theme }
-        <h3> {theme?.theme} </h3>
-        <div>
-            {#each theme?.charts as chart }
-                <Charts chart={chart} bind:values={attributes}/>
-            {/each}
+            <h3> {theme?.theme} </h3>
+            <div>
+                {#each theme?.charts as chart }
+                    <Charts chart={chart} bind:values={attributes}/>
+                {/each}
             </div>
        {/each}
     </article>
@@ -49,7 +49,6 @@
         flex-wrap: wrap;
         gap: 16px;
         justify-content: start;
-
         width: 100%;
         height: 100%;
     }

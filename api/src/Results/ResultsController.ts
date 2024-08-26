@@ -1,5 +1,4 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ResultsModel from './ResultsModel'
 import Database from '@ioc:Adonis/Lucid/Database'
 export default class ResultsController 
 {
@@ -10,7 +9,7 @@ export default class ResultsController
         const where = await this.getFilter(params)
 
         let counts = {}
-        const fieldsWithCount = ['fonction','zone_climatique','maitre_ouvrage','nature_travaux',
+        const fieldsWithCount = ['fonction','zone_climatique','region','maitre_ouvrage','nature_travaux',
                                  'bepos','label_energetique','isolation_pvo','ecs_principal',
                                  'confort_ete','confort_hiver','classe_inertie'
                                 ]
