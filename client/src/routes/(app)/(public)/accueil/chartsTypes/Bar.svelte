@@ -1,6 +1,4 @@
 <script>
-    import Show from "$module/session/account/Show.svelte";
-    import { Legend } from "chart.js";
     import * as echarts from "echarts";
     import { onMount } from "svelte";
     export let value;

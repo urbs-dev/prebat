@@ -2,8 +2,6 @@
     import * as echarts from "echarts";
     import { onMount } from "svelte";
     import { getCategoreis, deviation, round } from "./utils";
-    import { get } from "svelte/store";
-    import Show from "$module/session/account/Show.svelte";
     export let value;
     export let row = false;
     export let options = {};
