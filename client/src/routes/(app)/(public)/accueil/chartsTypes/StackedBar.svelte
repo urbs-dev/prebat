@@ -5,14 +5,17 @@
 
     let ctx;
     let chart;
-    const series = Object.keys(value).map((key) => ({
-        name: key,
-        type: "bar",
-        stack: "total",
-        data: Object.keys(value[key]).map((k) => value[key][k]),
-    }));
+    const getSeries = () => {
+        return Object.keys(value).map((key) => ({
+            name: key,
+            type: "bar",
+            stack: "total",
+            data: Object.keys(value[key]).map((k) => value[key][k]),
+        }));
+    }
     const getXAxis = () => {
-        
+        const data = Object.keys(value[Object.keys(value)[0]]);
+        if (!data) return false
         return  {
             type: "category",
             data: Object.keys(value[Object.keys(value)[0]]),
@@ -33,19 +36,30 @@
         yAxis: {
             type: "value",
         },
-        xAxis: getXAxis(),
-        series,
+        xAxis: {},
+        series: {},
     };
     onMount(async () => {
         chart = echarts.init(ctx);
+        if (!value) return;
+        const axis = await getXAxis();
+        const series = await getSeries();
+        if (!axis || !series) return;
+        option.xAxis= axis;
+        option.series = series;
         chart.setOption(option);
     });
 
-    const update = () => {
-        if (!chart) return;
-        option.xAxis= getXAxis();
+    const update = async () => {
+        if (!chart || !value) return;
+        const axis = await getXAxis();
+        const series = await getSeries();
+        if (!axis || !series) return;
+        option.xAxis= axis;
+        option.series = series;
         chart.setOption(option);
     };
+    $: update(value)
 </script>
 
 <div bind:this={ctx}></div>

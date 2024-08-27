@@ -118,8 +118,7 @@
     });
 
     const update = (value) => {
-        if (!chart) return;
-        if (!options) return;
+        if (!chart || !value || !options) return;
         option.yAxis = getYAxisOptions();
         option.series = getSeries();
         chart.setOption(option);
