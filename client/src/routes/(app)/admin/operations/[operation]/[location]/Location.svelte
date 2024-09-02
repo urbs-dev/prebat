@@ -38,7 +38,7 @@
                     <tr>
                         <th>Type de données</th>
                         <th>Capteur</th>
-                        <th>Point de mesure</th>
+                        <th>Grandeur mesurées</th>
                         <th>Unité</th>
                         <th></th>
                     </tr>

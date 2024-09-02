@@ -21,7 +21,7 @@ export default class FileParser
         this.sheet = sheet
         this.columns = this.getColumns()
         this.sites = this.getSites()
-        this.name = this.sheet.getRow(1).getCell(4).value as string
+        this.name = this.getName()
         this.buildingCount = this.getBuildingCount()
         this.rowCount = this.sheet.rowCount - 23
         this.measureParser = new MeasuresParser(this.sheet, isPreview)
@@ -30,7 +30,7 @@ export default class FileParser
     public get()
     {
         return {
-            name: this.sheet.getRow(1).getCell(4).value as string,
+            name: this.getName(),
             time_step: this.getTimeStep(),
             sites: this.sites,
             row_count: this.rowCount,
@@ -117,6 +117,19 @@ export default class FileParser
         const end = DateTime.fromISO(new Date(second).toISOString())
         const diff = end.diff(start, ['seconds'])
         return diff.toObject().seconds
+    }
+
+    private getName(){
+        let name = this.sheet.getRow(1).getCell(4).value
+        try {
+            if (typeof name === 'object') {
+                return name?.result
+            }
+            return name  as string
+        }
+        catch {
+            return name as string
+        }
     }
 }
 
