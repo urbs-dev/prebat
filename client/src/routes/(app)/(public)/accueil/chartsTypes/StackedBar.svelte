@@ -6,20 +6,31 @@
     let ctx;
     let chart;
     const getSeries = () => {
-        return Object.keys(value).map((key) => ({
-            name: key,
-            type: "bar",
-            stack: "total",
-            data: Object.keys(value[key]).map((k) => value[key][k]),
-        }));
+        try{
+            return Object.keys(value).map((key) => ({
+                name: key,
+                type: "bar",
+                stack: "total",
+                data: Object.keys(value[key]).map((k) => value[key][k]),
+            }));
+        }
+        catch (e) {
+            return false
+        }
     }
-    const getXAxis = () => {
-        const data = Object.keys(value[Object.keys(value)[0]]);
-        if (!data) return false
-        return  {
-            type: "category",
-            data: Object.keys(value[Object.keys(value)[0]]),
-        }}
+    const getXAxis = () => { 
+        try {
+            const data = Object.keys(value[Object.keys(value)[0]]);
+            if (!data) return false
+            return  {
+                type: "category",
+                data: Object.keys(value[Object.keys(value)[0]]),
+            }
+        }
+        catch (e) {
+            return false
+        }
+    }
 
     let option = {
         tooltip: {
@@ -41,13 +52,7 @@
     };
     onMount(async () => {
         chart = echarts.init(ctx);
-        if (!value) return;
-        const axis = await getXAxis();
-        const series = await getSeries();
-        if (!axis || !series) return;
-        option.xAxis= axis;
-        option.series = series;
-        chart.setOption(option);
+        update();
     });
 
     const update = async () => {
