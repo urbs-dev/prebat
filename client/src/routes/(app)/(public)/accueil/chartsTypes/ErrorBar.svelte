@@ -9,7 +9,7 @@
     let range = {}
     let rawData = {};
     let deviations = {};
-    const categoryData = getCategoreis(value, options.groupedBy);
+    let categoryData = getCategoreis(value, options.groupedBy);
 
 
   
@@ -53,10 +53,12 @@
         categoryData.map((key, i) => {
             rangeResult.min[i] = [i];
             Object.keys(range).map((attribute, y) => {
+                if(!range[attribute] || !range[attribute][key]) return;
                 rangeResult.min[i][y + 1] = range[attribute][key].min;
             });
             rangeResult.max[i] = [i];
             Object.keys(range).map((attribute, y) => {
+                if(!range[attribute] || !range[attribute][key]) return;
                 rangeResult.max[i][y + 1] = range[attribute][key].max;
             })
         });
@@ -73,6 +75,7 @@
     const getErrorBar = () => {
         let arr = []
         Object.keys(deviations).map((attribute,i) => {
+            if (!barData[attribute]) return;
             Object.keys(deviations[attribute]).map((key, y) => {
                 if (!arr[y]) arr[y] = [y];
                 arr[y].push(round(Number(barData[attribute][y]) - deviations[attribute][key]))
@@ -255,7 +258,7 @@
     let ctx;
     let chart;
 
-    const option = {
+    let option = {
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -324,14 +327,20 @@
         chart.setOption(option);
     });
 
-    const updated = (value) => {
+    const updated = async (value) => {
+        if (!chart || !value) return;
+        range = {}
+        categoryData = await getCategoreis(value, options.groupedBy);
+        barData = await getBarData(value.rows);
+        option.xAxis.data = await getCategoreis(value, options.groupedBy);
+        option.series = await getSeries();
+        chart.setOption(option);
     };
 
-    $: updated(barData);
+    $: updated(value);
 </script>
 
 <div bind:this={ctx}></div>
-
 <style>
     div {
         min-width: 500px;

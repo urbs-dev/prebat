@@ -393,6 +393,7 @@
 
     const updated = async (value) => {
         if (!chart) return;
+        range = {}
         categoryData = getCategoreis(value, options.groupedBy);
         barData = await getBarData(value.rows);
         option.xAxis.data = categoryData;
