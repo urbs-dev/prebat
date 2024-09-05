@@ -94,8 +94,7 @@
                                 La procédure est décrite dans la notice du fichier.
                             </p>
                         </span>
-
-                        <a class="file" href="/Cerema-TAB-PREBAT_MESURES_VIERGE.xlsx" download>
+                        <a class="file" href="STATIC_PATH/Cerema-TAB-PREBAT_MESURES_VIERGE.xlsx" download>
                             <i class="micon">file_download</i>
                             <span>
                                 Télécharger le fichier vierge de mesure
