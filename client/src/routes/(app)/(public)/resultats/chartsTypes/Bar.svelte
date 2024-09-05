@@ -2,6 +2,7 @@
     import * as echarts from "echarts";
     import { onMount } from "svelte";
     export let value;
+    export let options;
 
     let ctx;
     let chart;
@@ -39,11 +40,19 @@
 </script>
 
 <div bind:this={ctx}></div>
+{#if options.attribute === "zone_climatique"}
+    <img src="STATIC_PATH/img/climate_zone.png" alt="bar chart" width="300" height="250">
+{/if}
+
 <style>
     div {
         min-width: 300px;
         min-height: 250px;
         max-height: 250px;
+    }
+    img {
+        height: 250px;
+        width: auto;
     }
 </style>
 

@@ -50,7 +50,12 @@
                                     <i class="micon"> 
                                         {isActive(attribute, key) ? 'check_box' : 'check_box_outline_blank'} 
                                     </i>
-                                    <span> {name.length > 15 ? elipsis(name) +  "..." : name}</span>
+                                    <span>
+                                        {name.length > 15 ? elipsis(name) : name}
+                                        {#if name.length > 15}
+                                            <span class="tooltip">{name}</span>
+                                        {/if}
+                                    </span>
                                 </span>
                                 <code>{values[key] || 0}</code>
                             </button>
@@ -141,5 +146,31 @@
         width: 16px;
         height: 16px;
         border-radius: 50px;
+    }
+
+    .tooltip{
+        display: none;
+        position: absolute;
+        background: #fff;
+        color: #000;
+        padding: 8px;
+        border-radius: 4px;
+        box-shadow: 0 0 8px rgba(0,0,0,0.2);
+        z-index: 100;
+    }
+    .tooltip::before{
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #fff;
+        top: -8px;
+        left: 50%;
+        transform: translateX(50%);
+    }
+    .filter button:hover .tooltip{
+        display: block;
     }
 </style>

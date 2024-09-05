@@ -2,8 +2,6 @@
     import Footer from '$lib/components/Footer.svelte'
     import { getPath } from 'gros/page'
     import { initDownload } from '$lib/utils'
-    import Charts from './Charts.svelte'
-    export let data
 
     const download = async () => {
         const response = await fetch(`BASE_URL/prebat.api/operations/results/extract`, {
@@ -36,7 +34,6 @@
         <img src="STATIC_PATH/img/presentation-logo.svg" alt="">
 
     </article>
-    <Charts bind:data/>
     <article class="content">
         <!-- <p style:margin-top="40px">Données&nbsp;: tous les postes de consommation, performances du bâti et des équipements techniques, pratiques des acteurs et usage, notamment confort thermique. Mesures pendant les deux premières années d'occupation.</p> -->
         <h1 class="alt-font">Énergie et confort thermique</h1>
