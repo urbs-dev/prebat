@@ -1,6 +1,7 @@
 <script>
     import Charts from './Chart.svelte';
     import Filter from './Filter.svelte';
+    import { charts } from './chartsTypes/utils'
     export let data;
     let filters = {};
     let attributes;
@@ -33,7 +34,7 @@
 <section>
     <Filter bind:filters={filters} defaultAttributes={data.attributes} bind:attributes/>
     <article>
-       {#each data.charts as theme }
+       {#each charts as theme }
             <h3> {theme?.theme} </h3>
             <div>
                 {#each theme?.charts as chart }
