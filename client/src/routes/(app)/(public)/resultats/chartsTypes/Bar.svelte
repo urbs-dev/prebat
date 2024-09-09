@@ -51,7 +51,7 @@
         max-height: 250px;
     }
     img {
-        height: 250px;
+        height: 235px;
         width: auto;
     }
 </style>
