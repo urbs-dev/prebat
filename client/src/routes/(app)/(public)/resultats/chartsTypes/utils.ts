@@ -21,7 +21,6 @@ export const getCategoreis = (row, attribute) => {
     if (!row) return [];
     if (!row[attribute]) return [];
     return Object.keys(row[attribute] )
-    
 }
 
 export const deviation = (arr) =>{
@@ -41,13 +40,6 @@ export const deviation = (arr) =>{
 
 export const round = (value) => {
     return Math.round(value * 100) / 100;
-}
-
-export const filtersFields = {
-    region: "Région",
-    fonction : "Fonction",
-    zone_climatique : "Zone climatique",
-    isolation_pvo : "Isolation PVO",
 }
 
 export const getFilterValues = (keys, AllData, filters) => {
@@ -223,3 +215,10 @@ export const charts = [
         ]
     }
 ]
+
+export const filtersFields = {
+    region: "Région",
+    fonction : "Fonction",
+    zone_climatique : "Zone climatique",
+    isolation_pvo : "Isolation parois vertical opaques",
+}
