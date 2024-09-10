@@ -17,6 +17,11 @@
             Mesures
         </li>
     </a>
+    <a href="{getPath('/resultats')}">
+        <li class:active={$url.indexOf('resultats') > -1}>
+            Résultats
+        </li>
+    </a>
     {#if isAuthenticated}
         <a href="{getPath('/admin/measures/import')}">
             <li class:active={$url.indexOf('admin/measures/import') > -1}>
