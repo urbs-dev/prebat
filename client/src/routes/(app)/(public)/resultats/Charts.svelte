@@ -35,12 +35,14 @@
     <Filter bind:filters={filters} defaultAttributes={data.attributes} bind:attributes/>
     <article>
        {#each charts as theme }
-            <h3> {theme?.theme} </h3>
-            <div>
-                {#each theme?.charts as chart }
-                    <Charts chart={chart} bind:values={attributes}/>
-                {/each}
-            </div>
+            <aside>
+                <h3> {theme?.theme} </h3>
+                <div>
+                    {#each theme?.charts as chart }
+                        <Charts chart={chart} bind:values={attributes}/>
+                    {/each}
+                </div>
+            </aside>
        {/each}
     </article>
 </section>
@@ -73,5 +75,13 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
+    }
+    aside {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background-color: var(--primary-lighten-2);
+        padding: 0 16px 16px;
+        border-radius: 8px;
     }
 </style>

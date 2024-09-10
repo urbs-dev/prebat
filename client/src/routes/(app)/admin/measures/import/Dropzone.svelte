@@ -7,19 +7,35 @@
 
     const dispatch = createEventDispatcher()
 
+    const getFiles = (event) => {
+        if(!event.dataTransfer){
+            if (!event.target.files){
+                return false
+            } 
+            else{
+                return event.target.files
+            }
+        };
+        return event.dataTransfer.files
+    }
+
     const drop = (e) => {
         dragging = false
-
-        filename = e.target.files[0].name
+        const files = getFiles(e)
+        if (!files) {
+            filename = "Erreur, veuillez réessayer"
+        }
+        filename = files[0].name
         file = null
-        if (!checkName(e.target.files[0].name))
+        if (!checkName(files[0].name))
             return throwError()
 
         $page = null
-        file = e.dataTransfer.files[0]
+        file = files[0]
         filename = file.name
         dispatch('change')
     }
+    
     const handleInput = (e) => {
         filename = e.target.files[0].name
         file = null
