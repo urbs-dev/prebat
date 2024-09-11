@@ -219,6 +219,5 @@ export const charts = [
 export const filtersFields = {
     region: "Région",
     fonction : "Fonction",
-    zone_climatique : "Zone climatique",
-    isolation_pvo : "Isolation parois vertical opaques",
+    nature_travaux: "Nature des travaux",
 }
