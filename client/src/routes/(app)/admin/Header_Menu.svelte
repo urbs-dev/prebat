@@ -11,15 +11,14 @@
             Accueil
         </li>
     </a>
-
-    <a href="{getPath('/mesures')}">
-        <li class:active={$url.indexOf('mesures') > -1}>
-            Mesures
-        </li>
-    </a>
     <a href="{getPath('/resultats')}">
         <li class:active={$url.indexOf('resultats') > -1}>
             Résultats
+        </li>
+    </a>
+    <a href="{getPath('/mesures')}">
+        <li class:active={$url.indexOf('mesures') > -1}>
+            Mesures
         </li>
     </a>
     {#if isAuthenticated}

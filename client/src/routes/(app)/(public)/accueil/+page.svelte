@@ -75,15 +75,24 @@
                         <span>Agir en conséquence</span>
                     </a>
                 </li>
+               
+            </ul>
+            <h3 style:margin-top="40px"><span>2.</span>Données par opération</h3>
+            <ul>
+                <li>
+                    <a href="BASE_URL/resultats">
+                        <i class="micon">exit_to_app</i>
+                        <span>Synthèse graphique des résultats</span>
+                    </a>
+                </li>
                 <li>
                     <button class="btn" type="button" on:click={download}>
                         <i class="micon">file_download</i>
                         <span>RESULTATS D'EVALUATION : télécharger les données pour toutes les opérations</span>
                     </button>
                 </li>
-        </ul>
-
-            <h3 style:margin-top="40px"><span>2.</span>Données par opération</h3>
+            </ul>
+            <h3 style:margin-top="40px"><span>3.</span>Données par opération</h3>
             <ul>
 
                 <li>
@@ -93,6 +102,8 @@
                     </a>
                 </li>
             </ul>
+
+           
 
         </div>
 
