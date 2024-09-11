@@ -113,39 +113,39 @@ export const charts = [
                 type: 'doughnut',
                 attribute: 'nature_travaux'
             },
-            {
-                title: 'Label énergétique',
-                type: 'doughnut',
-                attribute: 'label_energetique'
-            }
+            // {
+            //     title: 'Label énergétique',
+            //     type: 'doughnut',
+            //     attribute: 'label_energetique'
+            // }
         ]
     },
     {
         theme: 'ENVELOPPE ET SYSTEMES',
         charts: [
-            {
-                title: 'Température de consigne théorique (RT) et mesurée',
-                type: 'multiple_error_bar',
-                attribute: ['temp_consigne_rt', 'temp_consigne_mesure'],
-                groupedBy: 'fonction'
-            },
-            {
-                title: 'Ubat',
-                type: 'multiple_error_bar',
-                attribute: ['ubat_rt', 'ubat_mesure'],
-                groupedBy: 'fonction'
+            // {
+            //     title: 'Température de consigne théorique (RT) et mesurée',
+            //     type: 'multiple_error_bar',
+            //     attribute: ['temp_consigne_rt', 'temp_consigne_mesure'],
+            //     groupedBy: 'fonction'
+            // },
+            // {
+            //     title: 'Ubat',
+            //     type: 'multiple_error_bar',
+            //     attribute: ['ubat_rt', 'ubat_mesure'],
+            //     groupedBy: 'fonction'
                 
-            },
+            // },
             {
                 title: 'Typologie d’isolation principale (parois opaque)',
                 type: 'doughnut',
                 attribute: 'isolation_pvo'
             },
-            {
-                title: 'Classe d’inertie',
-                type: 'doughnut',
-                attribute: 'classe_inertie'
-            }, 
+            // {
+            //     title: 'Classe d’inertie',
+            //     type: 'doughnut',
+            //     attribute: 'classe_inertie'
+            // }, 
             {
                 title: 'Typologie de système de chauffage',
                 type: 'stacked_hzbar',
@@ -213,12 +213,12 @@ export const charts = [
                 axisLabel:'Consommation (kWhEP/(m².an))'
 
             },
-            {
-                title: 'Confort Thermique estival et hivernal',
-                type: 'stacked_bar',
-                attribute: ['confort_ete', 'confort_hiver'],
-                groupedBy: 'fonction'
-            }
+            // {
+            //     title: 'Confort Thermique estival et hivernal',
+            //     type: 'stacked_bar',
+            //     attribute: ['confort_ete', 'confort_hiver'],
+            //     groupedBy: 'fonction'
+            // }
         ]
     }
 ]
