@@ -266,7 +266,7 @@
             }
         },
         grid:{
-            top: 10,
+            top: 30,
             bottom: 100,
         },
         legend: {
@@ -318,7 +318,18 @@
                 }
             },
         },
-        yAxis: {},
+        yAxis: [
+            {
+                name: options.axisLabel,
+                nameLocation: 'end',
+                nameGap: 10,
+                nameTextStyle: {
+                    padding: [0, 0, 0, -50],
+                    align: 'left',
+                },
+            },
+            
+        ],
         series: getSeries()
     };
   

@@ -165,8 +165,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['permeabilite_air'],
                 groupedBy: 'fonction',
-                
-
+                axisLabel:'Q4Pa (m3/(h.m²))'
             }
             
         ]
@@ -185,26 +184,34 @@ export const charts = [
                 title: 'Consommation de chauffage',
                 type: 'error_bar',
                 attribute: ['conso_chauffage'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
 
             },
             {
                 title: 'Consommation d’ECS',
                 type: 'error_bar',
                 attribute: ['conso_ecs'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
             },
             {
                 title: 'Consommation  des ventilations',
                 type: 'error_bar',
                 attribute: ['conso_ventilation'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
             },
             {
                 title: 'Consommation d’éclairage',
                 type: 'error_bar',
                 attribute: ['conso_eclairage'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
             },
             {
                 title: 'Confort Thermique estival et hivernal',
