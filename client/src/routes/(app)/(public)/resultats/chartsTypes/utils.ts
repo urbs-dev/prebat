@@ -13,6 +13,19 @@ export const getTooltips = (row) => {
     else {
         return {
             trigger: "axis",
+            formatter: function (params) {
+                let result = `${params[0].axisValueLabel} <br/> `
+                params.map((param)=> {
+                    if ( param.value === 0 ) return
+                    let colorSpan =
+                        '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' +
+                        param.color +
+                        '"></span>';
+                    result = `${result} ${colorSpan} ${param.seriesName} 
+                    <span style="float:right;margin-left:20px;font-size:14px;color:#666;font-weight:900">${param.value}</span> <br/>`
+                })
+                return result;
+            },
         };
     }
 };
@@ -138,14 +151,14 @@ export const charts = [
             // },
             {
                 title: 'Typologie d’isolation principale (parois opaque)',
-                type: 'doughnut',
+                type: 'stacked_hzbar',
                 attribute: 'isolation_pvo'
             },
-            // {
-            //     title: 'Classe d’inertie',
-            //     type: 'doughnut',
-            //     attribute: 'classe_inertie'
-            // }, 
+            {
+                title: 'Classe d’inertie',
+                type: 'stacked_hzbar',
+                attribute: 'classe_inertie'
+            }, 
             {
                 title: 'Typologie de système de chauffage',
                 type: 'stacked_hzbar',
