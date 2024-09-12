@@ -126,7 +126,8 @@ export default class OperationsController
 
     public async checkAccess({session, request, response }: HttpContextContract)
     {
-        const name = request.param('name')
+        const name = request.param('name').split('.xls')[0]
+
         const operation = await OperationsModel.query()
             .where('name', name)
             .first()
