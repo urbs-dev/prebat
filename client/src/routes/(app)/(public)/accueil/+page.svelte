@@ -131,7 +131,7 @@
         background: #fff;
     }
     .presentation{
-        background-color: var(--primary-lighten-2);
+        background-color: var(--background-lighten);
         margin-bottom: 40px;
         display: flex;
         font-size: 1.3em;

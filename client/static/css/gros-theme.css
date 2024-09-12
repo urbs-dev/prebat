@@ -17,11 +17,13 @@
   --primary-lighten-3: rgba(105, 102, 158,0.3);
   --primary-darken: #0F0D44;
 
-
+  
   --secondary:#EF7757;
   --secondary-lighten: #F4A089;
   --secondary-darken: #E4472C; 
-
+  
+  --background-lighten: #f5f5f5;
+  
   /* --primary:#EF7757;
   --primary-lighten: #F4A089;
   --primary-lighten-1: rgba(239, 119, 87,0.1);
