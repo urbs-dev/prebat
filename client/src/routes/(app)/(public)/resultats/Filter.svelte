@@ -25,6 +25,8 @@
 </script>
 
 <article>
+    <h1>Filtré les resultats</h1>
+    <span class="warning">⚠️  Lorsque l’échantillon est très faible il ne peut être considéré comme une généralisation.</span>
     {#each Object.keys(filtersFields) as attribute}
         <section>
             <h3 class="flex">
@@ -68,6 +70,17 @@
 </article>
 
 <style>
+    h1 {
+        font-size: 18px;
+    }
+
+    span.warning {
+        display: block;
+        padding: 8px 0;
+        border-top: 1px solid #d1d1d1;
+        border-bottom: 1px solid #d1d1d1;
+        font-size: 12px;
+    }
     article{
         display: flex;
         flex-direction: column;
@@ -77,6 +90,8 @@
         height: fit-content;
         color: #fff;
         gap: 16px;
+        max-width: 256px;
+        padding: 16px;
     }
     section{
         display: flex;
@@ -86,7 +101,7 @@
     }
     h3 {
         color: #fff;
-        margin: 24px 4px 4px 0;
+        margin: 16px 4px 4px 0;
         font-family: Roboto;
         font-size: 15px;
         text-transform: none;
