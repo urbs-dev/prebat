@@ -1,7 +1,7 @@
 <script>
     import Heatmap from './heatmap.svelte'
-    let scenario1 = [[], [], [], [], [], [], []]
-    let scenario2 = [[]]
+    let scenario1 = Array.from({ length: 7 }).map(() => Array.from({ length: 24 }).map(() => false))
+    let scenario2 = Array.from({ length: 1 }).map(() => Array.from({ length: 52 }).map(() => false))
 
 </script>
 
