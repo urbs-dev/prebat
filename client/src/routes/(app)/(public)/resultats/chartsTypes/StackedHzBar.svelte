@@ -50,7 +50,6 @@
                             }
                         },
                     emphasis: {
-                        focus: "series",
                     },
                     data: seriesGroups.map((group) =>
                         series[group][name] ? series[group][name] : 0,

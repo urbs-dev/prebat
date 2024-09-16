@@ -13,6 +13,19 @@ export const getTooltips = (row) => {
     else {
         return {
             trigger: "axis",
+            formatter: function (params) {
+                let result = `${params[0].axisValueLabel} <br/> `
+                params.map((param)=> {
+                    if ( param.value === 0 ) return
+                    let colorSpan =
+                        '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' +
+                        param.color +
+                        '"></span>';
+                    result = `${result} ${colorSpan} ${param.seriesName} 
+                    <span style="float:right;margin-left:20px;font-size:14px;color:#666;font-weight:900">${param.value}</span> <br/>`
+                })
+                return result;
+            },
         };
     }
 };
@@ -113,37 +126,37 @@ export const charts = [
                 type: 'doughnut',
                 attribute: 'nature_travaux'
             },
-            {
-                title: 'Label énergétique',
-                type: 'doughnut',
-                attribute: 'label_energetique'
-            }
+            // {
+            //     title: 'Label énergétique',
+            //     type: 'doughnut',
+            //     attribute: 'label_energetique'
+            // }
         ]
     },
     {
         theme: 'ENVELOPPE ET SYSTEMES',
         charts: [
-            {
-                title: 'Température de consigne théorique (RT) et mesurée',
-                type: 'multiple_error_bar',
-                attribute: ['temp_consigne_rt', 'temp_consigne_mesure'],
-                groupedBy: 'fonction'
-            },
-            {
-                title: 'Ubat',
-                type: 'multiple_error_bar',
-                attribute: ['ubat_rt', 'ubat_mesure'],
-                groupedBy: 'fonction'
+            // {
+            //     title: 'Température de consigne théorique (RT) et mesurée',
+            //     type: 'multiple_error_bar',
+            //     attribute: ['temp_consigne_rt', 'temp_consigne_mesure'],
+            //     groupedBy: 'fonction'
+            // },
+            // {
+            //     title: 'Ubat',
+            //     type: 'multiple_error_bar',
+            //     attribute: ['ubat_rt', 'ubat_mesure'],
+            //     groupedBy: 'fonction'
                 
-            },
+            // },
             {
                 title: 'Typologie d’isolation principale (parois opaque)',
-                type: 'doughnut',
+                type: 'stacked_hzbar',
                 attribute: 'isolation_pvo'
             },
             {
                 title: 'Classe d’inertie',
-                type: 'doughnut',
+                type: 'stacked_hzbar',
                 attribute: 'classe_inertie'
             }, 
             {
@@ -165,8 +178,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['permeabilite_air'],
                 groupedBy: 'fonction',
-                
-
+                axisLabel:'Q4Pa (m3/(h.m²))'
             }
             
         ]
@@ -185,33 +197,41 @@ export const charts = [
                 title: 'Consommation de chauffage',
                 type: 'error_bar',
                 attribute: ['conso_chauffage'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
 
             },
             {
                 title: 'Consommation d’ECS',
                 type: 'error_bar',
                 attribute: ['conso_ecs'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
             },
             {
                 title: 'Consommation  des ventilations',
                 type: 'error_bar',
                 attribute: ['conso_ventilation'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
             },
             {
                 title: 'Consommation d’éclairage',
                 type: 'error_bar',
                 attribute: ['conso_eclairage'],
-                groupedBy: 'fonction'
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhEP/(m².an))'
+
             },
-            {
-                title: 'Confort Thermique estival et hivernal',
-                type: 'stacked_bar',
-                attribute: ['confort_ete', 'confort_hiver'],
-                groupedBy: 'fonction'
-            }
+            // {
+            //     title: 'Confort Thermique estival et hivernal',
+            //     type: 'stacked_bar',
+            //     attribute: ['confort_ete', 'confort_hiver'],
+            //     groupedBy: 'fonction'
+            // }
         ]
     }
 ]
@@ -219,6 +239,5 @@ export const charts = [
 export const filtersFields = {
     region: "Région",
     fonction : "Fonction",
-    zone_climatique : "Zone climatique",
-    isolation_pvo : "Isolation parois vertical opaques",
+    nature_travaux: "Nature des travaux",
 }

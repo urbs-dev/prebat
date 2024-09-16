@@ -64,7 +64,7 @@
         border-radius: 8px;
         width: fit-content;
         height: fit-content;
-        background-color: #fafafa;
+        background-color: #fefefe;
 
     }
     h4{

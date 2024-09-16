@@ -80,7 +80,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        background-color: var(--primary-lighten-2);
+        background-color: var(--background-lighten);
         padding: 0 16px 16px;
         border-radius: 8px;
     }
