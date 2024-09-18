@@ -1,16 +1,19 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
+import { v4 as uuidv4 } from 'uuid'
 
-export default class ReportsModel extends BaseModel
+export default class ScenariosModel extends BaseModel
 {
-	public static table = 'scenarios'
-	public static selfAssignPrimaryKey = true
+    public static table = 'scenarios'
+    
+	@beforeCreate()
+	public static async createUUID (model: ScenariosModel ) { model.id = uuidv4() }
 
     @column({ isPrimary: true })
     public id: string
 
     @column()
-    public operationId: string;
+    public operation_id: string;
 
     @column()
     public nature: string = 'occupation';
@@ -24,7 +27,6 @@ export default class ReportsModel extends BaseModel
     @column()
     public data: boolean[][] | boolean[];
 
-	
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime
