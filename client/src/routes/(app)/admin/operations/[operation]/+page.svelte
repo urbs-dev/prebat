@@ -43,7 +43,7 @@
 <style>
     section {
         padding: 40px 0;
-        max-width: 880px;
+        max-width: 920px;
     }
     h1 {
         color: var(--secondary-darken);
