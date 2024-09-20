@@ -10,7 +10,7 @@
     let chart;
 
     const getSeries = () => {
-        if (!row)
+        if (!row){
             return Object.keys(value).map((key) => ({
                 name: key,
                 type: "bar",
@@ -23,7 +23,7 @@
                 },
                 data: [value[key]],
             }));
-        else {
+        } else {
             const seriesGroups = Object.keys(value[options.groupedBy]);
             let series = {};
             let seriesName = [];
@@ -116,11 +116,11 @@
         chart.setOption(option);
     });
 
-    const update = (value) => {
+    const update = async (value) => {
         if (!chart || !value || !options) return;
-        option.yAxis = getYAxisOptions();
-        option.series = getSeries();
-        chart.setOption(option);
+        option.yAxis = await getYAxisOptions();
+        option.series = await getSeries();
+        chart.setOption(option, {"notMerge": true});
     };
 
     $: update(value)
