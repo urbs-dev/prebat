@@ -178,7 +178,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['permeabilite_air'],
                 groupedBy: 'fonction',
-                axisLabel:'Q4Pa (m3/(h.m²))'
+                axisLabel:'Q4Pa (m³/(h.m²))'
             }
             
         ]
@@ -198,7 +198,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['conso_chauffage'],
                 groupedBy: 'fonction',
-                axisLabel:'Consommation (kWhEP/(m².an))'
+                axisLabel:'Consommation (kWhₑₚ/(m².an))'
 
 
             },
@@ -207,7 +207,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['conso_ecs'],
                 groupedBy: 'fonction',
-                axisLabel:'Consommation (kWhEP/(m².an))'
+                axisLabel:'Consommation (kWhₑₚ/(m².an))'
 
             },
             {
@@ -215,7 +215,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['conso_ventilation'],
                 groupedBy: 'fonction',
-                axisLabel:'Consommation (kWhEP/(m².an))'
+                axisLabel:'Consommation (kWhₑₚ/(m².an))'
 
             },
             {
@@ -223,7 +223,7 @@ export const charts = [
                 type: 'error_bar',
                 attribute: ['conso_eclairage'],
                 groupedBy: 'fonction',
-                axisLabel:'Consommation (kWhEP/(m².an))'
+                axisLabel:'Consommation (kWhₑₚ/(m².an))'
 
             },
             // {
