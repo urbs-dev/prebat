@@ -21,7 +21,6 @@
                 show: true,
                 orient: "horizontal",
                 bottom: 20,
-                type: "scroll",
             },
             animation: true,
             series: [
@@ -57,9 +56,9 @@
 
 <style>
     div {
-        min-width: 250px;
-        max-width: 250px;
-        min-height: 250px;
-        max-height: 250px;
+        min-width: 400px;
+        max-width: 400px;
+        min-height: 400px;
+        max-height: 400px;
     }
 </style>

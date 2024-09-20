@@ -360,8 +360,8 @@
 <div bind:this={ctx}></div>
 <style>
     div {
-        min-width: 500px;
-        min-height: 250px;
-        max-height: 250px;
+        min-width: 600px;
+        min-height: 400px;
+        max-height: 400px;
     }
 </style>

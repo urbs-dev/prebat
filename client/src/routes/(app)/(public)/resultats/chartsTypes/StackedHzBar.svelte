@@ -101,14 +101,13 @@
         legend: {
             show: true,
             orient: "horizontal",
-            type: "scroll",
             bottom: 20,
         },
         grid: {
             left: "3%",
             right: '4%',
             top: 10,
-            bottom: "20%",
+            bottom: "30%",
             containLabel: true,
         },
         xAxis: {
@@ -138,8 +137,8 @@
 
 <style>
     div {
-        min-width: 450px;
-        min-height: 250px;
-        max-height: 250px;
+        min-width: 650px;
+        min-height: 400px;
+        max-height: 400px;
     }
 </style>
