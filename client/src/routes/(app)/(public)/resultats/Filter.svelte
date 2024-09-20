@@ -2,7 +2,7 @@
     import { filtersFields, getFilterValues } from './chartsTypes/utils'
     export let filters = {}
     export let defaultAttributes = {}
-    export let attributes
+    export let attributes = {}
 
     const toggle = (attribute, key) => {
         if (!filters[attribute]) filters[attribute] = []  
@@ -22,10 +22,19 @@
         return name
     }
 
+    $:console.log(attributes.rows);
+    
+
 </script>
 
 <article>
     <h1>Filtré les resultats</h1>
+    <span class="info">Nombres d'échantillons: 
+        <b>
+            {attributes?.rows ? attributes.rows.length : 0}
+        </b>
+    </span>  
+
     <span class="warning">⚠️  Lorsque l’échantillon est très faible il ne peut être considéré comme une généralisation.</span>
     {#each Object.keys(filtersFields) as attribute}
         <section>
@@ -187,5 +196,9 @@
     }
     .filter button:hover .tooltip{
         display: block;
+    }
+    span.info{
+        font-size: 12px;
+        color: #fff;
     }
 </style>
