@@ -21,10 +21,6 @@
         if (name.length > 15) return name.substring(0,15) +  "..."
         return name
     }
-
-    $:console.log(attributes.rows);
-    
-
 </script>
 
 <article>

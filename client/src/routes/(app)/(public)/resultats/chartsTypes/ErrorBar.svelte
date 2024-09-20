@@ -78,8 +78,12 @@
             if (!barData[attribute]) return;
             Object.keys(deviations[attribute]).map((key, y) => {
                 if (!arr[y]) arr[y] = [y];
-                arr[y].push(round(Number(barData[attribute][y]) - deviations[attribute][key]))
-                arr[y].push(round(Number(barData[attribute][y]) + deviations[attribute][key]))
+                let min = round(Number(barData[attribute][y]) - deviations[attribute][key]);
+                if (min < 0) min = 0;
+                let max = round(Number(barData[attribute][y]) + deviations[attribute][key]);
+                if (max < 0) max = 0;
+                arr[y].push(min)
+                arr[y].push(max)
             })
         })
         deviations = arr;
@@ -254,7 +258,7 @@
        return series
     }
 
-    let barData = getBarData(value.rows);
+    let barData;
     let ctx;
     let chart;
 
@@ -329,17 +333,19 @@
                 },
             },
             
-        ],
-        series: getSeries()
+        ]
     };
   
     onMount(async () => {
         chart = echarts.init(ctx);
-        chart.setOption(option);
+        if (!value || !options) return;
+
+        updated(value);
     });
 
     const updated = async (value) => {
-        if (!chart || !value) return;
+        if (!chart || !value  || !options) return;
+        if (!options.groupedBy || !value.rows) return;
         range = {}
         categoryData = await getCategoreis(value, options.groupedBy);
         barData = await getBarData(value.rows);

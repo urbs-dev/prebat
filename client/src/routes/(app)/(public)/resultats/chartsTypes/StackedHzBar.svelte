@@ -2,14 +2,20 @@
     import * as echarts from "echarts";
     import { getTooltips } from "./utils";
     import { onMount } from "svelte";
-    export let value;
+    export let value ;
     export let options = {};
     export let row = false;
 
     let ctx;
     let chart;
 
+    const getSeriesGroups = () => {
+        if (!options.groupedBy || !value ) return;
+        return Object.keys(value[options.groupedBy])
+    }
+
     const getSeries = () => {
+        if (!value || !options) return;
         if (!row){
             return Object.keys(value).map((key) => ({
                 name: key,
@@ -24,7 +30,7 @@
                 data: [value[key]],
             }));
         } else {
-            const seriesGroups = Object.keys(value[options.groupedBy]);
+            const seriesGroups = getSeriesGroups()
             let series = {};
             let seriesName = [];
             let result = [];
@@ -67,10 +73,11 @@
                 data: [""],
             };
         else {
+            if (!options.groupedBy) return;
             return {
                 type: "category",
                 min: 1,
-                data: Object.keys(value[options.groupedBy]),
+                data: getSeriesGroups(),
                 axisLabel: {
                     interval: 0,
                     rotate: 0,
@@ -106,19 +113,20 @@
         },
         xAxis: {
             type: "value",
-        },
-        yAxis: getYAxisOptions(),
-        series: getSeries(),
+        }
     };
 
     onMount(async () => {
         chart = echarts.init(ctx);
-        chart.setOption(option);
+        if ( !value || !options) return;
+        update(value);
     });
 
     const update = async (value) => {
         if (!chart || !value || !options) return;
-        option.yAxis = await getYAxisOptions();
+        if (row && !value.rows ) return;
+
+        option.yAxis = await getYAxisOptions(value);
         option.series = await getSeries();
         chart.setOption(option, {"notMerge": true});
     };
