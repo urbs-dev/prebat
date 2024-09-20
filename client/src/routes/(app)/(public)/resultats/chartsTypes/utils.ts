@@ -116,11 +116,11 @@ export const charts = [
                 type: 'stacked_hzbar',
                 attribute: 'fonction',
             },
-            {
-                title: 'Zone climatique',
-                type: 'bar',
-                attribute: 'zone_climatique'
-            },
+            // {
+            //     title: 'Zone climatique',
+            //     type: 'bar',
+            //     attribute: 'zone_climatique'
+            // },
             {
                 title: 'Nature des travaux réalisés',
                 type: 'doughnut',
