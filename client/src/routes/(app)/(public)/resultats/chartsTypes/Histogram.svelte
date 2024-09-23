@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as echarts from 'echarts';
     import { onMount } from 'svelte';
-    import { round } from './utils.ts'
+    import { colors, round } from './utils.ts'
 
     export let value;
     export let options
@@ -30,6 +30,7 @@
             type: "value",
         },
         series: [],
+        color: colors
     };
     const getSerie = (value) => {
         let rows = value.rows

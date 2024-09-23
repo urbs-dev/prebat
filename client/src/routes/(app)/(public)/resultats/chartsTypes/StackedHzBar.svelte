@@ -1,6 +1,6 @@
 <script>
     import * as echarts from "echarts";
-    import { getTooltips } from "./utils";
+    import { getTooltips, colors } from "./utils";
     import { onMount } from "svelte";
     export let value ;
     export let options = {};
@@ -17,12 +17,22 @@
     const getSeries = () => {
         if (!value || !options) return;
         if (!row){
-            return Object.keys(value).map((key) => ({
+            return Object.keys(value).map((key, i) => ({
                 name: key,
                 type: "bar",
                 stack: "total",
                 label: {
                     show: true,
+                },
+                itemStyle: {
+                    decal: {
+                        // symbole achuré
+                        color: `rgba(0, 0, 0, ${i % 2 === 0 ? 0 : 0.1})`,
+                        borderWidth: 1,
+                        dashArrayX: [1, 0],
+                        dashArrayY: [2, 5],
+                        rotation: 45,
+                    },
                 },
                 emphasis: {
                     focus: "series",
@@ -112,7 +122,8 @@
         },
         xAxis: {
             type: "value",
-        }
+        },
+        color: colors
     };
 
     onMount(async () => {

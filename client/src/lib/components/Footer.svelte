@@ -387,7 +387,7 @@
     footer {
         position: relative;
         border-top: 5px solid var(--ternary);
-        background: #fafafa;
+        background: var(----background-lighten);
     }
     section {
         display: flex;

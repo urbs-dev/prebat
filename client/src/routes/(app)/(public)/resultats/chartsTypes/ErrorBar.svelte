@@ -1,7 +1,7 @@
 <script>
     import * as echarts from "echarts";
     import { onMount } from "svelte";
-    import { getCategoreis, deviation, round } from "./utils";
+    import { getCategoreis, deviation, round, colors } from "./utils";
     export let value;
     export let row = false;
     export let options = {};
@@ -333,7 +333,8 @@
                 },
             },
             
-        ]
+        ],
+        color: colors
     };
   
     onMount(async () => {

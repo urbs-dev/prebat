@@ -247,3 +247,14 @@ export const filtersFields = {
     fonction : "Fonction",
     nature_travaux: "Nature des travaux",
 }
+
+export const colors = [
+    "rgba(190, 205, 67, 1)",
+    "rgba(47, 161, 124, 1)",
+    "rgba(81, 189, 169, 1)",
+    "rgba(51, 166, 189, 1)",
+    "rgba(121, 198, 216, 1)",
+    "rgba(255, 125, 36, 1)",
+    "rgba(255, 78, 31, 1)",
+    "rgba(137, 185, 65, 1)"
+]

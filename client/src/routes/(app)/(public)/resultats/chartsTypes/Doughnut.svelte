@@ -2,6 +2,7 @@
     import * as echarts from 'echarts';
 
     import { onMount } from 'svelte';
+    import { colors } from './utils';
     export let value;
     
     let canvas;
@@ -34,7 +35,8 @@
                     },
                     data: Object.keys(value).map(key => ({value: value[key], name: key}))
                 }
-            ]
+            ],
+            color: colors
     }
 
     onMount(async () => {
