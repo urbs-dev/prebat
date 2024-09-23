@@ -122,6 +122,12 @@ export const charts = [
             //     attribute: 'zone_climatique'
             // },
             {
+                title: 'Consomation totale des habitations collectives',
+                type: 'histogram',
+                attribute: 'conso_tot',
+                fonction: 'habitat collectif'
+            },
+            {
                 title: 'Nature des travaux réalisés',
                 type: 'doughnut',
                 attribute: 'nature_travaux'
