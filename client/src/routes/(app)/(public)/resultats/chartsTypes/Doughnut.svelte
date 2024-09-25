@@ -1,10 +1,11 @@
 <script>
     import * as echarts from 'echarts';
-
     import { onMount } from 'svelte';
-    import { colors } from './utils';
+    import { colors, getCSV } from './utils';
     export let value;
-    
+    export let options;
+    export const downloadCSV = () => getCSV(option.series, 'doughnut', options.title);
+
     let canvas;
     let chart;
 
@@ -53,8 +54,11 @@
 
     $: update(value);
 </script>
+<article>
 
-<div bind:this={canvas}></div>
+
+    <div bind:this={canvas}></div>
+</article>
 
 <style>
     div {
@@ -62,5 +66,10 @@
         max-width: 400px;
         min-height: 400px;
         max-height: 400px;
+    }
+
+    button {
+        margin-top: 10px;
+        margin-left: 10px;
     }
 </style>

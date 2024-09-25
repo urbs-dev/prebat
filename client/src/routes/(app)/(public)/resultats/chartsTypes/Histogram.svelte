@@ -1,10 +1,11 @@
 <script lang="ts">
     import * as echarts from 'echarts';
     import { onMount } from 'svelte';
-    import { colors, round } from './utils.ts'
+    import { colors, round,getCSV } from './utils.ts'
 
     export let value;
     export let options
+    export const downloadCSV = () => getCSV(option.series, 'histogram', options.title);
     
     let ctx;
     let chart;
@@ -83,8 +84,9 @@
 
     const updated = async (value) => {
         if (!chart || !value || !options ) return;
+        if (!value.rows) return
         option.series = await getSerie(value)
-        option.xAxis = await getxAxis(value)
+        option.xAxis = await getxAxis()
         chart.setOption(option);
     };
 

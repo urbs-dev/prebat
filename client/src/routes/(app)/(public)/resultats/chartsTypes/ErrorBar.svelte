@@ -1,10 +1,11 @@
 <script>
     import * as echarts from "echarts";
     import { onMount } from "svelte";
-    import { getCategoreis, deviation, round, colors } from "./utils";
+    import { getCategoreis, deviation, round, colors, getCSV } from "./utils";
     export let value;
     export let row = false;
     export let options = {};
+    export const downloadCSV = () => getCSV(option.series, 'double_entry', options.title, categoryData );
 
     let range = {}
     let rawData = {};

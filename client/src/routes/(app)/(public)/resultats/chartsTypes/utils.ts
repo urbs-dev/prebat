@@ -258,3 +258,94 @@ export const colors = [
     "rgba(255, 78, 31, 1)",
     "rgba(137, 185, 65, 1)"
 ]
+
+export const getCSV = async (series, type, title, yAxis = false) => {
+    const csv = await getCSVData(series, type, yAxis)
+    if (!csv) return false
+
+    // return true
+
+    let blob = new Blob([csv], { type: 'text/csv' });
+    let url = window.URL.createObjectURL(blob);
+    let link = document.createElement('a');
+    
+    link.href = url;
+    link.setAttribute('hidden', '');
+    link.style.visibility = "hidden";    
+    link.setAttribute("download", title);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return true
+}
+
+const getCSVData = (series, type, yAxis) => {
+    let csv = ""
+    let headers = ""
+    let content = ""
+
+    if ( type === 'doughnut'){
+        const data = series[0].data
+        data.map((row, i)=>{
+            headers += `${row.name}`
+            content += `${row.value}`
+            if (i < data.length - 1){
+                headers += ";"
+                content += ";"
+            }
+        })
+    }
+    else if ( type === 'stacked_hzbar') {
+        const data = series
+        data.map((row, i)=>{
+            headers += `${row.name}`
+            if (row.data[0] === "" )
+                content += "0"
+            else
+                content += `${row.data[0]}`
+
+            if (i < data.length - 1){
+                headers += ";"
+                content += ";"
+            }
+        })
+    }
+    else if ( type === 'histogram') {
+        const data = series
+
+        data.map((col, i)=>{
+            headers += `${col.name}`
+            if (i < data.length - 1){
+                headers += ";"
+            }
+        })
+        Array.from({ length: data[0].data.length }).map((_, i)=>{
+            data.map((col, y)=>{
+                content += `${col.data[i]}`
+                if (y < data.length - 1){
+                    content += ";"
+                }
+            })
+            content += "\n"
+        })
+    }
+    else if ( type === 'double_entry') {
+        const data = series
+        headers += " ;"
+        data.map((row, i)=>{
+            headers += `${row.name}`
+            if (i < data.length - 1){
+                headers += ";"
+            }
+        })
+        yAxis.map((row, i)=>{
+            content += `${row}`
+            data.map((col, y)=>{
+                content += `;${col.data[i]}`
+            })
+            content += "\n"
+        })
+    }
+    csv = `${headers}\n${content}`
+    return csv
+}

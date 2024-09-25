@@ -1,10 +1,16 @@
 <script>
     import * as echarts from "echarts";
-    import { getTooltips, colors } from "./utils";
+    import { getTooltips, colors, getCSV } from "./utils";
     import { onMount } from "svelte";
     export let value ;
     export let options = {};
     export let row = false;
+    export const downloadCSV = () => {
+        if (!row) 
+            return getCSV(option.series, 'stacked_hzbar', options.title)
+        else 
+            return getCSV(option.series, 'double_entry', options.title, option.yAxis.data)
+    };
 
     let ctx;
     let chart;
@@ -14,7 +20,7 @@
         return Object.keys(value[options.groupedBy])
     }
 
-    const getSeries = () => {
+    const getSeries = async () => {
         if (!value || !options) return;
         if (!row){
             return Object.keys(value).map((key, i) => ({
@@ -40,7 +46,7 @@
                 data: [value[key]],
             }));
         } else {
-            const seriesGroups = getSeriesGroups()
+            const seriesGroups = await getSeriesGroups()
             let series = {};
             let seriesName = [];
             let result = [];
