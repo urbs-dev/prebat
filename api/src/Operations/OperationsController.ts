@@ -17,10 +17,18 @@ export default class OperationsController
         return response.send(operations)
     }
 
-    public async tree({ response }: HttpContextContract)
+    public async tree({ session, response }: HttpContextContract)
     {
-        const tree = await OperationsTree.all()
-        return response.send(tree)
+        if (!session) return response.send({ error: 'Acces denied' })
+        if (!session?.roles?.USER_ADMIN && !session?.roles?.GLOBAL_ADMIN)
+        {
+            const tree = await OperationsTree.findByOwner(session.id)
+            return response.send(tree)
+        }
+        else{
+            const tree = await OperationsTree.all()
+            return response.send(tree)
+        }
     }
 
     public async store({ request, response, session }: HttpContextContract)

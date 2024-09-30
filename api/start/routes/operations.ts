@@ -4,7 +4,7 @@ Route.group( () => {
 
     Route.get('operations', 'OperationsController.index')
 
-    Route.get('operations/tree', 'OperationsController.tree').middleware('isUserAdmin')
+    Route.get('operations/tree', 'OperationsController.tree')
 
     Route.get('operations/name/:prefix', 'OperationsController.getIndex').middleware('isUserAdmin')
 
