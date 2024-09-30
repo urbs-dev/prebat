@@ -6,7 +6,7 @@
     import Doughnut from './chartsTypes/Doughnut.svelte';
     import Bar from './chartsTypes/Bar.svelte';
     import StackedHzBar from './chartsTypes/StackedHzBar.svelte';
-    import StackedBar from './chartsTypes/StackedBar.svelte';
+    import Hzbar from './chartsTypes/Hzbar.svelte';
     import ErrorBar from './chartsTypes/ErrorBar.svelte';
     import MultipleErrorBar from './chartsTypes/MultipleErrorBar.svelte';
     import GroupedBar from './chartsTypes/GroupedBar.svelte';
@@ -14,7 +14,7 @@
     let downloadCSV
     const TYPE = {
         'stacked_hzbar': StackedHzBar,
-        'stacked_bar': StackedBar,
+        'hzbar': Hzbar,
         'bar': Bar,
         'doughnut': Doughnut,
         'error_bar': ErrorBar,
@@ -64,7 +64,7 @@
                 {#key values}
                     <svelte:component this={TYPE[chart.type]} value={getArrayValues(chart.attribute)} options={chart} bind:downloadCSV/>
                 {/key}
-            {:else if valueIsSingle(values ,chart.attribute)}
+            {:else if valueIsSingle(values ,chart.attribute) && !chart?.rows}
                 <svelte:component this={TYPE[chart.type]} bind:value={values[chart.attribute]} options={chart} bind:downloadCSV/>
             {:else}
                 <svelte:component this={TYPE[chart.type]} bind:value={values} options={chart} row={true} bind:downloadCSV/>
