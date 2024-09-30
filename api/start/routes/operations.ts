@@ -8,7 +8,7 @@ Route.group( () => {
 
     Route.get('operations/name/:prefix', 'OperationsController.getIndex').middleware('isUserAdmin')
 
-    Route.get('operations/access/:name', 'OperationsController.checkAccess').middleware('isUserAdmin')
+    Route.get('operations/access/:name', 'OperationsController.checkAccess')
 
     Route.post('operations', 'OperationsController.store').middleware('isUserAdmin')
 

@@ -31,15 +31,18 @@ export class Upload {
         if (!filename) return
         const response = await fetch(`BASE_URL/prebat.api/operations/access/${filename}`)
         const json = await response.json()
-        if (json.access && !json.error) {
+
+        if (!json.alreadyExists) // if operation doesn't exist
+        { 
             return json
         }
-        else if (json.error && json.access)
+        else if (json.alreadyExists)  // if operation exists
         {
-            return { alreadyExists: true }
+            if (json.access) return { alreadyExists: true }
+            if (!json.access) return { error: `Le fichier ${filename} n'est pas accessible` }
         }
         else {
-            return { error: "Une erreur est survenue lors de la vérification" }
+            return { error: `Une erreur est survenue lors de la vérification` }
         }
     }
 
