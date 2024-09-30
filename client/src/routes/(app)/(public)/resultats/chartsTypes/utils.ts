@@ -113,8 +113,9 @@ export const charts = [
         charts: [
             {
                 title: 'Typologie et fonction principale des bâtiments',
-                type: 'stacked_hzbar',
+                type: 'hzbar',
                 attribute: 'fonction',
+                rows: true
             },
             // {
             //     title: 'Zone climatique',
@@ -205,8 +206,12 @@ export const charts = [
                 attribute: ['conso_chauffage'],
                 groupedBy: 'fonction',
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
-
-
+            },
+            {
+                title: 'Consommation de chauffage',
+                type: 'histogram',
+                attribute: 'conso_chauffage',
+                fonction: 'habitat collectif'
             },
             {
                 title: 'Consommation d’ECS',
@@ -262,20 +267,38 @@ export const colors = [
 export const getCSV = async (series, type, title, yAxis = false) => {
     const csv = await getCSVData(series, type, yAxis)
     if (!csv) return false
-
     // return true
 
-    let blob = new Blob([csv], { type: 'text/csv' });
-    let url = window.URL.createObjectURL(blob);
-    let link = document.createElement('a');
+    download(csv, title)
     
-    link.href = url;
-    link.setAttribute('hidden', '');
-    link.style.visibility = "hidden";    
-    link.setAttribute("download", title);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    return true
+}
+export const getFilterasCSV = async (filters) => {
+    let csv = ""
+    let headers = ""
+    let content = ""
+    console.log(filters);
+    
+    Object.keys(filters[0]).map((key, i)=>{
+        headers += `${key}`
+        if (i < Object.keys(filters[0]).length - 1){
+            headers += ";"
+        }
+    })
+    console.log(headers);
+    
+    filters.map((row, i)=>{
+        Object.keys(row).map((key, y)=>{
+            content += `${row[key]}`
+            if (y < Object.keys(row).length - 1){
+                content += ";"
+            }
+        })
+        content += "\n"
+    })
+    csv = `${headers}\n${content}`
+    if (!csv) return false
+    download(csv, "Résultats - Filtres")
     return true
 }
 
@@ -348,4 +371,18 @@ const getCSVData = (series, type, yAxis) => {
     }
     csv = `${headers}\n${content}`
     return csv
+}
+
+const download = (csv, title) => {
+    let blob = new Blob([csv], { type: 'text/csv' });
+    let url = window.URL.createObjectURL(blob);
+    let link = document.createElement('a');
+
+    link.href = url;
+    link.setAttribute('hidden', '');
+    link.style.visibility = "hidden";    
+    link.setAttribute("download", title);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }

@@ -1,5 +1,5 @@
 <script>
-    import { filtersFields, getFilterValues } from './chartsTypes/utils'
+    import { filtersFields, getFilterValues, getFilterasCSV } from './chartsTypes/utils'
     export let filters = {}
     export let defaultAttributes = {}
     export let attributes = {}
@@ -32,6 +32,12 @@
     </span>  
 
     <span class="warning">⚠️  Lorsque l’échantillon est très faible il ne peut être considéré comme une généralisation.</span>
+
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <span class="download" on:click={() => getFilterasCSV(attributes.rows)}>
+        Télecharger les données filtré <i class="micon">file_download</i>
+    </span>
     {#each Object.keys(filtersFields) as attribute}
         <section>
             <h3 class="flex">
@@ -196,5 +202,18 @@
     span.info{
         font-size: 12px;
         color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+    span.download{
+        cursor: pointer;
+        font-size: 12px;
+        display: flex;
+        color: var(--secondary-lighten);
+    }
+    span.download i{
+        font-size: 18px;
+        margin-right: 8px;
     }
 </style>
