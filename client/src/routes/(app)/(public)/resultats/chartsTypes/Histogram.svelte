@@ -1,8 +1,8 @@
 <script lang="ts">
     import * as echarts from 'echarts';
     import { onMount } from 'svelte';
-    import { colors, round,getCSV } from './utils.ts'
-
+    import { colors, round, getCSV } from './utils.ts'
+    import { Select }  from 'gros/form'
     export let value;
     export let options
     export const downloadCSV = () => getCSV(option.series, 'histogram', options.title);
@@ -10,6 +10,8 @@
     let ctx;
     let chart;
     let operationCount = 0
+    let fonction = "Tous"
+    let fonctions = ["Tous"]
 
     let option = {
         // toolbox: {
@@ -40,6 +42,7 @@
 
         rows.sort((a, b) => a[attribute] - b[attribute]);
         rows.forEach(row => {
+            if ( fonction !== "Tous" && row.fonction !== fonction) return
             if (row[attribute] === null) return
             if ( row.nature_travaux === "renovation") {
                 series.renovation.push(round(row[attribute]))
@@ -77,7 +80,7 @@
             },
             {
                 position: "bottom",
-                data: [options.fonction],
+                data: [fonction],
             }
         ]
     }
@@ -85,6 +88,7 @@
     const updated = async (value) => {
         if (!chart || !value || !options ) return;
         if (!value.rows) return
+        fonctions = ["Tous", ...Object.keys(value.fonction)]
         option.series = await getSerie(value)
         option.xAxis = await getxAxis()
         chart.setOption(option);
@@ -97,15 +101,35 @@
 
     $: updated(value);
 
+    $: fonction, updated(value)
 
 </script>
+<section>
+    {#key fonctions}
+        
+    <Select
+        icon = "filter_list"
+        label="Fonction"
+        options={fonctions}
+        bind:value={fonction}
+    />
+    {/key}
 
-<div bind:this={ctx}></div>
-
+    <div bind:this={ctx}></div>
+</section>
 <style>
-    div {
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        
         min-width: 600px;
         min-height: 400px;
         max-height: 400px;
     }
+    div{
+        width: 100%;
+        height: 100%;
+    }
+ 
 </style>

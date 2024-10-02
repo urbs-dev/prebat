@@ -118,10 +118,10 @@ export const charts = [
                 rows: true
             },
             {
-                title: 'Consommation de totale [kWhₑₚ/(m².an)]', // TODO: duplicate with other fonction
+                title: 'Consommation de totale [kWhₑₚ/(m².an)]', 
                 type: 'histogram',
                 attribute: 'conso_tot',
-                fonction: 'habitat collectif' // TODO : change when new fonction will be added
+                fonction: 'MI' // TODO : change when new fonction will be added
             },
             {
                 title: 'Nature des travaux réalisés',
@@ -177,10 +177,9 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation de chauffage détaillée', // TODO: duplicate with other fonction
+                title: 'Consommation de chauffage détaillée', 
                 type: 'histogram',
                 attribute: 'conso_chauffage',
-                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
             {
                 title: "Consommation d'ECS",
@@ -191,10 +190,9 @@ export const charts = [
 
             },
             {
-                title: "Consommation d'ECS détaillée", // TODO: duplicate with other fonction
+                title: "Consommation d'ECS détaillée", 
                 type: 'histogram',
                 attribute: 'conso_ecs',
-                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
             {
                 title: 'Consommation  des ventilations',
@@ -211,10 +209,9 @@ export const charts = [
             //     rows: true
             // },
             {
-                title: 'Consommation des ventilations détaillée', // TODO: duplicate with other fonction
+                title: 'Consommation des ventilations détaillée', 
                 type: 'histogram',
                 attribute: 'conso_ventilation',
-                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
             {
                 title: 'Consommation d’éclairage',
@@ -224,10 +221,9 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation d’éclairage détaillée', // TODO: duplicate with other fonction
+                title: 'Consommation d’éclairage détaillée', 
                 type: 'histogram',
                 attribute: 'conso_eclairage',
-                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
         ]
     }
