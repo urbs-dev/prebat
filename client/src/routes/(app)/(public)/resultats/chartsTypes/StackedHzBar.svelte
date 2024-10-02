@@ -73,9 +73,10 @@
                         },
                     emphasis: {
                     },
-                    data: seriesGroups.map((group) =>
-                        series[group][name] ? series[group][name] : 0,
-                    ),
+                    data: seriesGroups.map((group) => {
+                        if (!series[group]) return 0;
+                        return series[group][name] ? series[group][name] : 0;
+                    }),
                 });
             });
             return result;
@@ -149,7 +150,6 @@
 
     $: update(value)
 </script>
-
 <div bind:this={ctx}></div>
 
 <style>

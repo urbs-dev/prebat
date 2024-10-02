@@ -42,6 +42,7 @@
         categoryData.map((key, i) => {
             Object.keys(data).map((attribute, y) => {
                 const arr = data[attribute][key];
+                if (!arr) return;
                 if (!result[attribute]) result[attribute] = [];
                 result[attribute][i] = round(arr.reduce((acc, curr)=> {
                     return Number(acc) + Number(curr)
@@ -360,6 +361,7 @@
 </script>
 
 <div bind:this={ctx}></div>
+
 <style>
     div {
         min-width: 600px;
