@@ -117,61 +117,37 @@ export const charts = [
                 attribute: 'fonction',
                 rows: true
             },
-            // {
-            //     title: 'Zone climatique',
-            //     type: 'bar',
-            //     attribute: 'zone_climatique'
-            // },
             {
-                title: 'Consomation totale des habitations collectives',
+                title: 'Consommation de totale [kWhₑₚ/(m².an)]', // TODO: duplicate with other fonction
                 type: 'histogram',
                 attribute: 'conso_tot',
-                fonction: 'habitat collectif'
+                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
             {
                 title: 'Nature des travaux réalisés',
                 type: 'doughnut',
                 attribute: 'nature_travaux'
             },
-            // {
-            //     title: 'Label énergétique',
-            //     type: 'doughnut',
-            //     attribute: 'label_energetique'
-            // }
         ]
     },
     {
         theme: 'ENVELOPPE ET SYSTEMES',
         charts: [
-            // {
-            //     title: 'Température de consigne théorique (RT) et mesurée',
-            //     type: 'multiple_error_bar',
-            //     attribute: ['temp_consigne_rt', 'temp_consigne_mesure'],
-            //     groupedBy: 'fonction'
-            // },
-            // {
-            //     title: 'Ubat',
-            //     type: 'multiple_error_bar',
-            //     attribute: ['ubat_rt', 'ubat_mesure'],
-            //     groupedBy: 'fonction'
-                
-            // },
             {
                 title: 'Typologie d’isolation principale (parois opaque)',
                 type: 'stacked_hzbar',
                 attribute: 'isolation_pvo'
             },
-            {
-                title: 'Classe d’inertie',
-                type: 'stacked_hzbar',
-                attribute: 'classe_inertie'
-            }, 
+            // {        // TODO: add when data will be available
+            //     title: 'Système constructif',
+            //     type: 'stacked_hzbar',
+            //     attribute: 'systeme_constructif',
+            // }, 
             {
                 title: 'Typologie de système de chauffage',
                 type: 'stacked_hzbar',
                 attribute: 'systeme_chauffage',
                 groupedBy: "fonction"
-
             }, 
             {
                 title: 'Typologie de système d’ECS',
@@ -193,13 +169,6 @@ export const charts = [
     {
         theme: 'Consommation production',
         charts: [
-            // {
-            //     title: 'Consommation totale',
-            //     type: 'grouped_bar',
-            //     attribute: 'conso_tot',
-            //     groupedBy: 'fonction',
-            //     check: {attribute: 'nature_travaux', value: 'neuf'}
-            // },
             {
                 title: 'Consommation de chauffage',
                 type: 'error_bar',
@@ -208,18 +177,24 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation de chauffage',
+                title: 'Consommation de chauffage détaillée', // TODO: duplicate with other fonction
                 type: 'histogram',
                 attribute: 'conso_chauffage',
-                fonction: 'habitat collectif'
+                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
             {
-                title: 'Consommation d’ECS',
+                title: "Consommation d'ECS",
                 type: 'error_bar',
                 attribute: ['conso_ecs'],
                 groupedBy: 'fonction',
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
 
+            },
+            {
+                title: "Consommation d'ECS détaillée", // TODO: duplicate with other fonction
+                type: 'histogram',
+                attribute: 'conso_ecs',
+                fonction: 'habitat collectif' // TODO : change when new fonction will be added
             },
             {
                 title: 'Consommation  des ventilations',
@@ -229,20 +204,31 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
 
             },
+            // {      // TODO: add when data will be available
+            //     title: 'Systeme de ventilation',
+            //     type: 'hzbar',
+            //     attribute: 'systeme_ventilation',
+            //     rows: true
+            // },
+            {
+                title: 'Consommation des ventilations détaillée', // TODO: duplicate with other fonction
+                type: 'histogram',
+                attribute: 'conso_ventilation',
+                fonction: 'habitat collectif' // TODO : change when new fonction will be added
+            },
             {
                 title: 'Consommation d’éclairage',
                 type: 'error_bar',
                 attribute: ['conso_eclairage'],
                 groupedBy: 'fonction',
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
-
             },
-            // {
-            //     title: 'Confort Thermique estival et hivernal',
-            //     type: 'stacked_bar',
-            //     attribute: ['confort_ete', 'confort_hiver'],
-            //     groupedBy: 'fonction'
-            // }
+            {
+                title: 'Consommation d’éclairage détaillée', // TODO: duplicate with other fonction
+                type: 'histogram',
+                attribute: 'conso_eclairage',
+                fonction: 'habitat collectif' // TODO : change when new fonction will be added
+            },
         ]
     }
 ]
