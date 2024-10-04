@@ -48,7 +48,7 @@
         font-size: 20px;
     }
     button:hover{
-        background-color:#f5f5f5;
+        background-color: var(--background-lighten);
     }
     ul{
         min-width:200px;

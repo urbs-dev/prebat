@@ -1,7 +1,7 @@
 <script>
     import * as echarts from "echarts";
     import { onMount } from "svelte";
-    import { getCategoreis, deviation, round } from "./utils";
+    import { getCategoreis, deviation, round, colors } from "./utils";
     export let value;
     export let options = {};
 
@@ -305,7 +305,7 @@
             series.push({
                 type: 'bar',
                 name: `moyenne ${key}`,
-                data: barData[key]
+                data: barData[key],
             })
         })
         getMinMax().map((minMax, i) => {
@@ -383,7 +383,8 @@
             },
         },
         yAxis: {},
-        series: getSeries()
+        series: getSeries(),
+        color: colors
     };
   
     onMount(async () => {

@@ -17,10 +17,18 @@ export default class OperationsController
         return response.send(operations)
     }
 
-    public async tree({ response }: HttpContextContract)
+    public async tree({ session, response }: HttpContextContract)
     {
-        const tree = await OperationsTree.all()
-        return response.send(tree)
+        if (!session) return response.send({ error: 'Acces denied' })
+        if (!session?.roles?.USER_ADMIN && !session?.roles?.GLOBAL_ADMIN)
+        {
+            const tree = await OperationsTree.findByOwner(session.id)
+            return response.send(tree)
+        }
+        else{
+            const tree = await OperationsTree.all()
+            return response.send(tree)
+        }
     }
 
     public async store({ request, response, session }: HttpContextContract)
@@ -124,15 +132,22 @@ export default class OperationsController
         return response.send({ index:  operations.length + 1 })
     }
 
-    public async checkAccess({session, request, response }: HttpContextContract)
+    public async checkAccess({request, response, session }: HttpContextContract)
     {
         const name = request.param('name').split('.xls')[0]
 
         const operation = await OperationsModel.query()
             .where('name', name)
             .first()
+            
+        if (!session ) return response.send({ error: 'You must be logged in', access: false })
+            
         if(!operation) return response.send({ access: true })
-        if (operation.owner === session.id) return response.send({ access: true })
-        return response.send({ error: 'Operation already exists', access: true}) // TODO: check access when we store uploder
+        if (operation.owner === session.id) return response.send({access: true, alreadyExists: true})
+
+            if (session?.roles?.USER_ADMIN || session?.roles?.GLOBAL_ADMIN){
+            return response.send({access: true,  alreadyExists: true})
+        }
+        return response.send({access: false,  alreadyExists: true})
     }
 }

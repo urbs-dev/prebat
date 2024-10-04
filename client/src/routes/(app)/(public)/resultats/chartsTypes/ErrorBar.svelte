@@ -1,10 +1,11 @@
 <script>
     import * as echarts from "echarts";
     import { onMount } from "svelte";
-    import { getCategoreis, deviation, round } from "./utils";
+    import { getCategoreis, deviation, round, colors, getCSV } from "./utils";
     export let value;
     export let row = false;
     export let options = {};
+    export const downloadCSV = () => getCSV(option.series, 'double_entry', options.title, categoryData );
 
     let range = {}
     let rawData = {};
@@ -41,6 +42,7 @@
         categoryData.map((key, i) => {
             Object.keys(data).map((attribute, y) => {
                 const arr = data[attribute][key];
+                if (!arr) return;
                 if (!result[attribute]) result[attribute] = [];
                 result[attribute][i] = round(arr.reduce((acc, curr)=> {
                     return Number(acc) + Number(curr)
@@ -78,8 +80,12 @@
             if (!barData[attribute]) return;
             Object.keys(deviations[attribute]).map((key, y) => {
                 if (!arr[y]) arr[y] = [y];
-                arr[y].push(round(Number(barData[attribute][y]) - deviations[attribute][key]))
-                arr[y].push(round(Number(barData[attribute][y]) + deviations[attribute][key]))
+                let min = round(Number(barData[attribute][y]) - deviations[attribute][key]);
+                if (min < 0) min = 0;
+                let max = round(Number(barData[attribute][y]) + deviations[attribute][key]);
+                if (max < 0) max = 0;
+                arr[y].push(min)
+                arr[y].push(max)
             })
         })
         deviations = arr;
@@ -254,7 +260,7 @@
        return series
     }
 
-    let barData = getBarData(value.rows);
+    let barData;
     let ctx;
     let chart;
 
@@ -330,16 +336,19 @@
             },
             
         ],
-        series: getSeries()
+        color: colors
     };
   
     onMount(async () => {
         chart = echarts.init(ctx);
-        chart.setOption(option);
+        if (!value || !options) return;
+
+        updated(value);
     });
 
     const updated = async (value) => {
-        if (!chart || !value) return;
+        if (!chart || !value  || !options) return;
+        if (!options.groupedBy || !value.rows) return;
         range = {}
         categoryData = await getCategoreis(value, options.groupedBy);
         barData = await getBarData(value.rows);
@@ -352,10 +361,11 @@
 </script>
 
 <div bind:this={ctx}></div>
+
 <style>
     div {
-        min-width: 500px;
-        min-height: 250px;
-        max-height: 250px;
+        min-width: 600px;
+        min-height: 400px;
+        max-height: 400px;
     }
 </style>

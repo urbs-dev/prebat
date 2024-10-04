@@ -3,7 +3,7 @@ import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis
 import ReportsModel from 'App/Reports/ReportsModel'
 import LocationsModel from 'App/Locations/LocationsModel'
 import MeasuresModel from 'App/Measures/MeasuresModel'
-
+import ScenariosModel from 'App/Scenarios/ScenariosModel'
 export default class OperationsModel extends BaseModel
 {
 	public static table = 'operations'
@@ -56,6 +56,13 @@ export default class OperationsModel extends BaseModel
 		localKey: 'name'
 	})
 	public report: HasOne<typeof ReportsModel>
+
+	@hasMany( () => ScenariosModel, {
+		foreignKey: 'operation_id',
+		localKey: 'id',
+		onQuery(query) { query.orderBy('name', 'asc') }
+	})
+	public scenarios: HasMany<typeof ScenariosModel>
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime

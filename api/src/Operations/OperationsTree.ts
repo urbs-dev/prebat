@@ -18,10 +18,20 @@ export default class Catalog
         return await OperationsModel.query()
             .where('id', id)
             .preload('report')
+            .preload('scenarios')
             // .preload('locations', (query => {
             //     this.getLocations(query)
             // }))
             .first()
+    }
+    public static async findByOwner(owner: string)
+    {
+        return await OperationsModel.query()
+            .where('owner', owner)
+            .preload('locations', (query => {
+                this.getLocationsPreview(query)
+            }))
+            .orderBy('name', 'asc')    
     }
 
     private static getLocationsPreview(query)

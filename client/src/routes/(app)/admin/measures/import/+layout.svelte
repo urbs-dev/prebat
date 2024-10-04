@@ -34,13 +34,13 @@
         $page = null
         const upload = new Upload()
         let acces = await upload.checkAccess(file.name)
-
+        
         if (acces?.alreadyExists) {
             loading.stop()
             modal.open(OverWrite, {file})
             return 
         }
-        else if (acces?.error) {
+        else if (!acces?.access) {
             $page = 'error'
             $content = acces
             loading.stop()

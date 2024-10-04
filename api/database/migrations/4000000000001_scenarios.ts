@@ -7,11 +7,10 @@ export default class Scenarios extends BaseSchema {
 		this.schema.createTable(this.tablename, (column) => {
 			column.uuid		( 'id'						).primary()
 			column.string	( 'nature'		    		).defaultTo('occupation')
-			column.uuid		( 'operation_id'			)
-			column.uuid		( 'building_id'				)
-			column.uuid		( 'zone_id'					)
-			column.uuid		( 'room_id'					)
-			column.uuid		( 'parent_id'				)
+			column.uuid		( 'operation_id'			).notNullable()
+			column.string	( 'name'					)
+			column.string   ( 'type'					).defaultTo('hourly')
+			column.json    	( 'data'					)
 			column.timestamps()
 		})
 	}

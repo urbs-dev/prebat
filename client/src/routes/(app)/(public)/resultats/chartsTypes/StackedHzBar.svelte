@@ -1,30 +1,52 @@
 <script>
     import * as echarts from "echarts";
-    import { getTooltips } from "./utils";
+    import { getTooltips, colors, getCSV } from "./utils";
     import { onMount } from "svelte";
-    export let value;
+    export let value ;
     export let options = {};
     export let row = false;
+    export const downloadCSV = () => {
+        if (!row) 
+            return getCSV(option.series, 'stacked_hzbar', options.title)
+        else 
+            return getCSV(option.series, 'double_entry', options.title, option.yAxis.data)
+    };
 
     let ctx;
     let chart;
 
-    const getSeries = () => {
-        if (!row)
-            return Object.keys(value).map((key) => ({
+    const getSeriesGroups = () => {
+        if (!options.groupedBy || !value ) return;
+        return Object.keys(value[options.groupedBy])
+    }
+
+    const getSeries = async () => {
+        if (!value || !options) return;
+        if (!row){
+            return Object.keys(value).map((key, i) => ({
                 name: key,
                 type: "bar",
                 stack: "total",
                 label: {
                     show: true,
                 },
+                itemStyle: {
+                    decal: {
+                        // symbole achuré
+                        color: `rgba(0, 0, 0, ${i % 2 === 0 ? 0 : 0.1})`,
+                        borderWidth: 1,
+                        dashArrayX: [1, 0],
+                        dashArrayY: [2, 5],
+                        rotation: 45,
+                    },
+                },
                 emphasis: {
                     focus: "series",
                 },
                 data: [value[key]],
             }));
-        else {
-            const seriesGroups = Object.keys(value[options.groupedBy]);
+        } else {
+            const seriesGroups = await getSeriesGroups()
             let series = {};
             let seriesName = [];
             let result = [];
@@ -51,9 +73,10 @@
                         },
                     emphasis: {
                     },
-                    data: seriesGroups.map((group) =>
-                        series[group][name] ? series[group][name] : 0,
-                    ),
+                    data: seriesGroups.map((group) => {
+                        if (!series[group]) return 0;
+                        return series[group][name] ? series[group][name] : 0;
+                    }),
                 });
             });
             return result;
@@ -67,10 +90,11 @@
                 data: [""],
             };
         else {
+            if (!options.groupedBy) return;
             return {
                 type: "category",
                 min: 1,
-                data: Object.keys(value[options.groupedBy]),
+                data: getSeriesGroups(),
                 axisLabel: {
                     interval: 0,
                     rotate: 0,
@@ -94,44 +118,44 @@
         legend: {
             show: true,
             orient: "horizontal",
-            type: "scroll",
             bottom: 20,
         },
         grid: {
             left: "3%",
             right: '4%',
             top: 10,
-            bottom: "20%",
+            bottom: "30%",
             containLabel: true,
         },
         xAxis: {
             type: "value",
         },
-        yAxis: getYAxisOptions(),
-        series: getSeries(),
+        color: colors
     };
 
     onMount(async () => {
         chart = echarts.init(ctx);
-        chart.setOption(option);
+        if ( !value || !options) return;
+        update(value);
     });
 
-    const update = (value) => {
+    const update = async (value) => {
         if (!chart || !value || !options) return;
-        option.yAxis = getYAxisOptions();
-        option.series = getSeries();
-        chart.setOption(option);
+        if (row && !value.rows ) return;
+
+        option.yAxis = await getYAxisOptions(value);
+        option.series = await getSeries();
+        chart.setOption(option, {"notMerge": true});
     };
 
     $: update(value)
 </script>
-
 <div bind:this={ctx}></div>
 
 <style>
     div {
-        min-width: 450px;
-        min-height: 250px;
-        max-height: 250px;
+        min-width: 650px;
+        min-height: 400px;
+        max-height: 400px;
     }
 </style>

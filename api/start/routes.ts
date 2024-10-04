@@ -3,6 +3,7 @@ import './routes/locations'
 import './routes/operations'
 import './routes/measures'
 import './routes/results'
+import './routes/scenarios'
 
 Route.get('/', async () => {
 	return { hello: 'Welcome to PREBAT API' }

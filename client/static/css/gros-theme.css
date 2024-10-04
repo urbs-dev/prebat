@@ -10,7 +10,7 @@
   --secondary-lighten: #F4A089;
   --secondary-darken: #E4472C; */
 
-  --primary:#292574;
+  --primary:#292574;                                /* Bleu Cerema */
   --primary-lighten: #69669E;
   --primary-lighten-1: rgba(105, 102, 158,0.1);
   --primary-lighten-2: rgba(105, 102, 158,0.2);
@@ -18,11 +18,20 @@
   --primary-darken: #0F0D44;
 
   
-  --secondary:#EF7757;
+  
+  --secondary:#EF7757;                              /* Orange Cerema */
   --secondary-lighten: #F4A089;
   --secondary-darken: #E4472C; 
   
   --background-lighten: #f5f5f5;
+  --background-darken: #e0e0e0;
+  
+
+
+  --yellow: #f7d05c;
+  --green: #448d60;
+  --light-green: #96ab5b;
+  --light-blue: #5a71b4;
   
   /* --primary:#EF7757;
   --primary-lighten: #F4A089;
@@ -34,6 +43,9 @@
   --secondary: #189471;
   --secondary-lighten: #5fb2a2;
   --secondary-darken: #086542; */
+
+
+
 
     --ternary: #0277bd;
   }

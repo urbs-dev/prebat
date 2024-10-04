@@ -4,7 +4,10 @@
     import Generalities from './Modal_Report_Generalities.svelte'
     import Envelope from './Modal_Report_Envelope.svelte'
     import System from './Modal_Report_System.svelte'
-    export let report
+    export let operation
+    
+    let report = operation.report
+    $: report = operation.report
 </script>
 
 <article>
