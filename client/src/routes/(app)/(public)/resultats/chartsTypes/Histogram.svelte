@@ -106,16 +106,24 @@
 </script>
 <section>
     {#key fonctions}
-        
-    <Select
-        icon = "filter_list"
-        label="Fonction"
-        options={fonctions}
-        bind:value={fonction}
-    />
+        <Select
+            icon = "filter_list"
+            label="Fonction"
+            options={fonctions}
+            bind:value={fonction}
+        />
     {/key}
+    
+    
+    <div bind:this={ctx}>
+        {#if operationCount === 0}
+        <span class="error">
+            <p> Aucune donnée à afficher </p>
+        </span>
+        {/if}
+    </div>
 
-    <div bind:this={ctx}></div>
+    
 </section>
 <style>
     section{
@@ -128,8 +136,29 @@
         max-height: 400px;
     }
     div{
+        position: relative;
+        width: 100%;
+        height: 80%;
+        min-width: 100%;
+        min-height: 80%;
+    }
+   .error{
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+   }
+   .error p{
+        color: var(--secondary-darken);
+        background-color: var(--background-lighten);
+        padding: 16px;
+        border-radius: 8px;
+        
     }
- 
 </style>

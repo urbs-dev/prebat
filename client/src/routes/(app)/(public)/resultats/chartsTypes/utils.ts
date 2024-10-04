@@ -138,11 +138,11 @@ export const charts = [
                 type: 'stacked_hzbar',
                 attribute: 'isolation_pvo'
             },
-            // {        // TODO: add when data will be available
-            //     title: 'Système constructif',
-            //     type: 'stacked_hzbar',
-            //     attribute: 'systeme_constructif',
-            // }, 
+            {        // TODO: add when data will be available
+                title: 'Système constructif',
+                type: 'stacked_hzbar',
+                attribute: 'structure',
+            }, 
             {
                 title: 'Typologie de système de chauffage',
                 type: 'stacked_hzbar',
