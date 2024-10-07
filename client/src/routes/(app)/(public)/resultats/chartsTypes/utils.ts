@@ -111,6 +111,7 @@ export const charts = [
     {
         theme: 'Données générales',
         charts: [
+           
             {
                 title: 'Typologie et fonction principale des bâtiments',
                 type: 'hzbar',
@@ -121,12 +122,16 @@ export const charts = [
                 title: 'Consommation de totale [kWhₑₚ/(m².an)]', 
                 type: 'histogram',
                 attribute: 'conso_tot',
-                fonction: 'MI' // TODO : change when new fonction will be added
             },
             {
                 title: 'Nature des travaux réalisés',
                 type: 'doughnut',
                 attribute: 'nature_travaux'
+            },
+            {
+                title: 'Consomations mesurées',
+                type: 'histogram_sum',
+                attribute: ['conso_chauffage', 'conso_ecs', 'conso_ventilation', 'conso_eclairage', 'conso_refroidissement', 'conso_auxiliaire'],
             },
         ]
     },
@@ -195,7 +200,7 @@ export const charts = [
                 attribute: 'conso_ecs',
             },
             {
-                title: 'Consommation  des ventilations',
+                title: 'Consommation de ventilations',
                 type: 'error_bar',
                 attribute: ['conso_ventilation'],
                 groupedBy: 'fonction',
@@ -224,6 +229,11 @@ export const charts = [
                 title: 'Consommation d’éclairage détaillée', 
                 type: 'histogram',
                 attribute: 'conso_eclairage',
+            },
+            {
+                title: 'Rendement',
+                type: 'histogram_sum',
+                attribute: ['rendement_chauffage', 'rendement_ecs'],
             },
         ]
     }
