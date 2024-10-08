@@ -14,8 +14,12 @@ const createUser = () => {
         subscribe, set, update,
         get: () => { return get(user) },
         create: (session) => {
-            user.set(session)
-            document.cookie = `token=${session.token};path=/;`
+            if (session.group.name === 'prebat' || session.roles.GLOBAL_ADMIN) {
+                user.set(session)
+                document.cookie = `token=${session.token};path=/;`
+                return true
+            }
+            return false
         },
         signIn: async (form: SignIn) => {
             const response = await fetch(`BASE_URL/resources.api/account/signin`, {
@@ -60,8 +64,10 @@ const createUser = () => {
             const response = await fetch(`BASE_URL/resources.api/account/session`)
             if (response.status === 200) {
                 const json = await response.json()
-                user.create(json)
-                status.set({ isAuthenticated: true, isAdmin: json.roles.GLOBAL_ADMIN })
+                const isCreated = user.create(json)
+                if (isCreated) {
+                    status.set({ isAuthenticated: true, isAdmin: json.roles.GLOBAL_ADMIN })
+                }
                 return status
             }
             status.set({ isAuthenticated: false, isAdmin: false })

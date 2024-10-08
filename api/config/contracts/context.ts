@@ -10,6 +10,9 @@ declare module '@ioc:Adonis/Core/HttpContext' {
 				USER_ADMIN: boolean,
 				USER: boolean
 			},
+			group: {
+				name: string
+			}
 			packs: string[],
 			licenses: { [name: string]: { expired_at: string, is_valid: boolean } },
 		},

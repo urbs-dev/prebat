@@ -10,9 +10,12 @@ export default class AuthMiddleware {
 		const token = ctx.request.cookiesList()?.token
 		if ( token ) {
 			ctx.token = token
-			const session = await Redis.get(token)
-			if (session) {
-				ctx.session = JSON.parse(session)
+			const exists = await Redis.get(token)
+			if (exists) {
+				const session = JSON.parse(exists)
+				if (session.roles.GLOBAL_ADMIN || session.group.name === 'prebat') {
+					ctx.session = session
+				}
 			}
 		}
 		await next()
