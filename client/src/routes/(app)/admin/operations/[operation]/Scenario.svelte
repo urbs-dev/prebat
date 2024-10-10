@@ -71,7 +71,7 @@
                         </button>
                         <aside slot="content">
                             {#if !hasHourly(scenarios)}
-                                <button on:click={() => createScenario(type, "hourly" )}>Ajouter un scénario horraire</button>
+                                <button on:click={() => createScenario(type, "hourly" )}>Ajouter un scénario horaire</button>
                             {/if}
                             <!-- <button on:click={() => createScenario(type, "weekly" )}>Ajouter un scénario annuel</button> -->
                             <button on:click={() => modal.open(CreationModal, {createScenario, type})}>Ajouter un scénario annuel</button>
