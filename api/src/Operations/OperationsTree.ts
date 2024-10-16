@@ -19,6 +19,7 @@ export default class Catalog
             .where('id', id)
             .preload('report')
             .preload('scenarios')
+            .preload('documentations')
             // .preload('locations', (query => {
             //     this.getLocations(query)
             // }))
