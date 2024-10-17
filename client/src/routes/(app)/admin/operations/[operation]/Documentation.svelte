@@ -140,7 +140,7 @@
                     type="file" 
                     id="upload" 
                     name="upload"
-                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required 
+                    required 
                 />
         </div>
     </label>
