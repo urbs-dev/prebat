@@ -10,10 +10,12 @@ export default class DocumentationsController
     {
         if (!session ) return response.send({ message: 'You must be logged in'})
         const file = request.file('file')
-        
+        const MAX_SIZE = 100 * 1024 * 1024 // 100MB
+    
         const documentation = request.all()
-
+    
         if (!file) return response.status(400).send({ message: 'file is required' })
+        const size = file?.size
         if (!documentation?.operation_id) return response.status(400).send({ message: 'operation_id is required' })
         if (!file.extname || !this.checkFileType(file.extname)) return response.status(400).send({ message: 'file type is invalid' })
 
@@ -24,8 +26,12 @@ export default class DocumentationsController
         if (!operation) return response.status(404).send({ message: 'Operation not found' })
         if (operation.owner != session?.id && !session.roles.USER_ADMIN && !session.roles.GLOBAL_ADMIN)
             return response.send({ error: "Acces denied" })
-
-        const new_doc = await {name: file.clientName, type: file.extname, operation_id: documentation.operation_id}
+        
+        if (size > MAX_SIZE) return response.status(400).send({ message: 'File is too large', error: 'Fichier trop volumineux' })
+            const has_space = await this.hasFreeSpace(size) 
+        if (!has_space) return response.status(400).send({ message: 'Storage is full', error: 'Le stockage est plien' })
+            
+        const new_doc = await {name: file.clientName, type: file.extname, operation_id: documentation.operation_id, size: size}
 
         const result = await DocumentationsModel.create(new_doc)
         const import_status = await this.import(file, result.id)
@@ -105,6 +111,14 @@ export default class DocumentationsController
             return false
         }
     }
+
+    private async hasFreeSpace(size: number){
+        const STORAGE_SIZE = 10 * 1024 * 1024 * 1024 // 10GB
+        const documentations = await DocumentationsModel.query()
+        const total_size = await documentations.reduce((acc, doc) => acc + Number(doc.size), 0)
+        if (total_size + size > STORAGE_SIZE) return false
+        return true
+    } 
   
 }
 

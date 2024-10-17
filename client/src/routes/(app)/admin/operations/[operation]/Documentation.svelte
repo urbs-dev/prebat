@@ -16,6 +16,7 @@
     }
     const dispatch = createEventDispatcher()
     const getFiles = (event) => {
+        error = undefined
         if(!event.dataTransfer){
             if (!event.target.files){
                 return false
@@ -28,6 +29,7 @@
     }
     const drop = (e) => {
         dragging = false
+        error = undefined
         const files = getFiles(e)
         if (!files) {
             filename = "Erreur, veuillez réessayer"
@@ -42,6 +44,7 @@
     const handleInput = (e) => {
         filename = e.target.files[0].name
         file = null
+        error = undefined
 
         file = e.target.files[0]
         filename = file.name
@@ -60,7 +63,12 @@
             const json = await response.json()
             files.push(json)
             invalidateAll()
-        }       
+        }
+        else{
+            response.json().then((data) => {
+                error = data.error
+            })
+        }
     }
 
     const download = async (id, name) => {
@@ -88,6 +96,7 @@
         invalidateAll()
     }
     
+    let error = undefined
     let file = undefined
     let filename = undefined
     let dragging = false
@@ -111,7 +120,11 @@
         <div class="content">
             <div class="img">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 448 512"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256z"/></svg>
-                <p>{filename ?? 'Aucun fichier'}</p>
+                {#if error}
+                    <p class="error">{error}</p>
+                {:else}
+                    <p>{filename ?? 'Aucun fichier'}</p>
+                {/if}
             </div>
             {#if !file}
                 <span class="button">
@@ -286,7 +299,7 @@
     aside button:hover {
         opacity: 1;
     }
-    .delete{
+    .delete, .error{
         color: var(--secondary-darken);
     }
 </style>

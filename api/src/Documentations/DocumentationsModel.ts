@@ -17,6 +17,9 @@ export default class DocumentationsModel extends BaseModel
 
     @column()
     public type: string
+    
+    @column()
+    public size: number
 
 	@column()
 	public operation_id: string | null
