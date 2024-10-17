@@ -8,6 +8,7 @@ export default class DocumentationsController
 {
     public async store({request, response, session }: HttpContextContract)
     {
+        if (!session ) return response.send({ message: 'You must be logged in'})
         const file = request.file('file')
         
         const documentation = request.all()
@@ -21,7 +22,7 @@ export default class DocumentationsController
 
         const operation = await OperationsModel.find(documentation.operation_id)
         if (!operation) return response.status(404).send({ message: 'Operation not found' })
-        if (operation.owner != session.id && !session.roles.USER_ADMIN && !session.roles.GLOBAL_ADMIN)
+        if (operation.owner != session?.id && !session.roles.USER_ADMIN && !session.roles.GLOBAL_ADMIN)
             return response.send({ error: "Acces denied" })
 
         const new_doc = await {name: file.clientName, type: file.extname, operation_id: documentation.operation_id}
@@ -37,6 +38,7 @@ export default class DocumentationsController
 
     public async destroy({request, response, session }: HttpContextContract)
     {
+        if (!session ) return response.send({ message: 'You must be logged in'})
         const id = request.param('id')
         if (!id) return response.status(400).send({ message: 'id is required' })        
         const documentation = await DocumentationsModel.find(id)
