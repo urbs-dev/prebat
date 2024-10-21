@@ -45,7 +45,7 @@ module.exports = {
         },
         production : {
             user          : "urbs",
-            host          : [ "prod.urbs.fr -p 8422" ],
+            host          : [ "app.urbs.fr -p 8522" ],
             ref           : "origin/main",
             repo          : "git@github.com:urbs-dev/prebat.git",
             path          : "/home/urbs/www/prebat/api",
