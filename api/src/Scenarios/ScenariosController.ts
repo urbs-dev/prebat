@@ -1,5 +1,4 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
 import ScenariosModel from './ScenariosModel'
 import OperationsModel from 'App/Operations/OperationsModel'
 
@@ -15,7 +14,6 @@ export default class ScenariosController
         if ( !await OperationsModel.find(scenario.operation_id) )
             return response.status(404).send({ message: 'Operation not found' })
 
-        console.log(scenario);
         const result = await ScenariosModel.create(scenario)
         return response.send(result)
     }

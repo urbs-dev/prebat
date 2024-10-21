@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import ReportsModel from 'App/Reports/ReportsModel'
+import DocumentationsModel from 'App/Documentations/DocumentationsModel'
 import LocationsModel from 'App/Locations/LocationsModel'
 import MeasuresModel from 'App/Measures/MeasuresModel'
 import ScenariosModel from 'App/Scenarios/ScenariosModel'
@@ -63,6 +64,14 @@ export default class OperationsModel extends BaseModel
 		onQuery(query) { query.orderBy('name', 'asc') }
 	})
 	public scenarios: HasMany<typeof ScenariosModel>
+
+	@hasMany( () => DocumentationsModel, {
+		foreignKey: 'operation_id',
+		localKey: 'id',
+		onQuery(query) { query.orderBy('name', 'asc') }
+	})
+	public documentations: HasMany<typeof DocumentationsModel>
+
 
 	@column.dateTime({ columnName: 'created_at', autoCreate: true })
 	public createdAt: DateTime
