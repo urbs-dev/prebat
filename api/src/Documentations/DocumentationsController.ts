@@ -24,7 +24,7 @@ export default class DocumentationsController
 
         const operation = await OperationsModel.find(documentation.operation_id)
         if (!operation) return response.status(404).send({ message: 'Operation not found' })
-        if (operation.owner != session?.id && !session.roles.USER_ADMIN && !session.roles.GLOBAL_ADMIN)
+        if (operation.owner != session?.id && !session?.roles?.USER_ADMIN && !session?.roles?.GLOBAL_ADMIN)
             return response.send({ error: "Acces denied" })
         
         if (size > MAX_SIZE) return response.status(400).send({ message: 'File is too large', error: 'Fichier trop volumineux' })
@@ -55,7 +55,7 @@ export default class DocumentationsController
         const operation = await OperationsModel.find(documentation.operation_id)
         if (!operation) return response.status(404).send({ message: 'Operation not found' })
 
-        if (operation.owner != session?.id && !session.roles.USER_ADMIN && !session.roles.GLOBAL_ADMIN)
+        if (operation.owner != session?.id && !session?.roles?.USER_ADMIN && !session?.roles?.GLOBAL_ADMIN)
                 return response.send({ error: "Acces denied" })
 
         try {
@@ -80,7 +80,7 @@ export default class DocumentationsController
         const operation = await OperationsModel.find(documentation.operation_id)
         if (!operation) return response.status(404).send({ message: 'Operation not found' })
 
-        if (operation.owner != session?.id && !session.roles.USER_ADMIN && !session.roles.GLOBAL_ADMIN)
+        if (operation.owner != session?.id && !session?.roles?.USER_ADMIN && !session?.roles?.GLOBAL_ADMIN)
                 return response.send({ error: "Acces denied" })
 
         const ext = documentation.type
