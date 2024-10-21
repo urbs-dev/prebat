@@ -9,6 +9,7 @@ export default class Documentations extends BaseSchema {
 			column.uuid		( 'operation_id'			).notNullable()
 			column.string	( 'name'					)
 			column.string   ( 'type'					)
+			column.integer  ( 'size'					)
 			column.timestamps()
 		})
 	}
