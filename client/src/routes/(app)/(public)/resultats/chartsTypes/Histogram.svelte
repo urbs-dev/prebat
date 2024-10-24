@@ -25,7 +25,7 @@
             show: true,
         },
         legend: {
-            data: ["renovation", "neuf"],
+            data: ["Rénovation", "Neuf"],
             bottom: 20,
         },
         xAxis: [],
@@ -38,38 +38,38 @@
     const getSerie = (value) => {
         let rows = value.rows
         const attribute = options.attribute
-        let series = { "renovation": [], "new": [] }
+        let series = { "Rénovation": [], "new": [] }
 
         rows.sort((a, b) => a[attribute] - b[attribute]);
         rows.forEach(row => {
             if ( fonction !== "Tous" && row.fonction !== fonction) return
-            if (row[attribute] === null) return
-            if ( row.nature_travaux === "renovation") {
-                series.renovation.push(round(row[attribute]))
+            if (row[attribute] === null || row[attribute] === 0) return
+            if ( row.nature_travaux === "Rénovation") {
+                series["Rénovation"].push(round(row[attribute]))
                 series.new.push("-")
             } else {
                 series.new.push(round(row[attribute]))
-                series.renovation.push("-")
+                series["Rénovation"].push("-")
             }
         });
-        operationCount = series.renovation.length
+        operationCount = series["Rénovation"].length
         return [
             {
-                name: "renovation",
-                type: "bar",
-                barWidth: '95%',
-                stack: "total",
-                barCategoryGap: "50%",
-                data: series.renovation,
-            },
-            {
-                name: "neuf",
+                name: "Neuf",
                 type: "bar",
                 stack: "total",
                 barCategoryGap: "50%",
                 barWidth: '95%',
                 data: series.new,
-            }
+            },
+            {
+                name: "Rénovation",
+                type: "bar",
+                barWidth: '95%',
+                stack: "total",
+                barCategoryGap: "50%",
+                data: series["Rénovation"],
+            },
         ]
     }
     const getxAxis = () => {
@@ -108,7 +108,7 @@
     {#key fonctions}
         <Select
             icon = "filter_list"
-            label="Fonction"
+            label="Destination d’usage"
             options={fonctions}
             bind:value={fonction}
         />
