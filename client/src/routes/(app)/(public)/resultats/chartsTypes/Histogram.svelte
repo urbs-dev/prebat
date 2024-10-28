@@ -1,12 +1,12 @@
 <script lang="ts">
     import * as echarts from 'echarts';
     import { onMount } from 'svelte';
-    import { colors, round, getCSV } from './utils.ts'
+    import { colors, round, getCSV } from './utils'
     import { Select }  from 'gros/form'
     export let value;
     export let options
     export const downloadCSV = () => getCSV(option.series, 'histogram', options.title);
-    
+    console.log(value.rows)
     let ctx;
     let chart;
     let operationCount = 0
@@ -25,7 +25,7 @@
             show: true,
         },
         legend: {
-            data: ["renovation", "neuf"],
+            data: ["Rénovation", "Neuf"],
             bottom: 20,
         },
         xAxis: [],
@@ -44,7 +44,7 @@
         rows.forEach(row => {
             if ( fonction !== "Tous" && row.fonction !== fonction) return
             if (row[attribute] === null) return
-            if ( row.nature_travaux === "renovation") {
+            if ( row.nature_travaux.startsWith('Rénovation')) {
                 series.renovation.push(round(row[attribute]))
                 series.new.push("-")
             } else {
@@ -55,7 +55,7 @@
         operationCount = series.renovation.length
         return [
             {
-                name: "renovation",
+                name: "Rénovation",
                 type: "bar",
                 barWidth: '95%',
                 stack: "total",
@@ -63,7 +63,7 @@
                 data: series.renovation,
             },
             {
-                name: "neuf",
+                name: "Neuf",
                 type: "bar",
                 stack: "total",
                 barCategoryGap: "50%",

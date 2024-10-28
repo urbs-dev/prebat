@@ -36,7 +36,7 @@
             if (!legend.includes(element[attributes]))
                 legend.push(element[attributes]);
 
-            if (element.nature_travaux === "neuf")
+            if (element.nature_travaux === "Neuf")
                 axis[element[attributes]].neuf++;
             else axis[element[attributes]].renovation++;
         });
