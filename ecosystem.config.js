@@ -48,7 +48,7 @@ module.exports = {
             host          : [ "app.urbs.fr -p 8522" ],
             ref           : "origin/main",
             repo          : "git@github.com:urbs-dev/prebat.git",
-            path          : "/home/urbs/www/prebat/api",
+            path          : "/home/urbs/www/prebat",
             "post-deploy" : getPostDeploy('production')
         },
     }
