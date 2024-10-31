@@ -110,7 +110,7 @@
     {#key fonctions}
         <Select
             icon = "filter_list"
-            label="Fonction"
+            label="Destination d’usage"
             options={fonctions}
             bind:value={fonction}
         />

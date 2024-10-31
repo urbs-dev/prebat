@@ -73,6 +73,7 @@
         display: flex;
         align-items: center;
 
+        text-transform: uppercase;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         padding: 8px;

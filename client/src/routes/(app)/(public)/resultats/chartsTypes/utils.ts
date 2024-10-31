@@ -113,15 +113,10 @@ export const charts = [
         charts: [
            
             {
-                title: 'Typologie et fonction principale des bâtiments',
+                title: 'Destination d’usage des bâtiments',
                 type: 'hzbar',
                 attribute: 'fonction',
                 rows: true
-            },
-            {
-                title: 'Consommation de totale [kWhₑₚ/(m².an)]', 
-                type: 'histogram',
-                attribute: 'conso_tot',
             },
             {
                 title: 'Nature des travaux réalisés',
@@ -129,7 +124,13 @@ export const charts = [
                 attribute: 'nature_travaux'
             },
             {
-                title: 'Consomations mesurées',
+                title: 'Consommation totale [kWhₑₚ/(m².an)]', 
+                type: 'histogram',
+                attribute: 'conso_tot',
+            },
+           
+            {
+                title: 'Consommation de six postes [kWhₑₚ/(m².an)]',
                 type: 'histogram_sum',
                 attribute: ['conso_chauffage', 'conso_ecs', 'conso_ventilation', 'conso_eclairage', 'conso_refroidissement', 'conso_auxiliaire'],
             },
@@ -139,15 +140,22 @@ export const charts = [
         theme: 'ENVELOPPE ET SYSTEMES',
         charts: [
             {
-                title: 'Typologie d’isolation principale (parois opaque)',
+                title: 'Typologie d’isolation principale (paroi opaque)',
                 type: 'stacked_hzbar',
                 attribute: 'isolation_pvo'
             },
-            {        // TODO: add when data will be available
-                title: 'Système constructif',
+            { 
+                title: 'Système constructif (paroi opaque)',
                 type: 'stacked_hzbar',
                 attribute: 'structure',
             }, 
+            {
+                title: 'Perméabilité à l’air',
+                type: 'error_bar',
+                attribute: ['permeabilite_air'],
+                groupedBy: 'fonction',
+                axisLabel:'Q4Pa (m³/(h.m²))'
+            },
             {
                 title: 'Typologie de système de chauffage',
                 type: 'stacked_hzbar',
@@ -159,16 +167,12 @@ export const charts = [
                 type: 'stacked_hzbar',
                 attribute: 'ecs_principal',
                 groupedBy: "fonction"
-
             },
             {
-                title: 'Perméabilité à l’air',
-                type: 'error_bar',
-                attribute: ['permeabilite_air'],
-                groupedBy: 'fonction',
-                axisLabel:'Q4Pa (m³/(h.m²))'
-            }
-            
+                title: 'Typologie de système de ventilation',
+                type: 'stacked_hzbar',
+                atrribute: 'systeme_ventilation', 
+            },
         ]
     },
     {
@@ -182,7 +186,7 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation de chauffage détaillée', 
+                title: 'Consommation de chauffage détaillée (kWhₑₚ/(m².an))', 
                 type: 'histogram',
                 attribute: 'conso_chauffage',
             },
@@ -195,12 +199,12 @@ export const charts = [
 
             },
             {
-                title: "Consommation d'ECS détaillée", 
+                title: "Consommation d'ECS détaillée (kWhₑₚ/(m².an))", 
                 type: 'histogram',
                 attribute: 'conso_ecs',
             },
             {
-                title: 'Consommation de ventilations',
+                title: 'Consommation de ventilation',
                 type: 'error_bar',
                 attribute: ['conso_ventilation'],
                 groupedBy: 'fonction',
@@ -214,7 +218,7 @@ export const charts = [
             //     rows: true
             // },
             {
-                title: 'Consommation des ventilations détaillée', 
+                title: 'Consommation des ventilations détaillée (kWhₑₚ/(m².an))', 
                 type: 'histogram',
                 attribute: 'conso_ventilation',
             },
@@ -226,15 +230,15 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation d’éclairage détaillée', 
+                title: 'Consommation d’éclairage détaillée (kWhₑₚ/(m².an))', 
                 type: 'histogram',
                 attribute: 'conso_eclairage',
             },
-            {
-                title: 'Rendement',
-                type: 'histogram_sum',
-                attribute: ['rendement_chauffage', 'rendement_ecs'],
-            },
+            // {
+            //     title: 'détails de chacun des postes ',
+            //     type: 'histogram_sum',
+            //     attribute: ['conso_refroidissement', 'conso_auxiliaire'],
+            // },
         ]
     }
 ]
