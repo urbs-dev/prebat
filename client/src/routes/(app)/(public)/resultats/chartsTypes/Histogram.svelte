@@ -44,15 +44,15 @@
         rows.forEach(row => {
             if ( fonction !== "Tous" && row.fonction !== fonction) return
             if (row[attribute] === null || row[attribute] === 0) return
-            if ( row.nature_travaux === "Rénovation") {
+            if ( row.nature_travaux === "Neuf") {
+                series.new.push(round(row[attribute]))
+                series['Rénovation'].push("-")
+            } else {
                 series["Rénovation"].push(round(row[attribute]))
                 series.new.push("-")
-            } else {
-                series.new.push(round(row[attribute]))
-                series["Rénovation"].push("-")
             }
         });
-        operationCount = series["Rénovation"].length
+        operationCount = series.new.length
         return [
             {
                 name: "Neuf",
