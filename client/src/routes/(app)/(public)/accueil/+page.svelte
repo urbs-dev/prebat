@@ -91,16 +91,17 @@
                     <button class="btn" type="button" on:click={download}>
                         <i class="micon">file_download</i>
                         <span>Résultats d’évaluation de la campagne PREBAT : Télécharger les données pour toutes les opérations</span>
+                        <span>Résultats d’évaluation de la campagne PREBAT : Télécharger les données pour toutes les opérations</span>
                     </button>
                 </li>
             </ul>
-            <h3 style:margin-top="40px"><span>3.</span>Résultats</h3>
+            <h3 style:margin-top="40px"><span>3.</span>Données par opération</h3>
             <ul>
 
                 <li>
                     <a href="{getPath('/mesures')}">
                         <i class="micon">file_download</i>
-                        <span>MESURES : sélectionner et télécharger les données par opération</span>
+                        <span>MESURES : Sélectionner et télécharger les données par opération</span>
                     </a>
                 </li>
             </ul>
@@ -147,6 +148,8 @@
         display: flex;
         flex-direction: column;
         gap: .8em;
+        max-width: 1000px;
+
 
     }
     .presentation  span{

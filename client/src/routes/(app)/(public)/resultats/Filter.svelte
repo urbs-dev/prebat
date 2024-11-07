@@ -37,6 +37,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <span class="download" on:click={() => getFilterasCSV(attributes.rows)}>
         Télecharger les données filtrées <i class="micon">file_download</i>
+        Télecharger les données filtrées <i class="micon">file_download</i>
     </span>
     {#each Object.keys(filtersFields) as attribute}
         <section>
@@ -103,6 +104,8 @@
         gap: 16px;
         max-width: 256px;
         padding: 16px;
+        position: sticky;
+        top: 20px;
     }
     section{
         display: flex;

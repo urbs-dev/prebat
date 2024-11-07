@@ -29,16 +29,16 @@
 
         data.forEach((element) => {
             if (!axis[element[attributes]]) axis[element[attributes]] = {};
-            if (!axis[element[attributes]].neuf)
-                axis[element[attributes]].neuf = 0;
-            if (!axis[element[attributes]].renovation)
-                axis[element[attributes]].renovation = 0;
+            if (!axis[element[attributes]].Neuf)
+                axis[element[attributes]].Neuf = 0;
+            if (!axis[element[attributes]]["Rénovation"])
+                axis[element[attributes]]["Rénovation"] = 0;
             if (!legend.includes(element[attributes]))
                 legend.push(element[attributes]);
 
             if (element.nature_travaux === "Neuf")
-                axis[element[attributes]].neuf++;
-            else axis[element[attributes]].renovation++;
+                axis[element[attributes]].Neuf++;
+            else axis[element[attributes]]["Rénovation"]++;
         });
 
         Object.keys(axis).forEach((key, i) => {
@@ -52,7 +52,7 @@
                 emphasis: {
                     focus: "series",
                 },
-                data: [axis[key].neuf],
+                data: [axis[key].Neuf],
             });
             series.push({
                 name: key,
@@ -73,7 +73,7 @@
                 emphasis: {
                     focus: "series",
                 },
-                data: [axis[key].renovation],
+                data: [axis[key]["Rénovation"]],
             });
         });
 
