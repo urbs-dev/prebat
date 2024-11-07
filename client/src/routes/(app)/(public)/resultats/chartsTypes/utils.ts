@@ -109,11 +109,11 @@ export const getFilterValues = (keys, AllData, filters) => {
 
 export const charts = [
     {
-        theme: 'Données générales',
+        theme: 'DONNÉES GÉNÉRALES',
         charts: [
            
             {
-                title: 'Typologie et fonction principale des bâtiments',
+                title: 'Destination d’usage des bâtiments',
                 type: 'hzbar',
                 attribute: 'fonction',
                 rows: true
@@ -129,9 +129,10 @@ export const charts = [
                 attribute: 'nature_travaux'
             },
             {
-                title: 'Consomations mesurées',
+                title: 'Consommation de six postes [kWhEP/(m².an)]',
                 type: 'histogram_sum',
                 attribute: ['conso_chauffage', 'conso_ecs', 'conso_ventilation', 'conso_eclairage', 'conso_refroidissement', 'conso_auxiliaire'],
+                label: ['Chauffage', 'ECS', 'Ventilation', 'Éclairage', 'Refroidissement', 'Auxiliaire']
             },
         ]
     },
@@ -139,7 +140,7 @@ export const charts = [
         theme: 'ENVELOPPE ET SYSTEMES',
         charts: [
             {
-                title: 'Typologie d’isolation principale (parois opaque)',
+                title: 'Typologie d’isolation principale (paroi opaque)',
                 type: 'stacked_hzbar',
                 attribute: 'isolation_pvo'
             },
@@ -172,7 +173,7 @@ export const charts = [
         ]
     },
     {
-        theme: 'Consommation production',
+        theme: 'CONSOMMATION PRODUCTION',
         charts: [
             {
                 title: 'Consommation de chauffage',
@@ -234,6 +235,7 @@ export const charts = [
                 title: 'Rendement',
                 type: 'histogram_sum',
                 attribute: ['rendement_chauffage', 'rendement_ecs'],
+                label: ['Chauffage', 'ECS']
             },
         ]
     }

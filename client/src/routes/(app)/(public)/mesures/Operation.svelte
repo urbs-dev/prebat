@@ -16,7 +16,6 @@
                 headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
             })
             const result = await response.json()
-            console.log(result)
             initDownload(result.url)
             loading.stop()
         }, 960)

@@ -21,14 +21,16 @@
         <div>
             <span>Données & performances énergétiques des bâtiments issues de PREBAT</span>
             <p>
-                Retrouvez les constats techniques et d'usage, en conditions réelles de fonctionnement et d'occupation, par contexte, 
-                en type de bâtiment, nature de travaux, équipements, localisation... et aux trois niveaux de traitements suivants:
+                En tant qu’acteur de la construction, rénovation, gestion ou exploitation de bâtiment résidentiel ou tertiaire, comme
+                en tant qu’occupant, utilisateur ou usager, nous agissons tous sur leur performance effective. Le Cerema en donne
+                ici ses constats techniques et d’usage, en conditions réelles de fonctionnement et d’occupation, par contexte, en
+                type de bâtiment, nature de travaux, équipements, localisation… et aux trois niveaux de traitement suivants :
             </p>
 
             <ul>
-                <li>Données élémentaires par bâtiment&nbsp;: mesures, observations et enquêtes;</li>
-                <li>Résultats d'évaluation par bâtiment;</li>
-                <li>Enseignements transversaux tirés des résultats des évaluations, par typologies générales ou sélection plus fine.</li>
+                <li>Enseignements transversaux tirés des résultats des évaluations : par typologie générale ou sélection plus fine ;</li>
+                <li>Résultats d’évaluation par bâtiment ;</li>
+                <li>Données élémentaires par bâtiment : mesures, observations et enquêtes.</li>
             </ul>
         </div>
         <img src="STATIC_PATH/img/presentation-logo.svg" alt="">
@@ -54,30 +56,30 @@
             <h3><span>1.</span>Données et enseignements inter-opérations</h3>
             <div class="flex">
                 <img style="width:650px;" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
-                <span>Consommations totales en énergie primaire par m² SHON et par an</span>
+                <span>Consommation totales en énergie primaire par m² <sub>SHON</sub> et par an</span>
             </div>
             <ul>
                 <li>
-                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-3">
+                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-3" target= »firstwindow>
                         <i class="micon">exit_to_app</i>
                         <span>Rapport de capitalisation</span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-2">
+                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/batiments-demonstrateurs-basse-consommation-energie-prebat-2" target= »secondwindow>
                         <i class="micon">exit_to_app</i>
                         <span>Synthèse</span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/enseignements-batiments-performants-energie">
+                    <a href="https://www.cerema.fr/fr/centre-ressources/boutique/enseignements-batiments-performants-energie" target= »thirdwindow>
                         <i class="micon">exit_to_app</i>
                         <span>Agir en conséquence</span>
                     </a>
                 </li>
                
             </ul>
-            <h3 style:margin-top="40px"><span>2.</span>Données par opération</h3>
+            <h3 style:margin-top="40px"><span>2.</span>Résultats</h3>
             <ul>
                 <li>
                     <a href="BASE_URL/resultats">
@@ -88,7 +90,7 @@
                 <li>
                     <button class="btn" type="button" on:click={download}>
                         <i class="micon">file_download</i>
-                        <span>RESULTATS D'EVALUATION : télécharger les données pour toutes les opérations</span>
+                        <span>Résultats d’évaluation de la campagne PREBAT : Télécharger les données pour toutes les opérations</span>
                     </button>
                 </li>
             </ul>
