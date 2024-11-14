@@ -19,3 +19,9 @@ export const initDownload = (url: string, name = '') => {
     a.click()
     document.body.removeChild(a)
 }
+
+export const sessionAsPrivilege = (session) => {
+    if (!session) return false
+    if ( new Date(session?.licenses?.prebat.end_at) > new Date() || session?.roles?.GLOBAL_ADMIN) return true
+    else return false
+}

@@ -2,6 +2,7 @@
     import Nav from './Nav.svelte'
     import Header from './Header.svelte'
     import { goto } from '$app/navigation'
+    import { sessionAsPrivilege } from '$lib/utils'
 	import { status, user } from '$module/session'
     import { getPath } from 'gros/page'
 </script>
@@ -12,7 +13,7 @@
 
 
 
-{#if $status.isAuthenticated && ($user.roles.USER_ADMIN || $user.roles.GLOBAL_ADMIN)}
+{#if $status.isAuthenticated && sessionAsPrivilege($user)}
     <Header/>
     <Nav/>
     <section>
