@@ -1,12 +1,12 @@
 <script lang="ts">
     import * as echarts from 'echarts';
     import { onMount } from 'svelte';
-    import { colors, round, getCSV } from './utils.ts'
+    import { colors, round, getCSV } from './utils'
     import { Select }  from 'gros/form'
     export let value;
     export let options
     export const downloadCSV = () => getCSV(option.series, 'histogram', options.title);
-    
+    console.log(value.rows)
     let ctx;
     let chart;
     let operationCount = 0

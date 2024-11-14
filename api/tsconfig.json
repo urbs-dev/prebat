@@ -34,7 +34,9 @@
 			"@adonisjs/lucid",
 			"adonis5-swagger",
 			"@adonisjs/view",
+			
 			"@adonisjs/redis"
 		]
+		
 	}
 }
