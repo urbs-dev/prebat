@@ -32,6 +32,15 @@ export default class ResultsController
 
     private async getCount(field: string, where: string)
     {
+        console.log(`
+            SELECT
+                JSONB_BUILD_OBJECT( 
+                    CASE WHEN ${field}='' THEN 'Non renseigné' ELSE ${field} END, COUNT(*)
+                ) as count
+            FROM results
+            ${where}
+            GROUP BY ${field}
+            ;`)
         return await Database.rawQuery(`
             SELECT
                 JSONB_BUILD_OBJECT( 

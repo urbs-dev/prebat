@@ -23,19 +23,20 @@
     }
 </script>
 
-<article>
+<article class="thin-scrollbar">
     <h1>Filtrer les résultats</h1>
-    <span class="info">Nombre d’opérations: 
+    <span class="info">Nombre d'opérations: 
         <b>
             {attributes?.rows ? attributes.rows.length : 0}
         </b>
     </span>  
 
-    <span class="warning">⚠️  Lorsque l’échantillon est très faible il ne peut être considéré comme représentatif.</span>
+    <span class="warning">⚠️  Lorsque l’échantillon est très faible il ne peut être considéré comme une représentatif.</span>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <span class="download" on:click={() => getFilterasCSV(attributes.rows)}>
+        Télecharger les données filtrées <i class="micon">file_download</i>
         Télecharger les données filtrées <i class="micon">file_download</i>
     </span>
     {#each Object.keys(filtersFields) as attribute}

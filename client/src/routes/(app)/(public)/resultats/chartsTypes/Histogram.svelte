@@ -6,7 +6,6 @@
     export let value;
     export let options
     export const downloadCSV = () => getCSV(option.series, 'histogram', options.title);
-    console.log(value.rows)
     let ctx;
     let chart;
     let operationCount = 0

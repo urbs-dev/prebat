@@ -109,7 +109,7 @@ export const getFilterValues = (keys, AllData, filters) => {
 
 export const charts = [
     {
-        theme: 'Données générales',
+        theme: 'DONNÉES GÉNÉRALES',
         charts: [
            
             {
@@ -133,6 +133,7 @@ export const charts = [
                 title: 'Consommation de six postes [kWhₑₚ/(m².an)]',
                 type: 'histogram_sum',
                 attribute: ['conso_chauffage', 'conso_ecs', 'conso_ventilation', 'conso_eclairage', 'conso_refroidissement', 'conso_auxiliaire'],
+                label: ['Chauffage', 'ECS', 'Ventilation', 'Éclairage', 'Refroidissement', 'Auxiliaire']
             },
         ]
     },
@@ -176,7 +177,7 @@ export const charts = [
         ]
     },
     {
-        theme: 'Consommation production',
+        theme: 'CONSOMMATION PRODUCTION',
         charts: [
             {
                 title: 'Consommation de chauffage',

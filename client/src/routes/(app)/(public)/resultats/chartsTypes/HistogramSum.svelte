@@ -6,12 +6,16 @@
     export let value;
     export let options
     export const downloadCSV = () => getCSV(option.series, 'histogram', options.title);
+
+    console.log(options)
     
     let ctx;
     let chart;
     let operationCount = 0
     let fonction = "Tous"
     let fonctions = ["Tous"]
+
+    // console.log(options)
 
     let option = {
         // toolbox: {
@@ -37,6 +41,7 @@
     const getSerie = (value) => {
         let rows = value.rows
         const attributes = options.attribute
+        const labels = options.label
         let series = {}
         attributes.map((attribute) => {
             series[attribute] = []
@@ -63,9 +68,9 @@
         });
         operationCount = series[attributes[0]].length
 
-        return attributes.map((attribute) => {
+        return attributes.map((attribute, i) => {
             return {
-                name: attribute.split("_")[1],
+                name: labels[i],
                 type: "bar",
                 barWidth: '95%',
                 stack: "total",
