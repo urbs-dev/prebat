@@ -1,13 +1,14 @@
 <script>
     import { AccountButton, AccountButtonLink as Link, Account, user, status } from '$module/session'
     import Tools from './Header_Tools.svelte'
+    import { sessionAsPrivilege } from '$lib/utils'
     import { getPath, url } from 'gros/page'
     import Menu from './Header_Menu.svelte'
 </script>
 
 <header class="z-depth-2 flex">
     <article class="flex">
-        {#if $status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}
+        {#if $status.isAuthenticated && sessionAsPrivilege($user)}
         <a href="{getPath('/admin')}"><i class="micon app">menu</i></a>
         {/if}
         <div class="flex actors" style:margin-left={$url.includes('admin') ? '256px' : '72px'} >
@@ -25,7 +26,7 @@
     </article>
 
     <aside class="flex">
-        <Menu isAuthenticated={$status.isAuthenticated && ($user.roles.GLOBAL_ADMIN || $user.roles.USER_ADMIN)}/>
+        <Menu isAuthenticated={$status.isAuthenticated && sessionAsPrivilege($user)}/>
         {#if $status.isAuthenticated}
             <AccountButton height={"64px"}>
                 <Link isExternal={true} role="USER_ADMIN" href="BASE_URL/prebat.api/swagger/" name="API doc" icon="code"/>

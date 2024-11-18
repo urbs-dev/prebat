@@ -3,6 +3,7 @@ import OperationsTree from './OperationsTree'
 import OperationsModel from './OperationsModel'
 import ReportsModel from 'App/Reports/ReportsModel'
 import { getClimaticZone } from './climat'
+import { sessionAsPrivilege } from 'Core/utils'
 import OperationsManager from './OperationsManager'
 import OperationsIO from './OperationsIO'
 
@@ -20,9 +21,11 @@ export default class OperationsController
     public async tree({ session, response }: HttpContextContract)
     {
         if (!session) return response.send({ error: 'Acces denied' })
-        if (!session?.roles?.USER_ADMIN && !session?.roles?.GLOBAL_ADMIN)
+        if (!sessionAsPrivilege(session))
         {
+            console.log("access denied");
             const tree = await OperationsTree.findByOwner(session.id)
+            
             return response.send(tree)
         }
         else{
@@ -40,7 +43,7 @@ export default class OperationsController
             
         if (operation)
         {
-            if (!session?.roles?.USER_ADMIN || !session?.roles?.GLOBAL_ADMIN)
+            if (!sessionAsPrivilege(session))
             {
                 if (operation?.owner != session.id) return response.send({ error: "Acces denied" })
             }
@@ -141,11 +144,10 @@ export default class OperationsController
             .first()
             
         if (!session ) return response.send({ error: 'You must be logged in', access: false })
-            
         if(!operation) return response.send({ access: true })
         if (operation.owner === session.id) return response.send({access: true, alreadyExists: true})
 
-            if (session?.roles?.USER_ADMIN || session?.roles?.GLOBAL_ADMIN){
+            if (sessionAsPrivilege(session)){
             return response.send({access: true,  alreadyExists: true})
         }
         return response.send({access: false,  alreadyExists: true})
