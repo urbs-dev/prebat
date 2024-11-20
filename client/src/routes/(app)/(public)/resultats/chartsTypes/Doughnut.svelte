@@ -9,7 +9,6 @@
     let canvas;
     let chart;
 
-    console.log(value)
 
     let option = {
             tooltip: {

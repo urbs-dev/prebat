@@ -88,6 +88,8 @@ export default class ResultsModel extends BaseModel
     @column()
     public systeme_chauffage : string | null
     @column()
+    public systeme_ventilation : string | null
+    @column()
     public ecs_principal : string | null
     @column()
     public confort_ete : string | null

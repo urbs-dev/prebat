@@ -11,7 +11,7 @@ export default class ResultsController
         let counts = {}
         const fieldsWithCount = ['fonction','zone_climatique','region','maitre_ouvrage','nature_travaux',
                                  'bepos','label_energetique','isolation_pvo',
-                                 'confort_ete','confort_hiver','classe_inertie', 'structure'
+                                 'confort_ete','confort_hiver','classe_inertie', 'structure', 'systeme_ventilation'
                                 ]
 
         fieldsWithCount.map(async (field) => {

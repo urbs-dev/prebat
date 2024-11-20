@@ -135,6 +135,12 @@ export const charts = [
                 attribute: ['conso_chauffage', 'conso_ecs', 'conso_ventilation', 'conso_eclairage', 'conso_refroidissement', 'conso_auxiliaire'],
                 label: ['Chauffage', 'ECS', 'Ventilation', 'Éclairage', 'Refroidissement', 'Auxiliaire']
             },
+            {
+                title: 'Consommation totale des opérations [kWhₑₚ/(m².an)]',
+                type: 'histogram_sum',
+                attribute: ['conso_rt', 'conso_nonrt'],
+                label: ['Consommation RT', 'Consommation non RT']
+            },
         ]
     },
     {
@@ -173,6 +179,7 @@ export const charts = [
                 title: 'Typologie de système de ventilation',
                 type: 'stacked_hzbar',
                 atrribute: 'systeme_ventilation', 
+                groupedBy: "fonction"
             },
         ]
     },
@@ -234,6 +241,30 @@ export const charts = [
                 title: 'Consommation d’éclairage détaillée (kWhₑₚ/(m².an))', 
                 type: 'histogram',
                 attribute: 'conso_eclairage',
+            },
+            {
+                title: 'Consommation auxiliaire',
+                type: 'error_bar',
+                attribute: ['conso_auxiliaire'],
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhₑₚ/(m².an))'
+            },
+            {
+                title: 'Consommation auxiliaire détaillée (kWhₑₚ/(m².an))', 
+                type: 'histogram',
+                attribute: 'conso_auxiliaire',
+            },
+            {
+                title: 'Consommation refroidissement',
+                type: 'error_bar',
+                attribute: ['conso_refroidissement'],
+                groupedBy: 'fonction',
+                axisLabel:'Consommation (kWhₑₚ/(m².an))'
+            },
+            {
+                title: 'Consommation refroidissement détaillée (kWhₑₚ/(m².an))', 
+                type: 'histogram',
+                attribute: 'conso_refroidissement',
             },
             // {
             //     title: 'détails de chacun des postes ',

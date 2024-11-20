@@ -29,7 +29,7 @@
         attributes = response 
     }   
     $: getAttributes(filters)
-
+    console.log(data.attributes)
     let hide = {}
 </script>
 

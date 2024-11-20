@@ -5,7 +5,6 @@
     import Charts from './Charts.svelte'
     export let data
 
-    console.log(data)
 </script>
 
 <div class="main thin-scrollbar">

@@ -5,6 +5,7 @@
     export let value ;
     export let options = {};
     export let row = false;
+    console.log(value)
     export const downloadCSV = () => {
         if (!row) 
             return getCSV(option.series, 'stacked_hzbar', options.title)
@@ -22,7 +23,6 @@
 
     const getSeries = async () => {
         if (!value || !options) return;
-        console.log(row)
         if (!row){
             return Object.keys(value).sort().map((key, i) => ({
                 name: key.substring(2),
@@ -48,7 +48,6 @@
             }));
         } else {
             const seriesGroups = await getSeriesGroups()
-            console.log(seriesGroups)
             let series = {};
             let seriesName = [];
             let result = [];

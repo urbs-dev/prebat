@@ -39,9 +39,12 @@
             if (!values[attribute]) return result = false
             result[attribute] = values[attribute]
         })
-        // console.log(result)
         return result
     }
+
+
+
+
 
 </script>
 
