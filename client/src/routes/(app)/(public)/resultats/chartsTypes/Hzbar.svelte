@@ -5,6 +5,7 @@
     export let value;
     export let options = {};
     export let row = false;
+
     export const downloadCSV = () => {
         return getCSV(
             option.series,
@@ -40,10 +41,12 @@
                 axis[element[attributes]].Neuf++;
             else axis[element[attributes]]["Rénovation"]++;
         });
+     
+        // const axis = Object.keys.sort()
 
-        Object.keys(axis).forEach((key, i) => {
+        Object.keys(axis).sort().forEach((key, i) => {
             series.push({
-                name: key,
+                name: key.substring(2),
                 type: "bar",
                 stack: "total",
                 label: {
@@ -55,7 +58,7 @@
                 data: [axis[key].Neuf],
             });
             series.push({
-                name: key,
+                name: key.substring(2),
                 type: "bar",
                 stack: "total",
                 label: {
@@ -130,7 +133,7 @@
         </span>
         <span>
             <i class="empty"></i>
-            Neuf
+            'Neuf'
         </span>
       
     </section>

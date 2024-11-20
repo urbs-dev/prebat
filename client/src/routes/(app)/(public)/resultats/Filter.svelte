@@ -37,7 +37,6 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <span class="download" on:click={() => getFilterasCSV(attributes.rows)}>
         Télecharger les données filtrées <i class="micon">file_download</i>
-        Télecharger les données filtrées <i class="micon">file_download</i>
     </span>
     {#each Object.keys(filtersFields) as attribute}
         <section>
@@ -56,7 +55,7 @@
                 {#await getFilterValues(attribute, defaultAttributes, filters)}
                     <p>Chargement...</p>
                 {:then values}
-                    {#each Object.keys(values) as key}
+                    {#each Object.keys(values).sort() as key}
                         {@const name = key }
                         {#key filters[attribute]}
                             <button on:click={() => toggle(attribute, key)} class:active={isActive(attribute, key)}  disabled={!values[key] > 0}>
@@ -64,12 +63,21 @@
                                     <i class="micon"> 
                                         {isActive(attribute, key) ? 'check_box' : 'check_box_outline_blank'} 
                                     </i>
+                                    {#if name.match(/^\d/)}  
+                                        <span>
+                                            {name.length > 15 ? elipsis(name.substring(2)) : name.substring(2)}
+                                            {#if name.length > 15}
+                                                <span class="tooltip">{name.substring(2)}</span>
+                                            {/if}
+                                        </span>
+                                    {:else}
                                     <span>
                                         {name.length > 15 ? elipsis(name) : name}
                                         {#if name.length > 15}
                                             <span class="tooltip">{name}</span>
                                         {/if}
                                     </span>
+                                    {/if}
                                 </span>
                                 <code>{values[key] || 0}</code>
                             </button>

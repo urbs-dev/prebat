@@ -56,7 +56,7 @@
             <h3><span>1.</span>Données et enseignements inter-opérations</h3>
             <div class="flex">
                 <img style="width:650px;" src="STATIC_PATH/img/enseignement_inter_operations.png" alt="Graphique enseignement inter-opérations">
-                <span>Consommation totales en énergie primaire par m² <sub>SHON</sub> et par an</span>
+                <span>Consommation totale en énergie primaire par m² <sub>SHON</sub> et par an</span>
             </div>
             <ul>
                 <li>
@@ -90,7 +90,6 @@
                 <li>
                     <button class="btn" type="button" on:click={download}>
                         <i class="micon">file_download</i>
-                        <span>Résultats d’évaluation de la campagne PREBAT : Télécharger les données pour toutes les opérations</span>
                         <span>Résultats d’évaluation de la campagne PREBAT : Télécharger les données pour toutes les opérations</span>
                     </button>
                 </li>

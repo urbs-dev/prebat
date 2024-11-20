@@ -17,29 +17,30 @@
 
     const getSeriesGroups = () => {
         if (!options.groupedBy || !value ) return;
-        return Object.keys(value[options.groupedBy])
+        return Object.keys(value[options.groupedBy]).sort()
     }
 
     const getSeries = async () => {
         if (!value || !options) return;
+        console.log(row)
         if (!row){
-            return Object.keys(value).map((key, i) => ({
-                name: key,
+            return Object.keys(value).sort().map((key, i) => ({
+                name: key.substring(2),
                 type: "bar",
                 stack: "total",
                 label: {
                     show: true,
                 },
-                itemStyle: {
-                    decal: {
-                        // symbole achuré
-                        color: `rgba(0, 0, 0, ${i % 2 === 0 ? 0 : 0.1})`,
-                        borderWidth: 1,
-                        dashArrayX: [1, 0],
-                        dashArrayY: [2, 5],
-                        rotation: 45,
-                    },
-                },
+                // itemStyle: {
+                //     decal: {
+                //         // symbole achuré
+                //         color: `rgba(0, 0, 0, ${i % 2 === 0 ? 0 : 0.1})`,
+                //         borderWidth: 1,
+                //         dashArrayX: [1, 0],
+                //         dashArrayY: [2, 5],
+                //         rotation: 45,
+                //     },
+                // },
                 emphasis: {
                     focus: "series",
                 },
@@ -47,6 +48,7 @@
             }));
         } else {
             const seriesGroups = await getSeriesGroups()
+            console.log(seriesGroups)
             let series = {};
             let seriesName = [];
             let result = [];
@@ -93,7 +95,7 @@
             if (!options.groupedBy) return;
             return {
                 type: "category",
-                min: 1,
+                min: 0,
                 data: getSeriesGroups(),
                 axisLabel: {
                     interval: 0,
@@ -104,9 +106,9 @@
                     },
                     formatter: function (value) {
                         if (value.length > 13) {
-                            return value.substring(0, 13) + '...';
+                            return value.substring(2, 13) + '...';
                         }
-                        return value;
+                        return value.substring(2);
                     }
                 },
             };

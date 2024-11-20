@@ -33,7 +33,7 @@ export const getTooltips = (row) => {
 export const getCategoreis = (row, attribute) => {
     if (!row) return [];
     if (!row[attribute]) return [];
-    return Object.keys(row[attribute] )
+    return Object.keys(row[attribute] ).sort()
 }
 
 export const deviation = (arr) =>{

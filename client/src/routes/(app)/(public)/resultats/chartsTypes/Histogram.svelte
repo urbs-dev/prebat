@@ -87,7 +87,7 @@
     const updated = async (value) => {
         if (!chart || !value || !options ) return;
         if (!value.rows) return
-        fonctions = ["Tous", ...Object.keys(value.fonction)]
+        fonctions = ["Tous", ...Object.keys(value.fonction).sort()]
         option.series = await getSerie(value)
         option.xAxis = await getxAxis()
         chart.setOption(option);

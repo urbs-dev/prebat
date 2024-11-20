@@ -314,13 +314,13 @@
                 rotate: 45,
                 overflow: "truncate",
                 textStyle: {
-                    fontSize: 10,
+                    fontSize: 8,
                 },
                 formatter: function (value) {
-                    if (value.length > 10) {
-                        return value.substring(0, 10) + '...';
+                    if (value.length > 14) {
+                        return value.substring(2, 15) + '...';
                     }
-                    return value;
+                    return value.substring(2);
                 }
             },
         },

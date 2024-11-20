@@ -9,6 +9,8 @@
     let canvas;
     let chart;
 
+    console.log(value)
+
     let option = {
             tooltip: {
                 trigger: 'item',
@@ -34,7 +36,7 @@
                     label: {
                         show: false,
                     },
-                    data: Object.keys(value).map(key => ({value: value[key], name: key}))
+                    data: Object.keys(value).sort().map(key => ({value: value[key], name: key}))
                 }
             ],
             color: colors
@@ -47,7 +49,7 @@
 
     const update = () => {
         if (!chart) return;
-        option.series[0].data = Object.keys(value).map(key => ({value: value[key], name: key}));
+        option.series[0].data = Object.keys(value).sort().map(key => ({value: value[key], name: key}));
         chart.setOption(option);
     }
 
