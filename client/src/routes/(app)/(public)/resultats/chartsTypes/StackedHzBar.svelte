@@ -5,7 +5,6 @@
     export let value ;
     export let options = {};
     export let row = false;
-    console.log(value)
     export const downloadCSV = () => {
         if (!row) 
             return getCSV(option.series, 'stacked_hzbar', options.title)
@@ -61,6 +60,7 @@
                     series[row[options.groupedBy]][subSeries]++;
                 else series[row[options.groupedBy]][subSeries] = 1;
             });
+            seriesName.sort()
             seriesName.forEach((name) => {
                 return result.push({
                     name: name,

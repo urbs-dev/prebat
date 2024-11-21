@@ -25,8 +25,6 @@
         if (!type || !department) return
         const prefix = `${type}.dep${department}.`
 
-        console.log(prefix)
-
         fetch(`BASE_URL/prebat.api/operations/name/${prefix}`)
             .then(response => response.json())
             .then(json => {

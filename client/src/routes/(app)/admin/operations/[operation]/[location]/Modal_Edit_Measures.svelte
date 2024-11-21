@@ -23,7 +23,6 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form)
         })
-        console.log(result);
         invalidateAll()
         loading.stop()
     }

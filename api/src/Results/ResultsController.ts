@@ -11,7 +11,7 @@ export default class ResultsController
         let counts = {}
         const fieldsWithCount = ['fonction','zone_climatique','region','maitre_ouvrage','nature_travaux',
                                  'bepos','label_energetique','isolation_pvo',
-                                 'confort_ete','confort_hiver','classe_inertie', 'structure', 'systeme_ventilation'
+                                 'confort_ete','confort_hiver','classe_inertie', 'structure', 
                                 ]
 
         fieldsWithCount.map(async (field) => {
@@ -32,15 +32,7 @@ export default class ResultsController
 
     private async getCount(field: string, where: string)
     {
-        console.log(`
-            SELECT
-                JSONB_BUILD_OBJECT( 
-                    CASE WHEN ${field}='' THEN 'Non renseigné' ELSE ${field} END, COUNT(*)
-                ) as count
-            FROM results
-            ${where}
-            GROUP BY ${field}
-            ;`)
+  
         return await Database.rawQuery(`
             SELECT
                 JSONB_BUILD_OBJECT( 

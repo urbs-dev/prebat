@@ -178,7 +178,7 @@ export const charts = [
             {
                 title: 'Typologie de système de ventilation',
                 type: 'stacked_hzbar',
-                atrribute: 'systeme_ventilation', 
+                attribute: 'systeme_ventilation',
                 groupedBy: "fonction"
             },
         ]
