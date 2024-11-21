@@ -114,6 +114,10 @@
         padding: 16px;
         position: sticky;
         top: 20px;
+        height: calc(100vh - 80px - 134px);
+
+        overflow-y: auto;
+        scrollbar-width: thin;
     }
     section{
         display: flex;
