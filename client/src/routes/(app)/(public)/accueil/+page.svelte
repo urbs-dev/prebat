@@ -83,7 +83,6 @@
             <ul>
                 <li>
                     <a href="BASE_URL/resultats">
-                        {console.log('BASE_URL/resultats')}
                         <i class="micon">exit_to_app</i>
                         <span>Synthèse graphique des résultats</span>
                     </a>
