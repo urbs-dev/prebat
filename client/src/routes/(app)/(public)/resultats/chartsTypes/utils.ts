@@ -148,13 +148,16 @@ export const charts = [
         charts: [
             {
                 title: 'Typologie d’isolation principale (paroi opaque)',
-                type: 'stacked_hzbar',
-                attribute: 'isolation_pvo'
+                type: 'hzbar',
+                attribute: 'isolation_pvo',
+                rows: true
             },
             { 
                 title: 'Système constructif (paroi opaque)',
-                type: 'stacked_hzbar',
+                type: 'hzbar',
                 attribute: 'structure',
+                rows: true
+
             }, 
             {
                 title: 'Perméabilité à l’air',
