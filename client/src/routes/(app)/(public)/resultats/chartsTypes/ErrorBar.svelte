@@ -12,7 +12,6 @@
     let deviations = {};
     let categoryData = getCategoreis(value, options.groupedBy);
 
-
   
     const getBarData = (value) => {
         let data = {};
@@ -30,14 +29,12 @@
                 if (!row[attribute] || isNaN(row[attribute])) return;
 
                 data[attribute][row[options.groupedBy]].push(Number(row[attribute]));
-
-                if (range[attribute][row[options.groupedBy]].min > Number(row[attribute]))
+                if (range[attribute][row[options.groupedBy]].min > Number(row[attribute]) || !range[attribute][row[options.groupedBy]].min || isNaN(range[attribute][row[options.groupedBy]].min)) 
                     range[attribute][row[options.groupedBy]].min = round(Number(row[attribute]));
                 if (range[attribute][row[options.groupedBy]].max < Number(row[attribute])) 
                     range[attribute][row[options.groupedBy]].max = round(Number(row[attribute]));
             });
         });
-
         rawData = data;
         categoryData.map((key, i) => {
             Object.keys(data).map((attribute, y) => {
