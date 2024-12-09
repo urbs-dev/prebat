@@ -112,8 +112,8 @@
                             <i class="micon"> more_vert </i>
                         </button>
                         <aside slot="content">
-                            <button on:click={() => createScenario(type, "hourly", "", "")}>Ajouter un scénario horaire</button>
-                            <button on:click={() => modal.open(CreationModal, {createScenario, type})}>Ajouter un scénario annuel</button>
+                            <button on:click={() => modal.open(CreationModal, {createScenario, type, time:"hourly"})}>Ajouter un scénario horaire</button>
+                            <button on:click={() => modal.open(CreationModal, {createScenario, type, time:"weekly"})}>Ajouter un scénario annuel</button>
                         </aside>
                     </Dropdown>
                 </span>

@@ -10,7 +10,7 @@
 
     const create = async () => {
         close()
-        props.createScenario(props.type, "weekly", name,description)
+        props.createScenario(props.type, props.time, name,description)
     }
  </script>
 
