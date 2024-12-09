@@ -82,7 +82,7 @@
             <h3 style:margin-top="40px"><span>2.</span>Résultats</h3>
             <ul>
                 <li>
-                    <a href="BASE_URL/resultats">
+                    <a href="BASE_URL/prebat/resultats">
                         <i class="micon">exit_to_app</i>
                         <span>Synthèse graphique des résultats</span>
                     </a>

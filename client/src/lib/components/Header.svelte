@@ -8,6 +8,8 @@
 
     $: innerWidth = 0
 
+    console.log($status.isAuthenticated)
+
 </script>
 <svelte:window bind:innerWidth/>
 
@@ -137,7 +139,7 @@
         padding-right: 24px;
     }
     .actors img{
-        width: 100%;
+        max-width: 120px;
         min-width: 80px;
         max-height: 140px;
         margin-right: 8px;

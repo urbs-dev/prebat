@@ -133,7 +133,7 @@
         </span>
         <span>
             <i class="empty"></i>
-            'Neuf'
+            Neuf
         </span>
       
     </section>
