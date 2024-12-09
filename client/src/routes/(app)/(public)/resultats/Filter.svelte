@@ -31,7 +31,7 @@
         </b>
     </span>  
 
-    <span class="warning">⚠️  Lorsque l’échantillon est très faible il ne peut être considéré comme une représentatif.</span>
+    <span class="warning">⚠️  Lorsque l’échantillon est faible il ne peut être considéré comme représentatif.</span>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->

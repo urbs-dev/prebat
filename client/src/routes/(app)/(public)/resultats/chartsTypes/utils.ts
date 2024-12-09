@@ -14,7 +14,7 @@ export const getTooltips = (row) => {
         return {
             trigger: "axis",
             formatter: function (params) {
-                let result = `${params[0].axisValueLabel} <br/> `
+                let result = `${params[0].axisValueLabel.substring(2, 13)} <br/> `
                 params.map((param)=> {
                     if ( param.value === 0 ) return
                     let colorSpan =
@@ -125,6 +125,7 @@ export const charts = [
             },
             {
                 title: 'Consommation totale [kWhₑₚ/(m².an)]', 
+                info: 'Les consommations présentées dans ce graphique sont celles qui ont pu être mesurées. Elles ne représentent pas exhaustivement la consommation totale de l’opération.',
                 type: 'histogram',
                 attribute: 'conso_tot',
             },
@@ -136,7 +137,7 @@ export const charts = [
                 label: ['Chauffage', 'ECS', 'Ventilation', 'Éclairage', 'Refroidissement', 'Auxiliaire']
             },
             {
-                title: 'Consommation totale des opérations [kWhₑₚ/(m².an)]',
+                title: 'Consommations mesurées des postes réglementés et non réglementés. [kWhₑₚ/(m².an)]',
                 type: 'histogram_sum',
                 attribute: ['conso_rt', 'conso_nonrt'],
                 label: ['Consommation RT', 'Consommation non RT']

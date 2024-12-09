@@ -6,18 +6,23 @@
     export let close
 
     let name
+    let description
 
     const create = async () => {
         close()
-        props.createScenario(props.type, "weekly", name)
+        props.createScenario(props.type, "weekly", name,description)
     }
  </script>
 
 <Modal title="Crée un scénario" icon="save">
     <aside>
         <label>
-            Année du scénario
+            Nom du scénario:
             <input type="text" bind:value={name}  placeholder="ex:2020"/>
+        </label>
+        <label>
+            Description:
+            <textarea type="text" bind:value={description}  placeholder="Description..."/>
         </label>
         <p class="infos">
             ⚠️ Les modifications non sauvegardés seront perdus.
@@ -36,5 +41,10 @@
         color:var(--color-warning);
         font-size:12px;
         margin-top:20px;
+    }
+    label{margin-bottom:20px;}
+    textarea{
+        width:100%;
+        height:100px;
     }
 </style>

@@ -20,6 +20,9 @@ export default class ScenariosModel extends BaseModel
 
     @column()
     public name?: string | null;
+    
+    @column()
+    public description?: string | null;
 
     @column()
     public type: string = 'hourly';

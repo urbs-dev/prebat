@@ -17,7 +17,7 @@
 
     const getSeriesGroups = () => {
         if (!options.groupedBy || !value ) return;
-        return Object.keys(value[options.groupedBy]).sort()
+        return Object.keys(value[options.groupedBy]).sort().reverse();
     }
 
     const getSeries = async () => {

@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { Tooltip } from "gros/tooltip"
-    
     const X = {
         hourly: Array.from({ length: 24 }),
         weekly: Array.from({ length: 52 })
@@ -16,6 +14,7 @@
     export let type = "hourly"
     export let data = Y[type].map(() => X[type].map( () => false)) as boolean[][]
     export let name = ""
+    export let description = ""
     export let id
     export let removeScenario
 
@@ -92,112 +91,73 @@
         dataHover = Y[type].map(() => X[type].map( () => false))
     }
 
-    const saveScenario = async () => {
-        const response = await fetch(`BASE_URL/prebat.api/scenarios/${id}`, {
-            method: 'PUT',
-            headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({data: JSON.stringify(data), name})
-        })
-        return await response.json()
-    }
 
-    const deleteScenario = async () => {
-        const response = await fetch(`BASE_URL/prebat.api/scenarios/${id}`, {method: 'DELETE',})
-        removeScenario(id)
-        return await response.json()
-    }
+
+
 
 </script>
-<section>
-    <table  on:mouseleave={() => resetHover()}>
-        {#if type === 'hourly'}
+<table  on:mouseleave={() => resetHover()}>
+    {#if type === 'hourly'}
+        <thead>
+            <tr>
+                <th>{label[type]}</th>
+                    {#each X[type] as _, i}
+                        <th class="X" on:click={() => selectX(i)} >{i}</th>
+                    {/each}
+                </tr>
+        </thead>
+        <tbody> 
+            {#each Y[type] as day, y}
+                <tr>
+                    <th class="Y" on:click={() => selectY(y) }>{day}</th>
+                    {#each X[type] as _, x}
+                        <td 
+                            class:active={data[y][x]} 
+                            class:hover={dataHover[y][x]}
+                            on:mousedown={() => startDrag(x, y)}
+                            on:mouseup={() => endDrag(x, y)}
+                            on:mouseenter={() => Hover(x, y, true)}
+                            on:mouseleave={() => Hover(x, y, false)}
+                            >
+                        </td>
+                    {/each}
+                </tr>
+            {/each}
+        </tbody>
+    {:else if type === "weekly"}
+        {#each Array.from({ length: 3 }) as  row, i}
             <thead>
                 <tr>
                     <th>{label[type]}</th>
-                        {#each X[type] as _, i}
-                            <th class="X" on:click={() => selectX(i)} >{i}</th>
-                        {/each}
-                    </tr>
+                    {#each X[type].slice(i*24, i*24+24) as aled, x}
+                        <th class="X" on:click={() => selectX(i*24+x)} >{i*24+x+1}</th>
+                    {/each}
+                </tr>
             </thead>
-            <tbody> 
-                {#each Y[type] as day, y}
-                    <tr>
-                        <th class="Y" on:click={() => selectY(y) }>{day}</th>
-                        {#each X[type] as _, x}
-                            <td 
-                                class:active={data[y][x]} 
-                                class:hover={dataHover[y][x]}
-                                on:mousedown={() => startDrag(x, y)}
-                                on:mouseup={() => endDrag(x, y)}
-                                on:mouseenter={() => Hover(x, y, true)}
-                                on:mouseleave={() => Hover(x, y, false)}
-                                >
-                            </td>
-                        {/each}
-                    </tr>
-                {/each}
+            <tbody>
+                <tr>
+                    <th class="Y" on:click={() => selectY(i)}>
+                    </th>
+                    {#each X[type].slice(i*24, i*24+24) as _, x}
+                        <td
+                            class:active={data[0][i*24+x]} 
+                            class:hover={dataHover[0][i*24+x]}
+                            on:mousedown={() => startDrag(i*24+x, 0)}
+                            on:mouseup={() => endDrag(i*24+x, 0)}
+                            on:mouseenter={() => Hover(i*24+x, 0, true)}
+                            on:mouseleave={() => Hover(i*24+x, 0, false)}
+                        >
+                            
+                        </td>
+                    {/each}
+                </tr>
             </tbody>
-        {:else if type === "weekly"}
-            {#each Array.from({ length: 3 }) as  row, i}
-               <thead>
-                    <tr>
-                        <th>{label[type]}</th>
-                        {#each X[type].slice(i*24, i*24+24) as aled, x}
-                            <th class="X" on:click={() => selectX(i*24+x)} >{i*24+x+1}</th>
-                        {/each}
-                    </tr>
-               </thead>
-               <tbody>
-                    <tr>
-                        <th class="Y" on:click={() => selectY(i)}>
-                            {name}
-                        </th>
-                        {#each X[type].slice(i*24, i*24+24) as _, x}
-                            <td
-                                class:active={data[0][i*24+x]} 
-                                class:hover={dataHover[0][i*24+x]}
-                                on:mousedown={() => startDrag(i*24+x, 0)}
-                                on:mouseup={() => endDrag(i*24+x, 0)}
-                                on:mouseenter={() => Hover(i*24+x, 0, true)}
-                                on:mouseleave={() => Hover(i*24+x, 0, false)}
-                            >
-                                
-                            </td>
-                        {/each}
-                    </tr>
-               </tbody>
-                
-            {/each}
-        {/if}
-    </table>
-    <article class="action">
-        <button class="save" on:click={() => saveScenario()}>
-            <Tooltip right content="Sauvegardé les changements"/>
-            <i class="micon">save</i>  
-        </button>
-        <button class="delete" on:click={() => deleteScenario()}>
-            <Tooltip right content="Supprimer le scénario"/>
-            <i class="micon">delete</i>  
-        </button>
-    </article>
-
-</section>
-
+            
+        {/each}
+    {/if}
+</table>
 <style>
-    section{
-        display: flex;
-        flex-direction: row;
-        align-items: start;
-    }
-    article.action{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-left: 16px;
-        gap: 8px;
-    }
-
+   
     table{
         width: auto;
         border-collapse: collapse;
@@ -208,7 +168,6 @@
         
         font-size: 12px;
         margin-bottom: 16px;
-        margin-left: 8px;
     }
     th, td{
         border: 1px solid #e0e0e0;
@@ -238,7 +197,6 @@
     td {
         position: relative;
         cursor: pointer;
-      
     }
     .hover:before {
         content: '';
@@ -250,21 +208,5 @@
         background-color: #000;
         opacity: 0.2;
     }
-
-    .action button{
-        position: relative;
-        width: 32px;
-        background: #f5f5f5;
-        height: 32px;
-        border-radius: 50%;
-        margin: 0 8px;
-    }
-    .action button:hover{
-        background: #e0e0e0;
-    }
-    .save{
-        color: var(--ternary);
-    }
-
 
 </style>

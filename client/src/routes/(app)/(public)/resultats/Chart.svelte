@@ -2,6 +2,7 @@
     export let chart
     export let values
     import { Dropdown } from 'gros/dropdown';
+    import { Tooltip } from "gros/tooltip"
 
     import Doughnut from './chartsTypes/Doughnut.svelte';
     import Bar from './chartsTypes/Bar.svelte';
@@ -50,7 +51,15 @@
 
 <section class="chart">
     <h4>
-        {chart.title}   
+        <div>
+            {chart.title} 
+            {#if chart.info}
+                <button class="info">
+                    <Tooltip bottom content={chart.info}/>
+                    <i class="micon">info_outline</i>  
+                </button> 
+            {/if}
+        </div>
         <Dropdown  position="bottom-end">
             <button>
                 <i class="micon"> more_vert </i>
@@ -92,6 +101,7 @@
     }
     h4{
         color: var(--primary-lighten);
+        font-family: 'mariane', sans-serif;
         font-size: 18px;
         margin: 16px 0 8px 0;
         display: flex;
@@ -114,5 +124,20 @@
     }
     aside button:hover {
         background-color: var(--background-darken);
+    }
+   h4 div{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+   }
+    h4 .info{
+          display: flex;
+          align-items: center;
+          position: relative;
+    }
+    h4 .info i{
+        font-size: 18px;
+        color: var(--primary-lighten);
     }
 </style>
