@@ -7,6 +7,7 @@
     import { Tooltip } from 'gros/tooltip'
     import OverWrite from './Modal_Overwrite_Operation.svelte' 
     import { modal } from 'gros/modal'
+    import CreateOperation from './Modal_Create_Operation.svelte'
 
     let file
     let name 
@@ -66,17 +67,19 @@
                 <i class="micon">arrow_back</i>
             </button>
         {/if}
+
         {#if step === 1}
+            
             <button class="btn" on:click={()=> step++}>
-                <i class="micon">add
-                </i>
-                créer une opération
+                <i class="micon">add</i>
+                Créer une opération 
             </button>
         {:else if step === 2}
             <Naming bind:name bind:step/>
         {:else if step === 3}
             <div class="import">
                     <Dropzone bind:file/>
+ 
                     <!-- <Dropzone bind:file/> -->
                     <div class="info">
                         <span class="warning">
@@ -101,7 +104,7 @@
                             </span>
                         </a>
                     </div>
-
+                   
                     {#if file}
                     <aside>
                         <button type="submit" class="btn" on:click={store}>
@@ -115,6 +118,13 @@
                         </button>
                     </aside>
                     {/if}
+                    <div class="create">
+                        <p> Ou crée une opération sans mesure </p>
+                        <button class="btn" on:click={()=> modal.open(CreateOperation, {name})}>
+                            <i class="micon">add</i>
+                            Créer sans mesure
+                        </button>
+                    </div>
             </div>
         {/if}
     </form>
@@ -149,6 +159,13 @@
     }
     .btn i {
         margin-right: 8px;
+    }
+    .btn.secondary {
+        background: #ddd;
+        color: var(--primary);
+    }
+    .btn.secondary:hover {
+        background: #ccc;
     }
 
     .btn:hover {
@@ -197,5 +214,11 @@
     }
     .import{ 
         margin: 24px 0;
+    }
+    .create{
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>

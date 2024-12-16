@@ -145,7 +145,7 @@
                                         <i class="micon">save</i>  
                                     </button>
                                     <button class="save" on:click={() => downloadScenario(data, name, type)}>
-                                        <Tooltip right content="Exporté le scénario au format csv"/>
+                                        <Tooltip right content="Exporter le scénario au format csv"/>
                                         <i class="micon">file_download</i>  
                                     </button>
                                     <button class="delete" on:click={() => deleteScenario(id)}>

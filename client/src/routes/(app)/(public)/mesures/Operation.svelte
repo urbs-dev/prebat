@@ -26,10 +26,12 @@
 <article class="z-depth-1">
     <h1 class="flex">
         {row.name} 
-        <button class="btn" on:click={extract}>
-            <i class="micon" style:margin-right="4px">file_download</i>
-            Télécharger
-        </button>
+        {#if row.filename}
+            <button class="btn" on:click={extract}>
+                <i class="micon" style:margin-right="4px">file_download</i>
+                Télécharger
+            </button>
+        {/if}
     </h1>
     <Figures sites={row.sites} measuresCount={row.measures.length}/>
     <aside class="flex">

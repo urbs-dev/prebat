@@ -6,6 +6,7 @@ import { getClimaticZone } from './climat'
 import { sessionAsPrivilege } from 'Core/utils'
 import OperationsManager from './OperationsManager'
 import OperationsIO from './OperationsIO'
+import LocationsModel from 'App/Locations/LocationsModel'
 
 export default class OperationsController
 {
@@ -151,5 +152,80 @@ export default class OperationsController
             return response.send({access: true,  alreadyExists: true})
         }
         return response.send({access: false,  alreadyExists: true})
+    }
+
+    public async storeWithoutMeasures({ request, response, session }: HttpContextContract)
+    {
+        const data = request.body()
+        const locations = data.locations
+
+
+        const alreadyExists = await OperationsModel.query()
+        .where('name', data.name)
+        .first()
+        if (alreadyExists)
+        {
+            if (!sessionAsPrivilege(session))
+            {
+                if (alreadyExists?.owner != session.id) return response.send({ error: "Acces denied" })
+            }
+            await OperationsManager.drop(alreadyExists.id)
+        }
+ 
+        let sites = { buildings:[], zones:[], rooms:[] }
+        await locations.map((building) => {
+            sites.buildings.push(building.name)
+            building.zones.map((zone) => {
+                sites.zones.push(`${building.name} / ${zone.name}`)
+                zone.rooms.map((room) => {
+                    sites.rooms.push(`${building.name} / ${zone.name} / ${room.name}`)
+                })
+            })
+        })
+
+        const operation = {
+            name: data.name,
+            sites: await sites,
+            time_step: 0,
+            building_count: await sites.buildings.length,
+            row_count: 0,
+            is_public: false,
+            filename: null,
+            owner: await session.id,
+        } as OperationsModel
+
+        const result = await OperationsModel.create(operation)
+        const operation_id = result.id
+        await locations.map( async (building) => {
+            let locations = { 
+                path: `${operation.name}  / ${building.name}`,
+                name: building.name, 
+                operation_id, 
+                nature: 'building', 
+                parent_id: operation_id,
+            } as LocationsModel
+            const response = await LocationsModel.create(locations)
+            const building_id = response.id
+
+            building.zones.map( async (zone) => {
+                locations.name = zone.name
+                locations.path = `${operation.name}  / ${building.name} / ${zone.name}`
+                locations.nature = 'zone'
+                locations.parent_id = building_id
+                locations.building_id = building_id
+                const response = await LocationsModel.create(locations)
+                const zone_id = response.id
+                zone.rooms.map( async (room) => {
+                    locations.name = room.name
+                    locations.path = `${operation.name}  / ${building.name} / ${zone.name} / ${room.name}`
+                    locations.nature = 'room'
+                    locations.parent_id = zone_id
+                    locations.zone_id = zone_id
+                    await LocationsModel.create(locations)
+                })
+            })
+        })
+        
+        return response.send({ message: 'created' })
     }
 }

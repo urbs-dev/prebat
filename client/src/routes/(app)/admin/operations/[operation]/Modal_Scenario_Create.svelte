@@ -25,7 +25,7 @@
             <textarea type="text" bind:value={description}  placeholder="Description..."/>
         </label>
         <p class="infos">
-            ⚠️ Les modifications non sauvegardés seront perdus.
+            ⚠️ Les modifications non sauvegardées seront perdues.
         </p>
     </aside>
     <svelte:fragment slot="footer">

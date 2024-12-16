@@ -1,14 +1,18 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, hasOne, HasOne, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
 import ReportsModel from 'App/Reports/ReportsModel'
 import DocumentationsModel from 'App/Documentations/DocumentationsModel'
 import LocationsModel from 'App/Locations/LocationsModel'
 import MeasuresModel from 'App/Measures/MeasuresModel'
+import { v4 as uuidv4 } from 'uuid'
 import ScenariosModel from 'App/Scenarios/ScenariosModel'
 export default class OperationsModel extends BaseModel
 {
 	public static table = 'operations'
 	public static selfAssignPrimaryKey = true
+
+	@beforeCreate()
+	public static async createUUID (model: OperationsModel ) { model.id = uuidv4() }
 
 	@column({ isPrimary: true })
 	public id: string
@@ -32,7 +36,7 @@ export default class OperationsModel extends BaseModel
 	public is_public: boolean
 
 	@column()
-	public filename: string
+	public filename: string | null
 	
 	@column()
 	public owner: string | null

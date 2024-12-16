@@ -20,6 +20,8 @@ Route.group( () => {
 
     Route.post('operations/:id/extract', 'OperationsController.extract')
 
+    Route.post('operations/empty', 'OperationsController.storeWithoutMeasures').middleware('isUserAdmin')
+
     Route.delete('operations/:id', 'OperationsController.destroy').middleware('isUserAdmin')
 
 }).namespace('App/Operations')

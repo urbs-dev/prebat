@@ -1,11 +1,15 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, belongsTo, BelongsTo,beforeCreate } from '@ioc:Adonis/Lucid/Orm'
 import MeasuresModel from 'App/Measures/MeasuresModel'
 import ReportsModel from 'App/Reports/ReportsModel'
+import { v4 as uuidv4 } from 'uuid'
 
 export default class LocationsModel extends BaseModel
 {
     public static table = 'locations'
+
+    @beforeCreate()
+	public static async createUUID (model: LocationsModel ) { model.id = uuidv4() }
 
     @column({ isPrimary: true })
     public id: string

@@ -4,6 +4,7 @@
 
     export let name 
     export let step
+    export let withoutMeasures = false
 
     const types = [
         { value: 'MI', label: 'Habitation individuelle' },

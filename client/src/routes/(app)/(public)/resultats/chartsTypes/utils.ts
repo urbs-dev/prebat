@@ -124,20 +124,20 @@ export const charts = [
                 attribute: 'nature_travaux'
             },
             {
-                title: 'Consommation totale [kWhₑₚ/(m².an)]', 
+                title: `Consommation totale [kWh<span class="indice" >ep</span>/(m².an)]`, 
                 info: 'Les consommations présentées dans ce graphique sont celles qui ont pu être mesurées. Elles ne représentent pas exhaustivement la consommation totale de l’opération.',
                 type: 'histogram',
                 attribute: 'conso_tot',
             },
            
             {
-                title: 'Consommation de six postes [kWhₑₚ/(m².an)]',
+                title: 'Consommation de six postes [kWh<span class="indice" >ep</span>/(m².an)]',
                 type: 'histogram_sum',
                 attribute: ['conso_chauffage', 'conso_ecs', 'conso_ventilation', 'conso_eclairage', 'conso_refroidissement', 'conso_auxiliaire'],
                 label: ['Chauffage', 'ECS', 'Ventilation', 'Éclairage', 'Refroidissement', 'Auxiliaire']
             },
             {
-                title: 'Consommations mesurées des postes réglementés et non réglementés. [kWhₑₚ/(m².an)]',
+                title: 'Consommations mesurées des postes réglementés et non réglementés. [kWh<span class="indice" >ep</span>/(m².an)]',
                 type: 'histogram_sum',
                 attribute: ['conso_rt', 'conso_nonrt'],
                 label: ['Consommation RT', 'Consommation non RT']

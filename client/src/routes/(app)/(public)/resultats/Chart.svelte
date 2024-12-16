@@ -52,7 +52,9 @@
 <section class="chart">
     <h4>
         <div>
-            {chart.title} 
+            <span>
+                {@html chart.title} 
+            </span>
             {#if chart.info}
                 <button class="info">
                     <Tooltip bottom content={chart.info}/>
@@ -129,7 +131,8 @@
         display: flex;
         align-items: center;
         gap: 8px;
-
+        max-width: 500px;
+        min-height: 50px;
    }
     h4 .info{
           display: flex;
@@ -139,5 +142,13 @@
     h4 .info i{
         font-size: 18px;
         color: var(--primary-lighten);
+    }
+    h4 span{
+        display: block;
+    }
+    :global(.indice){
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
     }
 </style>

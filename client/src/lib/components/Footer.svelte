@@ -77,17 +77,17 @@
             </span>
             <ul class="flex">
                 <li>
-                    <a href="https://www.cerema.fr">
+                    <a href="https://www.cerema.fr" target="_blank">
                         cerema.fr
                     </a>
                 </li>
                 <li>
-                    <a href="https://doc.cerema.fr">
+                    <a href="https://doc.cerema.fr" target="_blank">
                         doc.cerema.fr
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.expertises-territoires.fr">
+                    <a href="https://www.expertises-territoires.fr" target="_blank">
                         expertises-territoires.fr
                     </a>
                 </li>
