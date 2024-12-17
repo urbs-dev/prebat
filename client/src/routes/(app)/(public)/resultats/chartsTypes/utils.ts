@@ -198,7 +198,7 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation de chauffage détaillée (kWhₑₚ/(m².an))', 
+                title: 'Consommation de chauffage détaillée (kWh<span class="indice" >ep</span>/(m².an))', 
                 type: 'histogram',
                 attribute: 'conso_chauffage',
             },
@@ -211,7 +211,7 @@ export const charts = [
 
             },
             {
-                title: "Consommation d'ECS détaillée (kWhₑₚ/(m².an))", 
+                title: `Consommation d'ECS détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
                 type: 'histogram',
                 attribute: 'conso_ecs',
             },
@@ -230,7 +230,7 @@ export const charts = [
             //     rows: true
             // },
             {
-                title: 'Consommation des ventilations détaillée (kWhₑₚ/(m².an))', 
+                title: `Consommation des ventilations détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
                 type: 'histogram',
                 attribute: 'conso_ventilation',
             },
@@ -242,7 +242,7 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation d’éclairage détaillée (kWhₑₚ/(m².an))', 
+                title: `Consommation d’éclairage détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
                 type: 'histogram',
                 attribute: 'conso_eclairage',
             },
@@ -254,7 +254,7 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation auxiliaire détaillée (kWhₑₚ/(m².an))', 
+                title: `Consommation auxiliaire détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
                 type: 'histogram',
                 attribute: 'conso_auxiliaire',
             },
@@ -266,7 +266,7 @@ export const charts = [
                 axisLabel:'Consommation (kWhₑₚ/(m².an))'
             },
             {
-                title: 'Consommation refroidissement détaillée (kWhₑₚ/(m².an))', 
+                title: `Consommation refroidissement détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
                 type: 'histogram',
                 attribute: 'conso_refroidissement',
             },
