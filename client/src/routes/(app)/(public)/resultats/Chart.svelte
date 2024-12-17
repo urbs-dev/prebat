@@ -150,5 +150,6 @@
         margin: 0;
         padding: 0;
         font-size: 12px;
+        text-transform: uppercase;
     }
 </style>
