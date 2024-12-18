@@ -13,6 +13,7 @@
 
     const create = async () => {
         close()
+        if (!name && props.name) name = props.name     
         const result = await fetch(`BASE_URL/prebat.api/operations/empty`, {
             method: 'POST',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
