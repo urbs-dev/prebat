@@ -61,7 +61,7 @@
 </script>
 
 <section>
-    <form>
+    <div>
         {#if step != 1}
             <button class="back" on:click={()=> step--}>
                 <i class="micon">arrow_back</i>
@@ -127,7 +127,7 @@
                     </div>
             </div>
         {/if}
-    </form>
+    </div>
 
 </section>
 
