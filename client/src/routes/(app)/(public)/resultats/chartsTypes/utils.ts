@@ -413,7 +413,7 @@ const download = (csv, title) => {
     link.href = url;
     link.setAttribute('hidden', '');
     link.style.visibility = "hidden";    
-    link.setAttribute("download", title);
+    link.setAttribute("download", `${title}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
