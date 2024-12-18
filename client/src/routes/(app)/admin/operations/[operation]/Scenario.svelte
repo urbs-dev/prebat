@@ -86,7 +86,7 @@
         const url = window.URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
-        a.download = `${name}_${type}.csv`
+        a.download = `${operation.name}_${name}_${type}.csv`
         a.click()
         window.URL.revokeObjectURL(url)
 
