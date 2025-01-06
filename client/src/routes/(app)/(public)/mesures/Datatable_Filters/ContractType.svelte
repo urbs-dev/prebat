@@ -1,5 +1,6 @@
 <script>
     export let handler
+    let hide = false
 
     const contracts = handler.createCalculation(row => row.report?.contract_type).distinct((values) => {
         return values
@@ -12,6 +13,9 @@
 
 <h3 class="flex">
     <div class="flex">
+        <button class="btn" class:active={hide} on:click={() => hide = !hide}>
+            <i class="micon">keyboard_arrow_down</i>
+        </button>
         <i class="micon" style="margin-right:6px;font-size: 18px;">filter_list</i>
         Maîtrise d'ouvrage
     </div>
@@ -21,21 +25,24 @@
         </button>
     {/if}
 </h3>
-
-<article>
-    {#each contracts as contract}
-        {@const { value, count } = contract}
-        {#if value}
-        <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
-            <i class="micon">
-                {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
-            </i>
-            <span>{value}</span>
-            <code>{count}</code>
-        </button>
-        {/if}
-    {/each}
-</article>
+{#if !hide || $selected.length > 0}
+    <article>
+        {#each contracts as contract}
+            {@const { value, count } = contract}
+            {#if !hide || $selected.includes(value)}
+                {#if value}
+                <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
+                    <i class="micon">
+                        {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
+                    </i>
+                    <span>{value}</span>
+                    <code>{count}</code>
+                </button>
+                {/if}
+            {/if}
+        {/each}
+    </article>
+{/if}
 
 
 
@@ -97,5 +104,13 @@
         width: 16px;
         height: 16px;
         border-radius: 50px;
+    }
+    h3 button i.micon{
+        color: #9e9e9e;
+        transition: all 0.2s;
+    }
+    h3 button.active i.micon{
+        transform: rotate(-90deg);
+        transition: all 0.2s;
     }
 </style>

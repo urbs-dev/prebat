@@ -1,9 +1,9 @@
 <script>
-    import DeliveredOn from './Datatable_Filters_DeliveredOn.svelte'
-    import Use from './Datatable_Filters_Use.svelte'
-    import ContractType from './Datatable_Filters_ContractType.svelte'
-    import Engineering from './Datatable_Filters_Engineering.svelte'
-    import Places from './Datatable_Filters_Places.svelte'
+    import DeliveredOn from './Datatable_Filters/DeliveredOn.svelte'
+    import Use from './Datatable_Filters/Use.svelte'
+    import ContractType from './Datatable_Filters/ContractType.svelte'
+    import Engineering from './Datatable_Filters/Engineering.svelte'
+    import Places from './Datatable_Filters/Places.svelte'
     export let handler
     export let isMobile = true
     export let showMobileFilters = false

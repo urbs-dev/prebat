@@ -2,7 +2,8 @@
     import Places from './Datatable_Filters/Places.svelte'
     import Select from './Datatable_Filters/Select.svelte'
     import Range from './Datatable_Filters/Range.svelte'
-    import Use from './Datatable_Filters/Use.svelte'
+    import SensorModal from './Modal_Filters_Sensor.svelte'
+    import { modal } from 'gros/modal'
 
     import { status } from '$module/session';
     export let handler
@@ -31,13 +32,29 @@
         console.log('download');
     }
 
+    const openModal = () => {
+        modal.open(SensorModal, {handler})
+    }
+
+    
     const adminFilters = [
-        ["use", "Destination d'usage"],
-        ["climatic_zone", "Zone climatique"],
-        ["constructive_system", "Système constructif"],
-        ["heating", "Equipements de chauffage"],
-        ["hot_water", "Equipements d'ECS"],
-        ["airing", "Equipements de ventilation"],
+        ["shon", "SHON", "range"],
+        ["su", "SU", "range"],
+        ["shab", "SHAB", "range"],
+        ["departement", "Département", "places"],
+        ["region", "Région", "places"],
+        ["delivered_on", "Année de livraison", "range"],
+        ["contract_type", "Type de maitrise d'ouvrage", "select"],
+        ["engineering", "Nature des travaux", "select"],
+        ["label", "Label / certification ", "select"],
+        ["building_insulation", "Type d'isolation", "select"],
+        ["wall_insulation", "Isolation mue", "select"],
+        ["roof_insulation", "Type toiture", "select"],
+        ["floor_insulation", "Type plancher", "select"],
+        ["window_carpentry", "Menuiserie - vitrage", "select"],
+        ["frame_carpentry", "Menuiserie - chassis", "select"],
+        ["air_permeability", "Pérméabilité à l'air de l'enveloppe", "range"],
+        // ["air_permeability_network", "Pérméabilité à l'air des réseaux", "range"],
     ]
 </script>
 
@@ -47,22 +64,24 @@
 
 
 <section class="thin-scrollbar" class:visible={!isMobile}>
-    <h1>Mesures par opération</h1>
-    <span>⚠️ Les mesures ne sont pas disponibles pour toutes les opérations.</span>
-
-    {#if $status.isAuthenticated}
+    <h1>Filtres avancées</h1>
+        <button class="btn" on:click={() => openModal()}>
+            <i class="micon">cloud_download</i>
+            <span>
+                Télécharger les opérations filtrées
+            </span>
+        </button>
         {#each adminFilters as filter}
-            {@const [field, title] = filter}
+            {@const [field, title, type] = filter}
             {@const hide = true}
-            <Select handler={handler} {field} {title} {hide}/>
+            {#if type === 'range'}
+                <Range handler={handler} {field} {title} {hide}/>
+            {:else if type === 'places'}
+                <Places handler={handler} {field} {title} {hide}/>
+            {:else}
+                <Select handler={handler} {field} {title} {hide}/>
+            {/if}
         {/each}
-    {:else}
-        <Places {handler} title="Département"/> 
-        <Select {handler} field="use" title="Destination d'usage"/>
-        <Select {handler} field="engineering" title="Nature des travaux"/>
-        <Select {handler} field="contract_type" title="Maîtrise d'ouvrage"/>
-        <Range {handler} field="delivered_on" title="Année de livraison" hide={false}/>
-    {/if}
 </section>
 
 

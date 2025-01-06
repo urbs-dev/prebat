@@ -3,10 +3,12 @@ import OperationsTree from './OperationsTree'
 import OperationsModel from './OperationsModel'
 import ReportsModel from 'App/Reports/ReportsModel'
 import { getClimaticZone } from './climat'
-import { sessionAsPrivilege } from 'Core/utils'
+import { PATH_TO_FILES, sessionAsPrivilege } from 'Core/utils'
 import OperationsManager from './OperationsManager'
 import OperationsIO from './OperationsIO'
 import LocationsModel from 'App/Locations/LocationsModel'
+import { promises as fs } from 'fs';
+import JSZip from 'jszip';
 
 export default class OperationsController
 {
@@ -24,9 +26,7 @@ export default class OperationsController
         if (!session) return response.send({ error: 'Acces denied' })
         if (!sessionAsPrivilege(session))
         {
-            console.log("access denied");
             const tree = await OperationsTree.findByOwner(session.id)
-            
             return response.send(tree)
         }
         else{
@@ -227,5 +227,63 @@ export default class OperationsController
         })
         
         return response.send({ message: 'created' })
+    }
+
+    public async extracts({ request, response }: HttpContextContract)
+    {
+        const body = request.body()
+        const ids = body.ids
+        const filters = body.filter
+        console.log(filters);
+            
+        let operations = await OperationsModel.query().whereIn('id', ids).preload('measures').preload('report')
+        console.log(operations.length)
+
+        const filtersKeys = ['sensor', 'system', 'system_category']
+        await filtersKeys.map(async (key) => {
+            if(filters[key].length > 0 ){
+                await operations.map(async (operation) => {
+                    const include = await operation.measures.map((measure) => {
+                        if ( filters[key].includes(measure[key])) return true
+                        return false
+                    })
+                    if (!include.includes(true)) {
+                        operations.splice(operations.indexOf(operation), 1)
+                    }
+                })
+            }  
+        })
+
+        if (filters.usages.length > 0){
+            await operations.map(async (operation) => {
+                if (!operation.report) return
+                let use = operation.report.use.split('~')[0] 
+                if (!filters.usages.includes(use))  operations.splice(operations.indexOf(operation), 1)
+            })
+        }
+        if (operations.length === 0) return response.status(404).send({ message: 'No operation found'})
+        try{    
+            const zip = new JSZip();
+            for(let i = 0; i < operations.length; i++){
+                try {
+                if (!operations[i].filename) continue
+                const filename = await operations[i].filename
+                const data = await fs.readFile(`${PATH_TO_FILES}/${filename}`);
+                const blob = await new Blob([data], { type: `application/xls}` });
+                const arrayBuffer = await blob.arrayBuffer();
+                const name = 'Cerema-TAB-PREBAT_MESURES_' + operations[i].filename
+                zip.file( `${name}`, arrayBuffer);
+                } catch (error) {
+                    continue
+                }
+            }
+            
+            const content = await zip.generateAsync({ type: 'nodebuffer' });
+            const buffer = Buffer.from(content);
+            return response.status(200).send(buffer);
+        } catch (error) {
+            return response.status(500).send({ message: 'File not found' });
+        }
+
     }
 }

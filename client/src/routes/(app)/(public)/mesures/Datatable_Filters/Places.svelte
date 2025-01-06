@@ -1,19 +1,32 @@
 <script>
     export let handler
+    export let title
+    export let field
 
-    const places = handler.createCalculation(row => row.report?.place.context).distinct((values) => {
+    export let hide = false
+
+    const places = handler.createCalculation(row => {
+        if (field === 'region') return (row.report?.place.context).split(', ')[2]
+        else return row.report?.place.context
+    }).distinct((values) => {
         return values
             .filter(Boolean)
             .sort((a, b) => { return a.localeCompare(b) })
     })
-    const filter = handler.createAdvancedFilter(row => row.report?.place.context)
+    const filter = handler.createAdvancedFilter(row =>  {
+        if (field === 'region') return (row.report?.place.context).split(', ')[2]
+        else return row.report?.place.context
+    })
     const selected = filter.getSelected()
 </script>
 
 <h3 class="flex">
     <div class="flex">
+        <button class="btn" class:active={hide} on:click={() => hide = !hide}>
+            <i class="micon">keyboard_arrow_down</i>
+        </button>
         <i class="micon" style="margin-right:6px;font-size:18px;">filter_list</i>
-        Départements
+        {title}
     </div>
     {#if $selected.length > 0}
         <button class="btn" style:color="#e57373" on:click={() => filter.clear()}>
@@ -22,20 +35,28 @@
     {/if}
 </h3>
 
-<article>
-    {#each places as place}
-        {@const { value, count } = place}
-        {#if value}
-        <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
-            <i class="micon">
-                {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
-            </i>
-            <span>{value.split(', ')[1]} ({value.split(', ')[0]})</span>
-            <code>{count}</code>
-        </button>
-        {/if}
-    {/each}
-</article>
+{#if !hide || $selected.length > 0}
+    <article>
+        {#each places as place}
+            {@const { value, count } = place}
+            {#if !hide || $selected.includes(value)}
+                {#if value}
+                <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
+                    <i class="micon">
+                        {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
+                    </i>
+                    {#if field === 'region'}
+                        <span>{value}</span>
+                    {:else}
+                        <span>{value.split(', ')[1]} ({value.split(', ')[0]})</span>
+                    {/if}
+                    <code>{count}</code>
+                </button>
+                {/if}
+            {/if}
+        {/each}
+    </article>
+{/if}
 
 
 
@@ -101,5 +122,13 @@
         width: 16px;
         height: 16px;
         border-radius: 50px;
+    }
+    h3 button i.micon{
+        color: #9e9e9e;
+        transition: all 0.2s;
+    }
+    h3 button.active i.micon{
+        transform: rotate(-90deg);
+        transition: all 0.2s;
     }
 </style>

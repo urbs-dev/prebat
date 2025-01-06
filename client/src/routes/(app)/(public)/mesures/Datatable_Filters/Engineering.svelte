@@ -1,25 +1,23 @@
 <script>
     export let handler
+    let hide = false
 
-    const usages = handler
-        .createCalculation((row) => row.report?.use)
-        .distinct((values) => {
-            return values
-                .map((value) => (value ? value.split(' ~ ') : null))
-                .flat()
-                .filter(Boolean)
-                .sort((a, b) => {
-                    return a.localeCompare(b)
-                })
-        })
-    const filter = handler.createAdvancedFilter((row) => row.report?.use)
+    const works = handler.createCalculation(row => row.report?.engineering).distinct((values) => {
+        return values
+            .filter(Boolean)
+            .sort((a, b) => { return a.localeCompare(b) })
+    })
+    const filter = handler.createAdvancedFilter(row => row.report?.engineering)
     const selected = filter.getSelected()
 </script>
 
 <h3 class="flex">
     <div class="flex">
-        <i class="micon" style="margin-right:6px;font-size: 18px;">filter_list</i>
-        Destination d'usage
+        <button class="btn" class:active={hide} on:click={() => hide = !hide}>
+            <i class="micon">keyboard_arrow_down</i>
+        </button>
+        <i class="micon" style="margin-right:6px;font-size:18px;">filter_list</i>
+        Nature des travaux
     </div>
     {#if $selected.length > 0}
         <button class="btn" style:color="#e57373" on:click={() => filter.clear()}>
@@ -27,20 +25,31 @@
         </button>
     {/if}
 </h3>
-<article>
-    {#each usages as usage}
-        {@const { value, count } = usage}
-        {#if value}
-            <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
-                <i class="micon">
-                    {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
-                </i>
-                <span>{value}</span>
-                <code>{count}</code>
-            </button>
-        {/if}
-    {/each}
-</article>
+
+{#if !hide || $selected.length > 0}
+    <article>
+        {#each works as work}
+            {@const { value, count } = work}
+            {#if !hide || $selected.includes(value)}
+                {#if value}
+                <button on:click={() => filter.set(value)} class="btn select" class:active={$selected.includes(value)}>
+                    <i class="micon">
+                        {$selected.includes(value) ? 'check_box' : 'check_box_outline_blank'}
+                    </i>
+                    <span>{value}</span>
+                    <code>{count}</code>
+                </button>
+                {/if}
+            {/if}
+
+        {/each}
+    </article>
+{/if}
+
+
+
+
+
 
 <style>
     article {
@@ -98,5 +107,13 @@
         width: 16px;
         height: 16px;
         border-radius: 50px;
+    }
+    h3 button i.micon{
+        color: #9e9e9e;
+        transition: all 0.2s;
+    }
+    h3 button.active i.micon{
+        transform: rotate(-90deg);
+        transition: all 0.2s;
     }
 </style>

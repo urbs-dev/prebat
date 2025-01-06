@@ -1,8 +1,10 @@
 <script lang="ts">
     import type { ComponentType } from 'svelte'
     import type {  DataHandler } from 'gros/datatable'
+    import { status } from '$module/session';
     import { Pagination } from 'gros/datatable'
     import Filters from './Datatable_Filters.svelte'
+    import AdvanceFilters from './Datatable_Filters_Advanced.svelte'
     import Mobilfilter from './Datatable_Filters_Mobil.svelte'
 
     type T = $$Generic<Row>
@@ -43,6 +45,9 @@
             <Filters {handler} bind:isMobile/>
             <Mobilfilter bind:handler bind:showMobileFilters bind:isMobile/>
             <slot />
+            {#if $status.isAuthenticated}
+                <AdvanceFilters {handler} bind:isMobile/>
+            {/if}
         </aside>
         
     </article>
@@ -130,7 +135,7 @@
 
     aside {
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: 1600px;
         padding: 0 24px;
         align-items: flex-start;
     }

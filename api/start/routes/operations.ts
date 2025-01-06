@@ -24,4 +24,6 @@ Route.group( () => {
 
     Route.delete('operations/:id', 'OperationsController.destroy').middleware('isUserAdmin')
 
+    Route.post('operations/extracts', 'OperationsController.extracts').middleware('isUserAdmin')
+
 }).namespace('App/Operations')
