@@ -119,7 +119,7 @@
                     </aside>
                     {/if}
                     <div class="create">
-                        <p> Ou crée une opération sans mesure </p>
+                        <p> Ou créer une opération sans mesure </p>
                         <button class="btn" on:click={()=> modal.open(CreateOperation, {name})}>
                             <i class="micon">add</i>
                             Créer sans mesure

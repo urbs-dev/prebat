@@ -72,7 +72,7 @@
 
  </script>
 
-<Modal title="Crée une opération sans mesure" icon="save">
+<Modal title="Créer une opération sans mesure" icon="save">
     <section>
         {#if !props.name} 
             <Input bind:value={name} required label="Nom de l'opération"/>
