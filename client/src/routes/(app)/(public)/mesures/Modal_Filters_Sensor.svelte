@@ -47,7 +47,6 @@
 
 <Modal title="Selection des mesures" icon="developer_board">
     <section>
-        {JSON.stringify(selected)}
         <article>
             <Usage title="Destination d'usage" list={usages} bind:selected={selected.usages} />
             <Select title="Capteur" list={sensor} bind:selected={selected.sensor} />
