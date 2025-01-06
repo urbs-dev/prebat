@@ -234,11 +234,9 @@ export default class OperationsController
         const body = request.body()
         const ids = body.ids
         const filters = body.filter
-        console.log(filters);
-            
+        
         let operations = await OperationsModel.query().whereIn('id', ids).preload('measures').preload('report')
-        console.log(operations.length)
-
+        
         const filtersKeys = ['sensor', 'system', 'system_category']
         await filtersKeys.map(async (key) => {
             if(filters[key].length > 0 ){
