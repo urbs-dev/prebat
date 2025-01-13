@@ -1,6 +1,6 @@
 export const usages = [
     {
-        typology: 'Habitation', 
+        label: 'Habitation', 
         values: [
             'Habitation individuelle diffus',
             'Habitation individuelle groupée',
@@ -8,11 +8,11 @@ export const usages = [
         ]
     },
     {
-        typology: 'Bureau', 
+        label: 'Bureau', 
         values: ['Bureau']
     },
     {
-        typology: 'Enseignement', 
+        label: 'Enseignement', 
         values: [
             'Crèche',
             'Ecole',
@@ -23,15 +23,15 @@ export const usages = [
         ]
     },
     {
-        typology: 'Commerce', 
+        label: 'Commerce', 
         values: ['Commerce']
     },
     {
-        typology: 'Santé', 
+        label: 'Santé', 
         values: ['Santé']
     },
     {
-        typology: 'Hébergement', 
+        label: 'Hébergement', 
         values: [
             'EHPAD',
             'Hôtel',
@@ -40,11 +40,11 @@ export const usages = [
         ]
     },
     {
-        typology: 'Restauration', 
+        label: 'Restauration', 
         values: ['Restauration']
     },
     {
-        typology: 'Culture', 
+        label: 'Culture', 
         values: [
             'Bibliothèque',
             'Salle de spectacle',
@@ -52,24 +52,24 @@ export const usages = [
         ]
     },
     {
-        typology: 'Sport', 
+        label: 'Sport', 
         values: ['Sport']
     },
     {
-        typology: 'Autre', 
+        label: 'Autre', 
         values: ['Autre']
     },
 ]
 
 export const getUseTypology = (selected: string[]) => {
-    const def = usages.map(({typology, values}) => {
+    const def = usages.map(({label, values}) => {
         return values.map(value => {
-            return { typology, value }
+            return { label, value }
         })
     }).flat()
     let typologies = []
     for (const value of selected) {
-        typologies.push(def.find(item => item.value === value)?.typology)
+        typologies.push(def.find(item => item.value === value)?.label)
     }
     if (typologies.filter(Boolean).length === 0) {
         return null
@@ -77,234 +77,12 @@ export const getUseTypology = (selected: string[]) => {
     return [ ...new Set(typologies.filter(Boolean))].join(' ~ ')
 }
 
-export const envelope = [
-    { label: 'Système constructif *', name: 'constructive_system', values: [
-        `Béton`,
-        `Maçonnerie monomur`,
-        `Maçonnerie ancienne`,
-        `Maçonnerie - autre`,
-        `Ossature bois`,
-        `Ossature métallique`,
-        `Mixte (bois, béton)`,
-        `Mixte (bois, maçonnerie)`,
-        `Mixte (acier, béton)`,
-        `Mixte (acier, maçonnerie)`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Isolation du bâtiment', name: 'building_insulation', values: [
-        `Isolation par l'intérieur (ITI)`,
-        `Isolation par l'extérieur (ITE)`,
-        `Isolation répartie (ITR)`,
-        `Isolation intégrée (ITitg)`,
-        `Non isolé`,
-        `Ne sait pas`,
-        
-    ] },
-    { label: 'Isolation murs', name: 'wall_insulation', values: [
-        `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
-        `Laine minérale (roche, verre)`,
-        `Bois (laine, fibre)`,
-        `Ouate de cellulose`,
-        `Autres biosourcés`,
-        `Autres`,
-        `Non isolés`,
-        `Ne sait pas`,
-    ] },
-    { label: 'Isolation toiture', name: 'roof_insulation', values: [
-        `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
-        `Laine minérale (roche, verre)`,
-        `Bois (laine, fibre)`,
-        `Ouate de cellulose`,
-        `Autres biosourcés`,
-        `Autres`,
-        `Non isolés`,
-        `Ne sait pas`,
-    ] },
-    { label: 'Isolation plancher', name: 'floor_insulation', values: [
-        `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
-        `Laine minérale (roche, verre)`,
-        `Bois (laine, fibre)`,
-        `Ouate de cellulose`,
-        `Autres biosourcés`,
-        `Autres`,
-        `Non isolés`,
-        `Ne sait pas`,
-    ] },
-    { label: 'Menuiserie - vitrage', name: 'window_carpentry', values: [
-        `Simple vitrage`,
-        `Double vitrage`,
-        `Triple vitrage`,
-        `Double menuiseries`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Menuiserie - châssis', name: 'frame_carpentry', values: [
-        `PVC`,
-        `Bois`,
-        `Alu`,
-        `Mixte`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-
-]
-
-export const system = [
-    { label: 'Chauffage de base *', name: 'heating', values: [
-        `Radiateurs électriques`,
-        `PAC`,
-        `Batterie ou résistance électrique`,
-        `Chaudière gaz`,
-        `Chaudière fioul`,
-        `Chaudière bois`,
-        `Réseau de chaleur urbain`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
-        `Groupée avec le système de chauffage`,
-        `Production instantanée non groupée avec le chauffage`,
-        `Ballon électrique`,
-        `Ballon thermodynamique`,
-        `ECS solaire`,
-        `Résistance électrique pour appoint`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Ventilation *', name: 'airing', values: [
-        `Ventilation naturelle`,
-        `Ventilation hybride`,
-        `VMC simple flux autoréglable`,
-        `VMC simple flux hygro A`,
-        `VMC simple flux hygro B`,
-        `VMC double flux`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Climatisation / Rafraichissement', name: 'refresher', values: [
-        `Climatisation à détente directe`,
-        `Climatisation avec réseau d'eau glacée`,
-        `PAC réversible`,
-        `Rafraîchissement`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Emetteurs chaud', name: 'hot_emitter', values: [
-        `Plancher chauffant`,
-        `Plafond chauffant`,
-        `Mur rayonnant`,
-        `Radiateurs électriques`,
-        `Radiateurs à eau basse température`,
-        `Radiateurs à eau standards`,
-        `Ventilo convecteur`,
-        `Batterie à eau chaude dans la gaine de soufflage de la ventilation`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    { label: 'Emetteurs froid', name: 'cold_emitter', values: [
-        `Plancher`,
-        `Plancher rafraîchissant`,
-        `Mur rayonnant`,
-        `Poutre froide`,
-        `Ventilo convecteur`,
-        `Batterie froide`,
-        `Autres`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    {
-        label: `Pérméabilité à l'air de l'enveloppe`,
-        unit: 'm³/(h.m²)',
-        name: 'air_permeability', 
-        type: 'number',
-    },
-    {
-        label: `Perméabilité à l'air des réseaux`,
-        unit: 'm³/(h.m²)',
-        name: 'air_permeability_network', 
-        type: 'number',
-    }
-]
-
-export const locationSystem = [
-    { label: 'Système constructif *', name: 'constructive_system', values: [
-        `Béton`,
-        `Maçonnerie monomur`,
-        `Maçonnerie ancienne`,
-        `Maçonnerie - autre`,
-        `Ossature bois`,
-        `Ossature métallique`,
-        `Mixte (bois, béton)`,
-        `Mixte (bois, maçonnerie)`,
-        `Mixte (acier, béton)`,
-        `Mixte (acier, maçonnerie)`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ]},
-    { label: 'Chauffage de base *', name: 'heating', values: [
-        `Radiateurs électriques`,
-        `PAC`,
-        `Batterie ou résistance électrique`,
-        `Chaudière gaz`,
-        `Chaudière fioul`,
-        `Chaudière bois`,
-        `Réseau de chaleur urbain`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ]},
-    { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
-        `Groupée avec le système de chauffage`,
-        `Production instantanée non groupée avec le chauffage`,
-        `Ballon électrique`,
-        `Ballon thermodynamique`,
-        `ECS solaire`,
-        `Résistance électrique pour appoint`,
-        `Autre`,
-        `Ne sait pas`,
-    ] },
-    { label: 'Ventilation *', name: 'airing', values: [
-        `Ventilation naturelle`,
-        `Ventilation hybride`,
-        `VMC simple flux autoréglable`,
-        `VMC simple flux hygro A`,
-        `VMC simple flux hygro B`,
-        `VMC double flux`,
-        `Autre`,
-        `Ne sait pas`,
-        `Aucun`,
-    ] },
-    {
-        label: `Pérméabilité à l'air de l'enveloppe`,
-        unit: 'm³/(h.m²)',
-        name: 'air_permeability', 
-        type: 'number',
-    },
-]
-
-export const getValues = (array: Object[], label: string) => {
-    let object = array[array.indexOf(array.find(a => a.label === label))]
-
-    if ( object?.values ) {
-        return object.values
-    }
-    return []
-}
-
 export const sensor = [
     {
-        label: 'électrique',
+        label: 'Compteur électrique',
         values: [
-            `Index électrique`,
-            `Consommation électrique`,
+            `Index  `,
+            `Consommation`,
             `Production`,
             `Puissance`,
             `Puissance apparente`,
@@ -316,9 +94,9 @@ export const sensor = [
     {
         label: 'Compteur de calories',
         values: [
-            'Index compteur calories',
-            'Consommation compteur calories',
-            'Volume compteur calories',
+            'Index',
+            'Consommation',
+            'Volume',
             'T Chaud',
             'T Froid',
             'Débit eau',
@@ -328,29 +106,29 @@ export const sensor = [
     {
         label: 'Compteur volumétrique gaz',
         values: [
-            'Index gaz',
-            'Volume gaz',
-            'Consommation gaz',
-            'Débit gaz',
+            'Index',
+            'Volume',
+            'Consommation',
+            'Débit',
             'Autre',
         ]
     },
     {
         label: 'Compteur volumétrique fioul',
         values: [
-            'Index fioul',
-            'Volume fioul',
-            'Consommation fioul',
-            'Débit fioul',
+            'Index',
+            'Volume',
+            'Consommation',
+            'Débit',
             'Autre',
         ]
     },
     {
         label: 'Compteur volumétrique eau',
         values: [
-            'Index eau',
-            'Volume eau',
-            'Débit eau',
+            'Index',
+            'Volume',
+            'Débit',
             'Autre',
         ]
     },
@@ -527,178 +305,6 @@ export const sensor = [
 
 ]
 
-export const parameters = [
-    {
-        label: "Global",
-        values: [
-            "Électrique",
-            "Gaz",
-            "Auto-consommation",
-            "Autre",
-        ]
-    },
-    {
-        label: "Chauffage",
-        values: [
-            "Générateur de base",
-            "Générateur d'appoint",
-            "Apport (solaire, géothermie ... )",
-            "Stockage",
-            "Réseau primaire",
-            "Réseau secondaire (distribution)",
-            "Émetteur",
-            "Pertes de distribution",
-            "Autre",
-        ]
-    },
-    {
-        label: "ECS",
-        values: [
-            "Générateur de base",
-            "Générateur d'appoint",
-            "Apport (solaire, géothermie ... )",
-            "Energie utile fournie par le générateur",
-            "Stockage",
-            "Production ECS",
-            "Réseau primaire",
-            "Réseau secondaire (distribution)",
-            "Perte réseau bouclage",
-            "Puisage ECS",
-            "Autre",
-        ]
-    },
-    {
-        label: "Froid",
-        values: [
-            "Générateur de base",
-            "Générateur d'appoint",
-            "Apport (géothermie)",
-            "Energie utile fournie par le générateur",
-            "Production Primaire",
-            "Production secondaire",
-            "Autre",
-        ]
-    },
-    {
-        label: "Auxiliaire",
-        values: [
-            "Totale",
-            "Auxiliaires de chauffage",
-            "Auxilaires d'ECS",
-            "Auxiliaires de froid",
-            "Auxiliaire de chauffage et d'ECS",
-            "Auxiliaire de chauffage et de Froid",
-            "Auxiliaire de chauffage, ECS et Froid",
-            "Autre",
-        ]
-    },
-    {
-        label: "Ventilation",
-        values: [
-            "Total",
-            "Caisson",
-            "Air neuf",
-            "Air soufflé",
-            "Air repris",
-            "Air extrait",
-            "Réseau",
-            "by-pass",
-            "Filtre",
-        ]
-    },
-    {
-        label: "Éclairage",
-        values: [
-            "Total",
-            "Zone d'occupation (locaux, logement ...)",
-            "Circulation et espace communs",
-            "Parking",
-            "Extérieur",
-            "Éclairement",
-            "Autre",
-        ]
-    },
-    {
-        label: "Électricité mobilier",
-        values: [
-            "Total",
-            "Bureautique",
-            "Électroménager",
-            "Prise circulation et espace commun",
-            "Prise zone d'occcupation",
-            "Serveur",
-            "Autre",
-        ]
-    },
-    {
-        label: "Électricité immobilier",
-        values: [
-            "Total",
-            "BAES",
-            "Ascenseur",
-            "Autre",
-        ]
-    },
-    {
-        label: "Production électrique",
-        values: [
-            "Photovoltaïque",
-            "Co-génération",
-            "Micro-éolien",
-        ]
-    },
-    {
-        label: "Météo",
-        values: [
-            "Température extérieure",
-            "Humidité relative extérieure",
-            "Vitesse du vent",
-            "Direction du vent",
-            "Rayonnement",
-            "Pluviométrie",
-        ]
-    },
-    {
-        label: "Ambiance",
-        values: [
-            "Température d'air",
-            "Température radiative",
-            "Températion opérative",
-            "Humidité relative d'air",
-            "CO2",
-            "Différence de pression d'air",
-            "Eclairement lumineux",
-            "Autre",
-        ]
-    },
-    {
-        label: "Paroi",
-        values: [
-            "Température de surface ou à une interface",
-            "Température dans un matériau",
-            "Humidité relative en surface ou à une interface",
-            "Humidité relative dans un matériau",
-            "Teneur en eau dans un matriau",
-            "Différence de pression d'air",
-            "Flux thermique",
-            "Humectation (mesure indicative de présence d'eau liquide)",
-            "Perméabilité à l'air (en chantier)",
-            "Perméabilité à l'air (à réception)",
-        ]
-    },
-    {
-        label: "Occupation",
-        values: [
-            "Détecteur de présence",
-            "Comptage de passage",
-            "Autre",
-        ]
-    },
-    {
-        label: "Autre",
-    }
-]
-
 export const system_category = [
     {
         label: "Équipement de production de chauffage et/ou ECS et/ou Froid",
@@ -820,6 +426,161 @@ export const system_category = [
     }
 ]
 
+export const envelope = [
+    { label: 'Système constructif *', name: 'constructive_system', values: [
+        `Béton`,
+        `Maçonnerie monomur`,
+        `Maçonnerie ancienne`,
+        `Maçonnerie - autre`,
+        `Ossature bois`,
+        `Ossature métallique`,
+        `Mixte (bois, béton)`,
+        `Mixte (bois, maçonnerie)`,
+        `Mixte (acier, béton)`,
+        `Mixte (acier, maçonnerie)`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Isolation du bâtiment', name: 'building_insulation', values: [
+        `Isolation par l'intérieur (ITI)`,
+        `Isolation par l'extérieur (ITE)`,
+        `Isolation répartie (ITR)`,
+        `Isolation intégrée (ITitg)`,
+        `Non isolé`,
+        `Ne sait pas`,
+        
+    ] },
+    { label: 'Isolation murs', name: 'wall_insulation', values: [
+        `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
+        `Laine minérale (roche, verre)`,
+        `Bois (laine, fibre)`,
+        `Ouate de cellulose`,
+        `Autres biosourcés`,
+        `Autres`,
+        `Non isolés`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Isolation toiture', name: 'roof_insulation', values: [
+        `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
+        `Laine minérale (roche, verre)`,
+        `Bois (laine, fibre)`,
+        `Ouate de cellulose`,
+        `Autres biosourcés`,
+        `Autres`,
+        `Non isolés`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Isolation plancher', name: 'floor_insulation', values: [
+        `Plastique alvéolaire (PSE, XPS, PUR, ...)`,
+        `Laine minérale (roche, verre)`,
+        `Bois (laine, fibre)`,
+        `Ouate de cellulose`,
+        `Autres biosourcés`,
+        `Autres`,
+        `Non isolés`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Menuiserie - vitrage', name: 'window_carpentry', values: [
+        `Simple vitrage`,
+        `Double vitrage`,
+        `Triple vitrage`,
+        `Double menuiseries`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Menuiserie - châssis', name: 'frame_carpentry', values: [
+        `PVC`,
+        `Bois`,
+        `Alu`,
+        `Mixte`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+
+]
+
+export const system = [
+    { label: 'Chauffage de base *', name: 'heating', values: [
+        `Radiateurs électriques`,
+        `PAC`,
+        `Batterie ou résistance électrique`,
+        `Chaudière gaz`,
+        `Chaudière fioul`,
+        `Chaudière bois`,
+        `Réseau de chaleur urbain`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
+        `Groupée avec le système de chauffage`,
+        `Production instantanée non groupée avec le chauffage`,
+        `Ballon électrique`,
+        `Ballon thermodynamique`,
+        `ECS solaire`,
+        `Résistance électrique pour appoint`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Ventilation *', name: 'airing', values: [
+        `Ventilation naturelle`,
+        `Ventilation hybride`,
+        `VMC simple flux autoréglable`,
+        `VMC simple flux hygro A`,
+        `VMC simple flux hygro B`,
+        `VMC double flux`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Climatisation / Rafraichissement', name: 'refresher', values: [
+        `Climatisation à détente directe`,
+        `Climatisation avec réseau d'eau glacée`,
+        `PAC réversible`,
+        `Rafraîchissement`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Emetteurs chaud', name: 'hot_emitter', values: [
+        `Plancher chauffant`,
+        `Plafond chauffant`,
+        `Mur rayonnant`,
+        `Radiateurs électriques`,
+        `Radiateurs à eau basse température`,
+        `Radiateurs à eau standards`,
+        `Ventilo convecteur`,
+        `Batterie à eau chaude dans la gaine de soufflage de la ventilation`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    { label: 'Emetteurs froid', name: 'cold_emitter', values: [
+        `Plancher`,
+        `Plancher rafraîchissant`,
+        `Mur rayonnant`,
+        `Poutre froide`,
+        `Ventilo convecteur`,
+        `Batterie froide`,
+        `Autres`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    {
+        label: `Pérméabilité à l'air de l'enveloppe`,
+        unit: 'm³/(h.m²)',
+        name: 'air_permeability', 
+        type: 'number',
+    },
+    {
+        label: `Perméabilité à l'air des réseaux`,
+        unit: 'm³/(h.m²)',
+        name: 'air_permeability_network', 
+        type: 'number',
+    }
+]
 
 export const resultsInfos = [
     {
@@ -992,4 +753,241 @@ export const resultsInfos = [
             },
         }
     }
+]
+
+export const parameters = [
+    {
+        label: "Global",
+        values: [
+            "Électrique",
+            "Gaz",
+            "Auto-consommation",
+            "Autre",
+        ]
+    },
+    {
+        label: "Chauffage",
+        values: [
+            "Générateur de base",
+            "Générateur d'appoint",
+            "Apport (solaire, géothermie ... )",
+            "Stockage",
+            "Réseau primaire",
+            "Réseau secondaire (distribution)",
+            "Émetteur",
+            "Pertes de distribution",
+            "Autre",
+        ]
+    },
+    {
+        label: "ECS",
+        values: [
+            "Générateur de base",
+            "Générateur d'appoint",
+            "Apport (solaire, géothermie ... )",
+            "Energie utile fournie par le générateur",
+            "Stockage",
+            "Production ECS",
+            "Réseau primaire",
+            "Réseau secondaire (distribution)",
+            "Perte réseau bouclage",
+            "Puisage ECS",
+            "Autre",
+        ]
+    },
+    {
+        label: "Froid",
+        values: [
+            "Générateur de base",
+            "Générateur d'appoint",
+            "Apport (géothermie)",
+            "Energie utile fournie par le générateur",
+            "Production Primaire",
+            "Production secondaire",
+            "Autre",
+        ]
+    },
+    {
+        label: "Auxiliaire",
+        values: [
+            "Totale",
+            "Auxiliaires de chauffage",
+            "Auxilaires d'ECS",
+            "Auxiliaires de froid",
+            "Auxiliaire de chauffage et d'ECS",
+            "Auxiliaire de chauffage et de Froid",
+            "Auxiliaire de chauffage, ECS et Froid",
+            "Autre",
+        ]
+    },
+    {
+        label: "Ventilation",
+        values: [
+            "Total",
+            "Caisson",
+            "Air neuf",
+            "Air soufflé",
+            "Air repris",
+            "Air extrait",
+            "Réseau",
+            "by-pass",
+            "Filtre",
+        ]
+    },
+    {
+        label: "Éclairage",
+        values: [
+            "Total",
+            "Zone d'occupation (locaux, logement ...)",
+            "Circulation et espace communs",
+            "Parking",
+            "Extérieur",
+            "Éclairement",
+            "Autre",
+        ]
+    },
+    {
+        label: "Électricité mobilier",
+        values: [
+            "Total",
+            "Bureautique",
+            "Électroménager",
+            "Prise circulation et espace commun",
+            "Prise zone d'occcupation",
+            "Serveur",
+            "Autre",
+        ]
+    },
+    {
+        label: "Électricité immobilier",
+        values: [
+            "Total",
+            "BAES",
+            "Ascenseur",
+            "Autre",
+        ]
+    },
+    {
+        label: "Production électrique",
+        values: [
+            "Photovoltaïque",
+            "Co-génération",
+            "Micro-éolien",
+        ]
+    },
+    {
+        label: "Météo",
+        values: [
+            "Température extérieure",
+            "Humidité relative extérieure",
+            "Vitesse du vent",
+            "Direction du vent",
+            "Rayonnement",
+            "Pluviométrie",
+        ]
+    },
+    {
+        label: "Ambiance",
+        values: [
+            "Température d'air",
+            "Température radiative",
+            "Températion opérative",
+            "Humidité relative d'air",
+            "CO2",
+            "Différence de pression d'air",
+            "Eclairement lumineux",
+            "Autre",
+        ]
+    },
+    {
+        label: "Paroi",
+        values: [
+            "Température de surface ou à une interface",
+            "Température dans un matériau",
+            "Humidité relative en surface ou à une interface",
+            "Humidité relative dans un matériau",
+            "Teneur en eau dans un matriau",
+            "Différence de pression d'air",
+            "Flux thermique",
+            "Humectation (mesure indicative de présence d'eau liquide)",
+            "Perméabilité à l'air (en chantier)",
+            "Perméabilité à l'air (à réception)",
+        ]
+    },
+    {
+        label: "Occupation",
+        values: [
+            "Détecteur de présence",
+            "Comptage de passage",
+            "Autre",
+        ]
+    },
+    {
+        label: "Autre",
+    }
+]
+export const getValues = (array: Object[], label: string) => {
+    let object = array[array.indexOf(array.find(a => a.label === label))]
+
+    if ( object?.values ) {
+        return object.values
+    }
+    return []
+}
+
+export const locationSystem = [
+    { label: 'Système constructif *', name: 'constructive_system', values: [
+        `Béton`,
+        `Maçonnerie monomur`,
+        `Maçonnerie ancienne`,
+        `Maçonnerie - autre`,
+        `Ossature bois`,
+        `Ossature métallique`,
+        `Mixte (bois, béton)`,
+        `Mixte (bois, maçonnerie)`,
+        `Mixte (acier, béton)`,
+        `Mixte (acier, maçonnerie)`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ]},
+    { label: 'Chauffage de base *', name: 'heating', values: [
+        `Radiateurs électriques`,
+        `PAC`,
+        `Batterie ou résistance électrique`,
+        `Chaudière gaz`,
+        `Chaudière fioul`,
+        `Chaudière bois`,
+        `Réseau de chaleur urbain`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ]},
+    { label: 'Eau chaude sanitaire *', name: 'hot_water', values: [
+        `Groupée avec le système de chauffage`,
+        `Production instantanée non groupée avec le chauffage`,
+        `Ballon électrique`,
+        `Ballon thermodynamique`,
+        `ECS solaire`,
+        `Résistance électrique pour appoint`,
+        `Autre`,
+        `Ne sait pas`,
+    ] },
+    { label: 'Ventilation *', name: 'airing', values: [
+        `Ventilation naturelle`,
+        `Ventilation hybride`,
+        `VMC simple flux autoréglable`,
+        `VMC simple flux hygro A`,
+        `VMC simple flux hygro B`,
+        `VMC double flux`,
+        `Autre`,
+        `Ne sait pas`,
+        `Aucun`,
+    ] },
+    {
+        label: `Pérméabilité à l'air de l'enveloppe`,
+        unit: 'm³/(h.m²)',
+        name: 'air_permeability', 
+        type: 'number',
+    },
 ]

@@ -61,7 +61,6 @@ export const usages = [
     },
 ]
 
-
 export const sensor = [
     {
         label: 'électrique',

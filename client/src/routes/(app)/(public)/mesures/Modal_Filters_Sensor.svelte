@@ -2,7 +2,7 @@
     import { Modal } from "gros/modal";
     import Select from "./Modal_Filters_Sensor_Select.svelte" 
     import Usage from "./Modal_Filters_Sensor_Usage.svelte" 
-    import { sensor, usages, system_category } from './utils'
+    import { sensor, usages, system_category } from '$lib/utils/list'
     import { loading } from 'gros/loading'
     export let close
     export let props

@@ -3,7 +3,7 @@
     import { loading } from 'gros/loading'
     import { invalidateAll } from '$app/navigation'
     import { Input, Checkbox, Select, Textarea } from 'gros/form'
-    import { parameters, getValues, sensor, system_category } from '../utils'
+    import { parameters, getValues, sensor, system_category } from '$lib/utils/list'
     import { slide } from 'svelte/transition';
 
     export let props
@@ -32,6 +32,7 @@
     <article>
         <aside>
             <!-- Usage -->
+             
             <section> 
                 <h2 class="flex">
                     <i class="micon">chevron_right</i>
@@ -69,10 +70,10 @@
                     />
                     {#if form?.sensor}
                         <Select
-                            label="Type de données"
+                            label="Grandeur mesurée"
                             bind:value={form.statement}
                             options={getValues(sensor, form.sensor)}
-                            placeholder="Choisir un type de données"
+                            placeholder="Choisir une grandeur mesurée"
                         />
                     {/if}
                 </div>
@@ -85,7 +86,7 @@
                 </h2>
                 <div>
                 <Select 
-                    label="Catégorie d'équipement"
+                    label="Type d'équipement"
                     bind:value={form.system_category}
                     options={system_category.map(p => ({value: p.label}))}
                     placeholder="Choisir un usage"

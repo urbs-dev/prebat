@@ -3,7 +3,7 @@
     import { loading } from 'gros/loading'
     import { invalidateAll } from '$app/navigation'
     import { Checkbox } from 'gros/form'
-    import { envelope } from './utils'
+    import { envelope } from '$lib/utils/list'
     import { removeEmptyString } from '$lib/utils'
 
     export let props

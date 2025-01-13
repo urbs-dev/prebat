@@ -3,7 +3,7 @@
     import { loading } from 'gros/loading'
     import { invalidateAll } from '$app/navigation'
     import { Input, Checkbox } from 'gros/form'
-    import { usages, getUseTypology } from '../utils'
+    import { usages, getUseTypology } from '$lib/utils/list'
     import { removeEmptyString } from '$lib/utils'
     export let props
     export let close
@@ -49,11 +49,11 @@
             <article class="thin-scrollbar">
                 {#each usages as usage}
                     <div class="flex">
-                        <i>{usage.typology}</i>
+                        <i>{usage.label}</i>
                         <ul>
                             {#each usage.values as value}
                             <li class:active={selected.includes(value)}>
-                                <Checkbox checked={selected.includes(value)} size={16} margin={[0,8,0,0]} on:click={() => select(value, usage.typology)}>
+                                <Checkbox checked={selected.includes(value)} size={16} margin={[0,8,0,0]} on:click={() => select(value, usage.label)}>
                                     {value}
                                 </Checkbox>
                             </li>

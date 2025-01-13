@@ -4,7 +4,7 @@
     import { invalidateAll } from '$app/navigation'
     import { Checkbox } from 'gros/form'
     import Radio from './Radio.svelte'
-    import { system } from './utils'
+    import { system } from '$lib/utils/list'
     import { removeEmptyString } from '$lib/utils'
 
     export let props

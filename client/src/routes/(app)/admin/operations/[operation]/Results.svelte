@@ -1,6 +1,6 @@
 <script>
     import { Input, Select } from "gros/form";
-    import { resultsInfos } from "./utils";
+    import { resultsInfos } from "$lib/utils/list";
     import { Tooltip } from 'gros/tooltip'
     import { slide } from 'svelte/transition'
     export let operation;
