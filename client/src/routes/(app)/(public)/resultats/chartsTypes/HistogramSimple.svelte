@@ -13,17 +13,11 @@
     let fonctions = ["Tous"]
 
     let option = {
-        // toolbox: {
-        //     show: true,
-        //     feature: {
-        //         dataView: { readOnly: true },
-        //     },
-        // },
         tooltip: {
             show: true,
         },
         legend: {
-            data: ["Rénovation", "Neuf"],
+            show: false,
             bottom: 20,
         },
         xAxis: [],
@@ -36,37 +30,23 @@
     const getSerie = (value) => {
         let rows = value.rows
         const attribute = options.attribute
-        let series = { "Rénovation": [], "new": [] }
+        let series = []
 
         rows.sort((a, b) => a[attribute] - b[attribute]);
         rows.forEach(row => {
             if ( fonction !== "Tous" && row.fonction !== fonction) return
             if (row[attribute] === null || row[attribute] === 0) return
-            if ( row.nature_travaux === "Neuf") {
-                series.new.push(round(row[attribute]))
-                series['Rénovation'].push("-")
-            } else {
-                series["Rénovation"].push(round(row[attribute]))
-                series.new.push("-")
-            }
+            series.push(round(row[attribute]))
         });
-        operationCount = series.new.length
+        operationCount = series.length
         return [
             {
-                name: "Neuf",
+                name: "Opération",
                 type: "bar",
                 stack: "total",
                 barCategoryGap: "50%",
                 barWidth: '95%',
-                data: series.new,
-            },
-            {
-                name: "Rénovation",
-                type: "bar",
-                barWidth: '95%',
-                stack: "total",
-                barCategoryGap: "50%",
-                data: series["Rénovation"],
+                data: series,
             },
         ]
     }
@@ -112,19 +92,19 @@
         />
     {/key}
     
-    
-    <div bind:this={ctx}>
-        {#if operationCount === 0}
-        <span class="error">
-            <p> Aucune donnée à afficher </p>
-        </span>
-        {/if}
-    </div>
+        <div bind:this={ctx}>
+            {#if operationCount === 0}
+                <span class="error">
+                    <p> Aucune donnée à afficher </p>
+                </span>
+            {/if}
+        </div>
 
     
 </section>
 <style>
     section{
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: end;
@@ -157,6 +137,5 @@
         background-color: var(--background-lighten);
         padding: 16px;
         border-radius: 8px;
-        
     }
 </style>

@@ -20,6 +20,11 @@
             <i class="micon">chevron_right</i>
             <span>{title}</span>
         </div>
+        {#if selected.length}
+            <button class="close" on:click={() => selected = []}>
+                <i class="micon">close</i>
+            </button>
+        {/if}
     </h3>
     <article>
         <ul>
@@ -79,6 +84,18 @@ h3{
         width: 100%;
         justify-content: flex-start !important;
         padding: 2px 8px;
+    }
+    .close{
+        background: none;
+        border: none;
+        color: var(--secondary-darken);
+        cursor: pointer;
+    }
+    .close:hover{
+        color: var(--secondary);
+    }
+    .close i{
+        font-size: 22px;
     }
  
 </style>

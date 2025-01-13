@@ -2,6 +2,7 @@
     import Report from './Report.svelte'
     import Scenario from './Scenario.svelte'
     import Documentation from './Documentation.svelte';
+    import Results from './Results.svelte';
     import { locations as icon  } from "$lib/svg"
     export let operation 
     let { sites } = operation
@@ -14,7 +15,8 @@
     const TABS = {
         general: Report,
         scenario: Scenario,
-        documentation: Documentation
+        documentation: Documentation,
+        result: Results
     }
 
 </script>
@@ -47,6 +49,7 @@
         <li class:active={currentTab === 'general' } on:click={() => currentTab = 'general'} > Général </li>
         <li class:active={currentTab === 'scenario'} on:click={() => currentTab = 'scenario'} > Scénario </li>
         <li class:active={currentTab === 'documentation'} on:click={() => currentTab = 'documentation'} > Documentation </li>
+        <li class:active={currentTab === 'result'} on:click={() => currentTab = 'result'} > Résultas </li>
     </ul>
 
     <svelte:component this={TABS[currentTab]} operation={operation} />

@@ -142,11 +142,11 @@
         </li>
         <li>
             <i>Emetteurs chaud</i>
-            <b>{report.hot_emitter ?? ''}</b>
+            <b>{report.hot_emitter ? report.hot_emitter.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Emetteurs froid</i>
-            <b>{report.cold_emitter ?? ''}</b>
+            <b>{report.cold_emitter ? report.cold_emitter.replace(/ ~ /g, ', ') : ''}</b>
         </li>
         <li>
             <i>Pérméabilité à l'air de l'enveloppe</i>

@@ -13,6 +13,8 @@
     import GroupedBar from './chartsTypes/GroupedBar.svelte';
     import Histogram from './chartsTypes/Histogram.svelte';
     import HistogramSum from './chartsTypes/HistogramSum.svelte';
+    import histogramSimple from './chartsTypes/HistogramSimple.svelte';
+    import Confort from './chartsTypes/Confort.svelte';
     let downloadCSV
     const TYPE = {
         'stacked_hzbar': StackedHzBar,
@@ -23,7 +25,9 @@
         'multiple_error_bar': MultipleErrorBar,
         'grouped_bar': GroupedBar,
         'histogram': Histogram,
-        'histogram_sum': HistogramSum
+        'histogram_sum': HistogramSum,
+        'histogram_simple': histogramSimple,
+        'confort': Confort
     }
 
     const isArray = (value) => Array.isArray(value) && value.length > 0

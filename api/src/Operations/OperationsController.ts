@@ -7,6 +7,7 @@ import { PATH_TO_FILES, sessionAsPrivilege } from 'Core/utils'
 import OperationsManager from './OperationsManager'
 import OperationsIO from './OperationsIO'
 import LocationsModel from 'App/Locations/LocationsModel'
+import ResultsModel from 'App/Results/ResultsModel'
 import { promises as fs } from 'fs';
 import JSZip from 'jszip';
 
@@ -51,9 +52,17 @@ export default class OperationsController
             await OperationsManager.drop(operation.id)
         }
         else data.owner = session.id
+
         
-        const result = await OperationsModel.create(data)
-        return response.send(result)
+        const operationCreated = await OperationsModel.create(data)
+        const results = await ResultsModel.query()
+            .where('name', data.name)
+            .first()
+            
+        if (!results) {
+            await ResultsModel.create({ name: data.name })
+        }
+        return response.send(operationCreated)
     }
 
     public async show({ request, response }: HttpContextContract)
@@ -148,7 +157,7 @@ export default class OperationsController
         if(!operation) return response.send({ access: true })
         if (operation.owner === session.id) return response.send({access: true, alreadyExists: true})
 
-            if (sessionAsPrivilege(session)){
+        if (sessionAsPrivilege(session)){
             return response.send({access: true,  alreadyExists: true})
         }
         return response.send({access: false,  alreadyExists: true})
@@ -226,6 +235,13 @@ export default class OperationsController
             })
         })
         
+        const results = await ResultsModel.query()
+        .where('name', data.name)
+        .first()
+        if (!results) {
+            await ResultsModel.create({ name: data.name })
+        }
+
         return response.send({ message: 'created' })
     }
 

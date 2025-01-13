@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, hasOne, HasOne, beforeCreate } from '@ioc:Adonis/Lucid/Orm'
 import ReportsModel from 'App/Reports/ReportsModel'
+import ResultModel from 'App/Results/ResultsModel'
 import DocumentationsModel from 'App/Documentations/DocumentationsModel'
 import LocationsModel from 'App/Locations/LocationsModel'
 import MeasuresModel from 'App/Measures/MeasuresModel'
@@ -61,6 +62,13 @@ export default class OperationsModel extends BaseModel
 		localKey: 'name'
 	})
 	public report: HasOne<typeof ReportsModel>
+
+	@hasOne( () => ResultModel, { 
+		foreignKey: 'name', 
+		localKey: 'name',
+		onQuery(query) { query.orderBy('name', 'asc') }
+	})
+	public results: HasOne<typeof ResultModel>
 
 	@hasMany( () => ScenariosModel, {
 		foreignKey: 'operation_id',

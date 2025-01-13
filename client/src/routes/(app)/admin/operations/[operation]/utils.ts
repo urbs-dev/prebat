@@ -77,7 +77,6 @@ export const getUseTypology = (selected: string[]) => {
     return [ ...new Set(typologies.filter(Boolean))].join(' ~ ')
 }
 
-
 export const envelope = [
     { label: 'Système constructif *', name: 'constructive_system', values: [
         `Béton`,
@@ -152,7 +151,6 @@ export const envelope = [
 
 ]
 
-
 export const system = [
     { label: 'Chauffage de base *', name: 'heating', values: [
         `Radiateurs électriques`,
@@ -197,7 +195,7 @@ export const system = [
         `Ne sait pas`,
         `Aucun`,
     ] },
-    { label: 'Emetteurs chaud', name: 'hot_emitter', type: 'radio', values: [
+    { label: 'Emetteurs chaud', name: 'hot_emitter', values: [
         `Plancher chauffant`,
         `Plafond chauffant`,
         `Mur rayonnant`,
@@ -210,7 +208,7 @@ export const system = [
         `Ne sait pas`,
         `Aucun`,
     ] },
-    { label: 'Emetteurs froid', name: 'cold_emitter', type: 'radio', values: [
+    { label: 'Emetteurs froid', name: 'cold_emitter', values: [
         `Plancher`,
         `Plancher rafraîchissant`,
         `Mur rayonnant`,
@@ -819,5 +817,179 @@ export const system_category = [
     },
     {
         label: "Autre",
+    }
+]
+
+
+export const resultsInfos = [
+    {
+        title: "Resultats",
+        abstract: "Résultats de l'opération n'écéssaire a la réalisation de graphiques",
+        hide: false,
+        values: {
+            fonction: { 
+                label: "Fonctions",
+                details: "",
+                type: "select",
+                values: [
+                    "1-Habitation individuelle",
+                    "2-Habitat collectif",
+                    "3-Bureau",
+                    "4-Tertiaire autre",
+                    "5-Mixte",
+                    "6-Non renseigné",
+                ]
+            },
+            permeabilite_air: { label: "Perméabilité à l’air", details: "", type: "number" },
+            conso_tot: { label: "Consomations total", details: "", type: "number" },
+            conso_chauffage: { label: "Consommation de chauffage", details: "", type: "number" },
+            conso_ecs: { label: "Consommation d'ECS", details: "", type: "number" },
+            conso_ventilation: { label: "Consommation de ventilation", details: "", type: "number" },
+            conso_eclairage: { label: "Consommation d’éclairage", details: "", type: "number" },
+            confort_ete: { 
+                label: "Confort été", 
+                details: "", 
+                type: "select",
+                values: [
+                    "inconfort localise",
+                    "inconfort generalise",
+                    "confortable"
+                ]
+            },
+            confort_hiver: { 
+                label: "Confort hiver", 
+                details: "",
+                type: "select",
+                values: [
+                    "inconfort localise",
+                    "inconfort generalise",
+                    "confortable"
+                ]
+            },
+            dh26: { label: "DH26", details: "", type: "number" },
+            structure: { 
+                label: "Structure", 
+                details: "",
+                type: "select",
+                values: [
+                    "1-Béton",
+                    "2-Maçonnerie-monomur",
+                    "3-Maçonnerie-ancienne",
+                    "4-Maçonnerie-autre",
+                    "5-Ossature bois",
+                    "6-Ossature métallique",
+                    "7-Mixte (acier, béton)",
+                    "8-Mixte (bois, maçonnerie)",
+                    "9-Mixte (bois, béton)",
+                    "10-Autre"
+                ]
+            },
+            isolation_pvo:{
+                label: "Isolation PVO",
+                details: "",
+                type: "select",
+                values: [
+                    "1-Isolation par l'intérieur (iti)",
+                    "2-Isolation par l'extérieur (ite)",
+                    "3-Isolation répartie (itr)",
+                    "4-Isolation intégrée (itig)",
+                    "5-Iti + ite",
+                    "6-Itig + ite",
+                    "7-Itig + iti",
+                    "8-Itr +ite",
+                    "9-Non renseigné"
+        
+                ]
+            },
+            conso_auxiliaire: { label: "Consommation auxiliaire", details: "", type: "number" },
+            conso_refroidissement: { label: "Consommation refroidissement", details: "", type: "number" },
+            conso_rt: { label: "Consommation RT", details: "", type: "number" },
+            conso_nonrt: { label: "Consommation non RT", details: "", type: "number" },
+            cop_chauffage: { label: "COP de la pompe a chaleur", details: "", type: "number" },
+            rendement_chauffage: { label: "Rendement chauffage", details: "", type: "number" },
+            rendement_ventilation: { label: "Rendement ventilation", details: "", type: "number" },
+            rendement_ecs: { label: "Rendement ECS", details: "", type: "number" },
+        }
+    },
+    {
+        title: "Résulats synchronisable",
+        abstract: "Résultats issue des questionnaires",
+        hide: true,
+        values: {
+            nature_travaux: { 
+                label: "Nature des travaux", 
+                details: "",
+                type: "select",
+                syncable: true,
+                values: [
+                    "Neuf",
+                    "Rénovation",
+                    "Rénovation avec extension",
+                ]
+            },
+            region: { label: "Régions",  details: "", type:"text", syncable: true,},
+            departement: { label: "Départements", details: "", type: "number", syncable: true,},
+            zone_climatique: { label: "Zones climatiques", details: "", type: "text", syncable: true, editable: false },
+            shon: { label: "SHON", details: "", type:"number", editable: false, syncable: true },
+            surface: { label: "Surface", details: "", type:"number", editable: false, syncable: true},
+            shab: { label: "SHAB", details: "", type:"number", editable: false, syncable: true },
+            hauteur: { label: "Hauteur du bâtimen", details: "", type:"number", editable: false, syncable: true },
+            volume: { label: "Volume", details: "", type:"number", syncable: true },
+            label_energetique: { label: "Label energetique", details: "", editable: false, syncable: true  }, //Label / Certification
+            systeme_chauffage: { label: "Chauffage de base", details: "", editable: false, syncable: true },
+            ecs_principal: { label: "Eau chaude sanitaire", details: "", editable: false, syncable: true },
+            fonction_detail: { label: "Fonction détaillé", details: "" , visible: false, syncable: true}, // visible ?
+            systeme_ventilation: { label: "Systeme de ventilation", details: "", editable: false, syncable:true }, // airing
+        }
+    },
+    {
+        title: "Autres résultats",
+        abstract: "Résultats qui optionel, qui ne sont pas nécéssaire a la réalisation de graphiques",
+        hide: true,
+        values: {
+            maitre_ouvrage: {
+                label: "Maître d'ouvrage",
+                details: "",
+                type: "select",
+                values: [
+                    "organisme non professionnel hors logement",
+                    "organisme de logements sociaux",
+                    "organisme professionnel prive",
+                    "etat ou collectivite territoriale hors logement social",
+                    "particulier",
+                    "copropriete privée",
+                    "autre"
+                ]
+            },
+            altitude: { label: "Altitude", details: "", type: "number" },
+            bepos: { 
+                label: "Bepos", 
+                details: "", 
+                type:"select",
+                values: [
+                    "Oui",
+                    "Non",
+                    "Ne sait pas",
+                ]   
+            },
+            temp_consigne_rt: { label: "Température RT", details: "", type: "number" },
+            temp_consigne_mesure: { label: "Température mesuré", details: "", type: "number" },
+            ubat_rt: { label: "UBAT RT", details: "", type: "number" },
+            ubat_mesure: { label: "UBAT mesure", details: "", type: "number"},
+            classe_inertie: { 
+                visible: false,
+                label: "Classe d'inertie", 
+                details: "",
+                type: "select",
+                values: [
+                    "Très légère",
+                    "légère",
+                    "Moyenne",
+                    "Lourde",
+                    "Très lourde",
+                    "Autre"
+                ]
+            },
+        }
     }
 ]

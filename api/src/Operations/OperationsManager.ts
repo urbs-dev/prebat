@@ -3,6 +3,7 @@ import LocationsModel from 'App/Locations/LocationsModel'
 import MeasuresModel from 'App/Measures/MeasuresModel'
 import ScenariosModel from 'App/Scenarios/ScenariosModel'
 import DocumentationsModel from 'App/Documentations/DocumentationsModel'
+import ResultsModel from 'App/Results/ResultsModel'
 import DataModel from 'App/Measures/DataModel'
 import { PATH_TO_FILES } from 'Core/utils'
 import fs from 'fs/promises'
@@ -11,11 +12,14 @@ export default class OperationsManager
 {
     public static async drop(id: string)
     {
+        const operation = await OperationsModel.query().where('id', id).first()
+        if (!operation) return
         await OperationsModel.query().where('id', id).delete()
         await LocationsModel.query().where('operation_id', id).delete()
         await MeasuresModel.query().where('operation_id', id).delete()
         await DataModel.query().where('operation_id', id).delete()
         await ScenariosModel.query().where('operation_id', id).delete()
+        await ResultsModel.query().where('name', operation.name).delete()
         this.deleteDocumentations(id)
     }
 

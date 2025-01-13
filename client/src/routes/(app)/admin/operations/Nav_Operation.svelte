@@ -2,7 +2,8 @@
     import Location from './Nav_Operation_Location.svelte'
     import { slide } from 'svelte/transition'
     import { page } from '$app/stores'
-    import { getPath } from 'gros/page'
+    import { getPath } from 'gros/page'   
+    import { Tooltip } from 'gros/tooltip'
     // import { Dropdown } from 'gros/dropdown'
     export let operation
     $: active = $page.params?.operation  === operation.id
@@ -15,6 +16,12 @@
             <i class="micon show">keyboard_arrow_right</i>
             <i class="micon">{active ? 'folder_open' : 'folder'}</i>
             {operation.name}
+             {#if !operation.filename}
+                <span class="tooltip">
+                    <i class="micon nofile "> no_sim</i>
+                    <Tooltip  content="Cette opération n'a pas de mesure "/>
+                </span>
+            {/if}
         </button>
     </a>
 </section>
@@ -60,5 +67,8 @@
         border-left: 1px dashed var(--primary-lighten);
         padding:4px 8px;
         margin-left: 18px;
+    }
+    .nofile {
+        opacity: 0.4;
     }
 </style>

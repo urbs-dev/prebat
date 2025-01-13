@@ -1,4 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import ResultsModel from './ResultsModel'
+import OperationsModel from 'App/Operations/OperationsModel'
+import { sessionAsPrivilege } from 'Core/utils'
 import Database from '@ioc:Adonis/Lucid/Database'
 export default class ResultsController 
 {
@@ -27,6 +30,33 @@ export default class ResultsController
         const result = { ...counts, rows } 
 
         return response.send(result)
+    }
+
+    public async update({request, response, session }: HttpContextContract)
+    {
+        if (!session ) return response.send({ error: 'You must be logged in'})
+
+        const data = request.body().results as ResultsModel
+        let result = await ResultsModel.query()
+        .where('id', request.param('id'))
+        .first()
+        
+        if(!result){
+            await ResultsModel.create(data)
+            return response.send({ message: 'created' })
+        }
+
+        const operation = await OperationsModel.query()
+        .where('name', result.name)
+        .first()
+        if (!operation) return response.send({ error: 'Operation not found' })
+
+        if (operation.owner === session.id || sessionAsPrivilege(session )) {
+            result.merge(data)
+            await result.save()
+            return response.send({ message: 'updated' })
+        }
+        return response.send({ error: 'You are not the owner of this operation', })
     }
 
 

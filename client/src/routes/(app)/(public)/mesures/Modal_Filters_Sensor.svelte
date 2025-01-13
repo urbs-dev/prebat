@@ -3,11 +3,10 @@
     import Select from "./Modal_Filters_Sensor_Select.svelte" 
     import Usage from "./Modal_Filters_Sensor_Usage.svelte" 
     import { sensor, usages, system_category } from './utils'
-    import { system } from "../../admin/operations/[operation]/utils";
+    import { loading } from 'gros/loading'
     export let close
     export let props
     const rows = props.handler.getAllRows()
-
     let selected = {
         sensor: [],
         usages: [],
@@ -16,6 +15,7 @@
     }
     let error = ""
     const download = async () => {
+        loading.start('Chargement des opérations', 'Cela peut prendre quelques secondes')
         error = false
         const ids = await $rows.map(row => row.id)
         const filter = selected
@@ -41,7 +41,8 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-            return a
+        loading.stop()
+        return a
     }
 </script>
 
@@ -72,6 +73,7 @@
 
 <style>
     article {
+        position: relative;
         display: flex;
         width: 100%;
         height: 100%;
@@ -102,5 +104,16 @@
         color: var(--secondary-darken);
         font-size: 12px;
         margin: 8px 0;
+    }
+    .loader{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>

@@ -276,6 +276,46 @@ export const charts = [
             //     attribute: ['conso_refroidissement', 'conso_auxiliaire'],
             // },
         ]
+    },
+    {
+        theme: 'Performances mesurées',
+        charts: [
+            {
+                title: 'COP des pompes à chaleur', 
+                type: 'histogram_simple',
+                attribute: 'cop_chauffage',
+
+            },
+            {
+                title: 'Rendement de chauffage', 
+                type: 'histogram_simple',
+                attribute: 'rendement_chauffage',
+
+            },
+            {
+                title: 'Rendement de ventilation', 
+                type: 'histogram_simple',
+                attribute: 'rendement_ventilation',
+            },
+            {
+                title: 'Rendement d’ECS', 
+                type: 'histogram_simple',
+                attribute: 'rendement_ecs',
+            },
+        ]
+    },
+    {
+        theme: 'L’occupation et le confort',
+        charts: [
+            {
+                title: 'Confort d’été', 
+                type: 'confort',
+                attribute: 'dh26',
+                groupedBy: "confort_ete"
+
+            },
+           
+        ]
     }
 ]
 
