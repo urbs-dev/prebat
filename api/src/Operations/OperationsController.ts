@@ -280,13 +280,13 @@ export default class OperationsController
             const zip = new JSZip();
             for(let i = 0; i < operations.length; i++){
                 try {
-                if (!operations[i].filename) continue
-                const filename = await operations[i].filename
-                const data = await fs.readFile(`${PATH_TO_FILES}/${filename}`);
-                const blob = await new Blob([data], { type: `application/xls}` });
-                const arrayBuffer = await blob.arrayBuffer();
-                const name = 'Cerema-TAB-PREBAT_MESURES_' + operations[i].filename
-                zip.file( `${name}`, arrayBuffer);
+                    if (!operations[i].filename) continue
+                    const filename = await operations[i].filename
+                    const data = await fs.readFile(`${PATH_TO_FILES}/${filename}`);
+                    const blob = await new Blob([data], { type: `application/xls}` });
+                    const arrayBuffer = await blob.arrayBuffer();
+                    const name = 'Cerema-TAB-PREBAT_MESURES_' + operations[i].filename
+                    zip.file( `${name}`, arrayBuffer);
                 } catch (error) {
                     continue
                 }

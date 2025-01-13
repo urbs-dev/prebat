@@ -68,7 +68,8 @@ export default class ResultsController
                 JSONB_BUILD_OBJECT( 
                     CASE WHEN ${field}='' THEN 'Non renseigné' ELSE ${field} END, COUNT(*)
                 ) as count
-            FROM results
+                FROM results
+            INNER JOIN operations as operations ON results.name = operations.name
             ${where}
             GROUP BY ${field}
             ;`
@@ -76,18 +77,19 @@ export default class ResultsController
     }
     private async getRows(where:string)
     {
-        const results = await Database.rawQuery(`SELECT * FROM results ${where};`)
-        return results.rows
+        // const results = await Database.rawQuery(`SELECT * FROM results INNER JOIN operations as operations ON results.name = operations.name ${where};`)
+        const results = await ResultsModel.query().innerJoin('operations', 'results.name', 'operations.name').whereRaw(where.slice(6))
+        
+        return results
     }
 
     private async getFilter(filters:JSON)
     {
-        let where = ""
+        let where = "WHERE operations.is_public=true"
         if (filters) {
-            
             const keys = Object.keys(filters)
             if (keys.length > 0) {
-                where = "WHERE "
+                where += " AND "
                 keys.map((key) => {
                     const filter = filters[key].split('|')
                     if ( filter.length >1) {
