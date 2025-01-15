@@ -11,7 +11,6 @@
     export let close
     let active = system[0]
     const form = props ?? {}
-    console.log(form.path)
     const update = async () => {
         close()
         loading.start()

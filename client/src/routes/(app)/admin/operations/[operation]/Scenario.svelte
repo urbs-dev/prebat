@@ -18,7 +18,6 @@
     ]
 
     const hasHourly = (scenarios) => {
-        console.log(scenarios.filter((el) =>{ return el.type === "hourly"}).length);
         return scenarios.filter((el) =>{ return el.type === "hourly"}).length > 0
     }
 

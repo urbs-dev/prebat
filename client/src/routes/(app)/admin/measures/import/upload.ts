@@ -51,7 +51,6 @@ export class Upload {
         if (!this.sequence) return
 
         const { operation } = this.sequence
-        console.log(operation)
         const response = await fetch(`BASE_URL/prebat.api/operations`, {
             method: 'POST',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},

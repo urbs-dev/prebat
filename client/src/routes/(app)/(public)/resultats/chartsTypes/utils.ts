@@ -349,7 +349,6 @@ export const getFilterasCSV = async (filters) => {
     let csv = ""
     let headers = ""
     let content = ""
-    console.log(filters);
     
     Object.keys(filters[0]).map((key, i)=>{
         headers += `${key}`
@@ -357,7 +356,6 @@ export const getFilterasCSV = async (filters) => {
             headers += ";"
         }
     })
-    console.log(headers);
     
     filters.map((row, i)=>{
         Object.keys(row).map((key, y)=>{

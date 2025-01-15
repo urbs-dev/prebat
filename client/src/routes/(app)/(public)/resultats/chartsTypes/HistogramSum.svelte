@@ -13,16 +13,7 @@
     let fonction = "Tous"
     let fonctions = ["Tous"]
 
-    // console.log(options)
-
     let option = {
-        // toolbox: {
-        //     show: true,
-        //     feature: {
-        //         dataView: { readOnly: true },
-               
-        //     },
-        // },
         tooltip: {
             show: true,
         },

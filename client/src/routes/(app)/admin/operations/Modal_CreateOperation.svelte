@@ -51,7 +51,6 @@
 
     const save = async () => {
         close()
-        console.log(form)
         await fetch(`BASE_URL/prebat.api/operations`, {
             method: 'POST',
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},

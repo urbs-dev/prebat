@@ -8,8 +8,6 @@
 
     $: innerWidth = 0
 
-    console.log($status.isAuthenticated)
-
 </script>
 <svelte:window bind:innerWidth/>
 

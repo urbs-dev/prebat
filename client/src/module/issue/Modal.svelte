@@ -29,7 +29,6 @@
             if (!response.ok) {
                 nok = true
                 const json = await response.json()
-                console.log(json)
             }
             else {
                 close()

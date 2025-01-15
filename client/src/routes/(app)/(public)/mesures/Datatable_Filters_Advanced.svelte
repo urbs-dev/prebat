@@ -10,27 +10,6 @@
     export let isMobile = false
     const rows = handler.getAllRows()
 
-    const downloads = async () =>{
-        const ids = await $rows.map(row => row.id);
-        console.log('download');
-        const result = await fetch(`BASE_URL/prebat.api/operations/extracts`, {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
-            body: JSON.stringify({ids}),
-        }).then(response => response.blob());
-
-        let url = window.URL.createObjectURL(result);
-        let link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('hidden', '');
-        link.style.visibility = "hidden";    
-        link.setAttribute("download", "measures.zip");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        console.log('download');
-    }
 
     const openModal = () => {
         modal.open(SensorModal, {handler})
