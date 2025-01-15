@@ -8,8 +8,8 @@ import OperationsManager from './OperationsManager'
 import OperationsIO from './OperationsIO'
 import LocationsModel from 'App/Locations/LocationsModel'
 import ResultsModel from 'App/Results/ResultsModel'
-import { promises as fs } from 'fs';
-import JSZip from 'jszip';
+import Excel from 'exceljs'
+import { copyOperation } from './XlsxExtract'
 
 export default class OperationsController
 {
@@ -245,59 +245,185 @@ export default class OperationsController
         return response.send({ message: 'created' })
     }
 
-    public async extracts({ request, response }: HttpContextContract)
+    // public async extracts({ request, response }: HttpContextContract)
+    // {
+    //     const body = request.body()
+    //     const ids = body.ids
+    //     const filters = body.filter
+        
+    //     let operations = await OperationsModel.query().whereIn('id', ids).preload('measures').preload('report')
+        
+    //     const filtersKeys = ['sensor', 'system', 'system_category']
+    //     await filtersKeys.map(async (key) => {
+    //         if(filters[key].length > 0 ){
+    //             await operations.map(async (operation) => {
+    //                 const include = await operation.measures.map((measure) => {
+    //                     if ( filters[key].includes(measure[key])) return true
+    //                     return false
+    //                 })
+    //                 if (!include.includes(true)) {
+    //                     operations.splice(operations.indexOf(operation), 1)
+    //                 }
+    //             })
+    //         }  
+    //     })
+
+    //     if (filters.usages.length > 0){
+    //         await operations.map(async (operation) => {
+    //             if (!operation.report) return
+    //             let use = operation.report.use.split('~')[0] 
+    //             if (!filters.usages.includes(use))  operations.splice(operations.indexOf(operation), 1)
+    //         })
+    //     }
+    //     if (operations.length === 0) return response.status(404).send({ message: 'No operation found'})
+    //     try{    
+    //         const zip = new JSZip();
+    //         for(let i = 0; i < operations.length; i++){
+    //             try {
+    //                 if (!operations[i].filename) continue
+    //                 const filename = await operations[i].filename
+    //                 const data = await fs.readFile(`${PATH_TO_FILES}/${filename}`);
+    //                 const blob = await new Blob([data], { type: `application/xls` });
+    //                 const arrayBuffer = await blob.arrayBuffer();
+    //                 const name = 'Cerema-TAB-PREBAT_MESURES_' + operations[i].filename
+    //                 zip.file( `${name}`, arrayBuffer);
+    //             } catch (error) {
+    //                 continue
+    //             }
+    //         }
+            
+    //         const content = await zip.generateAsync({ type: 'nodebuffer' });
+    //         const buffer = Buffer.from(content);
+    //         return response.status(200).send(buffer);
+    //     } catch (error) {
+    //         return response.status(500).send({ message: 'File not found' });
+    //     }
+
+    // }
+
+      public async extracts({ request, response }: HttpContextContract)
     {
         const body = request.body()
         const ids = body.ids
         const filters = body.filter
         
+        let operationToExtract: {name:string, columns:number[]}[] = []
         let operations = await OperationsModel.query().whereIn('id', ids).preload('measures').preload('report')
         
         const filtersKeys = ['sensor', 'system', 'system_category']
-        await filtersKeys.map(async (key) => {
-            if(filters[key].length > 0 ){
-                await operations.map(async (operation) => {
-                    const include = await operation.measures.map((measure) => {
-                        if ( filters[key].includes(measure[key])) return true
-                        return false
-                    })
-                    if (!include.includes(true)) {
-                        operations.splice(operations.indexOf(operation), 1)
-                    }
-                })
-            }  
-        })
+        if ( filters.system.length === 0 && filters.sensor.length === 0 && filters.system_category.length === 0) {
+            // if no columns filter, export all 
+            operations.map((operation) => {
+                let columns = operation.measures.map((measure) => measure.x)
+                if (!operation.filename) return
+                operationToExtract.push({name: operation.filename, columns})
+            })
+        }else{
+            await filtersKeys.map(async (key) => {
+                if(filters[key].length > 0 ){ // if there is a filter
+                    await operations.map(async (operation) => {
+                        if (!operation.filename) return false
+                        let columns: number[] = []
+                        await operation.measures.map((measure) => {
+                            if ( filters[key].includes(measure[key])){
+                                columns.push(measure.x)
+                            }
+                        })
+                        if( columns.length > 0) operationToExtract.push({name: operation.filename, columns: columns})
+                        else operations.splice(operations.indexOf(operation), 1)
 
+                    })
+                }  
+            })
+        }
+      
+        
         if (filters.usages.length > 0){
             await operations.map(async (operation) => {
                 if (!operation.report) return
                 let use = operation.report.use.split('~')[0] 
-                if (!filters.usages.includes(use))  operations.splice(operations.indexOf(operation), 1)
+                if (!filters.usages.includes(use)){
+                    const index = operationToExtract.findIndex((op) => op.name === operation.filename)
+                    if (index > -1){
+                        operationToExtract.splice(index, 1)
+                    }
+                } 
             })
         }
-        if (operations.length === 0) return response.status(404).send({ message: 'No operation found'})
-        try{    
-            const zip = new JSZip();
-            for(let i = 0; i < operations.length; i++){
-                try {
-                    if (!operations[i].filename) continue
-                    const filename = await operations[i].filename
-                    const data = await fs.readFile(`${PATH_TO_FILES}/${filename}`);
-                    const blob = await new Blob([data], { type: `application/xls}` });
-                    const arrayBuffer = await blob.arrayBuffer();
-                    const name = 'Cerema-TAB-PREBAT_MESURES_' + operations[i].filename
-                    zip.file( `${name}`, arrayBuffer);
-                } catch (error) {
-                    continue
-                }
+        operations = []
+        console.log(operationToExtract);
+        
+        if (operationToExtract.length === 0) return response.status(404).send({ message: 'No operation found'})
+        let workbook = new Excel.Workbook();
+        // console.log('===============================================')
+        // console.log("nombre d'opération à extraire: ", operationToExtract.length);
+        // console.log("nombre de colonnes à extraire: ", operationToExtract.map((op) => op.columns.length).reduce((a,b) => a+b));
+        // console.log('===============================================')
+        let nbcol = 0  
+
+        for( let i = 0; i < operationToExtract.length; i++){
+            nbcol += operationToExtract[i].columns.length
+
+            // console.log("Opération en cours: ",operationToExtract[i].name, "  index: ",i);
+            // console.log("Nombre de colonnes à extraire: ",operationToExtract[i].columns.length);
+            // console.log("Nombre total de colonnes extraites: ",nbcol);
+            // console.log('-----------------------------------------------');
+            // console.log('Mémoire utilisée: ', process.memoryUsage().heapUsed / 1024 / 1024, 'MB');
+            // console.log('Mémoire totale: ', process.memoryUsage().heapTotal / 1024 / 1024, 'MB');
+            // console.log('===============================================');
+            try {
+                const worksheet = await workbook.addWorksheet(operationToExtract[i].name)
+                await copyOperation(worksheet, operationToExtract[i].name, operationToExtract[i].columns)
             }
-            
-            const content = await zip.generateAsync({ type: 'nodebuffer' });
-            const buffer = Buffer.from(content);
-            return response.status(200).send(buffer);
-        } catch (error) {
-            return response.status(500).send({ message: 'File not found' });
+            catch (error) {
+                console.log(error);
+                continue
+            }
         }
+        const workbookBuffer = await workbook.xlsx.writeBuffer()
+
+        const blob = await new Blob([workbookBuffer], { type: `application/xls` });
+        const arrayBuffer = await blob.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        // return response.status(200).send("ok");
+        return response.status(200).send(buffer);
+       
 
     }
+
+
+
+    public async test({ request, response }: HttpContextContract)
+    {
+        const obj = [
+            {
+                name: "Sp.dep27.0001",
+                columns: [4,8]
+            },
+            {
+                name: "Sp.dep27.0002",
+                columns: [4,5,6,7,8]
+            }
+        ]
+        const workbook = new Excel.Workbook();
+        for( let i = 0; i < obj.length; i++){
+            try {
+            const worksheet = await workbook.addWorksheet(obj[i].name)
+            await copyOperation(worksheet, obj[i].name, obj[i].columns)
+            } catch (error) {
+                console.log(error);
+            }
+            console.log(process.memoryUsage());
+            
+        }
+    
+        const workbookBuffer = await workbook.xlsx.writeBuffer()
+
+        const blob = await new Blob([workbookBuffer], { type: `application/xls` });
+        const arrayBuffer = await blob.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        return response.send(buffer)
+    }   
+
 }
