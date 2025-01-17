@@ -1,5 +1,6 @@
 import { PATH_TO_FILES,  } from 'Core/utils'
 import { type Workbook, type Worksheet } from "exceljs";
+import JSZip from 'jszip'
 import Excel from 'exceljs'
 
 
@@ -46,4 +47,14 @@ export const copyOperation = async (worksheet: Worksheet, name:string, columns: 
     await copyRows(operationsWorksheet, worksheet, columns)
     await copyColumnsProperties(operationsWorksheet, worksheet, columns)
     return 1
+}
+
+export const zipFiles = async (files: Workbook, zip: any, name: string ) => {
+    
+    const workbookBuffer = await files.xlsx.writeBuffer()
+    const blob = await new Blob([workbookBuffer], { type: `application/xls` });
+    const arrayBuffer = await blob.arrayBuffer();
+    
+    await zip.file( `${name}`, arrayBuffer);
+    return zip
 }

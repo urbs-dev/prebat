@@ -37,7 +37,7 @@
         link.href = url;
         link.setAttribute('hidden', '');
         link.style.visibility = "hidden";    
-        link.setAttribute("download", "Operations.xlsx");
+        link.setAttribute("download", "Operations.zip");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
