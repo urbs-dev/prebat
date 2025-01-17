@@ -16,12 +16,14 @@ const copyRows = async (worksheet: Worksheet, newSheet: Worksheet, columns: numb
         const newRow = newSheet.getRow(rowNumber)
         newRow.height = row.height
         HEADER_COLUMN.map( async (col, i) => {
-            newRow.getCell(i+1).value           = row.getCell(col).value
+            if ( row.getCell(col).type == 6 ) newRow.getCell(i+1).value = row.getCell(col).result // 6 is formula
+            else newRow.getCell(i+1).value           = row.getCell(col).value
             newRow.getCell(i+1).style           = row.getCell(col).style
             newRow.getCell(i+1).model           = row.getCell(col).model
         })
         columns.map( async (col, i) => {
-            newRow.getCell(i+4).value           = row.getCell(col).value
+            if ( row.getCell(col).type == 6 ) newRow.getCell(i+4).value = row.getCell(col).result // 6 is formula
+            else newRow.getCell(i+4).value          = row.getCell(col).value
             newRow.getCell(i+4).style           = row.getCell(col).style
             newRow.getCell(i+4).fill            = row.getCell(col).fill
         })
