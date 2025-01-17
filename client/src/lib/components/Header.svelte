@@ -39,8 +39,11 @@
                 </AccountButton>
                 <Tools/>
             {:else}
-                <a href="{getPath('/auth')}" class="btn">
+                <!-- <a href="{getPath('/auth')}" class="btn">
                     Connexion
+                </a> -->
+                <a href="{getPath('/auth')}" class="btn">
+                    <i class="micon">person</i>
                 </a>
             {/if}
             <!-- <img src="STATIC_PATH/img/logo-ademe.svg" alt="logo ADEME"/> -->
@@ -123,15 +126,16 @@
         background:#eee;
     }
     a.btn{
-        color: #fff;
+        /* color: #fff; */
+        color: var(--primary-lighten);
         border-radius: 2em;
         padding: .8em;
         margin-right: 16px;
-        background: var(--secondary);
+        /* background: var(--secondary); */
         transition: background, 0.2s;
     }
     a.btn:hover{
-        background: var(--secondary-darken);
+        background: var(--primary-lighten-1);
     }
     div.actors {
         padding-right: 24px;
