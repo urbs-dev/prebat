@@ -101,7 +101,7 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
             <div class="title">
-                <h3 on:click={() => active = !active}>
+                <h3  on:click={() => active = !active}>
                     <i class="micon">chevron_right</i>
                     {label}
                 </h3>
@@ -175,6 +175,7 @@
         background-color: var(--primary-lighten-2);
 
         padding: 4px 8px;
+        cursor: pointer;
         border-radius: 8px;
     }
     .title span{
@@ -196,6 +197,8 @@
         display: flex;
         align-items: center;
         margin: 0;
+        cursor: pointer;
+        width: 100%;
     }
     h3 .micon {
         font-size: 24px;
