@@ -24,14 +24,14 @@
             headers: {'Content-Type' : 'application/json', 'Accept': 'application/json'},
             body: JSON.stringify({ids, filter}),
         }).then(response => {
-            if(!response.ok) throw new Errorr(response.json())
+            if(!response.ok) throw new Error(response.json())
             return response.blob()
         }).catch(e => {
-            console.error(e.message);
-            
+            loading.stop()
             error = "Aucune opérations ne correspond à votre selection"
+            return false
         });
-
+        if(!result) return
         let url = window.URL.createObjectURL(result);
         let link = document.createElement('a');
         link.href = url;

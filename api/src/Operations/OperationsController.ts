@@ -318,7 +318,7 @@ export default class OperationsController
             // console.log('-----------------------------------------------');
             // console.log('Mémoire utilisée: ', process.memoryUsage().heapUsed / 1024 / 1024, 'MB');
             // console.log('Mémoire totale: ', process.memoryUsage().heapTotal / 1024 / 1024, 'MB');
-            console.log('===============================================');
+            // console.log('===============================================');
             try {
                 const worksheet = await workbook.addWorksheet(operationToExtract[i].name)
                 await copyOperation(worksheet, operationToExtract[i].name, operationToExtract[i].columns)
