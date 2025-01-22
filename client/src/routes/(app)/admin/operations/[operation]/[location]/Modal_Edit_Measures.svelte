@@ -109,7 +109,7 @@
                 </h2>
                 <div >
                     <Checkbox bind:checked={form.is_computed} size={20} margin={[0,8,0,0]}>
-                        PM issue du calcul
+                        PM issu du calcul
                     </Checkbox>
 
                     {#if form?.is_computed}

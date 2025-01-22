@@ -27,7 +27,7 @@
         ["engineering", "Nature des travaux", "select"],
         ["label", "Label / certification ", "select"],
         ["building_insulation", "Type d'isolation", "select"],
-        ["wall_insulation", "Isolation mue", "select"],
+        ["wall_insulation", "Isolation murs", "select"],
         ["roof_insulation", "Type toiture", "select"],
         ["floor_insulation", "Type plancher", "select"],
         ["window_carpentry", "Menuiserie - vitrage", "select"],

@@ -230,7 +230,7 @@ export const charts = [
             //     rows: true
             // },
             {
-                title: `Consommation des ventilations détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
+                title: `Consommation de ventilation détaillée (kWh<span class="indice" >ep</span>/(m².an))`, 
                 type: 'histogram',
                 attribute: 'conso_ventilation',
             },
@@ -305,7 +305,7 @@ export const charts = [
         ]
     },
     {
-        theme: 'L’occupation et le confort',
+        theme: 'occupation et confort',
         charts: [
             {
                 title: 'Confort d’été', 

@@ -78,7 +78,7 @@
     <article class="action">
         <div>
             <button class="tooltip delete" on:click={deleteAll}>
-                <Tooltip bottom content="Supprimé tout les resultats"/>
+                <Tooltip bottom content="Supprimer tous les résultats"/>
                 <i class="micon">delete</i>
             </button>
             <button class="tooltip sync" on:click={synchroniseAll}>
@@ -149,7 +149,7 @@
                             </span>
                         {/if}
                         <button class="tooltip delete" on:click={() => results[key] = null}>
-                            <Tooltip right content="Supprimé"/>
+                            <Tooltip right content="Supprimer"/>
                             <i class="micon">delete</i>
                         </button>
                     </div>

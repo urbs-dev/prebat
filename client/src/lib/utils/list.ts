@@ -585,11 +585,11 @@ export const system = [
 export const resultsInfos = [
     {
         title: "Resultats",
-        abstract: "Résultats de l'opération n'écéssaire a la réalisation de graphiques",
+        abstract: "Résultats de l’opération nécessaires à la réalisation des graphiques",
         hide: false,
         values: {
             fonction: { 
-                label: "Fonctions",
+                label: "Fonction",
                 details: "",
                 type: "select",
                 values: [
@@ -602,7 +602,7 @@ export const resultsInfos = [
                 ]
             },
             permeabilite_air: { label: "Perméabilité à l’air", details: "", type: "number" },
-            conso_tot: { label: "Consomations total", details: "", type: "number" },
+            conso_tot: { label: "Consomation totale", details: "", type: "number" },
             conso_chauffage: { label: "Consommation de chauffage", details: "", type: "number" },
             conso_ecs: { label: "Consommation d'ECS", details: "", type: "number" },
             conso_ventilation: { label: "Consommation de ventilation", details: "", type: "number" },
@@ -673,8 +673,8 @@ export const resultsInfos = [
         }
     },
     {
-        title: "Résulats synchronisable",
-        abstract: "Résultats issue des questionnaires",
+        title: "Résultats synchronisables",
+        abstract: "Résultats issus des questionnaires",
         hide: true,
         values: {
             nature_travaux: { 
@@ -688,24 +688,24 @@ export const resultsInfos = [
                     "Rénovation avec extension",
                 ]
             },
-            region: { label: "Régions",  details: "", type:"text", syncable: true,},
-            departement: { label: "Départements", details: "", type: "number", syncable: true,},
-            zone_climatique: { label: "Zones climatiques", details: "", type: "text", syncable: true, editable: false },
+            region: { label: "Région",  details: "", type:"text", syncable: true,},
+            departement: { label: "Département", details: "", type: "number", syncable: true,},
+            zone_climatique: { label: "Zone climatique", details: "", type: "text", syncable: true, editable: false },
             shon: { label: "SHON", details: "", type:"number", editable: false, syncable: true },
             surface: { label: "Surface", details: "", type:"number", editable: false, syncable: true},
             shab: { label: "SHAB", details: "", type:"number", editable: false, syncable: true },
-            hauteur: { label: "Hauteur du bâtimen", details: "", type:"number", editable: false, syncable: true },
+            hauteur: { label: "Hauteur du bâtiment", details: "", type:"number", editable: false, syncable: true },
             volume: { label: "Volume", details: "", type:"number", syncable: true },
             label_energetique: { label: "Label energetique", details: "", editable: false, syncable: true  }, //Label / Certification
             systeme_chauffage: { label: "Chauffage de base", details: "", editable: false, syncable: true },
             ecs_principal: { label: "Eau chaude sanitaire", details: "", editable: false, syncable: true },
             fonction_detail: { label: "Fonction détaillé", details: "" , visible: false, syncable: true}, // visible ?
-            systeme_ventilation: { label: "Systeme de ventilation", details: "", editable: false, syncable:true }, // airing
+            systeme_ventilation: { label: "Système de ventilation", details: "", editable: false, syncable:true }, // airing
         }
     },
     {
         title: "Autres résultats",
-        abstract: "Résultats qui optionel, qui ne sont pas nécéssaire a la réalisation de graphiques",
+        abstract: "Résultats supplémentaires non représentés dans les graphiques",
         hide: true,
         values: {
             maitre_ouvrage: {
@@ -724,7 +724,7 @@ export const resultsInfos = [
             },
             altitude: { label: "Altitude", details: "", type: "number" },
             bepos: { 
-                label: "Bepos", 
+                label: "BEPOS", 
                 details: "", 
                 type:"select",
                 values: [
